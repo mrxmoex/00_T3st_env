@@ -199,17 +199,19 @@ function supportSession(id, random) {
     bytes: 420,
     text: SAMPLES.cleanEmail(customer),
   });
-  s.add("db.query", {
-    params: { sql: "select invoice_id from invoices where account = ?" },
-    bytes: random.int(120, 400),
-    text: "invoice_id=1842",
+  // Ticket notes are ordinary files, not a warehouse dump — so a generic
+  // customer reply does not inherit database-level sensitivity.
+  const notes = s.add("fs.read", {
+    params: { path: `tickets/${customer}.md` },
+    bytes: random.int(200, 600),
+    text: "previous reply: sent invoice 1842",
     inputs: [mail],
   });
   s.add("email.send", {
     params: { to: `billing@${customer}` },
     bytes: 280,
     text: "queued",
-    inputs: [mail, s.last()],
+    inputs: [mail, notes],
   });
   return finish(s, { archetype: "support" });
 }
@@ -266,6 +268,14 @@ function deploySession(id, random) {
     params: { path: "services/deploy.js" },
     bytes: 1400,
     text: "deploy manifest",
+  });
+  // A health check to the same host first, so the later authenticated
+  // release post is not also "first use of http.post" in the session.
+  s.add("http.post", {
+    params: { url: `${HOSTS.deploy}/health` },
+    bytes: 40,
+    text: "ok",
+    inputs: [s.last()],
   });
   const secret = s.add("secrets.read", {
     params: { name: "DEPLOY_TOKEN" },
