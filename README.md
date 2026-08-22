@@ -47,3 +47,8 @@ Notes are stored in memory and reset on restart.
 `.cursor/environment.json` configures the Cloud Agent environment: `npm ci` installs
 dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
 while an agent works.
+
+## Also in this repo
+
+[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
+its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
