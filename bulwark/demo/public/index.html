@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bulwark — session provenance</title>
+    <title>Bulwark — session inspector</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
@@ -15,28 +15,58 @@
           <p>Causal chains, not event scores</p>
         </div>
       </div>
-      <p class="thesis">
-        Reading a secret, fetching a page, and posting to an API are all normal.
-        One path that does all three is not.
-      </p>
+
+      <dl class="stats" id="stats">
+        <div><dt>baseline</dt><dd class="dim">loading…</dd></div>
+      </dl>
+
+      <div class="bands">
+        <span class="band observe">observe &lt; 0.30</span>
+        <span class="band flag">flag ≥ 0.30</span>
+        <span class="band confirm">confirm ≥ 0.60</span>
+        <span class="band block">block ≥ 0.85</span>
+      </div>
     </header>
 
     <main>
       <aside>
+        <div class="panel-head">
+          <span>Sessions</span>
+          <span class="dim" id="catalogCount"></span>
+        </div>
         <label class="filter">
-          Show
+          <span>Show</span>
           <select id="filter">
             <option value="all">all scored sessions</option>
             <option value="benign">benign</option>
-            <option value="attack">attacks</option>
             <option value="hard">hard negatives</option>
+            <option value="attack">attacks</option>
           </select>
         </label>
+
+        <p class="state" id="catalogState">Loading sessions…</p>
         <ol id="scenarios"></ol>
+
+        <p class="aside-note">
+          Ambient statistics are capped below the interrupt bands. A session can
+          look unusual all day without being interrupted; only a causal chain
+          can raise a confirm or a block.
+        </p>
       </aside>
 
       <section class="stage">
-        <div id="empty" class="empty">Pick a scenario to step through a session.</div>
+        <p class="state" id="stageEmpty">
+          Pick a session on the left, then step or play through it.
+        </p>
+
+        <p class="state" id="stageLoading" hidden>Scoring session…</p>
+
+        <div class="state error" id="stageError" hidden>
+          <strong>Could not load that session.</strong>
+          <span id="stageErrorDetail"></span>
+          <button type="button" id="retry">Retry</button>
+        </div>
+
         <article id="detail" hidden>
           <header class="session-head">
             <div>
@@ -44,16 +74,33 @@
               <h2 id="task"></h2>
             </div>
             <div class="controls">
-              <button type="button" id="reset">Reset</button>
-              <button type="button" id="step">Next step</button>
-              <button type="button" id="play" class="primary">Play</button>
+              <button type="button" id="reset" title="Rewind to the start (r)">Reset</button>
+              <button type="button" id="step" title="Score the next step (→)">Next step</button>
+              <button type="button" id="play" class="primary" title="Play or pause (p)">Play</button>
+              <button type="button" id="runAll" title="Reveal every step">Run to end</button>
             </div>
           </header>
-          <div class="verdict" id="verdict"></div>
+
+          <div class="running" id="running"></div>
+          <div class="track" id="track"></div>
+          <div class="step-line legend">
+            <span>#</span>
+            <span>action</span>
+            <span>tool → destination</span>
+            <span class="sparks">
+              <span>taint</span><span>sens</span><span>chain</span><span>ambient</span>
+            </span>
+            <span class="risk">risk</span>
+          </div>
           <ol id="steps" class="steps"></ol>
         </article>
       </section>
+
+      <section class="inspector" id="inspector">
+        <p class="state">Nothing selected. Step through a session, or click any scored step.</p>
+      </section>
     </main>
+
     <script type="module" src="/app.js"></script>
   </body>
 </html>
