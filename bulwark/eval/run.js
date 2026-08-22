@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { learnBaseline } from "../src/baseline.js";
 import { assessSession, summarize } from "../src/engine.js";
-import { buildCorpus, splitCorpus } from "../sim/corpus.js";
+import { buildCorpus, splitCorpus } from "../sim/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const INTERRUPT = new Set(["confirm", "block"]);
