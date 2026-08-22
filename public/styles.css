@@ -1,0 +1,189 @@
+:root {
+  color-scheme: light dark;
+  --bg: #0f172a;
+  --card: #1e293b;
+  --border: #334155;
+  --accent: #6366f1;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --danger: #f87171;
+  --danger-bg: #45191b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: radial-gradient(1200px 600px at 50% -10%, #1e293b, var(--bg));
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+main {
+  width: 100%;
+  max-width: 560px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 0.25rem;
+}
+
+p.sub {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+input[type="text"],
+input[type="search"] {
+  flex: 1;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+#search-input {
+  margin-bottom: 1.25rem;
+}
+
+button {
+  padding: 0.75rem 1.1rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: var(--accent);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  filter: brightness(1.1);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--danger);
+  border-radius: 0.6rem;
+  background: var(--danger-bg);
+  color: #fecaca;
+  font-size: 0.9rem;
+}
+
+.error button {
+  background: transparent;
+  color: #fecaca;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.9rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+li {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+li .body {
+  min-width: 0;
+  flex: 1;
+}
+
+li .text {
+  overflow-wrap: anywhere;
+}
+
+li time {
+  color: var(--muted);
+  font-size: 0.75rem;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+li .actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+li .actions button {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+li .actions button.primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+li .edit-input {
+  font-size: 0.95rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.empty,
+.status {
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty {
+  padding: 1.5rem 0;
+}
+
+.status {
+  font-size: 0.8rem;
+  margin: 1rem 0 0;
+  min-height: 1rem;
+}
+
+ul[aria-busy="true"] {
+  opacity: 0.5;
+}

@@ -23,6 +23,8 @@ export default [
       globals: {
         document: "readonly",
         fetch: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
       },
     },
   },
