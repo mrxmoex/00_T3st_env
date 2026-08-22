@@ -48,16 +48,7 @@ Notes are stored in memory and reset on restart.
 dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
 while an agent works.
 
-## Bulwark (agent behaviour prototype)
+## Also in this repo
 
-`bulwark/` is a separate package: capability-based provenance and behavioural
-detection for simulated agent tool traffic. It does not change the Notes app.
-
-```bash
-cd bulwark
-npm test
-npm run eval
-npm run demo    # dashboard on http://localhost:3001
-```
-
-See [`bulwark/README.md`](bulwark/README.md) and [`bulwark/STRATEGY.md`](bulwark/STRATEGY.md).
+[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
+its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).

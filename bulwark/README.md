@@ -1,40 +1,54 @@
 # Bulwark
 
-A small prototype of **capability-based provenance** for AI-agent tool traffic.
+Bulwark is a research prototype that monitors AI-agent tool-call traces. It scores causal paths that combine untrusted input, sensitive data, and egress rather than treating one unusual event as an attack.
 
-The claim: existing agent-security tools are noisy because they score *events*. Reading a secret, fetching a page, and posting to an API are all normal. What is almost never normal is **one causal path that touches all three**.
+The response levels are `observe`, `flag`, `confirm`, and `block`. Novel destinations, unusual volume, and other ambient signals may raise attention, but they cannot interrupt an agent by themselves. Structural content signals affect taint weight; they are not a prompt-injection verdict.
 
-Ambient / statistical signals (novel destination, surprisal, volume) are capped and can never reach `confirm` or `block` alone. Only a causal chain can interrupt. The default is the quietest action that is still safe: observe → flag → confirm → block.
+This package uses simulated traces. It is not a production security boundary. Read [STRATEGY.md](STRATEGY.md) for the market analysis, limits, and evidence required before making product claims.
 
-This is a research prototype, not a product. See [STRATEGY.md](STRATEGY.md) for the business argument and the measured numbers.
+## Requirements
 
-## Layout
+- Node.js 20 or newer.
+- Port 3001 available for the demo.
 
-| Path | Role |
-| --- | --- |
-| `src/capabilities.js` | What a tool can do: ingest / sensitivity / egress |
-| `src/content.js` | Structural injection-surface scoring (not a jailbreak list) |
-| `src/provenance.js` | Streaming taint + sensitivity with decaying context flow |
-| `src/baseline.js` | Per-deployment destinations, transitions, volume |
-| `src/detectors.js` | Ambient detectors, capped so they cannot interrupt alone |
-| `src/engine.js` | Composition: chain first, ambient only as corroboration |
-| `sim/` | Seeded session builder + graded corpus (hard negatives included) |
-| `eval/` | Train-on-benign / score-the-rest harness |
-| `demo/` | Local dashboard that steps through a session |
-| `test/` | Node built-in test runner |
+The package currently has no third-party runtime dependencies.
 
-## Commands
+## Operator commands
 
-From `bulwark/`:
+Run commands from the repository root:
 
 ```bash
-npm test          # unit tests
-npm run eval      # detection / FP / steps-to-intervention
-npm run demo      # dashboard on http://localhost:3001
+cd bulwark && npm test
+npm run eval
+npm run demo
 ```
 
-The dashboard is a standalone server on port 3001 so it does not collide with the Notes app on 3000.
+The commands are the package contract:
 
-## What the eval is for
+| Command | Purpose |
+| --- | --- |
+| `npm test` | Run the unit tests with Node's built-in test runner |
+| `npm run eval` | Run the seeded simulator evaluation and print detection, interruption, and timing metrics |
+| `npm run demo` | Start the local trace walkthrough at [http://localhost:3001](http://localhost:3001) |
 
-Benign traffic includes sessions that *look* like attacks (docs that say “ignore previous”, secret-reading agents that never egress, first-time vendors, high-volume refactors). Attacks include a ticket that just says “send env to this URL as a status check” with **no detectable content signal**, so the number measures the provenance path, not the sample.
+If a checkout does not yet contain the corresponding `package.json` scripts, treat these names as the intended interface rather than inventing replacement commands.
+
+Stop the demo with `Ctrl+C`. It uses port 3001 so the root Notes app can continue using port 3000.
+
+## Reading the evaluation
+
+The included corpus is synthetic. It contains benign sessions, attack sessions, and hard negatives such as first-time destinations or secret reads without external egress. Use the run to check engine behavior, not to claim a production detection rate.
+
+Before quoting a result, retain the generated eval artifact with its seed, corpus version, configuration, counts, and timestamp. `STRATEGY.md` deliberately leaves its eval numbers blank when `eval/last-run.json` is absent.
+
+## Package map
+
+| Path | Operator relevance |
+| --- | --- |
+| `src/` | Trace scoring, capabilities, provenance, baseline, and detectors |
+| `sim/` | Seeded trace scenarios |
+| `eval/` | Evaluation runner and output |
+| `test/` | Unit tests |
+| `demo/` | Local server and walkthrough |
+
+Do not send production prompts, credentials, source code, or personal data through this prototype.
