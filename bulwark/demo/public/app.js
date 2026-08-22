@@ -476,9 +476,9 @@ function contentBlock(step) {
              <span class="dim">weight ${num(s.weight, 2)} — ${escapeHtml(s.detail)}</span></li>`,
         )
         .join("")}</ul>`
-    : `<p class="dim">No content signal fired. Anything downstream of this step is trusted only
-       as far as the untrusted-origin floor allows — provenance, not the scanner, is what carries
-       this case.</p>`;
+    : `<p class="dim">No content signal fired. Content that scans clean still came from outside,
+       so steps downstream of this one inherit the untrusted-origin floor rather than full
+       trust — provenance, not the scanner, is what carries a case like this.</p>`;
 
   return `<section class="card"><h4>Ingested content</h4>
     <p class="dim">injection surface ${num(step.contentScore, 2)}
