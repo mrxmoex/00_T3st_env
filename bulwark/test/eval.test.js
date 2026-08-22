@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { formatReport, runEval } from "../eval/run.js";
+import { sweep } from "../eval/sweep.js";
 
 const report = runEval({ seed: 1 });
 
@@ -88,6 +89,22 @@ test("every failure is explained rather than counted", () => {
     assert.ok(row.action);
     assert.ok(typeof row.chain === "number");
     assert.ok(row.reasons.length > 0 || row.action === "observe", `${row.id} has no explanation`);
+  }
+});
+
+test("the headline numbers are a property of the design, not of one seed", () => {
+  const result = sweep({ seeds: 6 });
+  assert.ok(result.detection.min >= 0.7, `detection dipped to ${result.detection.min}`);
+  assert.ok(result.falsePositive.max <= 0.05, `interference rose to ${result.falsePositive.max}`);
+  assert.equal(result.ordinaryBenignInterruption.max, 0);
+});
+
+test("the attacks that are missed are the ones we say are missed", () => {
+  // Exfiltration routed through a destination the operator already trusts. If
+  // anything else joins this list, the claim in the PR body is stale.
+  const result = sweep({ seeds: 6 });
+  for (const archetype of result.alwaysMissed) {
+    assert.match(archetype, /trusted-channel|known-host-exfil/);
   }
 });
 
