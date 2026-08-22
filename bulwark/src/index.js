@@ -8,6 +8,7 @@ export {
   destinationNovelty,
   volumeAnomaly,
   isKnownDestination,
+  capabilityRarity,
 } from "./baseline.js";
 export { createAmbientDetectors, combineAmbient } from "./detectors.js";
 export { createEngine, assessSession, summarize, DEFAULT_THRESHOLDS } from "./engine.js";

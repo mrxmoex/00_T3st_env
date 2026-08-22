@@ -78,13 +78,19 @@ const SIGNALS = [
     weight: 0.85,
     detail: "Text hidden from a human reader by markup while remaining in the document",
     test: (text) => {
-      const hidden =
-        /<!--[\s\S]{0,600}?-->|style\s*=\s*["'][^"']*(display\s*:\s*none|font-size\s*:\s*0|color\s*:\s*#?f{3,6}\b|opacity\s*:\s*0)[^"']*["']/i;
+      // The match has to span the concealed *content*, not just the thing doing
+      // the concealing: hidden markup is only interesting when something is
+      // hiding inside it, and an empty `display:none` wrapper is not evidence.
+      const concealment = /display\s*:\s*none|font-size\s*:\s*0|color\s*:\s*#?f{3,6}\b|opacity\s*:\s*0/
+        .source;
+      const hidden = new RegExp(
+        `<!--[\\s\\S]{0,600}?-->|<[^>]*style\\s*=\\s*["'][^"']*(?:${concealment})[^"']*["'][^>]*>[\\s\\S]{0,600}?(?:</[a-z]+>|$)`,
+        "i",
+      );
       const match = text.match(hidden);
       if (!match) {
         return false;
       }
-      // Hidden markup is only interesting when something is hiding inside it.
       return /\b(you|your|ignore|instruction|task|send|must|assistant|ai)\b/i.test(match[0]);
     },
   },

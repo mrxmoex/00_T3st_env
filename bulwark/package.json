@@ -10,6 +10,7 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "eval": "node eval/run.js",
+    "eval:sweep": "node eval/sweep.js",
     "demo": "node demo/server.js"
   }
 }

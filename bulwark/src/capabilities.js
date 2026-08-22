@@ -87,19 +87,42 @@ export function destinationOf(step) {
 export function normalizeDestination(raw) {
   const value = raw.trim();
 
-  if (/^[a-z][a-z0-9+.-]*:\/\//i.test(value)) {
-    try {
-      return new URL(value).host.toLowerCase();
-    } catch {
-      return value.toLowerCase();
-    }
+  if (URL_SCHEME.test(value)) {
+    return hostOf(value) ?? value.toLowerCase();
   }
 
-  if (value.includes("@")) {
+  // A bare address, as opposed to a command line that happens to contain one.
+  if (/^[^\s@]+@[^\s@]+$/.test(value)) {
     return value.split("@").pop().toLowerCase();
   }
 
-  // Shell commands are opaque; treat the whole invocation as the destination
-  // so that a novel command is not silently trusted.
+  // Command lines are opaque, so reduce them to the identity that decides
+  // whether data can leave: the endpoint they talk to, or failing that the
+  // program being run. Keying on the whole invocation instead would give every
+  // command a different identity, so an ops agent could never build the
+  // reputation that keeps its routine deploys quiet.
+  if (/\s/.test(value)) {
+    const embedded = value.match(/[a-z][a-z0-9+.-]*:\/\/\S+/i);
+    const host = embedded ? hostOf(embedded[0]) : null;
+    if (host) {
+      return host;
+    }
+    const address = value.match(/\b\d{1,3}(?:\.\d{1,3}){3}\b/);
+    if (address) {
+      return address[0];
+    }
+    return value.split(/\s+/)[0].split("/").pop().toLowerCase();
+  }
+
   return value.toLowerCase();
+}
+
+const URL_SCHEME = /^[a-z][a-z0-9+.-]*:\/\//i;
+
+function hostOf(value) {
+  try {
+    return new URL(value).host.toLowerCase() || null;
+  } catch {
+    return null;
+  }
 }
