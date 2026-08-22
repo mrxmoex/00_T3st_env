@@ -82,6 +82,7 @@ async function loadCatalog() {
     catalogStateEl.classList.add("error");
     catalogStateEl.textContent = `Cannot reach the scoring API: ${error.message}`;
     catalogEl.innerHTML = "";
+    statsEl.innerHTML = `<div><dt>baseline</dt><dd class="dim">unavailable</dd></div>`;
   }
 }
 
