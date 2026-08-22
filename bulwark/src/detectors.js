@@ -1,5 +1,10 @@
 import { capabilityOf, destinationOf } from "./capabilities.js";
-import { destinationNovelty, transitionSurprisal, volumeAnomaly } from "./baseline.js";
+import {
+  capabilityRarity,
+  destinationNovelty,
+  transitionSurprisal,
+  volumeAnomaly,
+} from "./baseline.js";
 
 /**
  * Ambient detectors: statistical observations about a step in isolation.
@@ -13,6 +18,9 @@ import { destinationNovelty, transitionSurprisal, volumeAnomaly } from "./baseli
  */
 
 const WINDOW = 12;
+
+/** Below this, the deployment uses the tool often enough that it is routine. */
+const ESCALATION_RARITY = 0.85;
 
 export function createAmbientDetectors(baseline) {
   const seenTools = new Set();
@@ -57,12 +65,17 @@ export function createAmbientDetectors(baseline) {
       }
 
       if (!seenTools.has(step.tool) && Math.max(capability.egress, capability.sensitivity) >= 0.8) {
-        const rarity = 1 - (baseline.tools[step.tool] ?? 0) / Math.max(baseline.steps, 1);
-        signals.push({
-          name: "capability-escalation",
-          score: 0.5 * rarity * Math.max(capability.egress, capability.sensitivity),
-          detail: `first use of ${step.tool} in this session`,
-        });
+        // Only an escalation if this deployment does not routinely use the
+        // tool. A build agent running `shell.exec` every session is not
+        // escalating; a support agent running it once is.
+        const rarity = capabilityRarity(baseline, step.tool);
+        if (rarity >= ESCALATION_RARITY) {
+          signals.push({
+            name: "capability-escalation",
+            score: 0.5 * rarity * Math.max(capability.egress, capability.sensitivity),
+            detail: `first use of ${step.tool}, which this deployment rarely uses`,
+          });
+        }
       }
 
       const fingerprint = `${step.tool}:${stableStringify(step.params)}`;

@@ -21,6 +21,7 @@ export function emptyBaseline() {
     sessions: 0,
     steps: 0,
     tools: {},
+    toolSessions: {},
     transitions: {},
     destinations: {},
     volume: {},
@@ -33,8 +34,13 @@ export function learnBaseline(sessions) {
   for (const session of sessions) {
     baseline.sessions += 1;
     let previous = "__start__";
+    const usedHere = new Set();
 
     for (const step of session.steps) {
+      if (!usedHere.has(step.tool)) {
+        usedHere.add(step.tool);
+        baseline.toolSessions[step.tool] = (baseline.toolSessions[step.tool] ?? 0) + 1;
+      }
       baseline.steps += 1;
       baseline.tools[step.tool] = (baseline.tools[step.tool] ?? 0) + 1;
 
@@ -130,6 +136,24 @@ export function volumeAnomaly(baseline, tool, bytes) {
 
 export function isKnownDestination(baseline, destination) {
   return Boolean(destination) && (baseline.destinations[destination] ?? 0) > 0;
+}
+
+/**
+ * How unusual it is for this deployment to reach for `tool` at all, in [0, 1].
+ *
+ * Measured over sessions rather than steps on purpose. A tool's share of all
+ * steps says how chatty it is, not how exceptional it is: an agent that posts
+ * once in every session still accounts for a small fraction of steps, and
+ * reading that as "rare" makes routine work look like an escalation every
+ * time. What matters is whether this deployment reaches for the capability as
+ * a matter of course.
+ */
+export function capabilityRarity(baseline, tool) {
+  if (baseline.sessions === 0) {
+    return 1;
+  }
+  const share = (baseline.toolSessions?.[tool] ?? 0) / baseline.sessions;
+  return round(Math.max(0, 1 - share));
 }
 
 function round(value) {
