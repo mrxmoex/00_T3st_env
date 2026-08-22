@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bulwark — session provenance</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <span class="mark">B</span>
+        <div>
+          <h1>Bulwark</h1>
+          <p>Causal chains, not event scores</p>
+        </div>
+      </div>
+      <p class="thesis">
+        Reading a secret, fetching a page, and posting to an API are all normal.
+        One path that does all three is not.
+      </p>
+    </header>
+
+    <main>
+      <aside>
+        <label class="filter">
+          Show
+          <select id="filter">
+            <option value="all">all scored sessions</option>
+            <option value="benign">benign</option>
+            <option value="attack">attacks</option>
+            <option value="hard">hard negatives</option>
+          </select>
+        </label>
+        <ol id="scenarios"></ol>
+      </aside>
+
+      <section class="stage">
+        <div id="empty" class="empty">Pick a scenario to step through a session.</div>
+        <article id="detail" hidden>
+          <header class="session-head">
+            <div>
+              <p class="meta" id="meta"></p>
+              <h2 id="task"></h2>
+            </div>
+            <div class="controls">
+              <button type="button" id="reset">Reset</button>
+              <button type="button" id="step">Next step</button>
+              <button type="button" id="play" class="primary">Play</button>
+            </div>
+          </header>
+          <div class="verdict" id="verdict"></div>
+          <ol id="steps" class="steps"></ol>
+        </article>
+      </section>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
