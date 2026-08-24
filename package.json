@@ -8,10 +8,11 @@
   },
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
-    "test": "node --test",
-    "lint": "eslint ."
+    "start": "npm run preview --prefix web",
+    "dev": "npm run dev --prefix web",
+    "test": "node --test && npm test --prefix web",
+    "lint": "eslint . && npm run lint --prefix web",
+    "build": "npm run build --prefix web"
   },
   "dependencies": {
     "express": "^4.21.2"

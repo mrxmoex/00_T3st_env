@@ -1,11 +1,11 @@
 {
   "name": "00_T3st_env",
-  "install": "npm ci",
+  "install": "npm ci && npm ci --prefix web",
   "terminals": [
     {
       "name": "dev-server",
       "command": "npm run dev",
-      "description": "Runs the Notes app dev server (npm run dev) on port 3000 with auto-reload."
+      "description": "Runs Du bist was du isst (Vite) on port 3000 with auto-reload."
     }
   ],
   "ports": [
