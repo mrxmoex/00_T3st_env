@@ -1,23 +1,40 @@
 {
-  "name": "00_t3st_env",
+  "name": "du-bist-was-du-isst",
+  "private": true,
   "version": "1.0.0",
-  "description": "A small Notes web app used to demonstrate the Cloud Agent development environment end to end.",
+  "description": "Matrix evaluation of foods by biochemical efficiency, completeness, and real-world value.",
   "type": "module",
   "engines": {
     "node": ">=20"
   },
-  "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "node --watch src/server.js",
-    "test": "node --test",
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "lint": "eslint ."
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "eslint": "^9.18.0"
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.18.0",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.6",
+    "vitest": "^2.1.8"
   }
 }

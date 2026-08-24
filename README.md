@@ -1,54 +1,47 @@
-# 00_T3st_env
+# Du bist was du isst
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
+Public, free matrix evaluation of foods by **biochemical efficiency, completeness, and real-world value**. Explicit formulas. No equivalence theater between incomplete plant proteins and complete animal proteins. No black-box “AI nutrition score”.
 
-Have fun 🎉
+The previous Notes demo in this repo is replaced by this product. `bulwark/` remains a separate prototype.
+
+## Inevitable biological truths (encoded, not decorated)
+
+- Plant proteins are incomplete as a class; animal proteins are complete. DIAAS/PDCAAS are not equalised.
+- Non-heme iron, phytate-bound zinc, and carotenoid vitamin A are not equivalent to heme iron, animal zinc, and retinol.
+- Fibre/phytochemicals are plant advantages. B12, creatine, taurine, carnosine, and LC EPA/DHA are animal (or algae-oil) advantages.
+- Water-soluble vitamins degrade; fat-soluble vitamins oxidise.
+- Agricultural residues belong in the matrix.
+- Active vs passive carbohydrates are scored separately.
+- Fatty-acid composition is a first-class axis.
+- Algae, mushrooms, sprouts, kraut, legumes, and leafy salads are distinct classes.
 
 ## Stack
 
-- Node.js (>= 20) with [Express](https://expressjs.com/)
-- Plain HTML/CSS/JS frontend served from `public/`
-- Tests via the built-in Node test runner (`node --test`)
-- Linting via [ESLint](https://eslint.org/) (flat config)
+- Vite + React + TypeScript + Tailwind
+- Static catalog + pure scoring functions
+- Vitest for formula tests
 
-## Getting started
+## Run
 
 ```bash
-npm ci        # install exact dependencies from package-lock.json
-npm run dev   # start the dev server with auto-reload on http://localhost:3000
+npm ci
+npm run dev    # http://localhost:3000
 ```
 
-Then open http://localhost:3000 and add a note.
+| Command        | Description                |
+|----------------|----------------------------|
+| `npm run dev`  | Vite dev server, port 3000 |
+| `npm test`     | Scoring and export tests   |
+| `npm run build`| Production build           |
+| `npm run lint` | ESLint                     |
 
-## Commands
+## Architecture
 
-| Command        | Description                                   |
-| -------------- | --------------------------------------------- |
-| `npm start`    | Start the server (`src/server.js`)            |
-| `npm run dev`  | Start the server with `--watch` auto-reload   |
-| `npm test`     | Run the test suite (`node --test`)            |
-| `npm run lint` | Lint the codebase with ESLint                 |
+- `docs/ARCHITECTURE.md` — layers, data contract, extension path
+- `docs/METHODOLOGY.md` — auditable formulas and non-claims
+- `src/data/` — versioned foods, sources, class weights, coefficients
+- `src/scoring/` — pure axis functions
+- `src/recommend/` — pattern-aware engine with required B12 disclosure
+- `src/export/` — CSV / JSON
 
-The server port can be overridden with the `PORT` environment variable (defaults to `3000`).
-
-## API
-
-| Method   | Path              | Description              |
-| -------- | ----------------- | ------------------------ |
-| `GET`    | `/api/health`     | Health check             |
-| `GET`    | `/api/notes`      | List all notes           |
-| `POST`   | `/api/notes`      | Create a note (`{text}`) |
-| `DELETE` | `/api/notes/:id`  | Delete a note by id      |
-
-Notes are stored in memory and reset on restart.
-
-## Cloud Agent environment
-
-`.cursor/environment.json` configures the Cloud Agent environment: `npm ci` installs
-dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
-while an agent works.
-
-## Also in this repo
-
-[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
-its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
+Catalog version and last verification date are in `src/data/manifest.ts` and in the UI footer.

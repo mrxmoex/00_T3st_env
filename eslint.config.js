@@ -1,9 +1,23 @@
 import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 
-export default [
+export default tseslint.config(
   js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    files: ["**/*.js"],
+    files: ["src/**/*.{ts,tsx}"],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2023,
+        sourceType: "module",
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    },
+  },
+  {
+    files: ["bulwark/**/*.js"],
     languageOptions: {
       ecmaVersion: 2023,
       sourceType: "module",
@@ -13,6 +27,10 @@ export default [
         fetch: "readonly",
         Buffer: "readonly",
         URL: "readonly",
+        document: "readonly",
+        window: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
       },
     },
     rules: {
@@ -20,18 +38,6 @@ export default [
     },
   },
   {
-    files: ["public/**/*.js", "bulwark/demo/public/**/*.js"],
-    languageOptions: {
-      globals: {
-        document: "readonly",
-        window: "readonly",
-        fetch: "readonly",
-        setInterval: "readonly",
-        clearInterval: "readonly",
-      },
-    },
+    ignores: ["dist/**", "node_modules/**", "bulwark/eval/last-run.json"],
   },
-  {
-    ignores: ["node_modules/**", "bulwark/eval/last-run.json"],
-  },
-];
+);

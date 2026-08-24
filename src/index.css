@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.matrix-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #334038 transparent;
+}
+
+.heat {
+  font-variant-numeric: tabular-nums;
+}
