@@ -64,3 +64,23 @@ test("rejects an empty note", async () => {
   });
   assert.equal(res.status, 400);
 });
+
+test("serves the nutrition app shell", async () => {
+  const res = await fetch(`${baseUrl}/`);
+  assert.equal(res.status, 200);
+  const html = await res.text();
+  assert.match(html, /Du bist was du isst/);
+  assert.match(html, /js\/app\.js/);
+});
+
+test("serves scoring engine, dataset, and methodology docs", async () => {
+  const engine = await fetch(`${baseUrl}/lib/scoring/index.js`);
+  const data = await fetch(`${baseUrl}/dataset/foods.js`);
+  const docs = await fetch(`${baseUrl}/docs/methodology-non-claims.md`);
+  assert.equal(engine.status, 200);
+  assert.equal(data.status, 200);
+  assert.equal(docs.status, 200);
+  assert.match(await engine.text(), /export function scoreFood/);
+  assert.match(await data.text(), /leafy_salad/);
+  assert.match(await docs.text(), /will not claim/i);
+});

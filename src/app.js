@@ -43,6 +43,9 @@ export function createApp() {
     res.json(removed);
   });
 
+  app.use("/lib", express.static(path.join(__dirname, "..", "lib")));
+  app.use("/dataset", express.static(path.join(__dirname, "..", "dataset")));
+  app.use("/docs", express.static(path.join(__dirname, "..", "docs")));
   app.use(express.static(path.join(__dirname, "..", "public")));
 
   return app;

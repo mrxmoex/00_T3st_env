@@ -4,5 +4,5 @@ const port = Number(process.env.PORT) || 3000;
 const app = createApp();
 
 app.listen(port, "0.0.0.0", () => {
-  console.log(`Notes app listening on http://0.0.0.0:${port}`);
+  console.log(`Du bist was du isst listening on http://0.0.0.0:${port}`);
 });
