@@ -86,7 +86,6 @@ export function residuePenalty(food: Food): number {
 }
 
 function nutrientDensityRaw(food: Food): { score: number; drivers: Localized; sourceIds: string[] } {
-  const per100g = food;
   const kcal = Math.max(food.energyKcal.amount, 1);
   const scaleTo100kcal = 100 / kcal;
   const micros = food.micronutrients;
@@ -301,12 +300,30 @@ function rawForAxis(food: Food, axis: AxisId): { score: number; drivers: Localiz
   }
 }
 
-export function adjustAxis(raw: number, food: Food): number {
-  const adjusted =
-    raw * completenessMultiplier(food) * bioavailabilityMultiplier(food) -
-    antinutrientPenalty(food) * 22 -
-    residuePenalty(food) * 18;
-  return clamp(adjusted, 0, 120);
+export function adjustAxis(raw: number, food: Food, axis: AxisId): number {
+  const completeness = completenessMultiplier(food);
+  const bioavail = bioavailabilityMultiplier(food);
+  const anti = antinutrientPenalty(food);
+  const residue = residuePenalty(food);
+
+  switch (axis) {
+    case "protein_quality":
+      return clamp(raw * completeness - anti * 8, 0, 120);
+    case "nutrient_density":
+      return clamp(raw * bioavail - anti * 22 - residue * 12, 0, 120);
+    case "bioavailability":
+      return clamp(raw - anti * 24 - residue * 10, 0, 120);
+    case "carb_quality":
+    case "efa_profile":
+    case "bioactives":
+      return clamp(raw, 0, 120);
+    case "practical_efficiency":
+      return clamp(raw - residue * 14, 0, 120);
+    default: {
+      const _exhaustive: never = axis;
+      return _exhaustive;
+    }
+  }
 }
 
 function axisConfidence(food: Food, axis: AxisId): AxisScore["confidence"] {
@@ -328,7 +345,7 @@ export function evaluateFood(food: Food): EvaluatedFood {
     axes[axis] = {
       axis,
       raw: clamp(raw.score, 0, 130),
-      adjusted: adjustAxis(raw.score, food),
+      adjusted: adjustAxis(raw.score, food, axis),
       confidence: axisConfidence(food, axis),
       drivers: raw.drivers,
       sourceIds: raw.sourceIds,
@@ -424,13 +441,10 @@ export function absoluteTier(score: number): Tier {
 }
 
 function classTierFromRank(index: number, size: number, score: number): Tier {
-  if (size <= 1) return absoluteTier(score);
-  const percentile = 1 - index / (size - 1);
-  if (percentile >= 0.85 && score >= 60) return "S";
-  if (percentile >= 0.65) return "A";
-  if (percentile >= 0.4) return "B";
-  if (percentile >= 0.2) return "C";
-  return "D";
+  const absolute = absoluteTier(score);
+  if (size <= 2) return absolute;
+  if (index === 0 && score >= 60) return "S";
+  return absolute;
 }
 
 export function tierIndex(tier: Tier): number {

@@ -48,10 +48,10 @@ describe("scoring constraints", () => {
     for (const row of catalog) {
       assert.ok(row.completenessMultiplier <= 1.0);
       assert.ok(row.bioavailabilityMultiplier >= 0.5 && row.bioavailabilityMultiplier <= 1.15);
-      for (const axis of Object.values(row.axes)) {
-        const expectedFloor = axis.raw * row.completenessMultiplier * row.bioavailabilityMultiplier;
-        assert.ok(axis.adjusted <= expectedFloor + 0.01, `${row.food.id} ${axis.axis}`);
-      }
+      const density = row.axes.nutrient_density;
+      const protein = row.axes.protein_quality;
+      assert.ok(protein.adjusted <= protein.raw * row.completenessMultiplier + 0.01, row.food.id);
+      assert.ok(density.adjusted <= density.raw * row.bioavailabilityMultiplier + 0.01, row.food.id);
     }
     const spinach = catalog.find((row) => row.food.id === "spinach-raw");
     assert.ok(spinach);
