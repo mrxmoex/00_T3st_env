@@ -1,7 +1,7 @@
 {
   "name": "00_t3st_env",
   "version": "1.0.0",
-  "description": "A small Notes web app used to demonstrate the Cloud Agent development environment end to end.",
+  "description": "Du bist was du isst — free auditable food-quality matrix with a small Notes sandbox kept for the Cloud Agent environment demo.",
   "type": "module",
   "engines": {
     "node": ">=20"
