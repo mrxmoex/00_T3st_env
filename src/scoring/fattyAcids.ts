@@ -27,12 +27,13 @@ export function scoreFattyAcids(food: Food): AxisBreakdown {
   const n3Effective = n3Long + fa.ala * ALA_TO_LC_N3;
   const n6 = fa.la + fa.aa;
   const ratio = safeDiv(n6, Math.max(n3Effective, 0.001), 99);
+  const pufaLoad = n6 + n3Effective;
 
-  const lcScore = clamp(n3Long * 55 + (n3Long > 0 ? 18 : 0), 0, 100);
+  const lcScore = n3Long > 0 ? clamp(20 + n3Long * 45, 0, 100) : 12;
   const alaCredit = clamp(fa.ala * ALA_TO_LC_N3 * 80, 0, 22);
-  let ratioScore = 70;
-  if (n3Effective <= 0 && n6 <= 0.05) {
-    ratioScore = 52;
+  let ratioScore = 64;
+  if (pufaLoad < 0.4) {
+    ratioScore = 64;
   } else if (ratio <= 4) {
     ratioScore = 92;
   } else if (ratio <= 10) {
@@ -40,27 +41,27 @@ export function scoreFattyAcids(food: Food): AxisBreakdown {
   } else if (ratio <= 15) {
     ratioScore = 48;
   } else {
-    ratioScore = 28;
+    ratioScore = 30;
   }
 
   const totalFa = fa.sfa + fa.mufa + fa.pufa;
   const mufaShare = safeDiv(fa.mufa, totalFa, 0);
   const pufaShare = safeDiv(fa.pufa, totalFa, 0);
   const glyceride =
-    50 +
+    58 +
     clamp((mufaShare - 0.2) * 40, -8, 16) -
     (pufaShare > 0.45 ? (pufaShare - 0.45) * 40 : 0);
 
-  const oddCla = clamp(fa.oddChain * 40 + fa.cla * 50, 0, 12);
+  const oddCla = clamp(fa.oddChain * 80 + fa.cla * 90, 0, 18);
   const efaPresent = fa.la >= 0.1 || fa.ala >= 0.05 || n3Long >= 0.02;
-  const efaBonus = efaPresent ? 6 : 0;
+  const efaBonus = efaPresent ? 8 : 0;
 
   const raw =
-    0.38 * lcScore +
-    0.12 * alaCredit * (100 / 22) +
-    0.22 * ratioScore +
-    0.18 * clamp(glyceride, 0, 100) +
-    0.1 * (50 + oddCla + efaBonus);
+    0.26 * lcScore +
+    0.1 * alaCredit * (100 / 22) +
+    0.2 * ratioScore +
+    0.3 * clamp(glyceride, 0, 100) +
+    0.14 * (48 + oddCla + efaBonus);
 
   const notes = [
     `EPA+DHA ${n3Long.toFixed(3)} g; ALA ${fa.ala.toFixed(3)} g → effective n-3 ${n3Effective.toFixed(3)} g.`,

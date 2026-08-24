@@ -97,14 +97,16 @@ ratio = n6 / max(n3_effective, 0.001)
 
 Score components (0–100 each), then weighted:
 
-- Long-chain n-3 presence (EPA+DHA): primary credit. Algae and fatty fish score
-  here; flax/walnut credit only the converted ALA fraction.
-- n-6/n-3 effective ratio: better when ≤ 4; penalty rises above 10.
+- Long-chain n-3 presence (EPA+DHA): largest distinctive credit. Algae and fatty
+  fish score here; flax/walnut credit only the converted ALA fraction.
+- n-6/n-3 effective ratio: applied when PUFA load is meaningful (≥ 0.4 g/100 g).
+  Very-low-PUFA fats (typical muscle trim) are not punished for an unstable ratio.
 - Glyceride mix: MUFA share 0.25–0.55 is treated as compositionally ordinary;
   very high PUFA adds an oxidation-awareness penalty (not a moral score).
-- Odd-chain + CLA: modest documented credit for ruminant fat (not a health claim
-  beyond composition).
-- Essential FA present: LA and/or n-3 above trace.
+- Odd-chain + CLA: modest documented credit for ruminant fat (composition, not
+  a health claim).
+- Essential FA present: LA and/or n-3 above trace. Ruminant fat can score in
+  the middle of the axis without EPA/DHA; it cannot match fatty fish.
 
 Very-low-fat foods (total fat < 1 g/100 g) receive a **neutral 48**, not a
 penalty: they are not fat sources.

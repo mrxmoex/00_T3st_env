@@ -28,6 +28,7 @@ export function RecommendPage() {
           Pattern
         </span>
         <select
+          aria-label="Pattern"
           className="border border-stone-400 bg-white px-2 py-2 dark:border-ink-600 dark:bg-ink-900"
           value={pattern}
           onChange={(event) => setPattern(event.target.value as DietaryPattern)}

@@ -33,19 +33,22 @@ describe("EAA completeness + digestibility", () => {
     expect(scoreEaa(tofu).score).toBeLessThan(scoreEaa(egg).score);
   });
 
-  it("refuses to rescue an incomplete protein with high digestibility", () => {
-    const lentils = foodById("lentils-boiled");
-    expect(lentils).toBeDefined();
-    if (!lentils) return;
+  it("does not grant a DIAAS surplus to an incomplete protein", () => {
+    const spirulina = foodById("spirulina");
+    const egg = foodById("egg-whole");
+    expect(spirulina && egg).toBeTruthy();
+    if (!spirulina || !egg) return;
     const inflated = {
-      ...lentils,
-      proteinQuality: { ...lentils.proteinQuality, method: "DIAAS" as const, value: 1.18 },
+      ...spirulina,
+      proteinQuality: { ...spirulina.proteinQuality, method: "DIAAS" as const, value: 1.18 },
     };
-    const natural = scoreEaa(lentils);
+    const ratios = aminoAcidRatios(spirulina.aminoAcids);
     const boosted = scoreEaa(inflated);
-    expect(aminoAcidRatios(lentils.aminoAcids).completeness).toBeLessThan(1);
-    expect(boosted.score).toBeLessThanOrEqual(natural.score + 0.01);
-    expect(boosted.score).toBeLessThan(90);
+    const surplus = boosted.flags.find((flag) => flag.key === "diaas_surplus");
+    expect(ratios.completeness).toBeLessThan(1);
+    expect(surplus?.applied).toBe(false);
+    expect(boosted.score).toBeCloseTo(100 * ratios.completeness, 5);
+    expect(boosted.score).toBeLessThan(scoreEaa(egg).score);
   });
 
   it("scores every catalog food in 0–100", () => {

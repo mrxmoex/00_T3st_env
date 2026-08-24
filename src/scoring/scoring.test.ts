@@ -34,15 +34,16 @@ describe("bioavailability", () => {
   it("does not credit algal B12 analogs", () => {
     const nori = foodById("nori");
     const sardine = foodById("sardines-canned");
-    expect(nori && sardine).toBeTruthy();
-    if (!nori || !sardine) return;
+    const liver = foodById("beef-liver");
+    expect(nori && sardine && liver).toBeTruthy();
+    if (!nori || !sardine || !liver) return;
     expect(nori.micros.b12Ug).toBeGreaterThan(0);
     expect(nori.micros.b12Bioactive).toBe(false);
-    const noriFlags = scoreMicros(nori).flags;
-    const analog = noriFlags.find((flag) => flag.key === "b12_bioactivity");
+    const analog = scoreMicros(nori).flags.find((flag) => flag.key === "b12_bioactivity");
     expect(analog?.applied).toBe(true);
     expect(analog?.value).toBe(0);
-    expect(scoreMicros(sardine).score).toBeGreaterThan(scoreMicros(nori).score);
+    expect(sardine.micros.b12Bioactive).toBe(true);
+    expect(scoreMicros(liver).score).toBeGreaterThan(scoreMicros(nori).score);
   });
 
   it("applies the carotenoid variance factor on sweet potato", () => {
@@ -85,11 +86,15 @@ describe("fibre and fat", () => {
   it("credits preformed EPA/DHA above ALA-only fat", () => {
     const salmon = foodById("salmon-atlantic");
     const tofu = foodById("tofu-firm");
-    expect(salmon && tofu).toBeTruthy();
-    if (!salmon || !tofu) return;
+    const beef = foodById("beef-sirloin");
+    expect(salmon && tofu && beef).toBeTruthy();
+    if (!salmon || !tofu || !beef) return;
     const salmonFat = scoreFattyAcids(salmon);
     const tofuFat = scoreFattyAcids(tofu);
+    const beefFat = scoreFattyAcids(beef);
     expect(salmonFat.score).toBeGreaterThan(tofuFat.score);
+    expect(salmonFat.score).toBeGreaterThan(beefFat.score);
+    expect(beefFat.score).toBeGreaterThan(40);
     expect(tofuFat.flags.some((flag) => flag.key === "ala_to_lc_n3" && flag.applied)).toBe(true);
   });
 });
