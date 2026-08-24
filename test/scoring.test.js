@@ -496,6 +496,20 @@ describe("composite, tiers, and recommendation limits", () => {
     assert.ok(meatTiers.includes("S") || meatTiers.includes("A"));
   });
 
+  test("does not force a high-absolute food to D just because its class has two members", () => {
+    const scored = scoreDataset([
+      animalCompleteProtein({ id: "m1", classId: "muscle_fish" }),
+      animalCompleteProtein({
+        id: "m2",
+        classId: "muscle_fish",
+        residues: { pesticideRisk: 0.3, heavyMetalRisk: 0.28, persistentOrganicRisk: 0.25 },
+      }),
+    ]);
+    const ranked = assignTiers(scored);
+    assert.ok(ranked.every((food) => food.composite >= 50));
+    assert.ok(ranked.every((food) => food.tier !== "D"));
+  });
+
   test("plant-only recommendations require fortification or supplementation notes", () => {
     const scored = scoreDataset([
       incompleteLegume(),
