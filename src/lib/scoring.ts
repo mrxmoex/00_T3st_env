@@ -57,11 +57,6 @@ export function bioavailabilityMultiplier(food: Food): number {
   return clamp(base - penalty + mitigation, 0.5, 1);
 }
 
-function coverage(amount: number, ref: number): number {
-  if (ref <= 0) return 0;
-  return clamp((amount / ref) * 100, 0, 160);
-}
-
 function densityDrivers(food: Food, locale: Locale): string[] {
   const drivers: string[] = [];
   if (food.composition.vitaminB12Ug.value >= 2) {
@@ -79,27 +74,36 @@ function densityDrivers(food: Food, locale: Locale): string[] {
   return drivers;
 }
 
-export function rawNutrientDensity(food: Food): number {
-  const per100 = [
-    coverage(food.composition.ironMg.value, intake("iron").amount),
-    coverage(food.composition.zincMg.value, intake("zinc").amount),
-    coverage(food.composition.calciumMg.value, intake("calcium").amount),
-    coverage(food.composition.vitaminB12Ug.value, intake("b12").amount),
-    coverage(food.composition.vitaminARaeUg.value, intake("vitaminA").amount),
-    coverage(food.composition.vitaminCMg.value, intake("vitaminC").amount),
-    coverage(food.composition.folateDfeUg.value, intake("folate").amount),
-    coverage(food.composition.fiberG.value, intake("fiber").amount),
-    coverage(food.composition.proteinG.value, intake("protein").amount),
-    coverage(
-      (food.fattyAcids.epaMg.value + food.fattyAcids.dhaMg.value) / 1000,
-      intake("epaDha").amount / 1000,
+function densityVector(food: Food, scale: number): number[] {
+  const n = food.composition;
+  const amount = (value: number) => value * scale;
+  return [
+    Math.min(amount(n.ironMg.value) / intake("iron").amount, 2),
+    Math.min(amount(n.zincMg.value) / intake("zinc").amount, 2),
+    Math.min(amount(n.calciumMg.value) / intake("calcium").amount, 2),
+    Math.min(amount(n.vitaminB12Ug.value) / intake("b12").amount, 2),
+    Math.min(amount(n.vitaminARaeUg.value) / intake("vitaminA").amount, 2),
+    Math.min(amount(n.vitaminCMg.value) / intake("vitaminC").amount, 2),
+    Math.min(amount(n.folateDfeUg.value) / intake("folate").amount, 2),
+    Math.min(amount(n.fiberG.value) / intake("fiber").amount, 2),
+    Math.min(amount(n.proteinG.value) / intake("protein").amount, 2),
+    Math.min(
+      amount(n.vitaminDUg.value) / 20,
+      2,
     ),
+    Math.min(amount(n.cholineMg?.value ?? 0) / 400, 2),
   ];
-  const mean100 = per100.reduce((sum, value) => sum + value, 0) / per100.length;
-  const scale = 100 / Math.max(food.composition.energyKcal.value, 1);
-  const meanKcal = per100.map((value) => clamp(value * scale, 0, 160));
-  const meanPerKcal = meanKcal.reduce((sum, value) => sum + value, 0) / meanKcal.length;
-  return clamp(0.55 * (mean100 / 1.6) + 0.45 * (meanPerKcal / 1.6), 0, 100);
+}
+
+export function rawNutrientDensity(food: Food): number {
+  const per100 = densityVector(food, 1).reduce((sum, value) => sum + value, 0);
+  const perKcal = densityVector(food, 100 / Math.max(food.composition.energyKcal.value, 1)).reduce(
+    (sum, value) => sum + value,
+    0,
+  );
+  const score100 = (per100 / 8) * 100;
+  const scoreKcal = (perKcal / 10) * 100;
+  return clamp(0.55 * score100 + 0.45 * scoreKcal, 0, 100);
 }
 
 export function rawProteinQuality(food: Food): number {

@@ -22,7 +22,7 @@ export function geometricMean(values: number[]): number {
   if (values.length === 0) {
     return 0;
   }
-  const logs = values.map((value) => Math.log(Math.max(value, 1)));
+  const logs = values.map((value) => Math.log(Math.max(value, 12)));
   return Math.exp(logs.reduce((sum, value) => sum + value, 0) / logs.length);
 }
 

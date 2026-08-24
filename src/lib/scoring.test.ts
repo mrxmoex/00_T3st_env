@@ -60,9 +60,17 @@ describe("axis trade-offs", () => {
   });
 
   it("lets liver dominate nutrient density versus chicken breast", () => {
+    expect(rawNutrientDensity(foodById("beef-liver-braised"))).toBeGreaterThan(70);
     expect(rawNutrientDensity(foodById("beef-liver-braised"))).toBeGreaterThan(
       rawNutrientDensity(foodById("chicken-breast-cooked")),
     );
+  });
+
+  it("gives leafy greens a high per-kcal density without treating them as complete protein", () => {
+    expect(rawNutrientDensity(foodById("spinach-raw"))).toBeGreaterThan(
+      rawNutrientDensity(foodById("chicken-breast-cooked")),
+    );
+    expect(foodById("spinach-raw").proteinQuality.complete).toBe(false);
   });
 
   it("keeps soy as the best unaugmented plant protein in the seed without calling it complete", () => {
