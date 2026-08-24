@@ -296,15 +296,16 @@ export function scoreFood(food: Food, locale: Locale = "en"): FoodScore {
     }),
   ) as FoodScore["axes"];
 
-  const combined = geometricMean(AXES.map((axis) => axes[axis].adjusted));
+  const combined = clamp(geometricMean(AXES.map((axis) => axes[axis].adjusted)), 0, 100);
+  const tier = tierFromScore(combined);
   return {
     foodId: food.id,
     axes,
     completenessMultiplier: completeness,
     bioavailabilityMultiplier: bioavailability,
-    combined: clamp(combined, 0, 100),
-    tierAcross: "D",
-    tierWithin: "D",
+    combined,
+    tierAcross: tier,
+    tierWithin: tier,
   };
 }
 

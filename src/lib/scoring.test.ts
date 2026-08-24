@@ -89,8 +89,9 @@ describe("catalog ranking", () => {
   });
 
   it("assigns S-A-B-C-D tiers from the adjusted combined score", () => {
-    const liver = scoreCatalog([foodById("beef-liver-braised")])[0];
-    expect(["S", "A", "B", "C", "D"]).toContain(liver.tierAcross);
-    expect(liver.combined).toBeGreaterThan(0);
+    const liver = scoreFood(foodById("beef-liver-braised"));
+    expect(liver.tierAcross).toBe(liver.combined >= 50 ? "B" : liver.combined >= 35 ? "C" : "D");
+    expect(liver.combined).toBeGreaterThan(50);
+    expect(scoreFood(foodById("oysters-raw")).tierAcross).toBe("A");
   });
 });
