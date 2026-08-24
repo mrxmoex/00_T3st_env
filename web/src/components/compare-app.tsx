@@ -1,3 +1,4 @@
+import { sourceTooltip } from "@/data/sources";
 import { AxisRadar } from "@/components/axis-radar";
 import { SourceStack } from "@/components/source-cite";
 import { TierBadge } from "@/components/tier-badge";
@@ -60,8 +61,18 @@ export async function CompareApp({ query }: { query: CompareQuery }) {
               return (
                 <tr key={axis} data-axis={axis} className="border-t border-line/70">
                   <td className="px-3 py-2">{t(AXIS_LABELS[axis], locale)}</td>
-                  <td className="px-3 py-2 font-mono">{l?.score.toFixed(0)}</td>
-                  <td className="px-3 py-2 font-mono">{r?.score.toFixed(0)}</td>
+                  <td
+                    className="px-3 py-2 font-mono"
+                    title={l ? sourceTooltip(l.sourceIds) : undefined}
+                  >
+                    {l?.score.toFixed(0)}
+                  </td>
+                  <td
+                    className="px-3 py-2 font-mono"
+                    title={r ? sourceTooltip(r.sourceIds) : undefined}
+                  >
+                    {r?.score.toFixed(0)}
+                  </td>
                 </tr>
               );
             })}

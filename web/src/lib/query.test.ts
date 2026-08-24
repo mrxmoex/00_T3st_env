@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { filterCatalog, sortCatalog } from "@/lib/catalog";
+import { sourceTooltip } from "@/data/sources";
+import { filterCatalog, getFood, sortCatalog } from "@/lib/catalog";
 import {
   compareHref,
   matrixHref,
@@ -75,6 +76,17 @@ describe("catalog filters used by the URL matrix", () => {
     expect(
       filterCatalog({ includeReference: true }).some((item) => item.food.id === "whole-wheat-bread"),
     ).toBe(true);
+  });
+});
+
+describe("source tooltips", () => {
+  it("attaches organization and year to every axis score", () => {
+    const liver = getFood("beef-liver");
+    for (const axis of liver.axes) {
+      const tip = sourceTooltip(axis.sourceIds);
+      expect(tip).toMatch(/20\d{2}/);
+      expect(tip.length).toBeGreaterThan(8);
+    }
   });
 });
 

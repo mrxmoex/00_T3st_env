@@ -2,6 +2,7 @@ import Link from "next/link";
 import { AxisRadar } from "@/components/axis-radar";
 import { SourceStack } from "@/components/source-cite";
 import { TierBadge } from "@/components/tier-badge";
+import { sourceTooltip } from "@/data/sources";
 import { filterCatalog, sortCatalog } from "@/lib/catalog";
 import { cn } from "@/lib/cn";
 import { AXIS_LABELS, CATEGORY_LABELS, UI, t } from "@/lib/i18n";
@@ -161,7 +162,12 @@ export async function MatrixApp({ query }: { query: MatrixQuery }) {
                     </td>
                     <td className="px-3 py-2 font-mono">{item.composite.toFixed(0)}</td>
                     {item.axes.map((entry) => (
-                      <td key={entry.axis} className="px-2 py-2 font-mono text-muted">
+                      <td
+                        key={entry.axis}
+                        title={sourceTooltip(entry.sourceIds)}
+                        data-sources={entry.sourceIds.join(" ")}
+                        className="px-2 py-2 font-mono text-muted"
+                      >
                         {entry.score.toFixed(0)}
                       </td>
                     ))}

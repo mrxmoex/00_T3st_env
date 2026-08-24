@@ -278,3 +278,7 @@ export function sourceYearLabel(id: string): string {
   const source = getSource(id);
   return `${source.organization}, ${source.year}`;
 }
+
+export function sourceTooltip(ids: readonly string[]): string {
+  return [...new Set(ids)].map(sourceYearLabel).join(" · ");
+}
