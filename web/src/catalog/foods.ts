@@ -1205,7 +1205,7 @@ export const FOODS: readonly Food[] = [
     animalExclusive: MUSCLE_ANIMAL,
     sourceIds: ["usda-fdc-sr", "phillips-2017-diaas", "who-fao-2013", "cla-ruminant"],
     notes: [
-      "Published DIAAS 1.16. Complete protein under the animal + pattern + digestibility rule.",
+      "Published DIAAS 1.16. Complete via DIAAS ≥ 1.00 — FDC tryptophan 0.094 g/100 g under-reports vs ~12 mg/g protein.",
       "CLA 0.055 g and odd-chain 0.12 g/100 g are ruminant-fat literature estimates, not FDC fields.",
     ],
   },

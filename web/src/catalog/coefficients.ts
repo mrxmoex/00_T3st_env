@@ -26,6 +26,11 @@ export const COEFFICIENTS = {
   aminoAcidScoreCap: 1.5,
   /** Minimum ileal digestibility to call an animal protein complete. */
   completeDigestibilityFloor: 0.9,
+  /**
+   * FAO DIAAS ≥ 1.00 means no complementary protein is required.
+   * Used when an FDC amino-acid panel is incomplete (e.g. missing tryptophan).
+   */
+  completeDiaasFloor: 1,
   /** Display clamp for axis scores. Raw DIAAS is stored separately. */
   scoreCap: 100,
   /** Active-carb reference (g/100 g) at which the active-carb term saturates. */

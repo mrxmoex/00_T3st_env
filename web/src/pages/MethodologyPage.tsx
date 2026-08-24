@@ -46,9 +46,11 @@ diaasLike = publishedDIAAS ?? chemicalScore × ilealDigestibility
 eaaScore = clamp(diaasLike × 100, 0, 100)
 
 complete iff kingdom = animal
-        AND every AAS_i ≥ 1
         AND ilealDigestibility ≥ ${COEFFICIENTS.completeDigestibilityFloor}
-Plant kingdom ⇒ incomplete, always.`}</pre>
+        AND (every AAS_i ≥ 1  OR  publishedDIAAS ≥ ${COEFFICIENTS.completeDiaasFloor})
+Plant kingdom ⇒ incomplete, always.
+Published DIAAS is used when an FDC amino-acid panel is incomplete
+(e.g. cooked ground beef tryptophan under-reported at 0.094 g/100 g).`}</pre>
       </section>
 
       <section className="panel">

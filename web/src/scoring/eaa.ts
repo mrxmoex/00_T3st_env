@@ -62,13 +62,17 @@ export function scoreEaa(food: Food): EaaResult {
   const allMeetPattern = (Object.keys(scores) as AminoScoreKey[]).every(
     (key) => scores[key] >= 1,
   );
+  const publishedComplete =
+    food.quality.publishedDiaas !== null &&
+    food.quality.publishedDiaas >= COEFFICIENTS.completeDiaasFloor;
 
   // Hard biological constraint: plant proteins are not labelled complete.
-  // Animal proteins are complete only if they meet the adult pattern and digestibility floor.
+  // Animal proteins are complete if digestibility is high and either the FDC
+  // amino-acid panel meets the adult pattern or a published DIAAS is ≥ 1.00.
   const completeness =
     food.kingdom === "animal" &&
-    allMeetPattern &&
-    digestibility >= COEFFICIENTS.completeDigestibilityFloor
+    digestibility >= COEFFICIENTS.completeDigestibilityFloor &&
+    (allMeetPattern || publishedComplete)
       ? "complete"
       : "incomplete";
 
