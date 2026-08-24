@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.dbwdi/schemas/food.json",
+  "title": "FoodRecord",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "classId",
+    "kingdom",
+    "serving",
+    "protein",
+    "lipids",
+    "carbs",
+    "micros",
+    "phytochemicals",
+    "antinutrients",
+    "residues",
+    "degradation",
+    "flags",
+    "extensions"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "classId": {
+      "type": "string",
+      "enum": [
+        "leafy_salad",
+        "legumes",
+        "sprouts",
+        "cruciferous_kraut",
+        "mushrooms",
+        "algae",
+        "roots_tubers",
+        "other_vegetables",
+        "muscle_ruminant",
+        "muscle_monogastric",
+        "muscle_poultry",
+        "muscle_fish",
+        "organs",
+        "eggs",
+        "dairy",
+        "fermented_animal"
+      ]
+    },
+    "kingdom": { "type": "string", "enum": ["plant", "animal", "fungi", "algae"] },
+    "fermented": { "type": "boolean" },
+    "serving": {
+      "type": "object",
+      "required": ["grams", "kcal"],
+      "properties": {
+        "grams": { "type": "number" },
+        "kcal": { "type": "number" }
+      }
+    },
+    "protein": {
+      "type": "object",
+      "required": ["grams", "eaaMgPerGProtein", "ilealDigestibility", "fecalDigestibility"],
+      "properties": {
+        "grams": { "type": "number" },
+        "ilealDigestibility": { "type": "number", "minimum": 0, "maximum": 1 },
+        "fecalDigestibility": { "type": "number", "minimum": 0, "maximum": 1 },
+        "qualitySource": { "type": "string" },
+        "eaaMgPerGProtein": {
+          "type": "object",
+          "required": ["his", "ile", "leu", "lys", "met", "cys", "phe", "tyr", "thr", "trp", "val"],
+          "additionalProperties": { "type": "number" }
+        }
+      }
+    },
+    "lipids": { "type": "object" },
+    "carbs": { "type": "object" },
+    "micros": { "type": "object" },
+    "phytochemicals": { "type": "object" },
+    "antinutrients": { "type": "object" },
+    "residues": { "type": "object" },
+    "degradation": { "type": "object" },
+    "flags": {
+      "type": "object",
+      "required": ["estimatedFields"],
+      "properties": {
+        "estimatedFields": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "sources": { "type": "array" },
+    "extensions": {
+      "type": "object",
+      "required": ["supplements", "processedFood", "bloodworkOverlay"],
+      "properties": {
+        "supplements": {},
+        "processedFood": {},
+        "bloodworkOverlay": {}
+      }
+    }
+  }
+}
