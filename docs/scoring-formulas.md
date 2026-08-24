@@ -139,8 +139,10 @@ Weights are in `lib/scoring/constants.js` and always sum to 1. Leafy greens are 
 
 Tiers are **within class**, never across the whole matrix.
 
-- If a class has one food, or all composites are equal: absolute bands (S ≥ 82, A ≥ 68, B ≥ 52, C ≥ 36, else D).
-- Otherwise: min–max normalize inside the class (S ≥ 0.85, A ≥ 0.60, B ≥ 0.35, C ≥ 0.15, else D).
+- Absolute bands: S ≥ 82, A ≥ 68, B ≥ 52, C ≥ 36, else D.
+- If a class has two or more different composites, also compute a min–max relative band (S ≥ 0.85, A ≥ 0.60, B ≥ 0.35, C ≥ 0.15, else D).
+- The assigned tier is the **better** of the absolute and relative bands, so a strong food is not labelled D merely because its class has only two members.
 - The class leader is raised to at least A if composite ≥ 50.
+- The class trailer cannot inherit a relative S.
 
 A “D” salad is a weak salad, not a claim that beef is “better than spinach” at being a salad.
