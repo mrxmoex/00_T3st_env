@@ -1,54 +1,45 @@
-# 00_T3st_env
+# Was du isst
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
+Public, login-free nutritional evaluation matrix titled around **Du bist was du isst**.
 
-Have fun 🎉
+The app treats plant categories as unequal, evaluates animal foods on the same seven axes, and refuses a single score as sufficient. Completeness and bioavailability multipliers are applied before ranking. Anti-nutrient and residue penalties are explicit and source-linked. Every displayed claim carries a publisher and year.
+
+This is not dietary advocacy. Trade-offs stay visible.
 
 ## Stack
 
-- Node.js (>= 20) with [Express](https://expressjs.com/)
-- Plain HTML/CSS/JS frontend served from `public/`
-- Tests via the built-in Node test runner (`node --test`)
-- Linting via [ESLint](https://eslint.org/) (flat config)
+- Next.js 15 App Router, TypeScript, Tailwind CSS v4
+- Recharts for radar matrices
+- Static seed data derived from USDA FoodData Central (SR Legacy), FAO/WHO DIAAS, EFSA DRVs, DGE/ÖGE Referenzwerte, NIH ODS fact sheets, and cited bioavailability / residue literature
 
-## Getting started
+`bulwark/` remains a separate prototype in this repository and is not part of the matrix app.
+
+## Run
 
 ```bash
-npm ci        # install exact dependencies from package-lock.json
-npm run dev   # start the dev server with auto-reload on http://localhost:3000
+npm ci
+npm run dev    # http://localhost:3000
+npm test
+npm run typecheck
+npm run build
 ```
 
-Then open http://localhost:3000 and add a note.
+Core pages: `/` matrix + tiers, `/compare`, `/invariants`, `/sources`, `/food/[id]`. German and English toggle in the header. No account.
 
-## Commands
+## Data model
 
-| Command        | Description                                   |
-| -------------- | --------------------------------------------- |
-| `npm start`    | Start the server (`src/server.js`)            |
-| `npm run dev`  | Start the server with `--watch` auto-reload   |
-| `npm test`     | Run the test suite (`node --test`)            |
-| `npm run lint` | Lint the codebase with ESLint                 |
+- Ontology: six plant categories and five animal categories — never collapsed into a “vegetable” average
+- Axes: nutrient density, protein quality (DIAAS preferred), essential fats, carbohydrate quality (passive fiber vs active sugar/starch), bioavailability, unique bioactives, practical efficiency
+- Scoring: `src/lib/scoring.ts` — multipliers and penalties are applied to raw axis scores before combined ranking and tier placement
+- Seed foods: `src/data/foods/` (all eleven categories)
+- Sources: `src/data/sources.ts`
 
-The server port can be overridden with the `PORT` environment variable (defaults to `3000`).
+Sparse, contested, estimated, and preparation-dependent values are flagged on the record.
 
-## API
+## Guardrails
 
-| Method   | Path              | Description              |
-| -------- | ----------------- | ------------------------ |
-| `GET`    | `/api/health`     | Health check             |
-| `GET`    | `/api/notes`      | List all notes           |
-| `POST`   | `/api/notes`      | Create a note (`{text}`) |
-| `DELETE` | `/api/notes/:id`  | Delete a note by id      |
-
-Notes are stored in memory and reset on restart.
-
-## Cloud Agent environment
-
-`.cursor/environment.json` configures the Cloud Agent environment: `npm ci` installs
-dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
-while an agent works.
-
-## Also in this repo
-
-[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
-its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
+- Quantity without bioavailability is treated as noise
+- Complementarity is not scored as equivalent to high-DIAAS animal protein
+- Spirulina “B12” is stored as inactive analogs (usable B12 = 0)
+- Fiber absence on animal foods is axis-neutral, not a moral penalty
+- Residue claims cite EFSA monitoring and USDA PDP, not marketing lists
