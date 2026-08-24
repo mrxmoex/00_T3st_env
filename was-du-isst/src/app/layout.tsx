@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppShell } from "@/components/app-shell";
 import { LocaleProvider } from "@/components/locale-provider";
+import type { Locale } from "@/types/catalog";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,11 +22,13 @@ export const metadata: Metadata = {
     "Public multi-axis food evaluation matrix. Plant categories stay unequal. Bioavailability before ranking. Every claim carries a source and year.",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const jar = await cookies();
+  const locale: Locale = jar.get("was-du-isst-locale")?.value === "en" ? "en" : "de";
   return (
-    <html lang="de" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <LocaleProvider>
+        <LocaleProvider initialLocale={locale}>
           <AppShell>{children}</AppShell>
         </LocaleProvider>
       </body>

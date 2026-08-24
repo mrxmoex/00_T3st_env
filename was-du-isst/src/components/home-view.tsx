@@ -21,10 +21,10 @@ export function HomeView() {
         <h1 className="max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">{copy.title}</h1>
         <p className="max-w-2xl text-base text-muted sm:text-lg">{copy.subtitle}</p>
         <div className="flex flex-wrap gap-2">
-          <Link href="/matrix" className="rounded-md bg-brass px-4 py-2 text-sm font-medium text-bg">
+          <Link href={`/matrix?lang=${locale}`} className="rounded-md bg-brass px-4 py-2 text-sm font-medium text-bg">
             {copy.nav.matrix}
           </Link>
-          <Link href="/compare" className="rounded-md border border-line px-4 py-2 text-sm">
+          <Link href={`/compare?lang=${locale}`} className="rounded-md border border-line px-4 py-2 text-sm">
             {copy.nav.compare}
           </Link>
         </div>

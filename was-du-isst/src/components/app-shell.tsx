@@ -16,14 +16,14 @@ const LINKS = [
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { locale, setLocale, copy } = useLocale();
+  const { locale, copy } = useLocale();
 
   return (
     <div className="min-h-full flex flex-col">
       <header className="sticky top-0 z-40 border-b border-line bg-bg/90 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-baseline gap-3">
-            <Link href="/" className="font-semibold tracking-tight text-ink">
+            <Link href={`/?lang=${locale}`} className="font-semibold tracking-tight text-ink">
               {copy.title}
             </Link>
             <span className="hidden text-xs text-muted sm:inline">{copy.free}</span>
@@ -34,7 +34,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               return (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  href={`${link.href}?lang=${locale}`}
                   className={cn(
                     "rounded-md px-2.5 py-1.5",
                     active ? "bg-bg-soft text-brass" : "text-muted hover:text-ink",
@@ -45,22 +45,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               );
             })}
             <div className="ml-2 flex overflow-hidden rounded-md border border-line text-xs">
-              <button
-                type="button"
+              <Link
+                href="?lang=de"
                 aria-pressed={locale === "de"}
-                onClick={() => setLocale("de")}
                 className={cn("px-2 py-1", locale === "de" ? "bg-brass text-bg" : "text-muted")}
               >
                 DE
-              </button>
-              <button
-                type="button"
+              </Link>
+              <Link
+                href="?lang=en"
                 aria-pressed={locale === "en"}
-                onClick={() => setLocale("en")}
                 className={cn("px-2 py-1", locale === "en" ? "bg-brass text-bg" : "text-muted")}
               >
                 EN
-              </button>
+              </Link>
             </div>
           </nav>
         </div>
