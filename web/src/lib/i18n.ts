@@ -67,6 +67,12 @@ export const UI = {
   },
   plantSide: { de: "Pflanze / Pilz / Alge", en: "Plant / fungus / alga" },
   animalSide: { de: "Tier", en: "Animal" },
+  apply: { de: "Anwenden", en: "Apply" },
+  emptyS: {
+    de: "S bleibt leer: kein Lebensmittel ist auf allen Achsen vollständig. Das ist die Aussage, nicht ein Fehler.",
+    en: "S stays empty: no food is complete on every axis. That is the finding, not a defect.",
+  },
+  presence: { de: "Anwesenheit / Abwesenheit", en: "Presence / absence" },
 } as const;
 
 export function t(text: LocaleText, locale: LocaleCode): string {

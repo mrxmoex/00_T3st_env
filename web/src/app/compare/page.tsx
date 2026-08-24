@@ -1,10 +1,11 @@
-import { Suspense } from "react";
 import { CompareApp } from "@/components/compare-app";
+import { parseCompareQuery, type SearchRecord } from "@/lib/query";
 
-export default function ComparePage() {
-  return (
-    <Suspense fallback={<p className="text-muted">…</p>}>
-      <CompareApp />
-    </Suspense>
-  );
+export default async function ComparePage({
+  searchParams,
+}: {
+  searchParams: Promise<SearchRecord>;
+}) {
+  const query = parseCompareQuery(await searchParams);
+  return <CompareApp query={query} />;
 }

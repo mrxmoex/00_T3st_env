@@ -1,16 +1,15 @@
-"use client";
-
 import { getSource } from "@/data/sources";
-import { useLocale } from "@/components/locale-provider";
+import type { LocaleCode } from "@/lib/schema";
 
 export function SourceCite({
   sourceId,
   compact = false,
+  locale = "de",
 }: {
   sourceId: string;
   compact?: boolean;
+  locale?: LocaleCode;
 }) {
-  const { locale } = useLocale();
   const source = getSource(sourceId);
   const label = compact
     ? `${source.organization} ${source.year}`
@@ -28,12 +27,18 @@ export function SourceCite({
   );
 }
 
-export function SourceStack({ sourceIds }: { sourceIds: readonly string[] }) {
+export function SourceStack({
+  sourceIds,
+  locale = "de",
+}: {
+  sourceIds: readonly string[];
+  locale?: LocaleCode;
+}) {
   const unique = [...new Set(sourceIds)];
   return (
     <span className="inline-flex flex-wrap gap-x-2 gap-y-1 text-xs text-muted">
       {unique.map((id) => (
-        <SourceCite key={id} sourceId={id} compact />
+        <SourceCite key={id} sourceId={id} compact locale={locale} />
       ))}
     </span>
   );

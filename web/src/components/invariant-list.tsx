@@ -1,12 +1,9 @@
-"use client";
-
 import { INVARIANTS } from "@/data/invariants";
 import { SourceStack } from "@/components/source-cite";
-import { useLocale } from "@/components/locale-provider";
 import { t } from "@/lib/i18n";
+import type { LocaleCode } from "@/lib/schema";
 
-export function InvariantList() {
-  const { locale } = useLocale();
+export function InvariantList({ locale }: { locale: LocaleCode }) {
   return (
     <ol className="space-y-4">
       {INVARIANTS.map((item, index) => (
@@ -17,7 +14,7 @@ export function InvariantList() {
           <h2 className="mt-1 text-lg font-semibold">{t(item.title, locale)}</h2>
           <p className="mt-2 text-sm leading-relaxed text-muted">{t(item.body, locale)}</p>
           <div className="mt-3">
-            <SourceStack sourceIds={item.sourceIds} />
+            <SourceStack locale={locale} sourceIds={item.sourceIds} />
           </div>
         </li>
       ))}

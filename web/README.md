@@ -6,7 +6,7 @@ Quantity without bioavailability is noise. Completeness without digestibility is
 
 ## Stack
 
-Next.js (App Router) + TypeScript + Tailwind CSS + Recharts. Seed data is static and sourced.
+Next.js (App Router) + TypeScript + Tailwind CSS. Seed data is static and sourced. The matrix is server-rendered: filters, sort, locale, and comparison work from URL query parameters without client JavaScript. Radars are SVG.
 
 ## Run
 

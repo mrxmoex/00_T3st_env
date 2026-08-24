@@ -1,17 +1,20 @@
-"use client";
-
 import Link from "next/link";
 import { AxisRadar } from "@/components/axis-radar";
 import { SourceCite, SourceStack } from "@/components/source-cite";
 import { TierBadge } from "@/components/tier-badge";
-import { useLocale } from "@/components/locale-provider";
 import { AXIS_LABELS, CATEGORY_LABELS, UI, t } from "@/lib/i18n";
 import { kingdomTone } from "@/lib/kingdom-tone";
 import { cn } from "@/lib/cn";
-import type { FoodRecord, ScoredFood } from "@/lib/schema";
+import { compareHref } from "@/lib/query";
+import type { FoodRecord, LocaleCode, ScoredFood } from "@/lib/schema";
 
-export function FoodDetail({ scored }: { scored: ScoredFood }) {
-  const { locale } = useLocale();
+export function FoodDetail({
+  scored,
+  locale,
+}: {
+  scored: ScoredFood;
+  locale: LocaleCode;
+}) {
   const food = scored.food;
   return (
     <article className="space-y-6">
@@ -39,7 +42,7 @@ export function FoodDetail({ scored }: { scored: ScoredFood }) {
         </div>
       </header>
 
-      <AxisRadar foods={[scored]} />
+      <AxisRadar foods={[scored]} locale={locale} />
 
       <section className="grid gap-3 md:grid-cols-2">
         {scored.axes.map((axis) => (
@@ -50,20 +53,25 @@ export function FoodDetail({ scored }: { scored: ScoredFood }) {
             </div>
             <p className="mt-2 text-sm text-muted">{t(axis.rationale, locale)}</p>
             <div className="mt-2">
-              <SourceStack sourceIds={axis.sourceIds} />
+              <SourceStack locale={locale} sourceIds={axis.sourceIds} />
             </div>
           </div>
         ))}
       </section>
 
-      <CompositionTable food={food} />
-      <AbsenceList food={food} />
+      <CompositionTable food={food} locale={locale} />
+      <AbsenceList food={food} locale={locale} />
     </article>
   );
 }
 
-function CompositionTable({ food }: { food: FoodRecord }) {
-  const { locale } = useLocale();
+function CompositionTable({
+  food,
+  locale,
+}: {
+  food: FoodRecord;
+  locale: LocaleCode;
+}) {
   const rows = [
     ["kcal", food.composition.energyKcal],
     ["protein g", food.composition.proteinG],
@@ -109,7 +117,7 @@ function CompositionTable({ food }: { food: FoodRecord }) {
                   ) : null}
                 </td>
                 <td className="px-3 py-2">
-                  <SourceCite sourceId={cell.sourceId} compact /> · {cell.year}
+                  <SourceCite sourceId={cell.sourceId} compact locale={locale} /> · {cell.year}
                 </td>
               </tr>
             );
@@ -120,11 +128,16 @@ function CompositionTable({ food }: { food: FoodRecord }) {
   );
 }
 
-function AbsenceList({ food }: { food: FoodRecord }) {
-  const { locale } = useLocale();
+function AbsenceList({
+  food,
+  locale,
+}: {
+  food: FoodRecord;
+  locale: LocaleCode;
+}) {
   return (
     <section className="rounded-xl border border-line bg-bg-elev p-4">
-      <h2 className="mb-3 font-medium">{locale === "de" ? "Anwesenheit / Abwesenheit" : "Presence / absence"}</h2>
+      <h2 className="mb-3 font-medium">{t(UI.presence, locale)}</h2>
       <ul className="space-y-2 text-sm">
         {food.absences.map((item) => (
           <li key={item.compound} className="flex flex-wrap items-baseline gap-2">
@@ -132,12 +145,15 @@ function AbsenceList({ food }: { food: FoodRecord }) {
               {item.compound} {item.present ? "●" : "○"}
             </span>
             {item.note ? <span className="text-muted">{t(item.note, locale)}</span> : null}
-            <SourceCite sourceId={item.sourceId} compact />
+            <SourceCite sourceId={item.sourceId} compact locale={locale} />
           </li>
         ))}
       </ul>
       <p className="mt-4 text-sm">
-        <Link href={`/compare?a=${food.id}&b=spinach-raw`} className="text-copper">
+        <Link
+          href={compareHref({ a: food.id, b: "spinach-raw", lang: locale })}
+          className="text-copper"
+        >
           {t(UI.compare, locale)}
         </Link>
       </p>

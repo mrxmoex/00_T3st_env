@@ -1,10 +1,7 @@
-"use client";
-
 import { SOURCES } from "@/data/sources";
-import { useLocale } from "@/components/locale-provider";
+import type { LocaleCode } from "@/lib/schema";
 
-export function SourceLibrary() {
-  const { locale } = useLocale();
+export function SourceLibrary({ locale }: { locale: LocaleCode }) {
   const ordered = [...SOURCES].sort((a, b) => b.year - a.year);
   return (
     <ul className="space-y-3">
@@ -22,7 +19,9 @@ export function SourceLibrary() {
             {source.organization} · {source.year} · {source.kind}
           </p>
           <p className="mt-1 text-xs text-muted">
-            {locale === "de" ? "Jeder Matrixwert verweist auf eine dieser Quellen." : "Every matrix value points at one of these sources."}
+            {locale === "de"
+              ? "Jeder Matrixwert verweist auf eine dieser Quellen."
+              : "Every matrix value points at one of these sources."}
           </p>
         </li>
       ))}
