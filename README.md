@@ -1,54 +1,50 @@
-# 00_T3st_env
+# Du bist was du isst
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
+A free, public biochemical evaluation of foods. Honest matrix. No marketing equivalence. No paywall.
 
-Have fun 🎉
+Plant proteins are incomplete; animal proteins are complete. Non-heme iron is not heme iron. Algae, mushrooms, sprouts, fermented kraut, legumes, and leafy salads are scored as distinct classes.
 
-## Stack
-
-- Node.js (>= 20) with [Express](https://expressjs.com/)
-- Plain HTML/CSS/JS frontend served from `public/`
-- Tests via the built-in Node test runner (`node --test`)
-- Linting via [ESLint](https://eslint.org/) (flat config)
-
-## Getting started
+## Run
 
 ```bash
-npm ci        # install exact dependencies from package-lock.json
-npm run dev   # start the dev server with auto-reload on http://localhost:3000
+npm ci
+npm run dev      # http://localhost:3000
+npm test
+npm run build
 ```
 
-Then open http://localhost:3000 and add a note.
+`PORT` is not used; Vite is fixed to port 3000 to match the Cloud Agent environment.
 
-## Commands
+## What you get
 
-| Command        | Description                                   |
-| -------------- | --------------------------------------------- |
-| `npm start`    | Start the server (`src/server.js`)            |
-| `npm run dev`  | Start the server with `--watch` auto-reload   |
-| `npm test`     | Run the test suite (`node --test`)            |
-| `npm run lint` | Lint the codebase with ESLint                 |
+- Interactive heat-map matrix, sortable, filterable by class and dietary pattern
+- S/A/B/C/D tiers **within each food class**
+- Food deep dive, side-by-side compare, best-practice gap engine
+- Methodology (every formula + coefficient) and a non-claims page
+- CSV / JSON export of the current matrix
+- Dark / light, mobile-first
 
-The server port can be overridden with the `PORT` environment variable (defaults to `3000`).
+## How scores are computed
 
-## API
+Pure functions in `src/scoring/` over raw tables in `src/data/`. Documented in `docs/scoring-formulas.md` and `/method`. Composite = class-weighted sum of seven axes. Not an AI score.
 
-| Method   | Path              | Description              |
-| -------- | ----------------- | ------------------------ |
-| `GET`    | `/api/health`     | Health check             |
-| `GET`    | `/api/notes`      | List all notes           |
-| `POST`   | `/api/notes`      | Create a note (`{text}`) |
-| `DELETE` | `/api/notes/:id`  | Delete a note by id      |
+Dataset version and last verification date live in `src/data/coefficients.ts` and appear in the UI and exports.
 
-Notes are stored in memory and reset on restart.
+## What it will not claim
 
-## Cloud Agent environment
+See `docs/non-claims.md` and `/limits`. In particular: it will never call a plant-only diet complete without fortification or supplementation.
 
-`.cursor/environment.json` configures the Cloud Agent environment: `npm ci` installs
-dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
-while an agent works.
+## Repo map
 
-## Also in this repo
+| Path | Contents |
+| --- | --- |
+| `docs/architecture.md` | High-level architecture + data model |
+| `docs/scoring-formulas.md` | Explicit formulas |
+| `docs/wireframes.md` | Primary matrix UI |
+| `docs/data-sources.md` | External sources → axes |
+| `docs/non-claims.md` | Hard limits |
+| `src/data/foods/` | Sample foods (all plant + animal classes) |
+| `src/scoring/` | Deterministic scoring + tests |
+| `src/pages/` | Matrix, food, compare, recommend, method, limits |
 
-[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
-its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
+`bulwark/` is an unrelated prototype left in this repository; it is not part of the food matrix.

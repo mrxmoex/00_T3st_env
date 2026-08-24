@@ -1,37 +1,27 @@
 import js from "@eslint/js";
+import tseslint from "typescript-eslint";
 
-export default [
+export default tseslint.config(
   js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    files: ["**/*.js"],
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "bulwark/**",
+      "data/**",
+    ],
+  },
+  {
+    files: ["src/**/*.{ts,tsx}", "vite.config.ts", "vitest.config.ts"],
     languageOptions: {
-      ecmaVersion: 2023,
-      sourceType: "module",
-      globals: {
-        process: "readonly",
-        console: "readonly",
-        fetch: "readonly",
-        Buffer: "readonly",
-        URL: "readonly",
+      parserOptions: {
+        ecmaVersion: 2023,
+        sourceType: "module",
       },
     },
     rules: {
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     },
   },
-  {
-    files: ["public/**/*.js", "bulwark/demo/public/**/*.js"],
-    languageOptions: {
-      globals: {
-        document: "readonly",
-        window: "readonly",
-        fetch: "readonly",
-        setInterval: "readonly",
-        clearInterval: "readonly",
-      },
-    },
-  },
-  {
-    ignores: ["node_modules/**", "bulwark/eval/last-run.json"],
-  },
-];
+);
