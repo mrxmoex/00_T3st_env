@@ -13,7 +13,8 @@
     "preview": "vite preview --port 3000 --host",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "dump-matrix": "vite-node scripts/dump-matrix.ts"
   },
   "dependencies": {
     "react": "^19.1.1",
