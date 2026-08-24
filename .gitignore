@@ -2,5 +2,8 @@ node_modules/
 npm-debug.log*
 .DS_Store
 *.log
-data/
+.next/
+out/
+*.tsbuildinfo
+/data/
 bulwark/eval/last-run.json

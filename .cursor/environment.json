@@ -1,11 +1,10 @@
 {
-  "name": "00_T3st_env",
   "install": "npm ci",
   "terminals": [
     {
       "name": "dev-server",
       "command": "npm run dev",
-      "description": "Runs the Notes app dev server (npm run dev) on port 3000 with auto-reload."
+      "description": "Runs the Du bist was du isst Next.js app (npm run dev) on port 3000 with auto-reload."
     }
   ],
   "ports": [

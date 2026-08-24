@@ -1,54 +1,59 @@
-# 00_T3st_env
+# Du bist was du isst
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
-
-Have fun 🎉
+Public, login-free food evaluation matrix. Plant classes are not collapsed into a vegetable average. Completeness and bioavailability are applied before ranking.
 
 ## Stack
 
-- Node.js (>= 20) with [Express](https://expressjs.com/)
-- Plain HTML/CSS/JS frontend served from `public/`
-- Tests via the built-in Node test runner (`node --test`)
-- Linting via [ESLint](https://eslint.org/) (flat config)
+- Next.js (App Router) + TypeScript + Tailwind CSS
+- Recharts radar matrices
+- Static seed derived from USDA FoodData Central SR Legacy, FAO DIAAS, DGE Referenzwerte, EFSA DRVs, NIH ODS, and residue monitoring
 
-## Getting started
+## Run
 
 ```bash
-npm ci        # install exact dependencies from package-lock.json
-npm run dev   # start the dev server with auto-reload on http://localhost:3000
+npm ci
+npm run dev
 ```
 
-Then open http://localhost:3000 and add a note.
+Open http://localhost:3000
 
 ## Commands
 
-| Command        | Description                                   |
-| -------------- | --------------------------------------------- |
-| `npm start`    | Start the server (`src/server.js`)            |
-| `npm run dev`  | Start the server with `--watch` auto-reload   |
-| `npm test`     | Run the test suite (`node --test`)            |
-| `npm run lint` | Lint the codebase with ESLint                 |
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Next.js dev server on port 3000 |
+| `npm test` | Vitest: ontology, sourced schema, scoring multipliers |
+| `npm run typecheck` | `tsc --noEmit` |
+| `npm run lint` | ESLint |
+| `npm run build` | Production build |
 
-The server port can be overridden with the `PORT` environment variable (defaults to `3000`).
+## What the matrix does
 
-## API
+Seven axes, no single number:
 
-| Method   | Path              | Description              |
-| -------- | ----------------- | ------------------------ |
-| `GET`    | `/api/health`     | Health check             |
-| `GET`    | `/api/notes`      | List all notes           |
-| `POST`   | `/api/notes`      | Create a note (`{text}`) |
-| `DELETE` | `/api/notes/:id`  | Delete a note by id      |
+1. Nutrient density
+2. Protein quality (DIAAS preferred, PDCAAS fallback, limiting amino acid)
+3. Essential fatty-acid profile (preformed EPA/DHA vs ALA)
+4. Carbohydrate quality (passive fiber vs active sugars/starches)
+5. Bioavailability and anti-nutrient load
+6. Unique bioactives
+7. Practical efficiency
 
-Notes are stored in memory and reset on restart.
+Categories stay split: leafy greens, legumes, sprouts, fermented plants, mushrooms, algae, muscle meats, organs, eggs, dairy, fish/seafood.
 
-## Cloud Agent environment
+Every displayed composition or ranking input carries a source id and year. Sparse and contested values (spirulina analog B12, algal true B12, organ-specific DIAAS) are marked.
 
-`.cursor/environment.json` configures the Cloud Agent environment: `npm ci` installs
-dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
-while an agent works.
+## Data
 
-## Also in this repo
+- Live USDA SR Legacy pulls (2019 publication date) for spinach, kale, lentils, chickpeas, soy, white mushrooms, alfalfa sprouts, sauerkraut
+- Compiled SR Legacy 2019 values with FDC IDs for the remaining seed foods
+- DIAAS from FAO 2013, Herreman et al. 2020, Mathai/Stein 2017, and later reviews
+- Adult reference intakes from DGE 3rd edition (2025 reprint) with chapter years (iron 2024, B12 2018, protein 2017)
 
-[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
-its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
+`src/lib/types.ts` is the schema. `src/data/foods.ts` is the seed. `src/data/sources.ts` is the bibliography.
+
+## Guardrails
+
+The system does not advocate a plant-only or animal-only diet. Trade-offs stay visible: liver wins density and loses fiber; lentils win passive carbohydrate and lose DIAAS and heme iron.
+
+[`bulwark/`](bulwark/) remains a separate prototype in this repository.

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://du-bist-was-du-isst.local/schema/food.json",
+  "title": "Food matrix seed",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "name",
+    "category",
+    "kingdom",
+    "composition",
+    "proteinQuality",
+    "fattyAcids",
+    "bioavailability",
+    "uniqueBioactives",
+    "practical",
+    "residues",
+    "flags"
+  ],
+  "properties": {
+    "category": {
+      "enum": [
+        "leafy_greens",
+        "legumes",
+        "sprouts",
+        "fermented",
+        "mushrooms",
+        "algae",
+        "muscle_meats",
+        "organs",
+        "eggs",
+        "dairy",
+        "fish_seafood"
+      ]
+    },
+    "composition": {
+      "description": "All numeric fields are SourcedValue objects with value, unit, sourceId, year, confidence."
+    }
+  },
+  "unevaluatedProperties": true
+}

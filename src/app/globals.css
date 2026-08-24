@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #0b0d0a;
+  --panel: #141811;
+  --paper: #e8e2d2;
+  --mute: #9a937f;
+  --line: #2a2e24;
+  --chlorophyll: #7ea05a;
+  --rust: #c46a3a;
+  --fungi: #9b87c7;
+  --algae: #3d9b8f;
+  --gold: #c9a227;
+  --background: var(--ink);
+  --foreground: var(--paper);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-paper: var(--paper);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-chlorophyll: var(--chlorophyll);
+  --color-rust: var(--rust);
+  --color-fungi: var(--fungi);
+  --color-algae: var(--algae);
+  --color-gold: var(--gold);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-source-serif);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--chlorophyll) 40%, transparent);
+}
