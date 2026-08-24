@@ -32,6 +32,6 @@ export default [
     },
   },
   {
-    ignores: ["node_modules/**", "bulwark/eval/last-run.json"],
+    ignores: ["node_modules/**", "web/node_modules/**", "web/dist/**", "bulwark/eval/last-run.json"],
   },
 ];

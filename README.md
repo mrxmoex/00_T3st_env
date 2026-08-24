@@ -1,54 +1,37 @@
-# 00_T3st_env
+# Du bist was du isst
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
+Free public **efficiency-value-nutrition** web app: a multi-axis evaluation matrix for plant and animal foods. It does **not** treat plant and animal proteins, irons, zincs, or vitamin A forms as equivalent.
 
-Have fun 🎉
+The interactive app lives in [`web/`](web/).
 
-## Stack
-
-- Node.js (>= 20) with [Express](https://expressjs.com/)
-- Plain HTML/CSS/JS frontend served from `public/`
-- Tests via the built-in Node test runner (`node --test`)
-- Linting via [ESLint](https://eslint.org/) (flat config)
-
-## Getting started
+## Run
 
 ```bash
-npm ci        # install exact dependencies from package-lock.json
-npm run dev   # start the dev server with auto-reload on http://localhost:3000
+npm ci
+npm ci --prefix web
+npm run dev
 ```
 
-Then open http://localhost:3000 and add a note.
+Open http://localhost:3000
 
-## Commands
+| Command        | Description                                      |
+| -------------- | ------------------------------------------------ |
+| `npm run dev`  | Vite app on port 3000                            |
+| `npm test`     | Notes API tests + nutrition scoring tests        |
+| `npm run build`| Production build of the matrix app               |
+| `npm run lint` | ESLint (root JS) + oxlint (web)                  |
 
-| Command        | Description                                   |
-| -------------- | --------------------------------------------- |
-| `npm start`    | Start the server (`src/server.js`)            |
-| `npm run dev`  | Start the server with `--watch` auto-reload   |
-| `npm test`     | Run the test suite (`node --test`)            |
-| `npm run lint` | Lint the codebase with ESLint                 |
+## Biological constraints the software enforces
 
-The server port can be overridden with the `PORT` environment variable (defaults to `3000`).
+- Plant proteins are labelled **incomplete**. Animal proteins are complete only when they meet the WHO/FAO adult pattern and a digestibility floor.
+- Non-heme iron, phytate-bound zinc, and carotenoid vitamin A use published bioavailability coefficients.
+- Active carbohydrate (sugars + digestible starch) is scored separately from fibre and resistant starch.
+- Algae, mushrooms, sprouts, fermented kraut, legumes, and leafy salads are distinct classes.
+- A plant-only recommendation always names required B12 fortification/supplementation and does not claim completeness.
 
-## API
-
-| Method   | Path              | Description              |
-| -------- | ----------------- | ------------------------ |
-| `GET`    | `/api/health`     | Health check             |
-| `GET`    | `/api/notes`      | List all notes           |
-| `POST`   | `/api/notes`      | Create a note (`{text}`) |
-| `DELETE` | `/api/notes/:id`  | Delete a note by id      |
-
-Notes are stored in memory and reset on restart.
-
-## Cloud Agent environment
-
-`.cursor/environment.json` configures the Cloud Agent environment: `npm ci` installs
-dependencies, and a `dev-server` terminal runs `npm run dev` so the app is available
-while an agent works.
+See [web/README.md](web/README.md) and the in-app **Methodology** page.
 
 ## Also in this repo
 
-[`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
-its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
+- [`src/`](src/) + [`public/`](public/) — original Notes demo API (still tested)
+- [`bulwark/`](bulwark/) — separate AI-agent behaviour-security prototype
