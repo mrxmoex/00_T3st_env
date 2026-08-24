@@ -11,8 +11,8 @@ import type { EvaluatedFood } from "@/types/catalog";
 
 export function CompareTool({ foods }: { foods: EvaluatedFood[] }) {
   const { locale, copy } = useLocale();
-  const [leftId, setLeftId] = useState(foods[0]?.food.id ?? "");
-  const [rightId, setRightId] = useState(foods[1]?.food.id ?? "");
+  const [leftId, setLeftId] = useState("spinach-raw");
+  const [rightId, setRightId] = useState("beef-liver");
   const left = foods.find((item) => item.food.id === leftId);
   const right = foods.find((item) => item.food.id === rightId);
   const pair = useMemo(() => [left, right].filter(Boolean) as EvaluatedFood[], [left, right]);

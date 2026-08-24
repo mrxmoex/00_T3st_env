@@ -21,7 +21,7 @@ export function SourceCite({ ids }: { ids: string[] }) {
             title={`${t(source.title, locale)} (${source.year})`}
             className="rounded border border-line px-1.5 py-0.5 font-mono text-[10px] text-muted hover:border-brass hover:text-brass"
           >
-            {source.publisher.split(" ")[0]} {source.year}
+            {source.id.replace(/-20\d\d$/, "")} {source.year}
           </a>
         );
       })}

@@ -17,6 +17,7 @@ export function HomeView() {
     <div className="space-y-12">
       <section className="space-y-4">
         <p className="text-xs uppercase tracking-[0.2em] text-brass">{copy.tagline}</p>
+        <p className="text-xs text-muted">{locale === "de" ? "Sprache: Deutsch" : "Language: English"}</p>
         <h1 className="max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">{copy.title}</h1>
         <p className="max-w-2xl text-base text-muted sm:text-lg">{copy.subtitle}</p>
         <div className="flex flex-wrap gap-2">

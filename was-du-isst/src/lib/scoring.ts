@@ -221,6 +221,8 @@ function scoreCarb(food: SeedFood): AxisScore {
   let raw: number;
   if (total < 1) {
     raw = 48;
+  } else if (fiber === 0 && total < 8) {
+    raw = clamp(48 - active * 1.4);
   } else {
     raw = clamp((passive / total) * 100 + Math.min(fiber * 2.2, 12));
   }

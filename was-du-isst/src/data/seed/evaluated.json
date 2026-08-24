@@ -576,7 +576,7 @@
     "withinClassTier": "C",
     "acrossClassTier": "C",
     "withinClassRank": 1,
-    "acrossClassRank": 8
+    "acrossClassRank": 10
   },
   {
     "food": {
@@ -849,7 +849,7 @@
     "withinClassTier": "D",
     "acrossClassTier": "D",
     "withinClassRank": 2,
-    "acrossClassRank": 19
+    "acrossClassRank": 20
   },
   {
     "food": {
@@ -1657,7 +1657,7 @@
     "withinClassTier": "D",
     "acrossClassTier": "D",
     "withinClassRank": 2,
-    "acrossClassRank": 20
+    "acrossClassRank": 21
   },
   {
     "food": {
@@ -2212,7 +2212,7 @@
     "withinClassTier": "C",
     "acrossClassTier": "C",
     "withinClassRank": 1,
-    "acrossClassRank": 10
+    "acrossClassRank": 12
   },
   {
     "food": {
@@ -2420,8 +2420,8 @@
       },
       "carbQuality": {
         "axis": "carbQuality",
-        "raw": 0,
-        "adjusted": 0,
+        "raw": 37.4,
+        "adjusted": 37.4,
         "rationale": {
           "en": "Passive 0.0 g (fiber+RS) vs active 7.6 g (sugars+digestible starch) per 100 g.",
           "de": "Passiv 0.0 g (Ballast+RS) vs. aktiv 7.6 g (Zucker+verdauliche Stärke) je 100 g."
@@ -2497,11 +2497,11 @@
         ]
       }
     },
-    "combined": 35,
+    "combined": 40.3,
     "withinClassTier": "D",
     "acrossClassTier": "D",
     "withinClassRank": 2,
-    "acrossClassRank": 21
+    "acrossClassRank": 16
   },
   {
     "food": {
@@ -2801,7 +2801,7 @@
     "withinClassTier": "D",
     "acrossClassTier": "D",
     "withinClassRank": 2,
-    "acrossClassRank": 18
+    "acrossClassRank": 19
   },
   {
     "food": {
@@ -3086,7 +3086,7 @@
     "withinClassTier": "D",
     "acrossClassTier": "D",
     "withinClassRank": 1,
-    "acrossClassRank": 17
+    "acrossClassRank": 18
   },
   {
     "food": {
@@ -3372,7 +3372,7 @@
     "withinClassTier": "C",
     "acrossClassTier": "C",
     "withinClassRank": 1,
-    "acrossClassRank": 9
+    "acrossClassRank": 11
   },
   {
     "food": {
@@ -3641,7 +3641,7 @@
     "withinClassTier": "D",
     "acrossClassTier": "D",
     "withinClassRank": 2,
-    "acrossClassRank": 16
+    "acrossClassRank": 17
   },
   {
     "food": {
@@ -4211,7 +4211,7 @@
     "withinClassTier": "C",
     "acrossClassTier": "C",
     "withinClassRank": 2,
-    "acrossClassRank": 7
+    "acrossClassRank": 9
   },
   {
     "food": {
@@ -4430,8 +4430,8 @@
       },
       "carbQuality": {
         "axis": "carbQuality",
-        "raw": 0,
-        "adjusted": 0,
+        "raw": 40.9,
+        "adjusted": 40.9,
         "rationale": {
           "en": "Passive 0.0 g (fiber+RS) vs active 5.1 g (sugars+digestible starch) per 100 g.",
           "de": "Passiv 0.0 g (Ballast+RS) vs. aktiv 5.1 g (Zucker+verdauliche Stärke) je 100 g."
@@ -4509,11 +4509,11 @@
         ]
       }
     },
-    "combined": 58.5,
+    "combined": 64.3,
     "withinClassTier": "B",
     "acrossClassTier": "B",
-    "withinClassRank": 2,
-    "acrossClassRank": 4
+    "withinClassRank": 1,
+    "acrossClassRank": 3
   },
   {
     "food": {
@@ -4792,8 +4792,8 @@
     "combined": 61.1,
     "withinClassTier": "B",
     "acrossClassTier": "B",
-    "withinClassRank": 1,
-    "acrossClassRank": 3
+    "withinClassRank": 2,
+    "acrossClassRank": 4
   },
   {
     "food": {
@@ -5312,8 +5312,8 @@
       },
       "carbQuality": {
         "axis": "carbQuality",
-        "raw": 0,
-        "adjusted": 0,
+        "raw": 40.9,
+        "adjusted": 40.9,
         "rationale": {
           "en": "Passive 0.0 g (fiber+RS) vs active 5.1 g (sugars+digestible starch) per 100 g.",
           "de": "Passiv 0.0 g (Ballast+RS) vs. aktiv 5.1 g (Zucker+verdauliche Stärke) je 100 g."
@@ -5388,11 +5388,11 @@
         ]
       }
     },
-    "combined": 45.1,
+    "combined": 50.9,
     "withinClassTier": "C",
     "acrossClassTier": "C",
     "withinClassRank": 2,
-    "acrossClassRank": 12
+    "acrossClassRank": 8
   },
   {
     "food": {
@@ -5593,8 +5593,8 @@
       },
       "carbQuality": {
         "axis": "carbQuality",
-        "raw": 0,
-        "adjusted": 0,
+        "raw": 41.4,
+        "adjusted": 41.4,
         "rationale": {
           "en": "Passive 0.0 g (fiber+RS) vs active 4.7 g (sugars+digestible starch) per 100 g.",
           "de": "Passiv 0.0 g (Ballast+RS) vs. aktiv 4.7 g (Zucker+verdauliche Stärke) je 100 g."
@@ -5668,11 +5668,11 @@
         ]
       }
     },
-    "combined": 45.7,
+    "combined": 51.6,
     "withinClassTier": "C",
     "acrossClassTier": "C",
     "withinClassRank": 1,
-    "acrossClassRank": 11
+    "acrossClassRank": 7
   },
   {
     "food": {

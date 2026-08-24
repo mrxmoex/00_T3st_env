@@ -47,15 +47,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <div className="ml-2 flex overflow-hidden rounded-md border border-line text-xs">
               <button
                 type="button"
+                aria-pressed={locale === "de"}
                 onClick={() => setLocale("de")}
-                className={cn("px-2 py-1", locale === "de" ? "bg-bg-soft text-ink" : "text-muted")}
+                className={cn("px-2 py-1", locale === "de" ? "bg-brass text-bg" : "text-muted")}
               >
                 DE
               </button>
               <button
                 type="button"
+                aria-pressed={locale === "en"}
                 onClick={() => setLocale("en")}
-                className={cn("px-2 py-1", locale === "en" ? "bg-bg-soft text-ink" : "text-muted")}
+                className={cn("px-2 py-1", locale === "en" ? "bg-brass text-bg" : "text-muted")}
               >
                 EN
               </button>
