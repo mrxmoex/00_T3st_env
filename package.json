@@ -12,7 +12,8 @@
     "start": "next start --hostname 0.0.0.0 --port 3000",
     "lint": "next lint",
     "test": "tsx --test src/lib/scoring.test.ts src/lib/ontology.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "export-seed": "tsx scripts/export-seed.ts"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
