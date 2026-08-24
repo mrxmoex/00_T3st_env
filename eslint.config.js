@@ -32,6 +32,12 @@ export default [
     },
   },
   {
-    ignores: ["node_modules/**", "bulwark/eval/last-run.json"],
+    ignores: [
+      "node_modules/**",
+      "bulwark/eval/last-run.json",
+      "nutrition/dist/**",
+      "nutrition/web/**",
+      "public/nutrition/**",
+    ],
   },
 ];

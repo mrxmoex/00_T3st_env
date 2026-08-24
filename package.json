@@ -1,7 +1,7 @@
 {
   "name": "00_t3st_env",
   "version": "1.0.0",
-  "description": "A small Notes web app used to demonstrate the Cloud Agent development environment end to end.",
+  "description": "Du bist was du isst — biochemical nutrition evaluation + Notes demo environment.",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -10,7 +10,10 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
-    "test": "node --test",
+    "build:nutrition:lib": "tsc -p nutrition/tsconfig.json",
+    "build:nutrition:web": "cd nutrition/web && npm install && npm run build",
+    "build:nutrition": "npm run build:nutrition:lib && npm run build:nutrition:web",
+    "test": "npm run build:nutrition:lib && node --test",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -18,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "eslint": "^9.18.0"
+    "eslint": "^9.18.0",
+    "typescript": "^5.7.0"
   }
 }
