@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0c0e;
+  --bg-elev: #14161a;
+  --bg-soft: #1b1e24;
+  --line: #2c3038;
+  --ink: #ece8e1;
+  --muted: #9b958b;
+  --copper: #d4a574;
+  --copper-dim: #8a6a45;
+  --plant: #7f9b74;
+  --animal: #c48472;
+  --fungi: #b7a3d4;
+  --algae: #5aa7a7;
+  --warn: #d27d6c;
+  --ok: #8fbf8a;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elev: var(--bg-elev);
+  --color-bg-soft: var(--bg-soft);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-copper: var(--copper);
+  --color-copper-dim: var(--copper-dim);
+  --color-plant: var(--plant);
+  --color-animal: var(--animal);
+  --color-fungi: var(--fungi);
+  --color-algae: var(--algae);
+  --color-warn: var(--warn);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--copper) 40%, transparent);
+}

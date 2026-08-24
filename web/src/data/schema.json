@@ -1,0 +1,37 @@
+{
+  "$comment": "Nahrungsmatrix food record contract. Types in src/lib/schema.ts are authoritative.",
+  "foodRecord": {
+    "id": "string",
+    "names": { "de": "string", "en": "string" },
+    "category": "leafy_greens|legumes|sprouts|fermented|mushrooms|algae|muscle_meat|organs|eggs|dairy|fish_seafood|cereals_reference",
+    "kingdom": "plant|animal|fungi|algae",
+    "fdcId": "number?",
+    "composition": "Sourced<number> macros per 100 g edible",
+    "proteinQuality": { "method": "diaas|pdcaas|diaas_proxy", "score": "ratio e.g. 1.17", "limitingAA": "optional IAA" },
+    "fattyAcids": "epa/dha/ala/la mg per 100 g, each Sourced",
+    "iron.form": "heme|nonheme|mixed",
+    "b12.status": "preformed_active|absent|analog_dominant|variable_true|fermentation_variable",
+    "absences": "b12|epa_dha|creatine|carnosine|retinol|fiber with present boolean + source",
+    "antiNutrients": "explicit load levels + preparationMitigation < 1",
+    "residues": "leafy vs root vs aquatic vs animal_tissue — never a vegetable mean",
+    "tradeoffs": "required bilingual visible conflict"
+  },
+  "scoring": {
+    "axes": [
+      "nutrient_density",
+      "protein_quality",
+      "efa_profile",
+      "carbohydrate_quality",
+      "bioavailability",
+      "unique_bioactives",
+      "practical_efficiency"
+    ],
+    "rules": [
+      "Completeness and bioavailability multipliers apply before ranking",
+      "ALA conversion efficiency is 0.05",
+      "Anti-nutrient and residue penalties are explicit",
+      "Composite is an unweighted mean and is not sufficient alone",
+      "Tiers exist overall and within class"
+    ]
+  }
+}

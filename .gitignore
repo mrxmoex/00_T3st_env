@@ -2,5 +2,5 @@ node_modules/
 npm-debug.log*
 .DS_Store
 *.log
-data/
+/data/
 bulwark/eval/last-run.json
