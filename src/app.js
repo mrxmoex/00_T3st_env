@@ -1,6 +1,7 @@
 import express from "express";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { registerNutritionRoutes } from "./nutrition-api.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -16,6 +17,8 @@ export function createApp() {
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", uptime: process.uptime() });
   });
+
+  registerNutritionRoutes(app);
 
   app.get("/api/notes", (_req, res) => {
     res.json(notes);
@@ -44,6 +47,11 @@ export function createApp() {
   });
 
   app.use(express.static(path.join(__dirname, "..", "public")));
+
+  // Redirect root to nutrition app
+  app.get("/", (_req, res) => {
+    res.redirect("/nutrition/");
+  });
 
   return app;
 }

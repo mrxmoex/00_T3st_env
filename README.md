@@ -1,10 +1,22 @@
 # 00_T3st_env
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
+Cloud Agent demo environment hosting **Du bist was du isst** — a free, public biochemical nutrition evaluation web app — plus a tiny Notes demo and the Bulwark security prototype.
 
-Have fun 🎉
+## Du bist was du isst
 
-## Stack
+Honest, matrix-based food evaluation grounded in biochemical reality (EAA/DIAAS, bioavailability, EFA profile, residue tiers, etc.).
+
+- **UI:** http://localhost:3000/nutrition/
+- **API:** `/api/nutrition/meta`, `/api/nutrition/scores`, `/api/nutrition/foods`
+- **Docs:** `nutrition/docs/` (architecture, scoring formulas, data sources, limitations)
+- **Scoring engine:** `nutrition/src/scoring/` (TypeScript, compiled to `nutrition/dist/`)
+
+```bash
+npm run build:nutrition   # compile scoring lib + build React UI
+npm test                  # includes nutrition scoring + API tests
+```
+
+## Stack (Notes + server)
 
 - Node.js (>= 20) with [Express](https://expressjs.com/)
 - Plain HTML/CSS/JS frontend served from `public/`

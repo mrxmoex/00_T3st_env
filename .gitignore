@@ -1,6 +1,7 @@
 node_modules/
+nutrition/web/node_modules/
+/data/
 npm-debug.log*
 .DS_Store
 *.log
-data/
 bulwark/eval/last-run.json
