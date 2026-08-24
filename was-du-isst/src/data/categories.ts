@@ -1,0 +1,103 @@
+import type { CategoryMeta } from "@/types/catalog";
+
+export const CATEGORIES: CategoryMeta[] = [
+  {
+    id: "leafy-greens",
+    kingdom: "plant",
+    name: { en: "Leafy salads / greens", de: "Blattsalate / Blattgrün" },
+    whyUnequal: {
+      en: "Highest micronutrient-per-kcal among common plants, with high oxalate/phytate variance and the largest foliar residue surface.",
+      de: "Höchste Mikronährstoffdichte je kcal unter gängigen Pflanzen, mit großer Oxalat-/Phytat-Varianz und der größten Blatt-Rückstandsfläche.",
+    },
+  },
+  {
+    id: "legumes",
+    kingdom: "plant",
+    name: { en: "Legumes / beans", de: "Hülsenfrüchte" },
+    whyUnequal: {
+      en: "Protein + fiber density with lectin/phytate load. Methionine/cysteine-limited. Require heat; complementarity is not ileal equivalence.",
+      de: "Protein- plus Ballaststoffdichte mit Lektin-/Phytatlast. Methionin/Cystein-limitiert. Brauchen Hitze; Komplementierung ist keine ileale Äquivalenz.",
+    },
+  },
+  {
+    id: "sprouts-microgreens",
+    kingdom: "plant",
+    name: { en: "Sprouts / microgreens", de: "Sprossen / Microgreens" },
+    whyUnequal: {
+      en: "Germination raises vitamin C and can lower some anti-nutrients versus the dry seed. Not a cooked-legume substitute and not a leaf average.",
+      de: "Keimung hebt Vitamin C und kann manche Antinährstoffe gegenüber der trockenen Saat senken. Kein Ersatz für gegarte Hülsenfrüchte und kein Blatt-Mittelwert.",
+    },
+  },
+  {
+    id: "fermented-plant",
+    kingdom: "plant",
+    name: { en: "Fermented plants", de: "Fermentierte Pflanzen" },
+    whyUnequal: {
+      en: "Organic acids, possible microbial vitamin K2, partial anti-nutrient reduction, and live cultures in unpasteurized kraut. Sodium and heat-kill are real constraints.",
+      de: "Organische Säuren, mögliches mikrobielles Vitamin K2, teilweise Antinährstoffsenkung und lebende Kulturen in unpasteurisiertem Kraut. Natrium und Hitzeabtötung sind echte Grenzen.",
+    },
+  },
+  {
+    id: "mushrooms-fungi",
+    kingdom: "fungi",
+    name: { en: "Mushrooms / fungi", de: "Pilze / Fungi" },
+    whyUnequal: {
+      en: "Ergothioneine, beta-glucans, and D2 only if UV-treated. Amino-acid and bioactive profile is fungal, not vegetable.",
+      de: "Ergothionein, Beta-Glucane und D2 nur bei UV-Behandlung. Aminosäure- und Bioaktivprofil ist fungal, nicht pflanzlich-gemüseartig.",
+    },
+  },
+  {
+    id: "algae-seaweed",
+    kingdom: "algae",
+    name: { en: "Algae / seaweed", de: "Algen / Seetang" },
+    whyUnequal: {
+      en: "Mineral and sometimes protein density with highly variable true B12 and EPA status. Spirulina B12 is usually analog; some seaweeds carry iodine excess risk.",
+      de: "Mineral- und teils Proteindichte mit stark variablem echtem B12- und EPA-Status. Spirulina-B12 ist meist analog; manche Algen tragen Iodüberschussrisiko.",
+    },
+  },
+  {
+    id: "muscle-meats",
+    kingdom: "animal",
+    name: { en: "Muscle meats", de: "Muskelfleisch" },
+    whyUnequal: {
+      en: "Complete high-DIAAS protein, heme iron, creatine, carnosine. No fiber. Practical after simple heat.",
+      de: "Vollständiges Protein mit hohem DIAAS, Häm-Eisen, Kreatin, Carnosin. Keine Ballaststoffe. Praktisch nach einfacher Hitze.",
+    },
+  },
+  {
+    id: "organs",
+    kingdom: "animal",
+    name: { en: "Organs", de: "Innereien" },
+    whyUnequal: {
+      en: "Retinol, B12, heme iron, and folate densities that muscle cannot match. Upper-intake caution for preformed vitamin A.",
+      de: "Retinol-, B12-, Häm-Eisen- und Folatdichten, die Muskel nicht erreicht. Vorsicht vor der tolerierbaren Zufuhr an präformiertem Vitamin A.",
+    },
+  },
+  {
+    id: "eggs",
+    kingdom: "animal",
+    name: { en: "Eggs", de: "Eier" },
+    whyUnequal: {
+      en: "DIAAS ≥1.0, choline, some DHA and retinol, near-zero prep loss if softly cooked. No fiber.",
+      de: "DIAAS ≥1,0, Cholin, etwas DHA und Retinol, fast kein Zubereitungsverlust bei sanfter Hitze. Keine Ballaststoffe.",
+    },
+  },
+  {
+    id: "dairy",
+    kingdom: "animal",
+    name: { en: "Dairy", de: "Milchprodukte" },
+    whyUnequal: {
+      en: "Casein/whey DIAAS often >1.0, bioavailable calcium, riboflavin, B12, retinol. Lactose is an active sugar. Yogurt adds organic acids and cultures.",
+      de: "Casein/Molke-DIAAS oft >1,0, bioverfügbares Calcium, Riboflavin, B12, Retinol. Lactose ist ein aktiver Zucker. Joghurt bringt organische Säuren und Kulturen.",
+    },
+  },
+  {
+    id: "fish-seafood",
+    kingdom: "animal",
+    name: { en: "Fish / seafood", de: "Fisch / Meeresfrüchte" },
+    whyUnequal: {
+      en: "Preformed EPA/DHA plus complete protein. Fatty fish dominate the EFA axis; small canned fish add calcium from bone.",
+      de: "Präformiertes EPA/DHA plus vollständiges Protein. Fetter Fisch dominiert die EFA-Achse; kleine Dosenfische liefern Calcium aus Gräten.",
+    },
+  },
+];

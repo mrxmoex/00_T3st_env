@@ -1,0 +1,3090 @@
+[
+  {
+    "id": "spinach-raw",
+    "name": {
+      "en": "Spinach, raw",
+      "de": "Spinat, roh"
+    },
+    "category": "leafy-greens",
+    "usdaNdb": "11457",
+    "usdaDescription": "Spinach, raw",
+    "form": {
+      "en": "Raw edible leaves",
+      "de": "Rohe essbare Blätter"
+    },
+    "nutrients": {
+      "fiberG": 2.2,
+      "sugarsG": 0.42,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 91.4,
+      "naMg": 79,
+      "caMg": 99,
+      "feMg": 2.7,
+      "znMg": 0.53,
+      "mgMg": 79,
+      "kMg": 558,
+      "vitCMg": 28.1,
+      "thiaminMg": 0.08,
+      "folateUg": 194,
+      "vitB12Ug": 0,
+      "vitARaeUg": 469,
+      "retinolUg": 0,
+      "betaCaroteneUg": 5626,
+      "vitKUg": 482.9,
+      "vitDUg": 0,
+      "alaG": 0.138,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.026,
+      "energyKcal": 23,
+      "proteinG": 2.9,
+      "fatG": 0.39,
+      "carbG": 3.6
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.48,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Leaf protein DIAAS is sparse. Proxy uses cereal-like lysine limitation (Herreman wheat 0.48) — not a spinach-specific ileal trial. Flagged.",
+        "de": "DIAAS für Blattprotein ist dünn. Proxy nutzt getreideähnliche Lysinlimitierung (Herreman Weizen 0,48) — keine spinatspezifische Ileumstudie. Gekennzeichnet."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "low",
+      "oxalate": "high",
+      "lectin": "low",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "High oxalate binds Ca and residual Fe. Boiling leaches oxalate and also vitamin C/folate.",
+        "de": "Hohes Oxalat bindet Ca und restliches Fe. Kochen laugt Oxalat aus — und auch Vitamin C/Folat."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "leafy",
+      "typicalLoad": "high",
+      "note": {
+        "en": "Large foliar surface. PDP/EFSA rotate leafy commodities; detection ≠ tolerance exceedance.",
+        "de": "Große Blattfläche. PDP/EFSA rotieren Blattware; Nachweis ≠ Grenzwertüberschreitung."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "lutein",
+        "name": {
+          "en": "Lutein + zeaxanthin",
+          "de": "Lutein + Zeaxanthin"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "USDA 12,198 µg/100 g.",
+          "de": "USDA 12.198 µg/100 g."
+        },
+        "sourceIds": [
+          "usda-fdc",
+          "nih-vita"
+        ]
+      },
+      {
+        "id": "nitrate",
+        "name": {
+          "en": "Dietary nitrate",
+          "de": "Nahrungsnitrat"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Leaf nitrate is a matrix feature, not a protein substitute.",
+          "de": "Blattnitrat ist ein Matrixmerkmal, kein Proteinersatz."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "light",
+      "storageStability": "labile",
+      "heatLabileLoss": "high",
+      "note": {
+        "en": "Vitamin C and folate fall fast after cutting and heat. Carotenoids can rise with fat and mild heat.",
+        "de": "Vitamin C und Folat fallen nach Schneiden und Hitze rasch. Carotinoide können mit Fett und milder Hitze steigen."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "heme-minerals",
+      "fiber-passive-carb",
+      "vitamin-lability",
+      "surface-residues"
+    ],
+    "dataGaps": [
+      {
+        "en": "No spinach-specific DIAAS.",
+        "de": "Kein spinatspezifischer DIAAS."
+      }
+    ]
+  },
+  {
+    "id": "kale-raw",
+    "name": {
+      "en": "Kale, raw",
+      "de": "Grünkohl, roh"
+    },
+    "category": "leafy-greens",
+    "usdaNdb": "11233",
+    "usdaDescription": "Kale, raw",
+    "form": {
+      "en": "Raw leaves",
+      "de": "Rohe Blätter"
+    },
+    "nutrients": {
+      "fiberG": 4.1,
+      "sugarsG": 0.99,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 89.6,
+      "naMg": 53,
+      "caMg": 254,
+      "feMg": 1.6,
+      "znMg": 0.39,
+      "mgMg": 33,
+      "kMg": 348,
+      "vitCMg": 93.4,
+      "thiaminMg": 0.11,
+      "folateUg": 62,
+      "vitB12Ug": 0,
+      "vitARaeUg": 241,
+      "retinolUg": 0,
+      "betaCaroteneUg": 2873,
+      "vitKUg": 389.6,
+      "vitDUg": 0,
+      "alaG": 0.378,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.291,
+      "energyKcal": 35,
+      "proteinG": 2.9,
+      "fatG": 1.5,
+      "carbG": 4.4
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.48,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Same sparse leaf-protein proxy as spinach.",
+        "de": "Gleicher dünner Blattprotein-Proxy wie Spinat."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "low",
+      "oxalate": "low",
+      "lectin": "low",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Lower oxalate than spinach; glucosinolates need chewing/chopping, not overcooking, for myrosinase.",
+        "de": "Niedrigeres Oxalat als Spinat; Glucosinolate brauchen Kauen/Schneiden, kein Verkochen, für Myrosinase."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "leafy",
+      "typicalLoad": "high",
+      "note": {
+        "en": "Curly leaf increases wash-resistant surface.",
+        "de": "Krauses Blatt erhöht schwer abwaschbare Fläche."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "glucosinolates",
+        "name": {
+          "en": "Glucosinolates",
+          "de": "Glucosinolate"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Brassica-specific; not present in spinach at this niche.",
+          "de": "Brassica-spezifisch; in Spinat nicht in dieser Nische."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "vitc",
+        "name": {
+          "en": "Ascorbic acid",
+          "de": "Ascorbinsäure"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "93.4 mg/100 g raw — highly heat-labile.",
+          "de": "93,4 mg/100 g roh — stark hitzelabil."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "light",
+      "storageStability": "labile",
+      "heatLabileLoss": "high",
+      "note": {
+        "en": "Raw C is high; boiling collapses it.",
+        "de": "Rohes C ist hoch; Kochen bricht es."
+      }
+    },
+    "invariantIds": [
+      "fiber-passive-carb",
+      "vitamin-lability",
+      "surface-residues",
+      "unequal-niches"
+    ],
+    "dataGaps": [
+      {
+        "en": "No kale-specific DIAAS.",
+        "de": "Kein grünkohlspezifischer DIAAS."
+      }
+    ]
+  },
+  {
+    "id": "lentils-boiled",
+    "name": {
+      "en": "Lentils, boiled",
+      "de": "Linsen, gekocht"
+    },
+    "category": "legumes",
+    "usdaNdb": "16070",
+    "usdaDescription": "Lentils, mature seeds, cooked, boiled, without salt",
+    "form": {
+      "en": "Boiled mature seeds",
+      "de": "Gekochte reife Samen"
+    },
+    "nutrients": {
+      "fiberG": 7.9,
+      "sugarsG": 1.8,
+      "starchG": 10.4,
+      "resistantStarchG": null,
+      "waterG": 69.6,
+      "naMg": 2,
+      "caMg": 19,
+      "feMg": 3.3,
+      "znMg": 1.3,
+      "mgMg": 36,
+      "kMg": 369,
+      "vitCMg": 1.5,
+      "thiaminMg": 0.17,
+      "folateUg": 181,
+      "vitB12Ug": 0,
+      "vitARaeUg": 0,
+      "retinolUg": 0,
+      "betaCaroteneUg": 5,
+      "vitKUg": 1.7,
+      "vitDUg": 0,
+      "alaG": 0.037,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.137,
+      "energyKcal": 116,
+      "proteinG": 9,
+      "fatG": 0.38,
+      "carbG": 20.1
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.7,
+      "limitingAA": "met+cys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Herreman pea mean DIAAS 70, Met+Cys-limited — used as cooked-legume proxy. Lentil-specific ileal DIAAS remains thinner.",
+        "de": "Herreman Erbse mittlerer DIAAS 70, Met+Cys-limitiert — Proxy für gegarte Hülsenfrüchte. Linsenspezifischer ilealer DIAAS ist dünner."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "high",
+      "oxalate": "low",
+      "lectin": "moderate",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Phytate and lectins fall with boiling; they do not reach animal-protein mineral absorption.",
+        "de": "Phytat und Lektine sinken beim Kochen; sie erreichen nicht die Mineralabsorption tierischen Proteins."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "seed",
+      "typicalLoad": "low",
+      "note": {
+        "en": "Seed morphology, cooked and rinsed.",
+        "de": "Samenmorphologie, gegart und gespült."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "fiber",
+        "name": {
+          "en": "Viscous + insoluble fibre",
+          "de": "Viskose + unlösliche Ballaststoffe"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "7.9 g/100 g cooked.",
+          "de": "7,9 g/100 g gegart."
+        },
+        "sourceIds": [
+          "usda-fdc",
+          "efsa-drv"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "soak-cook",
+      "storageStability": "high",
+      "heatLabileLoss": "moderate",
+      "note": {
+        "en": "Must be boiled. Folate partly heat-labile.",
+        "de": "Muss gekocht werden. Folat teils hitzelabil."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "heme-minerals",
+      "fiber-passive-carb"
+    ],
+    "dataGaps": [
+      {
+        "en": "Lentil DIAAS proxied from pea dataset.",
+        "de": "Linsen-DIAAS aus Erbsendatensatz genähert."
+      }
+    ]
+  },
+  {
+    "id": "chickpeas-boiled",
+    "name": {
+      "en": "Chickpeas, boiled",
+      "de": "Kichererbsen, gekocht"
+    },
+    "category": "legumes",
+    "usdaNdb": "16057",
+    "usdaDescription": "Chickpeas (garbanzo beans, bengal gram), mature seeds, cooked, boiled, without salt",
+    "form": {
+      "en": "Boiled mature seeds",
+      "de": "Gekochte reife Samen"
+    },
+    "nutrients": {
+      "fiberG": 7.6,
+      "sugarsG": 4.8,
+      "starchG": 15,
+      "resistantStarchG": null,
+      "waterG": 60.2,
+      "naMg": 7,
+      "caMg": 49,
+      "feMg": 2.9,
+      "znMg": 1.53,
+      "mgMg": 48,
+      "kMg": 291,
+      "vitCMg": 1.3,
+      "thiaminMg": 0.12,
+      "folateUg": 172,
+      "vitB12Ug": 0,
+      "vitARaeUg": 1,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": 4,
+      "vitDUg": 0,
+      "alaG": 0.043,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 1.1,
+      "energyKcal": 164,
+      "proteinG": 8.9,
+      "fatG": 2.6,
+      "carbG": 27.4
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.7,
+      "limitingAA": "met+cys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "mathai-2017"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Legume sulfur-AA limitation (pea 0.70; pea concentrate 0.71).",
+        "de": "Schwefel-AS-Limitierung der Leguminosen (Erbse 0,70; Erbsenkonzentrat 0,71)."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "high",
+      "oxalate": "low",
+      "lectin": "moderate",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Boiling required; phytate remains measurable.",
+        "de": "Kochen nötig; Phytat bleibt messbar."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "seed",
+      "typicalLoad": "low",
+      "note": {
+        "en": "Thick seed coat, cooked.",
+        "de": "Dicke Samenschale, gegart."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "resistant-starch",
+        "name": {
+          "en": "Resistant starch after cool-down",
+          "de": "Resistente Stärke nach dem Abkühlen"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Increases if cooked then cooled.",
+          "de": "Steigt, wenn gegart und abgekühlt."
+        },
+        "sourceIds": [
+          "efsa-drv"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "soak-cook",
+      "storageStability": "high",
+      "heatLabileLoss": "moderate",
+      "note": {
+        "en": "Long cook. Active starch fraction is real.",
+        "de": "Lange Garzeit. Aktiver Stärkeanteil ist real."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "fiber-passive-carb",
+      "heme-minerals"
+    ],
+    "dataGaps": [
+      {
+        "en": "Chickpea-specific DIAAS variation not expanded here.",
+        "de": "Kichererbsen-spezifische DIAAS-Varianz hier nicht aufgefächert."
+      }
+    ]
+  },
+  {
+    "id": "soybeans-boiled",
+    "name": {
+      "en": "Soybeans, boiled",
+      "de": "Sojabohnen, gekocht"
+    },
+    "category": "legumes",
+    "usdaNdb": "16109",
+    "usdaDescription": "Soybeans, mature seeds, cooked, boiled, without salt",
+    "form": {
+      "en": "Boiled mature seeds",
+      "de": "Gekochte reife Samen"
+    },
+    "nutrients": {
+      "fiberG": 6,
+      "sugarsG": 3,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 62.6,
+      "naMg": 1,
+      "caMg": 102,
+      "feMg": 5.1,
+      "znMg": 1.15,
+      "mgMg": 86,
+      "kMg": 515,
+      "vitCMg": 1.7,
+      "thiaminMg": 0.16,
+      "folateUg": 54,
+      "vitB12Ug": 0,
+      "vitARaeUg": 1,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": 19.2,
+      "vitDUg": 0,
+      "alaG": 0.6,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 4.5,
+      "energyKcal": 173,
+      "proteinG": 16.6,
+      "fatG": 9,
+      "carbG": 9.9
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS",
+      "diaas": 0.91,
+      "limitingAA": "met+cys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "mathai-2017",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "high",
+      "notes": {
+        "en": "Herreman soy mean DIAAS 91 (Met+Cys). Mathai soy isolate ~86, soy flour ~93. Best common unaugmented plant protein in this seed — still <1.0 and not truncated-equivalent to casein 1.17.",
+        "de": "Herreman Soja mittlerer DIAAS 91 (Met+Cys). Mathai Isolat ~86, Mehl ~93. Bestes gängiges unbehandeltes Pflanzenprotein in diesem Seed — trotzdem <1,0 und nicht caseingleich (1,17)."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "high",
+      "oxalate": "low",
+      "lectin": "moderate",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Boiling/fermentation required. Phytate still limits Zn/Fe.",
+        "de": "Kochen/Fermentation nötig. Phytat limitiert weiter Zn/Fe."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "seed",
+      "typicalLoad": "low",
+      "note": {
+        "en": "Cooked seed.",
+        "de": "Gegarter Samen."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "isoflavones",
+        "name": {
+          "en": "Isoflavones",
+          "de": "Isoflavone"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Soy-specific; not a B12 or EPA substitute.",
+          "de": "Sojaspezifisch; kein B12- oder EPA-Ersatz."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "soak-cook",
+      "storageStability": "high",
+      "heatLabileLoss": "moderate",
+      "note": {
+        "en": "Highest plant protein density here; still incomplete.",
+        "de": "Höchste pflanzliche Proteindichte hier; trotzdem unvollständig."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "heme-minerals",
+      "absent-compounds"
+    ],
+    "dataGaps": []
+  },
+  {
+    "id": "mung-sprouts",
+    "name": {
+      "en": "Mung bean sprouts, raw",
+      "de": "Mungobohnensprossen, roh"
+    },
+    "category": "sprouts-microgreens",
+    "usdaNdb": "11043",
+    "usdaDescription": "Mung beans, mature seeds, sprouted, raw",
+    "form": {
+      "en": "Raw sprouts",
+      "de": "Rohe Sprossen"
+    },
+    "nutrients": {
+      "fiberG": 1.8,
+      "sugarsG": 4.13,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 90.4,
+      "naMg": 6,
+      "caMg": 13,
+      "feMg": 0.91,
+      "znMg": 0.41,
+      "mgMg": 21,
+      "kMg": 149,
+      "vitCMg": 13.2,
+      "thiaminMg": 0.08,
+      "folateUg": 61,
+      "vitB12Ug": 0,
+      "vitARaeUg": 1,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": 33,
+      "vitDUg": 0,
+      "alaG": 0.02,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.04,
+      "energyKcal": 30,
+      "proteinG": 3.04,
+      "fatG": 0.18,
+      "carbG": 5.94
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.7,
+      "limitingAA": "met+cys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020"
+      ],
+      "year": 2020,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Sprout DIAAS is sparse; sulfur-AA limitation of the parent legume is retained as the working hypothesis.",
+        "de": "Sprossen-DIAAS ist dünn; die Schwefel-AS-Limitierung der Mutterleguminose bleibt Arbeitshypothese."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "moderate",
+      "oxalate": "low",
+      "lectin": "low",
+      "polyphenolMineralBind": "low",
+      "mitigation": {
+        "en": "Germination lowers some phytate vs dry seed; raw sprouts have microbial risk if mishandled.",
+        "de": "Keimung senkt etwas Phytat vs. Trockensaat; rohe Sprossen haben mikrobielles Risiko bei Fehlhandling."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "thin-skin",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "High surface, often eaten raw.",
+        "de": "Große Oberfläche, oft roh gegessen."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "vitc-sprout",
+        "name": {
+          "en": "Elevated vitamin C vs dry seed",
+          "de": "Erhöhtes Vitamin C vs. Trockensaat"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "13.2 mg/100 g vs negligible in dry mung.",
+          "de": "13,2 mg/100 g vs. vernachlässigbar in der Trockenbohne."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "light",
+      "storageStability": "labile",
+      "heatLabileLoss": "high",
+      "note": {
+        "en": "Perishable. C collapses with heat.",
+        "de": "Verderblich. C bricht bei Hitze."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches",
+      "vitamin-lability",
+      "eaa-diaas"
+    ],
+    "dataGaps": [
+      {
+        "en": "No sprout-specific DIAAS trial in this seed.",
+        "de": "Keine sprossenspezifische DIAAS-Studie in diesem Seed."
+      }
+    ]
+  },
+  {
+    "id": "broccoli-sprouts",
+    "name": {
+      "en": "Broccoli sprouts",
+      "de": "Brokkolisprossen"
+    },
+    "category": "sprouts-microgreens",
+    "usdaNdb": "sparse",
+    "usdaDescription": "Not a complete SR Legacy item — glucoraphanin niche, vitamin C inferred from brassica sprouts",
+    "form": {
+      "en": "Fresh sprouts (3-day typical)",
+      "de": "Frische Sprossen (typisch 3 Tage)"
+    },
+    "nutrients": {
+      "fiberG": 2.5,
+      "sugarsG": 2,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": null,
+      "naMg": null,
+      "caMg": 50,
+      "feMg": 0.8,
+      "znMg": 0.4,
+      "mgMg": null,
+      "kMg": 200,
+      "vitCMg": 60,
+      "thiaminMg": null,
+      "folateUg": 70,
+      "vitB12Ug": 0,
+      "vitARaeUg": 30,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": null,
+      "alaG": 0.1,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.1,
+      "energyKcal": 43,
+      "proteinG": 4.5,
+      "fatG": 0.6,
+      "carbG": 7
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.55,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Brassica sprout protein quality is not well characterized by DIAAS. Conservative incomplete score.",
+        "de": "Proteinqualität von Brassica-Sprossen ist per DIAAS schlecht belegt. Konservativ unvollständig."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "low",
+      "oxalate": "low",
+      "lectin": "low",
+      "polyphenolMineralBind": "low",
+      "mitigation": {
+        "en": "Germination plus brassica matrix; still not a complete protein.",
+        "de": "Keimung plus Brassica-Matrix; trotzdem kein vollständiges Protein."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "thin-skin",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "Often raw; seed-borne microbes matter more than foliar spray.",
+        "de": "Oft roh; saatbürtige Keime wiegen schwerer als Blattspitze."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "sulforaphane",
+        "name": {
+          "en": "Glucoraphanin / sulforaphane potential",
+          "de": "Glucoraphanin / Sulforaphan-Potenzial"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Defining niche versus mature broccoli or generic greens. Quantitative USDA panel is incomplete — contested/sparse nutrients flagged.",
+          "de": "Definierende Nische gegenüber reifem Brokkoli oder generischem Blatt. USDA-Panel unvollständig — als dünn gekennzeichnet."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "light",
+      "storageStability": "labile",
+      "heatLabileLoss": "high",
+      "note": {
+        "en": "Must stay cold and young. Not a pantry food.",
+        "de": "Muss kalt und jung bleiben. Kein Vorratslebensmittel."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches",
+      "vitamin-lability"
+    ],
+    "dataGaps": [
+      {
+        "en": "Nutrient panel is incomplete relative to SR Legacy staples.",
+        "de": "Nährstoffpanel unvollständig gegenüber SR-Legacy-Staples."
+      }
+    ]
+  },
+  {
+    "id": "sauerkraut",
+    "name": {
+      "en": "Sauerkraut",
+      "de": "Sauerkraut"
+    },
+    "category": "fermented-plant",
+    "usdaNdb": "11439",
+    "usdaDescription": "Sauerkraut, canned, solids and liquids",
+    "form": {
+      "en": "Canned solids and liquid (often pasteurized)",
+      "de": "Konserve mit Lake (oft pasteurisiert)"
+    },
+    "nutrients": {
+      "fiberG": 2.9,
+      "sugarsG": 1.8,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 92.5,
+      "naMg": 661,
+      "caMg": 30,
+      "feMg": 1.5,
+      "znMg": 0.19,
+      "mgMg": 13,
+      "kMg": 170,
+      "vitCMg": 14.7,
+      "thiaminMg": 0.02,
+      "folateUg": 24,
+      "vitB12Ug": 0,
+      "vitARaeUg": 1,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": 13,
+      "vitDUg": 0,
+      "alaG": 0.03,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.03,
+      "energyKcal": 19,
+      "proteinG": 0.91,
+      "fatG": 0.14,
+      "carbG": 4.3
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.48,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020"
+      ],
+      "year": 2020,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Cabbage protein is not a protein food. Score exists so the category is not dropped.",
+        "de": "Kohprotein ist kein Proteinlebensmittel. Score existiert, damit die Kategorie nicht entfällt."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "low",
+      "oxalate": "low",
+      "lectin": "none",
+      "polyphenolMineralBind": "low",
+      "mitigation": {
+        "en": "Lactic fermentation lowers some anti-nutrients; sodium is the practical cost in canned product.",
+        "de": "Milchsäuregärung senkt manche Antinährstoffe; Natrium ist die praktische Kostenstelle der Konserve."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "leafy",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "Fermentation and washing can reduce some surface residues; systemic residues persist.",
+        "de": "Gärung und Waschen können Oberflächenrückstände mindern; systemische bleiben."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "organic-acids",
+        "name": {
+          "en": "Lactic / acetic acids",
+          "de": "Milch- / Essigsäure"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Defines the fermented niche.",
+          "de": "Definiert die Fermentnische."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "cultures",
+        "name": {
+          "en": "Live lactic cultures (unpasteurized only)",
+          "de": "Lebende Milchsäurekulturen (nur unpasteurisiert)"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Canned USDA item is often heat-treated — live-culture claim is conditional.",
+          "de": "USDA-Konserve oft hitzebehandelt — Lebendkultur nur bedingt."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "ready",
+      "storageStability": "high",
+      "heatLabileLoss": "moderate",
+      "note": {
+        "en": "Ready to eat. Pasteurisation kills cultures; raw kraut is labile.",
+        "de": "Verzehrfertig. Pasteurisation tötet Kulturen; Rohkraut ist labil."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches",
+      "fiber-passive-carb",
+      "surface-residues"
+    ],
+    "dataGaps": [
+      {
+        "en": "K2 content of kraut is strain-dependent and not in USDA.",
+        "de": "K2-Gehalt von Kraut ist stammabhängig und nicht in USDA."
+      }
+    ]
+  },
+  {
+    "id": "tempeh",
+    "name": {
+      "en": "Tempeh",
+      "de": "Tempeh"
+    },
+    "category": "fermented-plant",
+    "usdaNdb": "16114",
+    "usdaDescription": "Tempeh",
+    "form": {
+      "en": "Fermented soybean cake",
+      "de": "Fermentierter Sojakuchen"
+    },
+    "nutrients": {
+      "fiberG": null,
+      "sugarsG": null,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 59.7,
+      "naMg": 9,
+      "caMg": 111,
+      "feMg": 2.7,
+      "znMg": 1.1,
+      "mgMg": 81,
+      "kMg": 412,
+      "vitCMg": 0,
+      "thiaminMg": 0.08,
+      "folateUg": 24,
+      "vitB12Ug": 0.08,
+      "vitARaeUg": 0,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 0,
+      "alaG": 0.248,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 4.052,
+      "energyKcal": 192,
+      "proteinG": 20.3,
+      "fatG": 10.8,
+      "carbG": 7.6
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS",
+      "diaas": 0.91,
+      "limitingAA": "met+cys",
+      "complete": false,
+      "sourceIds": [
+        "herreman-2020",
+        "mathai-2017"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Fermentation can raise digestibility vs raw soy; seed still uses soy DIAAS 0.91 and does not invent a >1.0 plant score.",
+        "de": "Fermentation kann die Verdaulichkeit vs. roher Soja heben; der Seed bleibt bei Soja-DIAAS 0,91 und erfindet keinen Pflanzenwert >1,0."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "moderate",
+      "oxalate": "low",
+      "lectin": "low",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Rhizopus fermentation reduces some phytate/lectin vs boiled soy. Residual phytate remains.",
+        "de": "Rhizopus senkt etwas Phytat/Lektin vs. gekochter Soja. Restphytat bleibt."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "seed",
+      "typicalLoad": "low",
+      "note": {
+        "en": "Fermented seed matrix.",
+        "de": "Fermentierte Samenmatrix."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "fermentation",
+        "name": {
+          "en": "Fungal fermentation metabolites",
+          "de": "Pilzfermentationsmetabolite"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Distinct from tofu or boiled soy.",
+          "de": "Anders als Tofu oder gekochte Soja."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "b12-trace",
+        "name": {
+          "en": "Trace B12 (do not treat as a B12 food)",
+          "de": "Spuren-B12 (kein B12-Lebensmittel)"
+        },
+        "presence": "trace",
+        "note": {
+          "en": "USDA 0.08 µg/100 g — not a reliable B12 source.",
+          "de": "USDA 0,08 µg/100 g — keine verlässliche B12-Quelle."
+        },
+        "sourceIds": [
+          "usda-fdc",
+          "nih-b12"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Needs cooking. Fiber field is missing in SR Legacy — flagged.",
+        "de": "Muss gegart werden. Ballaststofffeld fehlt in SR Legacy — gekennzeichnet."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches",
+      "eaa-diaas",
+      "absent-compounds"
+    ],
+    "dataGaps": [
+      {
+        "en": "USDA fiber and sugar fields empty for tempeh.",
+        "de": "USDA-Ballaststoff- und Zuckerfelder für Tempeh leer."
+      }
+    ]
+  },
+  {
+    "id": "white-mushroom",
+    "name": {
+      "en": "White mushrooms, raw",
+      "de": "Champignons, roh"
+    },
+    "category": "mushrooms-fungi",
+    "usdaNdb": "11260",
+    "usdaDescription": "Mushrooms, white, raw",
+    "form": {
+      "en": "Raw fruiting body, no UV treatment",
+      "de": "Roher Fruchtkörper, ohne UV"
+    },
+    "nutrients": {
+      "fiberG": 1,
+      "sugarsG": 1.98,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 92.5,
+      "naMg": 5,
+      "caMg": 3,
+      "feMg": 0.5,
+      "znMg": 0.52,
+      "mgMg": 9,
+      "kMg": 318,
+      "vitCMg": 2.1,
+      "thiaminMg": 0.08,
+      "folateUg": 17,
+      "vitB12Ug": 0.04,
+      "vitARaeUg": 0,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 0.2,
+      "alaG": 0,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.16,
+      "energyKcal": 22,
+      "proteinG": 3.09,
+      "fatG": 0.34,
+      "carbG": 3.26
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.6,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "fao-diaas-2013"
+      ],
+      "year": 2013,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Fungal protein DIAAS is sparse. Incomplete until an ileal trial is attached.",
+        "de": "Fungales Protein-DIAAS ist dünn. Unvollständig, bis eine Ileumstudie hängt."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "low",
+      "lectin": "none",
+      "polyphenolMineralBind": "low",
+      "mitigation": {
+        "en": "Agaricus can concentrate some metals; not a phytate food.",
+        "de": "Agaricus kann Metalle anreichern; kein Phytatlebensmittel."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "fungal",
+      "typicalLoad": "low",
+      "note": {
+        "en": "Not a foliar spray surface like lettuce.",
+        "de": "Keine Blattspritzfläche wie Salat."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "ergothioneine",
+        "name": {
+          "en": "Ergothioneine",
+          "de": "Ergothionein"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Fungal antioxidant amino-acid derivative; not in USDA nutrient file.",
+          "de": "Fungales Antioxidans; nicht in der USDA-Nährstoffdatei."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "beta-glucan",
+        "name": {
+          "en": "Beta-glucans",
+          "de": "Beta-Glucane"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Cell-wall polysaccharides, fungal not cereal.",
+          "de": "Zellwandpolysaccharide, fungal nicht getreideartig."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "d2",
+        "name": {
+          "en": "Vitamin D2 without UV",
+          "de": "Vitamin D2 ohne UV"
+        },
+        "presence": "trace",
+        "note": {
+          "en": "0.2 µg/100 g — not a D food until UV-exposed.",
+          "de": "0,2 µg/100 g — kein D-Lebensmittel ohne UV."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Should be cooked. D2 requires UV — see the paired entry.",
+        "de": "Sollte gegart werden. D2 braucht UV — siehe Paareintrag."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches",
+      "absent-compounds"
+    ],
+    "dataGaps": [
+      {
+        "en": "Ergothioneine not in FDC nutrient list.",
+        "de": "Ergothionein nicht in der FDC-Nährstoffliste."
+      }
+    ]
+  },
+  {
+    "id": "uv-mushroom",
+    "name": {
+      "en": "UV-exposed mushrooms",
+      "de": "UV-exponierte Pilze"
+    },
+    "category": "mushrooms-fungi",
+    "usdaNdb": "uv-niche",
+    "usdaDescription": "Mushrooms exposed to UV light (D2 niche; not interchangeable with raw white)",
+    "form": {
+      "en": "UV-treated fruiting body",
+      "de": "UV-behandelter Fruchtkörper"
+    },
+    "nutrients": {
+      "fiberG": 1,
+      "sugarsG": 2,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": null,
+      "naMg": null,
+      "caMg": null,
+      "feMg": 0.5,
+      "znMg": 0.52,
+      "mgMg": null,
+      "kMg": 318,
+      "vitCMg": 2,
+      "thiaminMg": null,
+      "folateUg": 17,
+      "vitB12Ug": 0,
+      "vitARaeUg": 0,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 11,
+      "alaG": 0,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.16,
+      "energyKcal": 22,
+      "proteinG": 3.1,
+      "fatG": 0.34,
+      "carbG": 3.3
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.6,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "fao-diaas-2013"
+      ],
+      "year": 2013,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Same sparse fungal protein score; UV does not complete amino acids.",
+        "de": "Gleicher dünner Pilzprotein-Score; UV vervollständigt keine Aminosäuren."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "low",
+      "lectin": "none",
+      "polyphenolMineralBind": "low",
+      "mitigation": {
+        "en": "UV creates D2 from ergosterol; it does not add B12 or heme.",
+        "de": "UV bildet D2 aus Ergosterol; es fügt kein B12 oder Häm hinzu."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "fungal",
+      "typicalLoad": "low",
+      "note": {
+        "en": "Fungal morphology.",
+        "de": "Fungale Morphologie."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "d2-uv",
+        "name": {
+          "en": "Vitamin D2 after UV",
+          "de": "Vitamin D2 nach UV"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "This is the niche that raw supermarket mushrooms usually lack. D2 ≠ D3; still a real vitamer.",
+          "de": "Das ist die Nische, die rohe Supermarktchampignons meist nicht haben. D2 ≠ D3; trotzdem ein reales Vitamer."
+        },
+        "sourceIds": [
+          "usda-fdc",
+          "dge-ref-2025"
+        ]
+      },
+      {
+        "id": "ergothioneine",
+        "name": {
+          "en": "Ergothioneine",
+          "de": "Ergothionein"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Retained fungal marker.",
+          "de": "Bleibender fungal Marker."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Must be labelled UV-treated. Do not average with untreated fungi.",
+        "de": "Muss als UV-behandelt gekennzeichnet sein. Nicht mit unbehandelten Pilzen mitteln."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches"
+    ],
+    "dataGaps": [
+      {
+        "en": "D2 dose varies with UV fluence; 11 µg is an illustrative treated value, not a brand guarantee.",
+        "de": "D2-Dosis variiert mit UV-Fluenz; 11 µg ist ein illustrativer Behandlungswert, keine Markengarantie."
+      }
+    ]
+  },
+  {
+    "id": "nori",
+    "name": {
+      "en": "Nori (laver), dried sheets",
+      "de": "Nori (Lever), getrocknete Blätter"
+    },
+    "category": "algae-seaweed",
+    "usdaNdb": "11446",
+    "usdaDescription": "Seaweed, laver, raw (values scaled conceptually to common sheet use; panel is raw laver SR)",
+    "form": {
+      "en": "Dried sheet / raw laver SR panel",
+      "de": "Getrocknetes Blatt / SR-Panel roher Lever"
+    },
+    "nutrients": {
+      "fiberG": 0.3,
+      "sugarsG": 0.5,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": null,
+      "naMg": 48,
+      "caMg": 70,
+      "feMg": 1.8,
+      "znMg": 1.05,
+      "mgMg": 2,
+      "kMg": 356,
+      "vitCMg": 39,
+      "thiaminMg": 0.1,
+      "folateUg": 180,
+      "vitB12Ug": 0,
+      "vitARaeUg": 260,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": 4,
+      "vitDUg": 0,
+      "alaG": 0.01,
+      "epaG": 0.08,
+      "dhaG": 0,
+      "omega6G": 0.02,
+      "energyKcal": 35,
+      "proteinG": 5.8,
+      "fatG": 0.3,
+      "carbG": 5.1
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.75,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "fao-diaas-2013"
+      ],
+      "year": 2013,
+      "confidence": "sparse",
+      "notes": {
+        "en": "Algal protein DIAAS is contested and species-specific.",
+        "de": "Algenprotein-DIAAS ist umstritten und speziesspezifisch."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "low",
+      "oxalate": "low",
+      "lectin": "none",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Iodine can be high in other seaweeds; nori is usually moderate. Species matters.",
+        "de": "Iod kann in anderen Algen hoch sein; Nori ist meist moderat. Art entscheidet."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "aquatic",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "Aquatic contaminants (iodine, metals) differ from foliar pesticides.",
+        "de": "Aquatische Kontaminanten (Iod, Metalle) unterscheiden sich von Blattpestiziden."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "epa-algae",
+        "name": {
+          "en": "Some preformed EPA",
+          "de": "Etwas präformiertes EPA"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Certain seaweeds contain true EPA; amounts vary. Not salmon-equivalent.",
+          "de": "Manche Algen enthalten echtes EPA; Mengen variieren. Nicht lachsäquivalent."
+        },
+        "sourceIds": [
+          "nih-omega3",
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "iodine",
+        "name": {
+          "en": "Iodine",
+          "de": "Iod"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Useful and potentially excessive depending on species/serving.",
+          "de": "Nützlich und potenziell überschüssig je nach Art/Portion."
+        },
+        "sourceIds": [
+          "dge-ref-2025"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "ready",
+      "storageStability": "high",
+      "heatLabileLoss": "moderate",
+      "note": {
+        "en": "Sheets are stable. C in raw laver is labile if wet-cooked.",
+        "de": "Blätter sind stabil. C in rohem Lever ist labil bei Nassgarung."
+      }
+    },
+    "invariantIds": [
+      "unequal-niches",
+      "absent-compounds"
+    ],
+    "dataGaps": [
+      {
+        "en": "Raw-laver SR vs dried-sheet household use is a unit mismatch — flagged.",
+        "de": "SR-Rohlever vs. getrocknete Haushaltsblätter: Einheitenbruch — gekennzeichnet."
+      }
+    ]
+  },
+  {
+    "id": "spirulina",
+    "name": {
+      "en": "Spirulina, dried",
+      "de": "Spirulina, getrocknet"
+    },
+    "category": "algae-seaweed",
+    "usdaNdb": "11667",
+    "usdaDescription": "Seaweed, spirulina, dried",
+    "form": {
+      "en": "Dried powder",
+      "de": "Getrocknetes Pulver"
+    },
+    "nutrients": {
+      "fiberG": 3.6,
+      "sugarsG": 3.1,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": null,
+      "naMg": 1048,
+      "caMg": 120,
+      "feMg": 28.5,
+      "znMg": 2,
+      "mgMg": 195,
+      "kMg": 1363,
+      "vitCMg": 10.1,
+      "thiaminMg": 2.38,
+      "folateUg": 94,
+      "vitB12Ug": 0,
+      "vitARaeUg": 29,
+      "retinolUg": 0,
+      "betaCaroteneUg": null,
+      "vitKUg": 25.5,
+      "vitDUg": 0,
+      "alaG": 0.82,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 1.25,
+      "energyKcal": 290,
+      "proteinG": 57.5,
+      "fatG": 7.7,
+      "carbG": 23.9
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 0.7,
+      "limitingAA": "lys",
+      "complete": false,
+      "sourceIds": [
+        "fao-diaas-2013"
+      ],
+      "year": 2013,
+      "confidence": "contested",
+      "notes": {
+        "en": "High crude protein ≠ high DIAAS. Ileal scores for spirulina are contested.",
+        "de": "Hohes Rohprotein ≠ hoher DIAAS. Ileale Werte für Spirulina sind umstritten."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "low",
+      "oxalate": "low",
+      "lectin": "none",
+      "polyphenolMineralBind": "moderate",
+      "mitigation": {
+        "en": "Cyanobacterial biomass can carry contaminants if poorly produced.",
+        "de": "Cyanobakterielle Biomasse kann bei schlechter Produktion Kontaminanten tragen."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "aquatic",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "Production hygiene dominates over foliar spray logic.",
+        "de": "Produktionshygiene schlägt Blattlogik."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "b12-analog",
+        "name": {
+          "en": "Inactive B12 analogs",
+          "de": "Inaktive B12-Analoga"
+        },
+        "presence": "analog-only",
+        "note": {
+          "en": "Most commercial spirulina 'B12' does not correct human B12 status. Treat as absent.",
+          "de": "Das „B12“ der meisten Handels-Spirulina korrigiert den menschlichen B12-Status nicht. Als fehlend behandeln."
+        },
+        "sourceIds": [
+          "nih-b12"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "ready",
+      "storageStability": "high",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Powder is stable. Do not read the protein grams as animal-equivalent.",
+        "de": "Pulver ist stabil. Die Proteingramm nicht als tieräquivalent lesen."
+      }
+    },
+    "invariantIds": [
+      "absent-compounds",
+      "unequal-niches",
+      "eaa-diaas"
+    ],
+    "dataGaps": [
+      {
+        "en": "USDA may list or omit cobalamin; analog status is the biochemical fact.",
+        "de": "USDA kann Cobalamin listen oder weglassen; der Analogstatus ist die biochemische Tatsache."
+      }
+    ]
+  },
+  {
+    "id": "beef-ground-85",
+    "name": {
+      "en": "Beef, ground 85% lean, cooked",
+      "de": "Rinderhack, 85 % mager, gegart"
+    },
+    "category": "muscle-meats",
+    "usdaNdb": "23568",
+    "usdaDescription": "Beef, ground, 85% lean meat / 15% fat, patty, cooked, pan-broiled",
+    "form": {
+      "en": "Pan-broiled patty",
+      "de": "In der Pfanne gebratene Frikadelle"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 57,
+      "naMg": 72,
+      "caMg": 18,
+      "feMg": 2.5,
+      "znMg": 6.3,
+      "mgMg": 21,
+      "kMg": 318,
+      "vitCMg": 0,
+      "thiaminMg": 0.04,
+      "folateUg": 8,
+      "vitB12Ug": 2.6,
+      "vitARaeUg": 3,
+      "retinolUg": 3,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 0.1,
+      "alaG": 0.07,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.39,
+      "energyKcal": 250,
+      "proteinG": 25.9,
+      "fatG": 15.4,
+      "carbG": 0
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "mixed-heme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 1.12,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013",
+        "moughan-2024"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Herreman pork 1.17 is the closest muscle DIAAS in that table. Beef is scored 1.12 as a conservative complete-muscle value, not a pork clone.",
+        "de": "Herreman Schwein 1,17 ist der nächste Muskel-DIAAS in jener Tabelle. Rind wird mit 1,12 als konservativer vollständiger Muskelwert gesetzt, kein Schweineklon."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "No phytate/oxalate matrix. Heme fraction is the mineral fact.",
+        "de": "Keine Phytat-/Oxalatmatrix. Der Häm-Anteil ist die Mineral-Tatsache."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Not a foliar pesticide surface. Veterinary residues are a different monitoring stream (FSIS).",
+        "de": "Keine Blattpestizidfläche. Tierarzneimittelrückstände sind ein anderer Monitoringstrom (FSIS)."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "heme",
+        "name": {
+          "en": "Heme iron",
+          "de": "Häm-Eisen"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Mixed heme/nonheme in muscle.",
+          "de": "Gemischtes Häm/Nicht-Häm im Muskel."
+        },
+        "sourceIds": [
+          "nih-iron"
+        ]
+      },
+      {
+        "id": "creatine",
+        "name": {
+          "en": "Creatine",
+          "de": "Kreatin"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "NIH: ~500 mg / 4 oz in beef/salmon-class muscle. Absent from plants.",
+          "de": "NIH: ~500 mg / 4 oz in Rind/Lachs-Klasse. In Pflanzen fehlend."
+        },
+        "sourceIds": [
+          "nih-creatine"
+        ]
+      },
+      {
+        "id": "carnosine",
+        "name": {
+          "en": "Carnosine",
+          "de": "Carnosin"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Muscle histidine dipeptide. Not a plant food compound.",
+          "de": "Muskel-Histidindipeptid. Keine Pflanzenverbindung."
+        },
+        "sourceIds": [
+          "nih-creatine"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "high",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Simple heat. No fiber. Fat fraction is real energy.",
+        "de": "Einfache Hitze. Keine Ballaststoffe. Fettanteil ist echte Energie."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "heme-minerals",
+      "absent-compounds",
+      "fiber-passive-carb"
+    ],
+    "dataGaps": [
+      {
+        "en": "Beef-specific DIAAS not identical to pork 1.17.",
+        "de": "Rind-spezifischer DIAAS nicht identisch mit Schwein 1,17."
+      }
+    ]
+  },
+  {
+    "id": "chicken-breast",
+    "name": {
+      "en": "Chicken breast, cooked",
+      "de": "Hähnchenbrust, gegart"
+    },
+    "category": "muscle-meats",
+    "usdaNdb": "05064",
+    "usdaDescription": "Chicken, broilers or fryers, breast, meat only, cooked, roasted",
+    "form": {
+      "en": "Roasted meat only",
+      "de": "Gebraten, nur Fleisch"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 65,
+      "naMg": 74,
+      "caMg": 15,
+      "feMg": 1,
+      "znMg": 1,
+      "mgMg": 29,
+      "kMg": 256,
+      "vitCMg": 0,
+      "thiaminMg": 0.07,
+      "folateUg": 4,
+      "vitB12Ug": 0.34,
+      "vitARaeUg": 6,
+      "retinolUg": 6,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 0.1,
+      "alaG": 0.02,
+      "epaG": 0.01,
+      "dhaG": 0.03,
+      "omega6G": 0.7,
+      "energyKcal": 165,
+      "proteinG": 31,
+      "fatG": 3.6,
+      "carbG": 0
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "mixed-heme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 1.08,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Complete muscle protein; slightly below pork/casein means in Herreman.",
+        "de": "Vollständiges Muskelprotein; etwas unter Schwein/Casein-Mitteln bei Herreman."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "No plant anti-nutrient load.",
+        "de": "Keine pflanzliche Antinährstofflast."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Not foliar.",
+        "de": "Nicht foliar."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "creatine",
+        "name": {
+          "en": "Creatine",
+          "de": "Kreatin"
+        },
+        "presence": "present",
+        "note": {
+          "en": "Lower than red meat per NIH carnitine/creatine tables, still animal-only.",
+          "de": "Niedriger als Rotfleisch, trotzdem nur tierisch."
+        },
+        "sourceIds": [
+          "nih-creatine",
+          "nih-carnitine"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "high",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "High protein per kcal, low heme vs beef, no fiber.",
+        "de": "Viel Protein je kcal, wenig Häm vs. Rind, keine Ballaststoffe."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "fiber-passive-carb",
+      "absent-compounds"
+    ],
+    "dataGaps": []
+  },
+  {
+    "id": "beef-liver",
+    "name": {
+      "en": "Beef liver, braised",
+      "de": "Rinderleber, geschmort"
+    },
+    "category": "organs",
+    "usdaNdb": "13326",
+    "usdaDescription": "Beef, variety meats and by-products, liver, cooked, braised",
+    "form": {
+      "en": "Braised",
+      "de": "Geschmort"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 58.8,
+      "naMg": 79,
+      "caMg": 6,
+      "feMg": 6.5,
+      "znMg": 5.3,
+      "mgMg": 21,
+      "kMg": 352,
+      "vitCMg": 1.9,
+      "thiaminMg": 0.19,
+      "folateUg": 253,
+      "vitB12Ug": 70.6,
+      "vitARaeUg": 9442,
+      "retinolUg": 9428,
+      "betaCaroteneUg": 162,
+      "vitKUg": null,
+      "vitDUg": 1.2,
+      "alaG": 0.017,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.695,
+      "energyKcal": 191,
+      "proteinG": 29.1,
+      "fatG": 5.3,
+      "carbG": 5.1
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "mixed-heme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 1.1,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "fao-diaas-2013",
+        "herreman-2020"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Organ protein is complete; micronutrient density, not DIAAS, is why liver dominates its class.",
+        "de": "Organprotein ist vollständig; die Mikronährstoffdichte, nicht der DIAAS, macht Leber klassenführend."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "Preformed retinol can exceed upper intake at small servings — a toxicity constraint, not an anti-nutrient.",
+        "de": "Präformiertes Retinol kann schon in kleinen Portionen die Obergrenze überschreiten — eine Toxizitätsgrenze, kein Antinährstoff."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Liver concentrates some contaminants; that is a different axis than foliar spray.",
+        "de": "Leber konzentriert manche Kontaminanten; das ist eine andere Achse als Blattspritzung."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "retinol",
+        "name": {
+          "en": "Preformed retinol",
+          "de": "Präformiertes Retinol"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "9,428 µg retinol / 100 g. Plants have zero.",
+          "de": "9.428 µg Retinol / 100 g. Pflanzen haben null."
+        },
+        "sourceIds": [
+          "nih-vita",
+          "usda-fdc",
+          "efsa-vita-2015"
+        ]
+      },
+      {
+        "id": "b12",
+        "name": {
+          "en": "Vitamin B12",
+          "de": "Vitamin B12"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "70.6 µg/100 g.",
+          "de": "70,6 µg/100 g."
+        },
+        "sourceIds": [
+          "nih-b12",
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "heme",
+        "name": {
+          "en": "Heme iron",
+          "de": "Häm-Eisen"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "6.5 mg Fe with heme fraction.",
+          "de": "6,5 mg Fe mit Häm-Anteil."
+        },
+        "sourceIds": [
+          "nih-iron"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Short cook. Palatability and vitamin A UL are the practical brakes.",
+        "de": "Kurze Garzeit. Akzeptanz und Vitamin-A-UL sind die praktischen Bremsen."
+      }
+    },
+    "invariantIds": [
+      "absent-compounds",
+      "heme-minerals",
+      "eaa-diaas"
+    ],
+    "dataGaps": []
+  },
+  {
+    "id": "chicken-liver",
+    "name": {
+      "en": "Chicken liver, cooked",
+      "de": "Hühnerleber, gegart"
+    },
+    "category": "organs",
+    "usdaNdb": "05028",
+    "usdaDescription": "Chicken, liver, all classes, cooked, simmered",
+    "form": {
+      "en": "Simmered",
+      "de": "Geköchelt"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": null,
+      "naMg": 76,
+      "caMg": 11,
+      "feMg": 11.6,
+      "znMg": 4,
+      "mgMg": 25,
+      "kMg": 263,
+      "vitCMg": 27.9,
+      "thiaminMg": 0.3,
+      "folateUg": 578,
+      "vitB12Ug": 16.9,
+      "vitARaeUg": 3981,
+      "retinolUg": 3980,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 0,
+      "alaG": 0.01,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.7,
+      "energyKcal": 167,
+      "proteinG": 24.5,
+      "fatG": 6.5,
+      "carbG": 0.9
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "mixed-heme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 1.08,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "fao-diaas-2013"
+      ],
+      "year": 2013,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Complete organ protein. Folate and heme Fe are the poultry-liver signature versus beef liver's retinol/B12 extreme.",
+        "de": "Vollständiges Organprotein. Folat und Häm-Fe sind die Geflügelleber-Signatur gegenüber dem Retinol/B12-Extrem der Rinderleber."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "Retinol still high enough for UL caution.",
+        "de": "Retinol immer noch hoch genug für UL-Vorsicht."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Organ, not leaf.",
+        "de": "Organ, nicht Blatt."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "folate",
+        "name": {
+          "en": "Folate",
+          "de": "Folat"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "578 µg/100 g cooked.",
+          "de": "578 µg/100 g gegart."
+        },
+        "sourceIds": [
+          "usda-fdc",
+          "dge-ref-2025"
+        ]
+      },
+      {
+        "id": "retinol",
+        "name": {
+          "en": "Preformed retinol",
+          "de": "Präformiertes Retinol"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Still an animal-only vitamer.",
+          "de": "Weiterhin ein nur-tierisches Vitamer."
+        },
+        "sourceIds": [
+          "nih-vita"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "labile",
+      "heatLabileLoss": "moderate",
+      "note": {
+        "en": "More perishable than muscle. High folate is heat-sensitive if overcooked.",
+        "de": "Verderblicher als Muskel. Hohes Folat ist bei Übergaren hitzeempfindlich."
+      }
+    },
+    "invariantIds": [
+      "absent-compounds",
+      "heme-minerals",
+      "vitamin-lability"
+    ],
+    "dataGaps": []
+  },
+  {
+    "id": "egg-whole",
+    "name": {
+      "en": "Egg, whole, raw",
+      "de": "Hühnerei, ganz, roh"
+    },
+    "category": "eggs",
+    "usdaNdb": "01123",
+    "usdaDescription": "Egg, whole, raw, fresh",
+    "form": {
+      "en": "Whole raw (typically cooked before eating)",
+      "de": "Ganz roh (üblicherweise vor dem Essen gegart)"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0.37,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 76.2,
+      "naMg": 142,
+      "caMg": 56,
+      "feMg": 1.8,
+      "znMg": 1.3,
+      "mgMg": 12,
+      "kMg": 138,
+      "vitCMg": 0,
+      "thiaminMg": 0.04,
+      "folateUg": 47,
+      "vitB12Ug": 0.89,
+      "vitARaeUg": 160,
+      "retinolUg": 160,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 2,
+      "alaG": 0.036,
+      "epaG": 0,
+      "dhaG": 0.058,
+      "omega6G": 1.583,
+      "energyKcal": 143,
+      "proteinG": 12.6,
+      "fatG": 9.5,
+      "carbG": 0.72
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS",
+      "diaas": 1.01,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "herreman-2020",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "high",
+      "notes": {
+        "en": "Herreman egg mean DIAAS 101 (0.5–3 y). Excellent-quality band. Soft cooking preserves most of the score.",
+        "de": "Herreman Ei mittlerer DIAAS 101 (0,5–3 J.). Exzellentes Band. Sanftes Garen erhält den Score weitgehend."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "Avidin in raw white binds biotin; heat fixes it. Not a phytate problem.",
+        "de": "Avidin im rohen Eiklar bindet Biotin; Hitze hebt das. Kein Phytatproblem."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Shell egg, not foliar.",
+        "de": "Schalenei, nicht foliar."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "choline",
+        "name": {
+          "en": "Choline",
+          "de": "Cholin"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "USDA 294 mg/100 g.",
+          "de": "USDA 294 mg/100 g."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "retinol",
+        "name": {
+          "en": "Retinol",
+          "de": "Retinol"
+        },
+        "presence": "present",
+        "note": {
+          "en": "160 µg/100 g preformed.",
+          "de": "160 µg/100 g präformiert."
+        },
+        "sourceIds": [
+          "nih-vita"
+        ]
+      },
+      {
+        "id": "dha",
+        "name": {
+          "en": "DHA",
+          "de": "DHA"
+        },
+        "presence": "trace",
+        "note": {
+          "en": "0.058 g/100 g — present, not a fatty-fish dose.",
+          "de": "0,058 g/100 g — vorhanden, keine Fettfischdosis."
+        },
+        "sourceIds": [
+          "nih-omega3"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "light",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Highest practical completeness per minute of prep in this seed.",
+        "de": "Höchste praktische Vollständigkeit je Vorbereitungsminute in diesem Seed."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "absent-compounds",
+      "fiber-passive-carb"
+    ],
+    "dataGaps": []
+  },
+  {
+    "id": "milk-whole",
+    "name": {
+      "en": "Whole milk, 3.25%",
+      "de": "Vollmilch, 3,25 %"
+    },
+    "category": "dairy",
+    "usdaNdb": "01077",
+    "usdaDescription": "Milk, whole, 3.25% milkfat, with added vitamin D",
+    "form": {
+      "en": "Fluid, vitamin D fortified (US SR item)",
+      "de": "Flüssig, vitamin-D-angereichert (US-SR-Eintrag)"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 5.1,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 88.1,
+      "naMg": 43,
+      "caMg": 113,
+      "feMg": 0.03,
+      "znMg": 0.37,
+      "mgMg": 10,
+      "kMg": 132,
+      "vitCMg": 0,
+      "thiaminMg": 0.05,
+      "folateUg": 5,
+      "vitB12Ug": 0.45,
+      "vitARaeUg": 46,
+      "retinolUg": 45,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 1.3,
+      "alaG": 0.075,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.12,
+      "energyKcal": 61,
+      "proteinG": 3.2,
+      "fatG": 3.3,
+      "carbG": 4.8
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS",
+      "diaas": 1.17,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "herreman-2020",
+        "mathai-2017",
+        "fao-diaas-2013"
+      ],
+      "year": 2020,
+      "confidence": "high",
+      "notes": {
+        "en": "Herreman casein 117; Mathai milk protein concentrate 121, SMP high. Fluid milk protein is excellent-quality. Lactose is an active sugar.",
+        "de": "Herreman Casein 117; Mathai Milchproteinkonzentrat 121, Magermilchpulver hoch. Milchprotein ist exzellent. Lactose ist ein aktiver Zucker."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "Calcium is highly bioavailable. Lactose intolerance is a digestibility constraint for some humans.",
+        "de": "Calcium ist hoch bioverfügbar. Lactoseintoleranz ist für manche Menschen eine Verdaulichkeitsgrenze."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Not foliar.",
+        "de": "Nicht foliar."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "retinol",
+        "name": {
+          "en": "Retinol",
+          "de": "Retinol"
+        },
+        "presence": "present",
+        "note": {
+          "en": "45 µg/100 g.",
+          "de": "45 µg/100 g."
+        },
+        "sourceIds": [
+          "nih-vita"
+        ]
+      },
+      {
+        "id": "b12",
+        "name": {
+          "en": "Vitamin B12",
+          "de": "Vitamin B12"
+        },
+        "presence": "present",
+        "note": {
+          "en": "0.45 µg/100 g.",
+          "de": "0,45 µg/100 g."
+        },
+        "sourceIds": [
+          "nih-b12"
+        ]
+      },
+      {
+        "id": "k2",
+        "name": {
+          "en": "Menaquinone-4 (trace)",
+          "de": "Menachinon-4 (Spur)"
+        },
+        "presence": "trace",
+        "note": {
+          "en": "USDA lists 1 µg MK-4.",
+          "de": "USDA listet 1 µg MK-4."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "ready",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Ready. Fortified D is a US SR feature — EU whole milk is often unfortified.",
+        "de": "Verzehrfertig. Angereichertes D ist ein US-SR-Merkmal — EU-Vollmilch oft unangereichert."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "absent-compounds",
+      "fiber-passive-carb"
+    ],
+    "dataGaps": [
+      {
+        "en": "D fortification differs by jurisdiction.",
+        "de": "D-Anreicherung unterscheidet sich nach Rechtsraum."
+      }
+    ]
+  },
+  {
+    "id": "yogurt-plain",
+    "name": {
+      "en": "Plain whole-milk yogurt",
+      "de": "Naturjoghurt, vollfett"
+    },
+    "category": "dairy",
+    "usdaNdb": "01116",
+    "usdaDescription": "Yogurt, plain, whole milk",
+    "form": {
+      "en": "Plain fermented milk",
+      "de": "Ungesüßte fermentierte Milch"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 4.7,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": null,
+      "naMg": 46,
+      "caMg": 121,
+      "feMg": 0.05,
+      "znMg": 0.59,
+      "mgMg": 12,
+      "kMg": 155,
+      "vitCMg": 0.5,
+      "thiaminMg": 0.03,
+      "folateUg": 7,
+      "vitB12Ug": 0.37,
+      "vitARaeUg": 27,
+      "retinolUg": 27,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 0.1,
+      "alaG": 0.03,
+      "epaG": 0,
+      "dhaG": 0,
+      "omega6G": 0.09,
+      "energyKcal": 61,
+      "proteinG": 3.5,
+      "fatG": 3.3,
+      "carbG": 4.7
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "nonheme",
+    "proteinQuality": {
+      "method": "DIAAS",
+      "diaas": 1.17,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "herreman-2020",
+        "mathai-2017"
+      ],
+      "year": 2020,
+      "confidence": "high",
+      "notes": {
+        "en": "Same casein/whey excellent band as milk. Fermentation does not reduce DIAAS.",
+        "de": "Dasselbe Casein/Molke-Exzellenzband wie Milch. Fermentation senkt den DIAAS nicht."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "Lactose is partly consumed by cultures; residual lactose remains.",
+        "de": "Lactose wird teils von Kulturen verbraucht; Restlactose bleibt."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "animal",
+      "typicalLoad": "not-applicable",
+      "note": {
+        "en": "Not foliar.",
+        "de": "Nicht foliar."
+      },
+      "sourceIds": [
+        "usda-pdp-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "cultures",
+        "name": {
+          "en": "Lactic cultures",
+          "de": "Milchsäurekulturen"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Live only if not heat-treated after fermentation.",
+          "de": "Lebend nur ohne Nacherhitzung."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "organic-acids",
+        "name": {
+          "en": "Lactic acid",
+          "de": "Milchsäure"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "Dairy ferment, not kraut.",
+          "de": "Milchferment, nicht Kraut."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "ready",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Ready. Sweetened yogurts would collapse carb quality — this seed is plain only.",
+        "de": "Verzehrfertig. Gesüßte Joghurts würden die Kohlenhydratqualität einbrechen — dieser Seed ist nur Natur."
+      }
+    },
+    "invariantIds": [
+      "eaa-diaas",
+      "unequal-niches",
+      "fiber-passive-carb"
+    ],
+    "dataGaps": []
+  },
+  {
+    "id": "salmon-atlantic",
+    "name": {
+      "en": "Atlantic salmon, farmed, raw",
+      "de": "Atlantischer Lachs, Farm, roh"
+    },
+    "category": "fish-seafood",
+    "usdaNdb": "15236",
+    "usdaDescription": "Fish, salmon, Atlantic, farmed, raw",
+    "form": {
+      "en": "Raw fillet (typically cooked)",
+      "de": "Rohes Filet (üblicherweise gegart)"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 64.9,
+      "naMg": 59,
+      "caMg": 9,
+      "feMg": 0.34,
+      "znMg": 0.36,
+      "mgMg": 27,
+      "kMg": 363,
+      "vitCMg": 3.9,
+      "thiaminMg": 0.21,
+      "folateUg": 26,
+      "vitB12Ug": 3.2,
+      "vitARaeUg": 58,
+      "retinolUg": 58,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 11,
+      "alaG": 0.148,
+      "epaG": 0.862,
+      "dhaG": 1.104,
+      "omega6G": 0.9,
+      "energyKcal": 208,
+      "proteinG": 20.4,
+      "fatG": 13.4,
+      "carbG": 0
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "mixed-heme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 1.09,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "fao-diaas-2013",
+        "herreman-2020"
+      ],
+      "year": 2020,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Fish muscle is complete. The axis this food dominates is EFA, not iron.",
+        "de": "Fischmuskel ist vollständig. Die Achse, die dieses Lebensmittel führt, ist EFA, nicht Eisen."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "No phytate. Farmed vs wild fat profile varies — this is the SR farmed item.",
+        "de": "Kein Phytat. Farm vs. Wild Fettprofil variiert — dies ist der SR-Farmeintrag."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "aquatic",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "Persistent organic pollutants and feed additives are the aquatic residue class, not lettuce spray.",
+        "de": "Persistente Organika und Futterzusätze sind die aquatische Rückstandsklasse, nicht Salatspritzung."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "epa-dha",
+        "name": {
+          "en": "Preformed EPA + DHA",
+          "de": "Präformiertes EPA + DHA"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "0.862 g EPA + 1.104 g DHA / 100 g.",
+          "de": "0,862 g EPA + 1,104 g DHA / 100 g."
+        },
+        "sourceIds": [
+          "nih-omega3",
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "creatine",
+        "name": {
+          "en": "Creatine",
+          "de": "Kreatin"
+        },
+        "presence": "present",
+        "note": {
+          "en": "NIH lists salmon with beef as a creatine food.",
+          "de": "NIH listet Lachs mit Rind als Kreatinlebensmittel."
+        },
+        "sourceIds": [
+          "nih-creatine"
+        ]
+      },
+      {
+        "id": "vitd3",
+        "name": {
+          "en": "Vitamin D3",
+          "de": "Vitamin D3"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "11 µg/100 g.",
+          "de": "11 µg/100 g."
+        },
+        "sourceIds": [
+          "usda-fdc",
+          "dge-ref-2025"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "cook",
+      "storageStability": "moderate",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Short cook. No fiber. Farmed fat is energy-dense.",
+        "de": "Kurze Garzeit. Keine Ballaststoffe. Farmfett ist energiedicht."
+      }
+    },
+    "invariantIds": [
+      "absent-compounds",
+      "eaa-diaas",
+      "fiber-passive-carb"
+    ],
+    "dataGaps": [
+      {
+        "en": "Farmed vs wild EPA/DHA is not averaged away — this row is farmed only.",
+        "de": "Farm vs. Wild EPA/DHA wird nicht weggemittelt — diese Zeile ist nur Farm."
+      }
+    ]
+  },
+  {
+    "id": "sardines-canned",
+    "name": {
+      "en": "Sardines, canned in oil, with bone",
+      "de": "Sardinen, Dose in Öl, mit Gräte"
+    },
+    "category": "fish-seafood",
+    "usdaNdb": "15088",
+    "usdaDescription": "Fish, sardine, Atlantic, canned in oil, drained solids with bone",
+    "form": {
+      "en": "Drained canned solids with bone",
+      "de": "Abgetropfte Dosenfeststoffe mit Gräte"
+    },
+    "nutrients": {
+      "fiberG": 0,
+      "sugarsG": 0,
+      "starchG": null,
+      "resistantStarchG": null,
+      "waterG": 59.6,
+      "naMg": 307,
+      "caMg": 382,
+      "feMg": 2.9,
+      "znMg": 1.3,
+      "mgMg": 39,
+      "kMg": 397,
+      "vitCMg": 0,
+      "thiaminMg": 0.08,
+      "folateUg": 10,
+      "vitB12Ug": 8.9,
+      "vitARaeUg": 32,
+      "retinolUg": 32,
+      "betaCaroteneUg": null,
+      "vitKUg": null,
+      "vitDUg": 4.8,
+      "alaG": 0,
+      "epaG": 0.473,
+      "dhaG": 0.509,
+      "omega6G": 3.543,
+      "energyKcal": 208,
+      "proteinG": 24.6,
+      "fatG": 11.5,
+      "carbG": 0
+    },
+    "nutrientSourceIds": [
+      "usda-fdc"
+    ],
+    "nutrientYear": 2018,
+    "ironForm": "mixed-heme",
+    "proteinQuality": {
+      "method": "DIAAS-proxy",
+      "diaas": 1.09,
+      "limitingAA": "none",
+      "complete": true,
+      "sourceIds": [
+        "fao-diaas-2013"
+      ],
+      "year": 2013,
+      "confidence": "moderate",
+      "notes": {
+        "en": "Complete small-fish protein. Bone-in calcium is the extra axis versus salmon fillet.",
+        "de": "Vollständiges Kleinfischprotein. Grätencalcium ist die Extra-Achse gegenüber Lachsfilet."
+      }
+    },
+    "antiNutrients": {
+      "phytate": "none",
+      "oxalate": "none",
+      "lectin": "none",
+      "polyphenolMineralBind": "none",
+      "mitigation": {
+        "en": "Sodium and oil omega-6 are the canned-matrix costs.",
+        "de": "Natrium und Öl-Omega-6 sind die Dosenmatrix-Kosten."
+      },
+      "sourceIds": [
+        "nih-iron"
+      ]
+    },
+    "residues": {
+      "surfaceClass": "aquatic",
+      "typicalLoad": "moderate",
+      "note": {
+        "en": "Small pelagics; different contaminant profile than large fatty fish.",
+        "de": "Kleine Pelagiale; anderes Kontaminantenprofil als großer Fettfisch."
+      },
+      "sourceIds": [
+        "usda-pdp-2024",
+        "efsa-residues-2024"
+      ]
+    },
+    "bioactives": [
+      {
+        "id": "epa-dha",
+        "name": {
+          "en": "EPA + DHA",
+          "de": "EPA + DHA"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "0.473 + 0.509 g/100 g.",
+          "de": "0,473 + 0,509 g/100 g."
+        },
+        "sourceIds": [
+          "nih-omega3",
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "bone-ca",
+        "name": {
+          "en": "Bone calcium",
+          "de": "Gräten-Calcium"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "382 mg Ca/100 g — not available from boneless fillet.",
+          "de": "382 mg Ca/100 g — nicht aus grätenfreiem Filet."
+        },
+        "sourceIds": [
+          "usda-fdc"
+        ]
+      },
+      {
+        "id": "b12",
+        "name": {
+          "en": "Vitamin B12",
+          "de": "Vitamin B12"
+        },
+        "presence": "characteristic",
+        "note": {
+          "en": "8.9 µg/100 g.",
+          "de": "8,9 µg/100 g."
+        },
+        "sourceIds": [
+          "nih-b12"
+        ]
+      }
+    ],
+    "practical": {
+      "prepBurden": "ready",
+      "storageStability": "high",
+      "heatLabileLoss": "low",
+      "note": {
+        "en": "Ready. Sodium 307 mg/100 g is explicit.",
+        "de": "Verzehrfertig. Natrium 307 mg/100 g ist explizit."
+      }
+    },
+    "invariantIds": [
+      "absent-compounds",
+      "eaa-diaas"
+    ],
+    "dataGaps": []
+  }
+]

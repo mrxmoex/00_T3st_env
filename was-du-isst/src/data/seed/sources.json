@@ -1,0 +1,282 @@
+[
+  {
+    "id": "usda-fdc",
+    "kind": "usda",
+    "year": 2018,
+    "title": {
+      "en": "USDA FoodData Central — SR Legacy (quantitative backbone)",
+      "de": "USDA FoodData Central — SR Legacy (quantitatives Rückgrat)"
+    },
+    "publisher": "USDA Agricultural Research Service",
+    "url": "https://fdc.nal.usda.gov/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "SR Legacy remains the historical analytical backbone inside FoodData Central. Nutrient panels in this seed cite SR Legacy NDB numbers via USDA-derived per-100 g values.",
+      "de": "SR Legacy bleibt das analytische Rückgrat in FoodData Central. Nährstoffprofile in diesem Seed zitieren SR-Legacy-NDB-Nummern über USDA-Werte je 100 g."
+    }
+  },
+  {
+    "id": "fao-diaas-2013",
+    "kind": "fao",
+    "year": 2013,
+    "title": {
+      "en": "Dietary protein quality evaluation in human nutrition — FAO Expert Consultation (DIAAS)",
+      "de": "Bewertung der Proteinqualität in der menschlichen Ernährung — FAO-Expertenkonsultation (DIAAS)"
+    },
+    "publisher": "Food and Agriculture Organization of the United Nations",
+    "url": "https://www.fao.org/4/i3124e/i3124e.pdf",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Defines DIAAS = 100 × digestible IAA in 1 g dietary protein / IAA in 1 g reference protein. Values above 100% are not truncated for individual foods. Quality bands: <75 no claim, 75–99 high, ≥100 excellent.",
+      "de": "Definiert DIAAS = 100 × verdauliche IAA in 1 g Nahrungsprotein / IAA in 1 g Referenzprotein. Werte über 100 % werden für Einzellebensmittel nicht gekappt. Qualitätsbänder: <75 kein Claim, 75–99 hoch, ≥100 exzellent."
+    }
+  },
+  {
+    "id": "herreman-2020",
+    "kind": "peer-reviewed",
+    "year": 2020,
+    "title": {
+      "en": "Comprehensive overview of plant- and animal-sourced proteins based on DIAAS",
+      "de": "Überblick zu pflanzlichen und tierischen Proteinen auf DIAAS-Basis"
+    },
+    "publisher": "Food Science & Nutrition",
+    "url": "https://doi.org/10.1002/fsn3.1809",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Mean DIAAS (0.5–3 y pattern): corn 36 Lys; wheat 48 Lys; pea 70 Met+Cys; soy 91 Met+Cys; potato 100; egg 101; casein 117; pork 117. Cereals lysine-limited; legumes Met+Cys-limited. Wide within-source variation.",
+      "de": "Mittlere DIAAS (Muster 0,5–3 J.): Mais 36 Lys; Weizen 48 Lys; Erbse 70 Met+Cys; Soja 91 Met+Cys; Kartoffel 100; Ei 101; Casein 117; Schwein 117. Getreide lysinlimitiert; Hülsenfrüchte Met+Cys-limitiert."
+    }
+  },
+  {
+    "id": "mathai-2017",
+    "kind": "peer-reviewed",
+    "year": 2017,
+    "title": {
+      "en": "DIAAS versus PDCAAS for dairy and plant proteins (pig ileal model)",
+      "de": "DIAAS versus PDCAAS für Milch- und Pflanzenproteine (Schweine-Ileummodell)"
+    },
+    "publisher": "British Journal of Nutrition",
+    "url": "https://doi.org/10.1017/s0007114517000125",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Children 6–36 months DIAAS: milk protein concentrate 121; skimmed milk powder high; whey concentrate 107; soy isolate ~86–90; pea concentrate 71; wheat ~51. PDCAAS often overestimates plant proteins versus ileal DIAAS.",
+      "de": "DIAAS 6–36 Monate: Milchproteinkonzentrat 121; Magermilchpulver hoch; Molkenkonzentrat 107; Sojaisolat ~86–90; Erbsenkonzentrat 71; Weizen ~51. PDCAAS überschätzt pflanzliche Proteine oft gegenüber ilealem DIAAS."
+    }
+  },
+  {
+    "id": "moughan-2024",
+    "kind": "peer-reviewed",
+    "year": 2024,
+    "title": {
+      "en": "Digestible indispensable amino acid score (DIAAS): 10 years on",
+      "de": "DIAAS: zehn Jahre danach"
+    },
+    "publisher": "Frontiers in Nutrition",
+    "url": "https://doi.org/10.3389/fnut.2024.1389719",
+    "accessed": "2026-08-24"
+  },
+  {
+    "id": "nih-iron",
+    "kind": "nih",
+    "year": 2026,
+    "title": {
+      "en": "NIH ODS — Iron fact sheet for health professionals",
+      "de": "NIH ODS — Eisen-Faktenblatt für Fachkreise"
+    },
+    "publisher": "National Institutes of Health, Office of Dietary Supplements",
+    "url": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Heme iron has higher bioavailability than nonheme iron. Absorption ~14–18% from mixed diets with meat/seafood/vitamin C vs ~5–12% from vegetarian diets. Phytate and some polyphenols inhibit nonheme Fe.",
+      "de": "Häm-Eisen ist besser bioverfügbar als Nicht-Häm-Eisen. Absorption ~14–18 % bei Mischkost mit Fleisch/Meeresfrüchten/Vitamin C vs. ~5–12 % bei vegetarischer Kost. Phytat und einige Polyphenole hemmen Nicht-Häm-Fe."
+    }
+  },
+  {
+    "id": "nih-omega3",
+    "kind": "nih",
+    "year": 2026,
+    "title": {
+      "en": "NIH ODS — Omega-3 fatty acids fact sheet for health professionals",
+      "de": "NIH ODS — Omega-3-Fettsäuren-Faktenblatt für Fachkreise"
+    },
+    "publisher": "National Institutes of Health, Office of Dietary Supplements",
+    "url": "https://ods.od.nih.gov/factsheets/Omega3FattyAcids-HealthProfessional/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "ALA→EPA/DHA conversion is very limited; reported rates <15%. Direct EPA/DHA intake is the only practical way to raise tissue LC-omega-3.",
+      "de": "Die Umwandlung ALA→EPA/DHA ist stark begrenzt; berichtete Raten <15 %. Direkte EPA/DHA-Zufuhr ist der praktische Weg, LC-Omega-3 im Gewebe zu erhöhen."
+    }
+  },
+  {
+    "id": "nih-b12",
+    "kind": "nih",
+    "year": 2026,
+    "title": {
+      "en": "NIH ODS — Vitamin B12 fact sheet for health professionals",
+      "de": "NIH ODS — Vitamin-B12-Faktenblatt für Fachkreise"
+    },
+    "publisher": "National Institutes of Health, Office of Dietary Supplements",
+    "url": "https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Naturally present in animal foods. NIH consumer materials state foods from animals, but not plants, naturally have vitamin B12.",
+      "de": "Natürlich in tierischen Lebensmitteln. NIH-Verbrauchermaterialien: B12 kommt natürlicherweise in tierischen, nicht in pflanzlichen Lebensmitteln vor."
+    }
+  },
+  {
+    "id": "nih-vita",
+    "kind": "nih",
+    "year": 2026,
+    "title": {
+      "en": "NIH ODS — Vitamin A and carotenoids fact sheet for health professionals",
+      "de": "NIH ODS — Vitamin A und Carotinoide, Faktenblatt für Fachkreise"
+    },
+    "publisher": "National Institutes of Health, Office of Dietary Supplements",
+    "url": "https://ods.od.nih.gov/factsheets/VitaminA-HealthProfessional/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Preformed retinol is animal-sourced. 1 µg RAE = 1 µg retinol = 12 µg dietary β-carotene = 24 µg other dietary provitamin A carotenoids.",
+      "de": "Präformiertes Retinol stammt aus Tieren. 1 µg RAE = 1 µg Retinol = 12 µg diätetisches β-Carotin = 24 µg andere diätetische Provitamin-A-Carotinoide."
+    }
+  },
+  {
+    "id": "nih-carnitine",
+    "kind": "nih",
+    "year": 2026,
+    "title": {
+      "en": "NIH ODS — Carnitine fact sheet for health professionals",
+      "de": "NIH ODS — Carnitin-Faktenblatt für Fachkreise"
+    },
+    "publisher": "National Institutes of Health, Office of Dietary Supplements",
+    "url": "https://ods.od.nih.gov/factsheets/Carnitine-HealthProfessional/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Carnitine is concentrated in red meat; vegetables, fruits, and grains provide negligible amounts. USDA FDC does not list carnitine.",
+      "de": "Carnitin ist in Rotfleisch konzentriert; Gemüse, Obst und Getreide liefern vernachlässigbare Mengen. USDA FDC listet Carnitin nicht."
+    }
+  },
+  {
+    "id": "nih-creatine",
+    "kind": "nih",
+    "year": 2026,
+    "title": {
+      "en": "NIH ODS — Dietary supplements for exercise and athletic performance (creatine)",
+      "de": "NIH ODS — Nahrungsergänzung für Leistungssport (Kreatin)"
+    },
+    "publisher": "National Institutes of Health, Office of Dietary Supplements",
+    "url": "https://ods.od.nih.gov/factsheets/ExerciseAndAthleticPerformance-Consumer/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Body synthesizes ~1 g/day creatine; animal foods such as beef and salmon provide dietary creatine (~500 mg / 4 oz cited). Absent as a meaningful food source in unaugmented plants.",
+      "de": "Der Körper synthetisiert ~1 g Kreatin/Tag; tierische Lebensmittel wie Rind und Lachs liefern diätetisches Kreatin. In unbehandelten Pflanzen keine relevante Nahrungsquelle."
+    }
+  },
+  {
+    "id": "dge-ref-2025",
+    "kind": "dge",
+    "year": 2025,
+    "title": {
+      "en": "DGE/ÖGE Referenzwerte für die Nährstoffzufuhr, 3rd ed., 1st printing 2025",
+      "de": "DGE/ÖGE Referenzwerte für die Nährstoffzufuhr, 3. Auflage, 1. Ausgabe 2025"
+    },
+    "publisher": "Deutsche Gesellschaft für Ernährung / Österreichische Gesellschaft für Ernährung",
+    "url": "https://www.dge.de/wissenschaft/referenzwerte/",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Current German/Austrian reference values. Iron chapter updated 2024 (men 11 mg/d; women 14–16 mg/d). B12 adequate intake 4.0 µg/d (2018 chapter retained).",
+      "de": "Aktuelle DGE/ÖGE-Referenzwerte. Eisen 2024 aktualisiert (Männer 11 mg/d; Frauen 14–16 mg/d). B12-Schätzwert 4,0 µg/d (Kapitel 2018)."
+    }
+  },
+  {
+    "id": "efsa-drv",
+    "kind": "efsa",
+    "year": 2019,
+    "title": {
+      "en": "EFSA Dietary Reference Values (completed series of NDA opinions)",
+      "de": "EFSA Dietary Reference Values (abgeschlossene NDA-Opinions)"
+    },
+    "publisher": "European Food Safety Authority",
+    "url": "https://www.efsa.europa.eu/en/topics/topic/dietary-reference-values",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "34 opinions (2010–2019) covering energy, protein, fats, carbohydrates/fibre, 14 vitamins and 15 minerals. Iron PRI men 11 mg/d, premenopausal women 16 mg/d (2015).",
+      "de": "34 Opinions (2010–2019) zu Energie, Protein, Fett, Kohlenhydraten/Ballaststoffen, 14 Vitaminen und 15 Mineralstoffen. Eisen-PRI Männer 11 mg/d, prämenopausal 16 mg/d (2015)."
+    }
+  },
+  {
+    "id": "efsa-iron-2015",
+    "kind": "efsa",
+    "year": 2015,
+    "title": {
+      "en": "Scientific Opinion on Dietary Reference Values for iron",
+      "de": "Wissenschaftliche Opinion zu Referenzwerten für Eisen"
+    },
+    "publisher": "EFSA Journal",
+    "url": "https://doi.org/10.2903/j.efsa.2015.4254",
+    "accessed": "2026-08-24"
+  },
+  {
+    "id": "efsa-vita-2015",
+    "kind": "efsa",
+    "year": 2015,
+    "title": {
+      "en": "Scientific Opinion on Dietary Reference Values for vitamin A",
+      "de": "Wissenschaftliche Opinion zu Referenzwerten für Vitamin A"
+    },
+    "publisher": "EFSA Journal",
+    "url": "https://doi.org/10.2903/j.efsa.2015.4028",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "1 µg RE = 1 µg retinol = 6 µg β-carotene = 12 µg other provitamin A carotenoids (SCF conversion used by EFSA for European populations).",
+      "de": "1 µg RE = 1 µg Retinol = 6 µg β-Carotin = 12 µg andere Provitamin-A-Carotinoide (SCF-Faktoren, von EFSA für Europa verwendet)."
+    }
+  },
+  {
+    "id": "usda-pdp-2024",
+    "kind": "residue",
+    "year": 2024,
+    "title": {
+      "en": "USDA Pesticide Data Program Annual Summary 2024",
+      "de": "USDA Pesticide Data Program Jahresbericht 2024"
+    },
+    "publisher": "USDA Agricultural Marketing Service",
+    "url": "https://www.ams.usda.gov/datasets/pdp",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "National residue monitoring; commodities rotate. Leafy items (lettuces) recur because of high consumption and large surface area. >99% of 2024 samples were below EPA tolerances — presence is not automatically a health exceedance.",
+      "de": "Nationales Rückstandsmonitoring; Waren rotieren. Blattware (Salate) kehrt wegen Verbrauch und großer Oberfläche wieder. >99 % der Proben 2024 lagen unter EPA-Toleranzen — Nachweis ist kein automatischer Grenzwertverstoß."
+    }
+  },
+  {
+    "id": "efsa-residues-2024",
+    "kind": "residue",
+    "year": 2026,
+    "title": {
+      "en": "The 2024 European Union report on pesticide residues in food",
+      "de": "EU-Bericht 2024 zu Pestizidrückständen in Lebensmitteln"
+    },
+    "publisher": "EFSA Journal",
+    "url": "https://doi.org/10.2903/j.efsa.2026.10054",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "EU-coordinated programme: 1.2% non-compliant in the 9,842-sample subset. Dietary risk estimated as low for most subpopulations and substances.",
+      "de": "EU-koordiniertes Programm: 1,2 % nicht konform in der 9.842-Proben-Teilmenge. Ernährungliches Risiko für die meisten Teilgruppen und Stoffe als gering geschätzt."
+    }
+  },
+  {
+    "id": "who-protein-2007",
+    "kind": "fao",
+    "year": 2007,
+    "title": {
+      "en": "Protein and amino acid requirements in human nutrition (WHO/FAO/UNU)",
+      "de": "Protein- und Aminosäurebedarf in der menschlichen Ernährung (WHO/FAO/UNU)"
+    },
+    "publisher": "World Health Organization",
+    "url": "https://www.who.int/publications/i/item/9241209356",
+    "accessed": "2026-08-24",
+    "note": {
+      "en": "Nine indispensable amino acids cannot be synthesized in sufficient amounts: His, Ile, Leu, Lys, Met, Phe, Thr, Trp, Val (plus Cys/Tyr as conditionally sparing).",
+      "de": "Neun unentbehrliche Aminosäuren können nicht in ausreichender Menge synthetisiert werden: His, Ile, Leu, Lys, Met, Phe, Thr, Trp, Val."
+    }
+  }
+]

@@ -50,5 +50,7 @@ while an agent works.
 
 ## Also in this repo
 
+[`was-du-isst/`](was-du-isst/) is a public, bilingual food-evaluation matrix (Next.js). Plant categories stay unequal; every score carries a source and year. See its [README](was-du-isst/README.md).
+
 [`bulwark/`](bulwark/) is a separate AI-agent behaviour-security prototype. See
 its [operator guide](bulwark/README.md) and [business strategy](bulwark/STRATEGY.md).
