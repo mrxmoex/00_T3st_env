@@ -1,24 +1,19 @@
-# 00_T3st_env
+# Du bist was du isst
 
-A tiny **Notes** web app used to demonstrate a Cloud Agent development environment end to end.
+Public food-evaluation matrix. The production app lives in [`web/`](web/).
 
-Have fun 🎉
-
-## Stack
-
-- Node.js (>= 20) with [Express](https://expressjs.com/)
-- Plain HTML/CSS/JS frontend served from `public/`
-- Tests via the built-in Node test runner (`node --test`)
-- Linting via [ESLint](https://eslint.org/) (flat config)
-
-## Getting started
+Quantity without bioavailability is noise. Plant categories are never collapsed into a vegetable average.
 
 ```bash
-npm ci        # install exact dependencies from package-lock.json
-npm run dev   # start the dev server with auto-reload on http://localhost:3000
+cd web
+npm ci
+npm run dev    # http://localhost:3000
+npm test
 ```
 
-Then open http://localhost:3000 and add a note.
+See [`web/README.md`](web/README.md) for the schema, scoring rules, and source protocol.
+
+The original Notes demo remains under `src/` / `public/` for environment smoke tests. [`bulwark/`](bulwark/) is a separate prototype.
 
 ## Commands
 

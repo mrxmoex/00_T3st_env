@@ -1,11 +1,11 @@
 {
   "name": "00_T3st_env",
-  "install": "npm ci",
+  "install": "npm ci && npm --prefix web ci",
   "terminals": [
     {
       "name": "dev-server",
-      "command": "npm run dev",
-      "description": "Runs the Notes app dev server (npm run dev) on port 3000 with auto-reload."
+      "command": "npm --prefix web run dev -- --hostname 0.0.0.0 --port 3000",
+      "description": "Runs the Nahrungsmatrix Next.js app on port 3000."
     }
   ],
   "ports": [
