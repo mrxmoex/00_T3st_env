@@ -1,16 +1,15 @@
 import { DATA_META } from "../data/catalog";
+import { useLocale } from "../i18n/LocaleContext";
 import type { FoodRecord, ScoreCard } from "../scoring/types";
 
 export function SourcePanel({ food, card }: { food?: FoodRecord; card?: ScoreCard }) {
+  const { t } = useLocale();
+
   return (
     <details className="panel">
-      <summary>Source &amp; method</summary>
-      <p className="muted">
-        Dataset {DATA_META.version}, last verified {DATA_META.lastVerified}. Scores are
-        computed in the client from raw nutrient fields plus documented coefficients.
-        There is no black-box model.
-      </p>
-      <p className="muted">{DATA_META.updatePath}</p>
+      <summary>{t.source.summary}</summary>
+      <p className="muted">{t.source.dataset(DATA_META.version, DATA_META.lastVerified)}</p>
+      <p className="muted">{t.source.updatePath}</p>
       {food ? (
         <ul>
           {food.sources.map((source) => (
@@ -22,7 +21,7 @@ export function SourcePanel({ food, card }: { food?: FoodRecord; card?: ScoreCar
                 <>
                   {" "}
                   <a href={source.url} target="_blank" rel="noreferrer">
-                    link
+                    {t.source.link}
                   </a>
                 </>
               ) : null}
@@ -31,18 +30,21 @@ export function SourcePanel({ food, card }: { food?: FoodRecord; card?: ScoreCar
         </ul>
       ) : (
         <ul>
-          <li>USDA FoodData Central (FDC IDs on each food)</li>
-          <li>FAO 2013 adult amino acid scoring pattern + DIAAS/PDCAAS literature</li>
-          <li>IOM/EFSA RAE conversion (β-carotene /12, other carotenoids /24)</li>
-          <li>Iron/zinc absorption midpoints from bioavailability meta-analyses</li>
-          <li>EU/US MRL residue logic as classed risk, not a lab certificate</li>
+          {t.source.general.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
         </ul>
       )}
       {card ? (
         <p className="mono muted">
-          AAS {card.eaa.aas} · DIAAS {card.eaa.diaas} · PDCAAS {card.eaa.pdcaas} · limiting{" "}
-          {card.eaa.limitingAa.toUpperCase()} · RAE {card.micro.raeUg} µg · absorbable Fe{" "}
-          {card.micro.absorbableIronMg} mg
+          {t.source.cardLine({
+            aas: card.eaa.aas,
+            diaas: card.eaa.diaas,
+            pdcaas: card.eaa.pdcaas,
+            limiting: card.eaa.limitingAa.toUpperCase(),
+            rae: card.micro.raeUg,
+            iron: card.micro.absorbableIronMg,
+          })}
         </p>
       ) : null}
     </details>

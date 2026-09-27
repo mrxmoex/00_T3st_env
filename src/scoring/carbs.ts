@@ -1,3 +1,4 @@
+import type { LocalizedText } from "../i18n/locale";
 import { clamp01, round1, round2, safeDiv } from "./math";
 import type { CarbBreakdown, FoodRecord } from "./types";
 
@@ -22,7 +23,7 @@ export function scoreCarbs(food: FoodRecord): CarbBreakdown {
   const passiveG = passiveCarbsG(food);
   const total = activeG + passiveG;
   const kcal = Math.max(food.kcalPer100g, 1);
-  const flags: string[] = [];
+  const flags: LocalizedText[] = [];
 
   const activePer100kcal = (activeG / kcal) * 100;
   const passivePer100kcal = (passiveG / kcal) * 100;
@@ -33,19 +34,29 @@ export function scoreCarbs(food: FoodRecord): CarbBreakdown {
   let score: number;
   if (total < 0.5) {
     score = 70;
-    flags.push("Negligible carbohydrate. Fibre is absent — this is not a plant-fibre equivalent.");
+    flags.push({
+      en: "Negligible carbohydrate. Fibre is absent — this is not a plant-fibre equivalent.",
+      de: "Vernachlässigbare Kohlenhydrate. Ballaststoffe fehlen — kein Ersatz für pflanzliche Ballaststoffe.",
+    });
   } else {
     const passiveFrac = safeDiv(passiveG, total);
     const sugarFrac = safeDiv(food.carbs.sugars, total);
     score = 100 * (0.55 * passiveFrac + 0.25 * (activeScore / 100) + 0.2 * (1 - sugarFrac));
-    flags.push(
-      `Active (sugars+starch) ${round1(activeG)} g; passive (fibre+RS) ${round1(passiveG)} g per 100 g`,
-    );
+    flags.push({
+      en: `Active (sugars+starch) ${round1(activeG)} g; passive (fibre+RS) ${round1(passiveG)} g per 100 g`,
+      de: `Aktiv (Zucker+Stärke) ${round1(activeG)} g; passiv (Ballaststoffe+RS) ${round1(passiveG)} g pro 100 g`,
+    });
     if (sugarFrac > 0.45) {
-      flags.push("Sugar-dominant carbohydrate profile");
+      flags.push({
+        en: "Sugar-dominant carbohydrate profile",
+        de: "Zuckerdominiertes Kohlenhydratprofil",
+      });
     }
     if (food.carbs.resistantStarch >= 1) {
-      flags.push("Meaningful resistant starch (passive)");
+      flags.push({
+        en: "Meaningful resistant starch (passive)",
+        de: "Nennenswerte resistente Stärke (passiv)",
+      });
     }
   }
 

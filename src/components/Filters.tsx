@@ -1,3 +1,4 @@
+import { useLocale } from "../i18n/LocaleContext";
 import {
   ANIMAL_CLASSES,
   AXIS_KEYS,
@@ -8,7 +9,6 @@ import {
   type FoodClass,
   type Kingdom,
 } from "../scoring/types";
-import { AXIS_LABELS, CLASS_LABELS, PATTERN_LABELS } from "../ui/labels";
 
 export interface FilterState {
   query: string;
@@ -25,19 +25,21 @@ export function Filters({
   value: FilterState;
   onChange: (next: FilterState) => void;
 }) {
+  const { t } = useLocale();
+
   return (
     <div className="toolbar" role="search">
       <label>
-        Search
+        {t.filters.search}
         <input
           type="search"
           value={value.query}
-          placeholder="Spinach, Leber…"
+          placeholder={t.filters.searchPlaceholder}
           onChange={(event) => onChange({ ...value, query: event.target.value })}
         />
       </label>
       <label>
-        Kingdom
+        {t.filters.kingdom}
         <select
           value={value.kingdom}
           onChange={(event) =>
@@ -48,38 +50,38 @@ export function Filters({
             })
           }
         >
-          <option value="all">All classes</option>
-          <option value="plant">Plant classes only</option>
-          <option value="animal">Animal classes only</option>
+          <option value="all">{t.filters.allClasses}</option>
+          <option value="plant">{t.filters.plantOnly}</option>
+          <option value="animal">{t.filters.animalOnly}</option>
         </select>
       </label>
       <label>
-        Food class
+        {t.filters.foodClass}
         <select
           value={value.foodClass}
           onChange={(event) =>
             onChange({ ...value, foodClass: event.target.value as FilterState["foodClass"] })
           }
         >
-          <option value="all">All</option>
-          <optgroup label="Plant">
+          <option value="all">{t.filters.all}</option>
+          <optgroup label={t.kingdoms.plant}>
             {PLANT_CLASSES.map((foodClass) => (
               <option key={foodClass} value={foodClass}>
-                {CLASS_LABELS[foodClass]}
+                {t.classes[foodClass]}
               </option>
             ))}
           </optgroup>
-          <optgroup label="Animal">
+          <optgroup label={t.kingdoms.animal}>
             {ANIMAL_CLASSES.map((foodClass) => (
               <option key={foodClass} value={foodClass}>
-                {CLASS_LABELS[foodClass]}
+                {t.classes[foodClass]}
               </option>
             ))}
           </optgroup>
         </select>
       </label>
       <label>
-        Dietary pattern
+        {t.filters.pattern}
         <select
           value={value.pattern}
           onChange={(event) =>
@@ -88,13 +90,13 @@ export function Filters({
         >
           {DIETARY_PATTERNS.map((pattern) => (
             <option key={pattern} value={pattern}>
-              {PATTERN_LABELS[pattern]}
+              {t.patterns[pattern]}
             </option>
           ))}
         </select>
       </label>
       <label>
-        Sort axis
+        {t.filters.sortAxis}
         <select
           value={value.sortAxis}
           onChange={(event) =>
@@ -103,7 +105,7 @@ export function Filters({
         >
           {AXIS_KEYS.map((axis) => (
             <option key={axis} value={axis}>
-              {AXIS_LABELS[axis]}
+              {t.axes[axis]}
             </option>
           ))}
         </select>

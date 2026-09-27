@@ -46,7 +46,7 @@ describe("EAA completeness + digestibility", () => {
     expect(lentilAas).toBeLessThan(1);
     expect(eggAas).toBeGreaterThanOrEqual(1);
     expect(scoreEaa(lentils).limitingAa).toBe("saa");
-    expect(scoreEaa(lentils).flags.some((flag) => flag.includes("Incomplete"))).toBe(true);
+    expect(scoreEaa(lentils).flags.some((flag) => flag.en.includes("Incomplete"))).toBe(true);
   });
 
   it("DIAAS is AAS × digestibility and is not truncated; PDCAAS is", () => {
@@ -86,7 +86,7 @@ describe("carbohydrate type split", () => {
   it("treats muscle meat as metabolically quiet, not a fibre food", () => {
     const beef = scoreCarbs(requireFood("beef_ground_85_cooked"));
     expect(beef.score).toBe(70);
-    expect(beef.flags.some((flag) => flag.includes("Fibre is absent"))).toBe(true);
+    expect(beef.flags.some((flag) => flag.en.includes("Fibre is absent"))).toBe(true);
   });
 
   it("penalizes sugar-dominant profiles relative to high-fibre legumes", () => {
@@ -131,7 +131,7 @@ describe("EFA / glycerides", () => {
     const salmon = scoreEfa(requireFood("salmon_atlantic_cooked"));
     const flaxLikeKale = scoreEfa(requireFood("kale_raw"));
     expect(salmon.score).toBeGreaterThan(flaxLikeKale.score);
-    expect(salmon.flags.some((flag) => flag.includes("preformed long-chain"))).toBe(true);
+    expect(salmon.flags.some((flag) => flag.en.includes("preformed long-chain"))).toBe(true);
   });
 
   it("applies ALA→DHA inefficiency", () => {
@@ -210,7 +210,8 @@ describe("catalog coverage", () => {
 describe("recommendation engine", () => {
   it("never claims a plant-only diet is complete", () => {
     const rec = recommend({ pattern: "plant-only", selectedIds: ["lentils_boiled", "kale_raw"] });
-    expect(rec.headline.toLowerCase()).toContain("not biochemically complete");
+    expect(rec.headline.en.toLowerCase()).toContain("not biochemically complete");
+    expect(rec.headline.de).toContain("biochemisch nicht vollständig");
     const ids = rec.gaps.map((gap) => gap.id);
     expect(ids).toEqual(expect.arrayContaining(["b12", "complete-protein", "epa-dha", "heme-iron", "retinol"]));
     expect(rec.gaps.some((gap) => gap.severity === "required" && gap.id === "b12")).toBe(true);

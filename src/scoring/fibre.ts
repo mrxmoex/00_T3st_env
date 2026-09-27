@@ -1,3 +1,4 @@
+import type { LocalizedText } from "../i18n/locale";
 import { clamp01, round1, round2 } from "./math";
 import type { AxisBreakdown, FoodClass, FoodRecord } from "./types";
 
@@ -47,12 +48,18 @@ export function scoreFibre(food: FoodRecord): AxisBreakdown {
   const fibreScore = clamp01(fibrePer100kcal / 4);
   const phyto = clamp01(0.65 * classPhytoBaseline(food.class) + 0.35 * food.phytochemicalIndex);
   const score = 100 * (0.6 * fibreScore + 0.4 * phyto);
-  const flags: string[] = [];
+  const flags: LocalizedText[] = [];
 
   if (classPhytoBaseline(food.class) === 0) {
-    flags.push("No dietary fibre or plant phytochemicals. Animal advantage axes are scored elsewhere.");
+    flags.push({
+      en: "No dietary fibre or plant phytochemicals. Animal advantage axes are scored elsewhere.",
+      de: "Keine Ballaststoffe oder sekundären Pflanzenstoffe. Tierische Vorteile werden auf anderen Achsen bewertet.",
+    });
   } else {
-    flags.push(`Fibre ${food.carbs.fibre} g/100 g; phytochemical index ${food.phytochemicalIndex}`);
+    flags.push({
+      en: `Fibre ${food.carbs.fibre} g/100 g; phytochemical index ${food.phytochemicalIndex}`,
+      de: `Ballaststoffe ${food.carbs.fibre} g/100 g; Pflanzenstoff-Index ${food.phytochemicalIndex}`,
+    });
   }
 
   return {

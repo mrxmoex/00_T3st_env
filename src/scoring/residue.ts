@@ -1,3 +1,4 @@
+import type { LocalizedText } from "../i18n/locale";
 import { clamp01, round1, round2 } from "./math";
 import type {
   AxisBreakdown,
@@ -6,6 +7,25 @@ import type {
   SurfaceAreaClass,
   VetResidueClass,
 } from "./types";
+
+const SURFACE_DE: Record<SurfaceAreaClass, string> = {
+  high: "hoch",
+  medium: "mittel",
+  low: "niedrig",
+  none: "keine",
+};
+
+const METAL_DE: Record<HeavyMetalClass, string> = {
+  low: "niedrig",
+  moderate: "mäßig",
+  elevated: "erhöht",
+};
+
+const VET_DE: Record<VetResidueClass, string> = {
+  none: "keine",
+  low: "niedrig",
+  moderate: "mäßig",
+};
 
 function surfaceRisk(value: SurfaceAreaClass): number {
   switch (value) {
@@ -78,10 +98,19 @@ export function scoreResidue(food: FoodRecord): AxisBreakdown {
     0.1 * vet;
 
   const score = 100 * (1 - clamp01(risk));
-  const flags: string[] = [
-    `Surface-area class ${r.surfaceAreaClass}`,
-    `Heavy-metal class ${r.heavyMetalClass}`,
-    `Veterinary-residue class ${r.veterinaryResidueClass}`,
+  const flags: LocalizedText[] = [
+    {
+      en: `Surface-area class ${r.surfaceAreaClass}`,
+      de: `Oberflächenklasse: ${SURFACE_DE[r.surfaceAreaClass]}`,
+    },
+    {
+      en: `Heavy-metal class ${r.heavyMetalClass}`,
+      de: `Schwermetallklasse: ${METAL_DE[r.heavyMetalClass]}`,
+    },
+    {
+      en: `Veterinary-residue class ${r.veterinaryResidueClass}`,
+      de: `Tierarzneimittel-Rückstandsklasse: ${VET_DE[r.veterinaryResidueClass]}`,
+    },
   ];
 
   return {

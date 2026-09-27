@@ -1,15 +1,18 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { AxisRadar } from "../components/AxisRadar";
 import { HeatCell } from "../components/HeatCell";
 import { FOODS } from "../data/catalog";
+import { foodName } from "../i18n/locale";
+import { useLocale } from "../i18n/LocaleContext";
 import { scoreCatalog } from "../scoring/scoreFood";
 import { AXIS_KEYS } from "../scoring/types";
-import { AXIS_LABELS, CLASS_LABELS } from "../ui/labels";
 import { axisValue } from "../components/MatrixTable";
 
 const cards = scoreCatalog(FOODS);
 
 export function ComparePage() {
+  const { t, locale } = useLocale();
   const [params] = useSearchParams();
   const [ids, setIds] = useState<[string, string, string]>([
     params.get("a") ?? "egg_whole_cooked",
@@ -31,15 +34,12 @@ export function ComparePage() {
 
   return (
     <main>
-      <h1>Side-by-side</h1>
-      <p className="lede">
-        Compare foods without collapsing classes. A lentil column will not grow a B12 value
-        because the UI wants balance.
-      </p>
+      <h1>{t.compare.title}</h1>
+      <p className="lede">{t.compare.lede}</p>
       <div className="toolbar">
         {ids.map((id, index) => (
           <label key={index}>
-            Food {index + 1}
+            {t.compare.slot(index + 1)}
             <select
               value={id}
               onChange={(event) => {
@@ -50,7 +50,7 @@ export function ComparePage() {
             >
               {FOODS.map((food) => (
                 <option key={food.id} value={food.id}>
-                  {food.nameDe} ({CLASS_LABELS[food.class]})
+                  {foodName(food, locale)} ({t.classes[food.class]})
                 </option>
               ))}
             </select>
@@ -61,35 +61,51 @@ export function ComparePage() {
         {selected.map(({ food, card }) => (
           <article className="card" key={food.id}>
             <h2>
-              <Link to={`/food/${food.id}`}>{food.nameDe}</Link>
+              <Link to={`/food/${food.id}`}>{foodName(food, locale)}</Link>
             </h2>
-            <p className="muted">
-              {CLASS_LABELS[food.class]} · tier {card.tier}
+            <p className="muted">{t.compare.classTier(t.classes[food.class], card.tier)}</p>
+            <p>
+              {t.compare.eaaLine({
+                aas: card.eaa.aas,
+                diaas: card.eaa.diaas,
+                limiting: card.eaa.limitingAa.toUpperCase(),
+              })}
             </p>
             <p>
-              AAS {card.eaa.aas} · DIAAS {card.eaa.diaas} · limiting {card.eaa.limitingAa.toUpperCase()}
-            </p>
-            <p>
-              Creatine {food.animalCompounds.creatineMg} mg · fibre {food.carbs.fibre} g · B12{" "}
-              {card.micro.effectiveB12Ug} µg
+              {t.compare.compoundLine({
+                creatineMg: food.animalCompounds.creatineMg,
+                fibreG: food.carbs.fibre,
+                b12Ug: card.micro.effectiveB12Ug,
+              })}
             </p>
           </article>
         ))}
       </div>
+      <section className="panel">
+        <h2>{t.compare.radarHeading}</h2>
+        <AxisRadar
+          title={t.compare.radarTitle}
+          entries={selected.map(({ food, card }, index) => ({
+            id: `${index}-${food.id}`,
+            label: foodName(food, locale),
+            card,
+          }))}
+        />
+      </section>
       <div className="matrix-wrap" style={{ marginTop: "1rem" }}>
         <table className="matrix">
           <thead>
             <tr>
-              <th className="sticky">Axis</th>
+              <th className="sticky">{t.table.axis}</th>
               {selected.map(({ food }) => (
-                <th key={food.id}>{food.nameDe}</th>
+                <th key={food.id}>{foodName(food, locale)}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {AXIS_KEYS.map((axis) => (
               <tr key={axis}>
-                <td className="sticky">{AXIS_LABELS[axis]}</td>
+                <td className="sticky">{t.axes[axis]}</td>
                 {selected.map(({ food, card }) => (
                   <td key={food.id}>
                     <HeatCell score={axisValue(card, axis)} />

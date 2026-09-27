@@ -4,11 +4,13 @@ import { Filters, type FilterState } from "../components/Filters";
 import { MatrixTable, axisValue } from "../components/MatrixTable";
 import { SourcePanel } from "../components/SourcePanel";
 import { downloadText, matrixToCsv, matrixToJson } from "../export/matrixExport";
+import { useLocale } from "../i18n/LocaleContext";
 import { recommend } from "../recommend/engine";
 import { scoreCatalog } from "../scoring/scoreFood";
 import { kingdomOf } from "../scoring/types";
 
 export function MatrixPage() {
+  const { t, localize } = useLocale();
   const cards = useMemo(() => scoreCatalog(FOODS), []);
   const [filters, setFilters] = useState<FilterState>({
     query: "",
@@ -40,11 +42,7 @@ export function MatrixPage() {
   return (
     <main>
       <h1>Du bist was du isst</h1>
-      <p className="lede">
-        An honest matrix of biochemical efficiency, completeness, and real-world value.
-        Plant proteins are incomplete. Non-heme iron is not heme iron. Algae, mushrooms,
-        sprouts, kraut, legumes, and leafy salads are not interchangeable.
-      </p>
+      <p className="lede">{t.matrix.lede}</p>
       <Filters value={filters} onChange={setFilters} />
       <div className="toolbar">
         <button
@@ -54,7 +52,7 @@ export function MatrixPage() {
             downloadText("du-bist-was-du-isst.csv", matrixToCsv(rows.map((row) => row.card)), "text/csv")
           }
         >
-          Export CSV
+          {t.matrix.exportCsv}
         </button>
         <button
           type="button"
@@ -67,9 +65,9 @@ export function MatrixPage() {
             )
           }
         >
-          Export JSON
+          {t.matrix.exportJson}
         </button>
-        <span className="muted mono">{rows.length} foods in view</span>
+        <span className="muted mono">{t.matrix.inView(rows.length)}</span>
       </div>
       <MatrixTable
         rows={rows}
@@ -77,19 +75,16 @@ export function MatrixPage() {
         sortAxis={filters.sortAxis}
         onSort={(axis) => setFilters({ ...filters, sortAxis: axis })}
       />
-      <p className="muted">
-        Tiers S–D are assigned from the class-weighted composite. Heat is 0–100 on each axis.
-        Residue is inverted (higher = lower contaminant risk).
-      </p>
+      <p className="muted">{t.matrix.legend}</p>
       <section className="panel">
-        <h2>{rec.headline}</h2>
-        <p className="muted">Pattern: {filters.pattern}. This banner does not sell completeness.</p>
+        <h2>{localize(rec.headline)}</h2>
+        <p className="muted">{t.matrix.patternNote(t.patterns[filters.pattern])}</p>
         <ul>
           {rec.gaps
             .filter((gap) => gap.severity === "required")
             .map((gap) => (
               <li key={gap.id}>
-                <strong>{gap.title}.</strong> {gap.detail}
+                <strong>{localize(gap.title)}.</strong> {localize(gap.detail)}
               </li>
             ))}
         </ul>

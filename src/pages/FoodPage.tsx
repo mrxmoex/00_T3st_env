@@ -1,136 +1,128 @@
 import { Link, useParams } from "react-router-dom";
+import { AxisRadar } from "../components/AxisRadar";
+import { axisValue } from "../components/MatrixTable";
 import { SourcePanel } from "../components/SourcePanel";
 import { FOODS, foodById } from "../data/catalog";
 import { CLASS_WEIGHTS } from "../data/classWeights";
+import { altFoodName, foodName } from "../i18n/locale";
+import { useLocale } from "../i18n/LocaleContext";
 import { scoreCatalog } from "../scoring/scoreFood";
 import { AXIS_KEYS, kingdomOf } from "../scoring/types";
-import { AXIS_LABELS, CLASS_LABELS, EXTRA_LABELS } from "../ui/labels";
 
 const cards = scoreCatalog(FOODS);
 
 export function FoodPage() {
   const { id } = useParams();
+  const { t, locale, localize } = useLocale();
   const food = id ? foodById(id) : undefined;
   const card = cards.find((item) => item.foodId === id);
 
   if (!food || !card) {
     return (
       <main>
-        <h1>Unknown food</h1>
+        <h1>{t.food.unknown}</h1>
         <p>
-          <Link to="/">Back to matrix</Link>
+          <Link to="/">{t.food.back}</Link>
         </p>
       </main>
     );
   }
 
-  const weights = CLASS_WEIGHTS[food.class];
+  const name = foodName(food, locale);
+  const classLabel = t.classes[food.class];
 
   return (
     <main>
       <p className="muted">
-        <Link to="/">Matrix</Link> · {CLASS_LABELS[food.class]} · {kingdomOf(food.class)}
+        <Link to="/">{t.nav.matrix}</Link> · {classLabel} · {t.kingdoms[kingdomOf(food.class)]}
       </p>
-      <h1>{food.nameDe}</h1>
+      <h1>{name}</h1>
       <p className="lede">
-        {food.name}. {food.edibleState}. FDC {food.fdcId ?? "—"}. {food.kcalPer100g} kcal / 100 g.
-        Tier {card.tier} (#{card.classRank} of {card.classSize} in class).
-      </p>
-      <div className="axis-bars">
-        {AXIS_KEYS.map((axis) => {
-          const score =
-            axis === "composite"
-              ? card.composite
-              : axis === "eaa"
-                ? card.eaa.score
-                : axis === "efa"
-                  ? card.efa.score
-                  : axis === "carb"
-                    ? card.carb.score
-                    : axis === "micro"
-                      ? card.micro.score
-                      : axis === "fibre"
-                        ? card.fibre.score
-                        : axis === "residue"
-                          ? card.residue.score
-                          : card.degradation.score;
-          return (
-            <div className="bar-row" key={axis}>
-              <span>{AXIS_LABELS[axis]}</span>
-              <div className="bar">
-                <span style={{ width: `${score}%` }} />
-              </div>
-              <span className="mono">{score.toFixed(1)}</span>
-            </div>
-          );
+        {t.food.lede({
+          altName: altFoodName(food, locale),
+          state: localize(food.edibleState),
+          fdcId: food.fdcId ?? "—",
+          kcal: food.kcalPer100g,
+          tier: card.tier,
+          rank: card.classRank,
+          size: card.classSize,
         })}
+      </p>
+      <div className="food-overview">
+        <div className="axis-bars">
+          {AXIS_KEYS.map((axis) => {
+            const score = axisValue(card, axis);
+            return (
+              <div className="bar-row" key={axis}>
+                <span>{t.axes[axis]}</span>
+                <div className="bar">
+                  <span style={{ width: `${score}%` }} />
+                </div>
+                <span className="mono">{score.toFixed(1)}</span>
+              </div>
+            );
+          })}
+        </div>
+        <AxisRadar title={t.food.radarTitle(name)} entries={[{ id: food.id, label: name, card }]} />
       </div>
       <section className="grid-2">
         <article className="panel">
-          <h2>EAA + digestibility</h2>
+          <h2>{t.axes.eaa}</h2>
           <p>
-            AAS {card.eaa.aas}, DIAAS {card.eaa.diaas}, PDCAAS {card.eaa.pdcaas}. Limiting amino
-            acid: {card.eaa.limitingAa.toUpperCase()}. Ileal digestibility {food.ilealDigestibility}.
+            {t.food.eaaSummary({
+              aas: card.eaa.aas,
+              diaas: card.eaa.diaas,
+              pdcaas: card.eaa.pdcaas,
+              limiting: card.eaa.limitingAa.toUpperCase(),
+              digestibility: food.ilealDigestibility,
+            })}
           </p>
           <ul>
             {card.eaa.flags.map((flag) => (
-              <li key={flag}>{flag}</li>
+              <li key={flag.en}>{localize(flag)}</li>
             ))}
           </ul>
         </article>
         <article className="panel">
-          <h2>Fats, carbs, micros</h2>
+          <h2>{t.food.fatsCarbsMicros}</h2>
           <ul>
-            {card.efa.flags.map((flag) => (
-              <li key={flag}>{flag}</li>
-            ))}
-            {card.carb.flags.map((flag) => (
-              <li key={flag}>{flag}</li>
-            ))}
-            {card.micro.flags.map((flag) => (
-              <li key={flag}>{flag}</li>
+            {[...card.efa.flags, ...card.carb.flags, ...card.micro.flags].map((flag) => (
+              <li key={flag.en}>{localize(flag)}</li>
             ))}
           </ul>
           <p className="mono muted">
-            RAE {card.micro.raeUg} µg · abs. Fe {card.micro.absorbableIronMg} mg · abs. Zn{" "}
-            {card.micro.absorbableZincMg} mg · B12 {card.micro.effectiveB12Ug} µg
+            {t.food.microLine({
+              rae: card.micro.raeUg,
+              iron: card.micro.absorbableIronMg,
+              zinc: card.micro.absorbableZincMg,
+              b12: card.micro.effectiveB12Ug,
+            })}
           </p>
         </article>
       </section>
       <section className="panel">
-        <h2>Class-specific columns</h2>
+        <h2>{t.food.classColumns}</h2>
         <ul>
           {Object.entries(card.extras).map(([key, value]) => (
             <li key={key}>
-              {EXTRA_LABELS[key] ?? key}: <span className="mono">{value.toFixed(1)}</span>
+              {t.extras[key] ?? key}: <span className="mono">{value.toFixed(1)}</span>
             </li>
           ))}
         </ul>
-        <p className="muted">
-          Composite weights for {CLASS_LABELS[food.class]}: EAA {weights.eaa}, EFA {weights.efa},
-          carb {weights.carb}, micro {weights.micro}, fibre {weights.fibre}, residue {weights.residue},
-          stability {weights.degradation}.
-        </p>
+        <p className="muted">{t.food.weights(classLabel, CLASS_WEIGHTS[food.class])}</p>
       </section>
       <section className="panel">
-        <h2>Notes</h2>
+        <h2>{t.food.notes}</h2>
         <ul>
-          {food.notes.map((note) => (
-            <li key={note}>{note}</li>
-          ))}
-          {card.fibre.flags.map((flag) => (
-            <li key={flag}>{flag}</li>
-          ))}
-          {card.residue.flags.map((flag) => (
-            <li key={flag}>{flag}</li>
-          ))}
-          {card.degradation.flags.map((flag) => (
-            <li key={flag}>{flag}</li>
-          ))}
+          {[...food.notes, ...card.fibre.flags, ...card.residue.flags, ...card.degradation.flags].map(
+            (note) => (
+              <li key={note.en}>{localize(note)}</li>
+            ),
+          )}
         </ul>
         <p>
           <Link className="btn" to={`/compare?a=${food.id}`}>
-            Compare this food
+            {t.food.compareCta}
           </Link>
         </p>
       </section>
