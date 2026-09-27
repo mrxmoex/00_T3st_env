@@ -1,4 +1,6 @@
 import { Link, useParams } from "react-router-dom";
+import { AxisRadar } from "../components/AxisRadar";
+import { axisValue } from "../components/MatrixTable";
 import { SourcePanel } from "../components/SourcePanel";
 import { FOODS, foodById } from "../data/catalog";
 import { CLASS_WEIGHTS } from "../data/classWeights";
@@ -36,34 +38,25 @@ export function FoodPage() {
         {food.name}. {food.edibleState}. FDC {food.fdcId ?? "—"}. {food.kcalPer100g} kcal / 100 g.
         Tier {card.tier} (#{card.classRank} of {card.classSize} in class).
       </p>
-      <div className="axis-bars">
-        {AXIS_KEYS.map((axis) => {
-          const score =
-            axis === "composite"
-              ? card.composite
-              : axis === "eaa"
-                ? card.eaa.score
-                : axis === "efa"
-                  ? card.efa.score
-                  : axis === "carb"
-                    ? card.carb.score
-                    : axis === "micro"
-                      ? card.micro.score
-                      : axis === "fibre"
-                        ? card.fibre.score
-                        : axis === "residue"
-                          ? card.residue.score
-                          : card.degradation.score;
-          return (
-            <div className="bar-row" key={axis}>
-              <span>{AXIS_LABELS[axis]}</span>
-              <div className="bar">
-                <span style={{ width: `${score}%` }} />
+      <div className="food-overview">
+        <div className="axis-bars">
+          {AXIS_KEYS.map((axis) => {
+            const score = axisValue(card, axis);
+            return (
+              <div className="bar-row" key={axis}>
+                <span>{AXIS_LABELS[axis]}</span>
+                <div className="bar">
+                  <span style={{ width: `${score}%` }} />
+                </div>
+                <span className="mono">{score.toFixed(1)}</span>
               </div>
-              <span className="mono">{score.toFixed(1)}</span>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+        <AxisRadar
+          title={`${food.nameDe}: axis profile`}
+          entries={[{ id: food.id, label: food.nameDe, card }]}
+        />
       </div>
       <section className="grid-2">
         <article className="panel">

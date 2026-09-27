@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { AxisRadar } from "../components/AxisRadar";
 import { HeatCell } from "../components/HeatCell";
 import { FOODS } from "../data/catalog";
 import { scoreCatalog } from "../scoring/scoreFood";
@@ -76,6 +77,17 @@ export function ComparePage() {
           </article>
         ))}
       </div>
+      <section className="panel">
+        <h2>Axis profile</h2>
+        <AxisRadar
+          title="Axis profile of the selected foods"
+          entries={selected.map(({ food, card }, index) => ({
+            id: `${index}-${food.id}`,
+            label: food.nameDe,
+            card,
+          }))}
+        />
+      </section>
       <div className="matrix-wrap" style={{ marginTop: "1rem" }}>
         <table className="matrix">
           <thead>
