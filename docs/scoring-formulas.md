@@ -32,7 +32,7 @@ EFA          = 45 if fat < 0.5 g/100 g
              else 100×(0.45×lc + 0.35×ratio + 0.20×quality) + 100×odd_bonus
 ```
 
-ALA-only foods are flagged as not equivalent to preformed EPA/DHA.
+ALA-only foods are flagged as not equivalent to preformed EPA/DHA. When a source does not report odd-chain fatty acids or CLA, the bonus counts only what is reported and animal foods say so in their flags.
 
 ## Carbohydrate type
 
@@ -48,13 +48,20 @@ Carb = 70 if active+passive < 0.5   # quiet animal foods; fibre still absent
 ## Micros + bioavailability
 
 ```
-RAE = retinol + β-carotene/12 + other_carotenoids/24
-Fe* = Fe × {heme 0.25 | nonheme 0.05 | +vit C 0.12 | high phytate 0.03 | mixed weighted}
+RAE = retinol + β-carotene/12 + other_provitamin_A/24      (source RAE if a component is missing)
+Fe* = Fe × {heme 0.25 | nonheme 0.05 | +vit C 0.12 | high phytate 0.03
+            | mixed = 0.6×0.25 + 0.4×0.05}                  (meat, fish, organs; eggs and dairy are nonheme)
 Zn* = Zn × {animal 0.40 | low-phytate plant 0.25 | phytate 0.15}
 B12*= 0 if analogue flag else B12
-contrib_i = clamp( (%DV_absorbed per 100 kcal) / 20%, 0, 1 )
-Micro = 100 × mean(contrib_i)
+N   = the 20 nutrients below that a source reports          (missing values are excluded, not 0)
+contrib_i = −1                                              if 100 kcal exceed the EFSA daily UL
+          = clamp( (%DV_absorbed per 100 kcal) / 20%, 0, 1 ) otherwise
+Micro = 100 × max(0, mean_{i ∈ N}(contrib_i))
 ```
+
+Scored nutrients and FDA Daily Values: iron 18 mg, zinc 11 mg, vitamin A 900 µg RAE, B12 2.4 µg, folate 400 µg DFE, C 90 mg, D 20 µg, E 15 mg, K 120 µg, thiamin 1.2 mg, riboflavin 1.3 mg, niacin 16 mg, B6 1.7 mg, choline 550 mg, calcium 1300 mg, magnesium 420 mg, potassium 4700 mg, copper 0.9 mg, selenium 55 µg, iodine 150 µg.
+
+EFSA upper limits checked per 100 kcal: preformed retinol 3000 µg, iodine 600 µg, selenium 255 µg, copper 5 mg, zinc 25 mg, vitamin D 100 µg, calcium 2500 mg, B6 12 mg. The vitamin A limit uses retinol, not RAE, so carotenoid-A never trips it.
 
 ## Fibre / phytochemicals
 
