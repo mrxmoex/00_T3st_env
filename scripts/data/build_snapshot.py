@@ -129,6 +129,7 @@ NUTRIENTS: dict[str, tuple[str, str | None, float, tuple[str, ...]]] = {
 }
 DERIVED = {"provitaminAOther": "µg"}
 AMINO_ACIDS = ("his", "ile", "leu", "lys", "met", "cys", "phe", "tyr", "thr", "trp", "val")
+MIN_PROTEIN_FOR_AMINO_ACIDS = 0.5
 
 BLS_PROVENANCE = {
     "Analyse": "analysis",
@@ -342,11 +343,16 @@ def build(manifest: dict, bls: dict[str, dict], fdc: dict[str, dict]) -> dict:
         if "fdc" in item:
             entries.append(("FDC", item["fdc"], canonical_from_fdc(fdc[item["fdc"]]), fdc[item["fdc"]]["name"], item.get("fdcMatch")))
         values: dict[str, list | None] = {}
+        protein = next((e[2]["protein"][0] for e in entries if e[2].get("protein")), 0.0)
         for key in [*NUTRIENTS, *DERIVED]:
             chosen = None
             for db, _code, canonical, _name, match in entries:
                 hit = canonical.get(key)
                 if hit is None:
+                    continue
+                if key in AMINO_ACIDS and hit[0] == 0 and protein >= MIN_PROTEIN_FOR_AMINO_ACIDS:
+                    # An essential amino acid cannot be absent from a food with protein; a 0 here
+                    # is a data defect (BLS pattern calculations for zucchini report all zeros).
                     continue
                 provenance = hit[1]
                 if db == "FDC" and match == "similar" and entries[0][0] == "BLS":
@@ -376,7 +382,7 @@ def build(manifest: dict, bls: dict[str, dict], fdc: dict[str, dict]) -> dict:
             pattern = foods[pattern_id]["values"]
             ratio = values["protein"][0] / pattern["protein"][0]
             for key in AMINO_ACIDS:
-                if values[key] is None and pattern[key] is not None:
+                if values[key] is None and pattern[key] is not None and pattern[key][0] > 0:
                     values[key] = [compact(pattern[key][0] * ratio), "pattern", pattern[key][2]]
             foods[item["id"]]["aminoAcidPattern"] = pattern_id
         missing_aa = [key for key in AMINO_ACIDS if values[key] is None]

@@ -1933,9 +1933,9 @@
      "BLS"
     ],
     "met": [
-     0.0,
-     "database",
-     "BLS"
+     0.015,
+     "aggregation",
+     "FDC"
     ],
     "cys": [
      0.007,
@@ -5498,7 +5498,7 @@
      "BLS"
     ],
     "met": [
-     0.0,
+     0.0475,
      "pattern",
      "BLS"
     ],
@@ -5706,7 +5706,8 @@
      "formula",
      "BLS"
     ]
-   }
+   },
+   "aminoAcidPattern": "mung_bean_sprouts"
   },
   "mung_bean_sprouts": {
    "sources": [
@@ -9121,7 +9122,7 @@
      "BLS"
     ],
     "met": [
-     0.0,
+     0.0105825,
      "pattern",
      "BLS"
     ],
@@ -9146,9 +9147,9 @@
      "BLS"
     ],
     "trp": [
-     0.0,
+     0.00895441,
      "pattern",
-     "BLS"
+     "FDC"
     ],
     "val": [
      0.026,
@@ -9329,7 +9330,8 @@
      "formula",
      "BLS"
     ]
-   }
+   },
+   "aminoAcidPattern": "cabbage_raw"
   },
   "sauerkraut_stewed": {
    "sources": [
@@ -9409,8 +9411,8 @@
      "BLS"
     ],
     "met": [
-     0.0,
-     "recipe",
+     0.010479,
+     "pattern",
      "BLS"
     ],
     "cys": [
@@ -9434,9 +9436,9 @@
      "BLS"
     ],
     "trp": [
-     0.0,
-     "recipe",
-     "BLS"
+     0.00886686,
+     "pattern",
+     "FDC"
     ],
     "val": [
      0.026,
@@ -9617,7 +9619,8 @@
      "formula",
      "BLS"
     ]
-   }
+   },
+   "aminoAcidPattern": "sauerkraut"
   },
   "kimchi": {
    "sources": [
@@ -16259,59 +16262,59 @@
      "BLS"
     ],
     "his": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.026,
+     "analysis",
+     "FDC"
     ],
     "ile": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.044,
+     "analysis",
+     "FDC"
     ],
     "leu": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.071,
+     "analysis",
+     "FDC"
     ],
     "lys": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.067,
+     "analysis",
+     "FDC"
     ],
     "met": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.018,
+     "analysis",
+     "FDC"
     ],
     "cys": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.012,
+     "analysis",
+     "FDC"
     ],
     "phe": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.043,
+     "analysis",
+     "FDC"
     ],
     "tyr": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.032,
+     "analysis",
+     "FDC"
     ],
     "thr": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.029,
+     "analysis",
+     "FDC"
     ],
     "trp": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.01,
+     "analysis",
+     "FDC"
     ],
     "val": [
-     0.0,
-     "pattern",
-     "BLS"
+     0.054,
+     "analysis",
+     "FDC"
     ],
     "sfa": [
      0.068,
@@ -16606,9 +16609,9 @@
      "BLS"
     ],
     "tyr": [
-     0.0,
+     0.027,
      "database",
-     "BLS"
+     "FDC"
     ],
     "thr": [
      0.034,
@@ -25452,9 +25455,9 @@
      "BLS"
     ],
     "cys": [
-     0.0,
-     "trace",
-     "BLS"
+     0.019,
+     "borrowed",
+     "FDC"
     ],
     "phe": [
      0.16,
@@ -25764,9 +25767,9 @@
      "BLS"
     ],
     "cys": [
-     0.0,
-     "trace",
-     "BLS"
+     0.032,
+     "database",
+     "FDC"
     ],
     "phe": [
      0.193,
