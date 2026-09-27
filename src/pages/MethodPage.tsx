@@ -82,10 +82,10 @@ export function MethodPage() {
         <p>
           <RichText
             text={m.microDensity({
-              ironMg: DENSITY_REFS.ironMg,
-              zincMg: DENSITY_REFS.zincMg,
-              raeUg: DENSITY_REFS.vitaminARaeUg,
-              b12Ug: DENSITY_REFS.vitaminB12Ug,
+              ironMg: DENSITY_REFS.iron,
+              zincMg: DENSITY_REFS.zinc,
+              raeUg: DENSITY_REFS.vitaminA,
+              b12Ug: DENSITY_REFS.vitaminB12,
             })}
           />
         </p>

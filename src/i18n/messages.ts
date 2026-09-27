@@ -40,8 +40,8 @@ export interface Messages {
     back: string;
     lede: (info: {
       altName: string;
-      state: string;
-      fdcId: string;
+      preparation: string;
+      source: string;
       kcal: number;
       tier: Tier;
       rank: number;
@@ -56,7 +56,7 @@ export interface Messages {
       digestibility: number;
     }) => string;
     fatsCarbsMicros: string;
-    microLine: (info: { rae: number; iron: number; zinc: number; b12: number }) => string;
+    microLine: (info: { rae: number; iron: number; zinc: number; b12: number | null }) => string;
     classColumns: string;
     weights: (classLabel: string, weights: ClassWeights) => string;
     notes: string;
@@ -68,7 +68,7 @@ export interface Messages {
     slot: (position: number) => string;
     classTier: (classLabel: string, tier: Tier) => string;
     eaaLine: (info: { aas: number; diaas: number; limiting: string }) => string;
-    compoundLine: (info: { creatineMg: number; fibreG: number; b12Ug: number }) => string;
+    compoundLine: (info: { creatineMg: number; fibreG: number; b12Ug: number | null }) => string;
     radarHeading: string;
     radarTitle: string;
   };

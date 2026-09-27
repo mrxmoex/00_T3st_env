@@ -40,14 +40,14 @@ export const de: Messages = {
   food: {
     unknown: "Unbekanntes Lebensmittel",
     back: "Zurück zur Matrix",
-    lede: ({ altName, state, fdcId, kcal, tier, rank, size }) =>
-      `${altName}. ${state}. FDC ${fdcId}. ${kcal} kcal / 100 g. Stufe ${tier} (Platz ${rank} von ${size} in der Klasse).`,
+    lede: ({ altName, preparation, source, kcal, tier, rank, size }) =>
+      `${altName}. Zubereitung: ${preparation}. Quelle: ${source}. ${kcal} kcal / 100 g. Stufe ${tier} (Platz ${rank} von ${size} in der Klasse).`,
     radarTitle: (name) => `${name}: Achsenprofil`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
       `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limitierende Aminosäure: ${limiting}. Ileale Verdaulichkeit ${digestibility}.`,
     fatsCarbsMicros: "Fette, Kohlenhydrate, Mikronährstoffe",
     microLine: ({ rae, iron, zinc, b12 }) =>
-      `RAE ${rae} µg · res. Fe ${iron} mg · res. Zn ${zinc} mg · B12 ${b12} µg`,
+      `RAE ${rae} µg · res. Fe ${iron} mg · res. Zn ${zinc} mg · B12 ${b12 ?? "—"} µg`,
     classColumns: "Klassenspezifische Spalten",
     weights: (classLabel, w) =>
       `Gewichte des Gesamtwerts für ${classLabel}: EAA ${w.eaa}, EFA ${w.efa}, Kohlenhydrate ${w.carb}, Mikro ${w.micro}, Ballaststoffe ${w.fibre}, Rückstände ${w.residue}, Stabilität ${w.degradation}.`,
@@ -62,7 +62,7 @@ export const de: Messages = {
     classTier: (classLabel, tier) => `${classLabel} · Stufe ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
     compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Kreatin ${creatineMg} mg · Ballaststoffe ${fibreG} g · B12 ${b12Ug} µg`,
+      `Kreatin ${creatineMg} mg · Ballaststoffe ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
     radarHeading: "Achsenprofil",
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
   },
@@ -255,7 +255,7 @@ export const de: Messages = {
     iodineSelenium: "Jod + Selen",
     retinolDensity: "Retinoldichte",
     b12Density: "B12-Dichte",
-    copperProxy: "Kupfer-Proxy",
+    copperDensity: "Kupfer",
     cholineDensity: "Cholin",
     yolkFatQuality: "Eigelb-Fettqualität",
     calciumDensity: "Calciumdichte",

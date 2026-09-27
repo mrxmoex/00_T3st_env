@@ -1,631 +1,575 @@
-import type { FoodRecord } from "../../scoring/types";
-import { defineFood } from "./helpers";
+import type { AnimalExclusiveCompounds, DegradationProfile, FoodRecord, ResidueProfile } from "../../scoring/types";
+import { ZERO_ANIMAL, animal, defineFood, prepared } from "./helpers";
 
-const USDA = "USDA FoodData Central";
-const FAO = "FAO 2013 dietary protein quality / DIAAS literature";
+const FAO_ANIMAL = "FAO 2013 dietary protein quality / DIAAS literature";
+const EVENEPOEL = {
+  label: "Evenepoel et al. 1998, J Nutr 128:1716–1722",
+  note: "Human ileal digestibility of egg protein: 90.9 % cooked vs 51.3 % raw; raw value scaled by that ratio",
+};
+
+/** Raw muscle and organ meat: refrigerated shelf life before cooking. */
+const RAW_MEAT_DAYS = 2;
+
+const beefMinceBraised = animal({
+  id: "beef_mince_braised", name: "Beef mince, braised", nameDe: "Rinderhackfleisch, geschmort",
+  class: "muscle_ruminant", group: "beef_mince", preparation: "braised",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: { creatineMg: 450, taurineMg: 38, carnosineMg: 350 },
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
+    contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.1,
+    heavyMetalClass: "low", veterinaryResidueClass: "low",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.3,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.4,
+    perishabilityDays: 3, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0,
+  sources: [{ label: FAO_ANIMAL, note: "Beef DIAAS commonly ≥1.0; complete EAA pattern" }],
+  notes: [
+    {
+      en: "Complete protein, heme iron, creatine/carnosine/taurine. No fibre. Fat is ruminant, not seed oil.",
+      de: "Vollständiges Protein, Hämeisen, Kreatin/Carnosin/Taurin. Keine Ballaststoffe. Wiederkäuerfett, kein Samenöl.",
+    },
+  ],
+});
+
+const lambFlankRoasted = animal({
+  id: "lamb_flank_roasted", name: "Lamb thick flank, roasted", nameDe: "Lammnuss, im Ofen gebraten",
+  class: "muscle_ruminant", group: "lamb_flank", preparation: "roasted",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: { creatineMg: 420, taurineMg: 40, carnosineMg: 320 },
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
+    contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.08,
+    heavyMetalClass: "low", veterinaryResidueClass: "low",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.3,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.4,
+    perishabilityDays: 3, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Pasture-associated CLA/odd-chain fat is a composition note, not a marketing halo.",
+      de: "Weidebedingtes CLA/ungeradzahliges Fett ist ein Hinweis zur Zusammensetzung, kein Marketing-Heiligenschein.",
+    },
+  ],
+});
+
+const porkTenderloinRoasted = animal({
+  id: "pork_tenderloin_roasted", name: "Pork tenderloin, roasted", nameDe: "Schweinefilet, im Ofen gebraten",
+  class: "muscle_monogastric", group: "pork_tenderloin", preparation: "roasted",
+  ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: { creatineMg: 380, taurineMg: 25, carnosineMg: 400 },
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.06,
+    contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.12,
+    heavyMetalClass: "low", veterinaryResidueClass: "moderate",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.28, cutSurfaceSensitivity: 0.3,
+    heatSensitivity: 0.4, oxygenLightSensitivity: 0.4,
+    perishabilityDays: 3, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Complete protein. Higher n-6 than ruminant. Thiamin-rich.",
+      de: "Vollständiges Protein. Mehr n-6 als Wiederkäuer. Thiaminreich.",
+    },
+  ],
+});
+
+const POULTRY_RESIDUE: ResidueProfile = {
+  surfaceAreaClass: "none", systemicPesticideLikelihood: 0.08,
+  contactPesticideLikelihood: 0.03, typicalMrlProximity: 0.14,
+  heavyMetalClass: "low", veterinaryResidueClass: "moderate",
+};
+const POULTRY_DEGRADATION: DegradationProfile = {
+  waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.35,
+  heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
+  perishabilityDays: 3, processingStability: "cooked",
+};
+const POULTRY_COMPOUNDS: AnimalExclusiveCompounds = { creatineMg: 300, taurineMg: 15, carnosineMg: 280 };
+
+const chickenBreastFried = animal({
+  id: "chicken_breast_fried", name: "Chicken breast, pan-fried", nameDe: "Hähnchenbrust, in der Pfanne gebraten",
+  class: "muscle_poultry", group: "chicken_breast", preparation: "fried",
+  ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: POULTRY_COMPOUNDS,
+  residue: POULTRY_RESIDUE,
+  degradation: POULTRY_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "High EAA density, lean. Lower heme/zinc/B12 than ruminant. Not a fish-fat substitute.",
+      de: "Hohe EAA-Dichte, mager. Weniger Häm/Zink/B12 als Wiederkäuer. Kein Ersatz für Fischfett.",
+    },
+  ],
+});
+
+const turkeyBreastRaw = animal({
+  id: "turkey_breast_raw", name: "Turkey breast, raw", nameDe: "Putenbrust, roh",
+  class: "muscle_poultry", group: "turkey_breast", preparation: "raw",
+  ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: POULTRY_COMPOUNDS,
+  residue: POULTRY_RESIDUE,
+  degradation: { ...POULTRY_DEGRADATION, perishabilityDays: RAW_MEAT_DAYS, processingStability: "fresh" },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Very lean poultry muscle: dense complete protein, modest heme iron.",
+      de: "Sehr mageres Geflügelfleisch: dichtes vollständiges Protein, mäßig Hämeisen.",
+    },
+  ],
+});
+
+const FISH_COMPOUNDS: AnimalExclusiveCompounds = { creatineMg: 450, taurineMg: 60, carnosineMg: 40 };
+const FISH_DEGRADATION: DegradationProfile = {
+  waterSolubleVitaminLoad: 0.2, cutSurfaceSensitivity: 0.35,
+  heatSensitivity: 0.35, oxygenLightSensitivity: 0.55,
+  perishabilityDays: 2, processingStability: "cooked",
+};
+
+const salmonRoasted = animal({
+  id: "salmon_roasted", name: "Salmon, oven-roasted", nameDe: "Lachs, im Ofen gegart",
+  class: "muscle_fish", group: "salmon", preparation: "roasted",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: FISH_COMPOUNDS,
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
+    contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.15,
+    heavyMetalClass: "moderate", veterinaryResidueClass: "low",
+  },
+  degradation: FISH_DEGRADATION,
+  phytochemicalIndex: 0,
+  sources: [{ label: "EFSA n-3 LC-PUFA", note: "Preformed EPA+DHA; ALA conversion is not a substitute" }],
+  notes: [
+    {
+      en: "Preformed EPA/DHA. Farmed vs wild fat and contaminant profiles differ; metals are not zero.",
+      de: "Vorgeformtes EPA/DHA. Zucht- und Wildlachs unterscheiden sich in Fett- und Schadstoffprofil; Metalle sind nicht null.",
+    },
+  ],
+});
+
+const sardineCanned = animal({
+  id: "sardine_canned", name: "Sardines in oil, drained", nameDe: "Sardinen in Öl, abgetropft",
+  class: "muscle_fish", group: "sardine", preparation: "canned",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: { creatineMg: 400, taurineMg: 80, carnosineMg: 30 },
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
+    contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.12,
+    heavyMetalClass: "moderate", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.15, cutSurfaceSensitivity: 0.05,
+    heatSensitivity: 0.2, oxygenLightSensitivity: 0.35,
+    perishabilityDays: 365, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Bones raise calcium. Oil pack raises n-6. Small pelagics: lower mercury than large predators.",
+      de: "Gräten erhöhen Calcium. Ölaufguss erhöht n-6. Kleine Schwarmfische: weniger Quecksilber als große Raubfische.",
+    },
+  ],
+});
+
+const herringPoached = animal({
+  id: "herring_poached", name: "Herring, poached", nameDe: "Hering, pochiert",
+  class: "muscle_fish", group: "herring", preparation: "poached",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: FISH_COMPOUNDS,
+  residue: sardineCanned.residue,
+  degradation: FISH_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Oily fish: preformed EPA/DHA and vitamin D.",
+      de: "Fetter Fisch: vorgeformtes EPA/DHA und Vitamin D.",
+    },
+  ],
+});
+
+const mackerelGrilled = animal({
+  id: "mackerel_grilled", name: "Mackerel, grilled", nameDe: "Makrele, gegrillt",
+  class: "muscle_fish", group: "mackerel", preparation: "grilled",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: FISH_COMPOUNDS,
+  residue: sardineCanned.residue,
+  degradation: FISH_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Oily fish: preformed EPA/DHA; metals lower than in large predators.",
+      de: "Fetter Fisch: vorgeformtes EPA/DHA; weniger Metalle als große Raubfische.",
+    },
+  ],
+});
+
+const codPoached = animal({
+  id: "cod_poached", name: "Cod, poached", nameDe: "Kabeljau, pochiert",
+  class: "muscle_fish", group: "cod", preparation: "poached",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: FISH_COMPOUNDS,
+  residue: { ...sardineCanned.residue, heavyMetalClass: "low" },
+  degradation: FISH_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Lean white fish: complete protein and iodine, little EPA/DHA per gram.",
+      de: "Magerer Weißfisch: vollständiges Protein und Jod, pro Gramm wenig EPA/DHA.",
+    },
+  ],
+});
+
+const ORGAN_RESIDUE: ResidueProfile = {
+  surfaceAreaClass: "none", systemicPesticideLikelihood: 0.08,
+  contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.2,
+  heavyMetalClass: "moderate", veterinaryResidueClass: "moderate",
+};
+const ORGAN_DEGRADATION: DegradationProfile = {
+  waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.4,
+  heatSensitivity: 0.45, oxygenLightSensitivity: 0.4,
+  perishabilityDays: 2, processingStability: "cooked",
+};
+const ORGAN_COMPOUNDS: AnimalExclusiveCompounds = { creatineMg: 200, taurineMg: 110, carnosineMg: 80 };
+
+const beefLiverFried = animal({
+  id: "beef_liver_fried", name: "Beef liver, pan-fried", nameDe: "Rinderleber, in der Pfanne gebraten",
+  class: "organs", group: "beef_liver", preparation: "fried",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: ORGAN_COMPOUNDS,
+  residue: ORGAN_RESIDUE,
+  degradation: ORGAN_DEGRADATION,
+  phytochemicalIndex: 0,
+  sources: [{ label: "EFSA vitamin A UL", note: "Preformed retinol is potent; chronic excess is a real toxicity risk" }],
+  notes: [
+    {
+      en: "Muscle meat is not an organ. Retinol here is preformed — not carotenoid-A. UL matters.",
+      de: "Muskelfleisch ist kein Organ. Retinol ist hier vorgeformt — kein Carotinoid-A. Die Obergrenze (UL) zählt.",
+    },
+  ],
+});
+
+const chickenLiverFried = animal({
+  id: "chicken_liver_fried", name: "Chicken liver, pan-fried", nameDe: "Hähnchenleber, in der Pfanne gebraten",
+  class: "organs", group: "chicken_liver", preparation: "fried",
+  ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: { creatineMg: 150, taurineMg: 90, carnosineMg: 50 },
+  residue: { ...ORGAN_RESIDUE, systemicPesticideLikelihood: 0.1, contactPesticideLikelihood: 0.03, typicalMrlProximity: 0.22 },
+  degradation: { ...ORGAN_DEGRADATION, waterSolubleVitaminLoad: 0.45, cutSurfaceSensitivity: 0.45, heatSensitivity: 0.5 },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Exceptional folate + heme + retinol. Organ, not muscle. Residue/metal sequestration is real.",
+      de: "Außergewöhnlich viel Folat + Häm + Retinol. Organ, kein Muskel. Rückstands- und Metallanreicherung ist real.",
+    },
+  ],
+});
+
+const porkLiverFried = animal({
+  id: "pork_liver_fried", name: "Pork liver, pan-fried", nameDe: "Schweineleber, in der Pfanne gebraten",
+  class: "organs", group: "pork_liver", preparation: "fried",
+  ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: ORGAN_COMPOUNDS,
+  residue: ORGAN_RESIDUE,
+  degradation: ORGAN_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Organ with very high iron, vitamin A and B12; the retinol upper limit applies.",
+      de: "Organ mit sehr viel Eisen, Vitamin A und B12; die Retinol-Obergrenze gilt.",
+    },
+  ],
+});
+
+const beefHeartBraised = animal({
+  id: "beef_heart_braised", name: "Beef heart, braised", nameDe: "Rinderherz, geschmort",
+  class: "organs", group: "beef_heart", preparation: "braised",
+  ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: ORGAN_COMPOUNDS,
+  residue: ORGAN_RESIDUE,
+  degradation: { ...ORGAN_DEGRADATION, perishabilityDays: 3 },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "A muscle organ: complete protein with B12 and iron well above muscle meat.",
+      de: "Ein Muskelorgan: vollständiges Protein mit deutlich mehr B12 und Eisen als Muskelfleisch.",
+    },
+  ],
+});
+
+const chickenHeartFried = animal({
+  id: "chicken_heart_fried", name: "Chicken heart, pan-fried", nameDe: "Hähnchenherz, in der Pfanne gebraten",
+  class: "organs", group: "chicken_heart", preparation: "fried",
+  ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
+  animalCompounds: ORGAN_COMPOUNDS,
+  residue: ORGAN_RESIDUE,
+  degradation: ORGAN_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Small organ: B12, iron and zinc denser than in breast meat.",
+      de: "Kleines Organ: B12, Eisen und Zink dichter als im Brustfleisch.",
+    },
+  ],
+});
+
+const eggBoiled = animal({
+  id: "egg_boiled", name: "Egg, boiled", nameDe: "Hühnerei, gekocht",
+  class: "eggs", group: "egg", preparation: "boiled",
+  ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
+    contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.08,
+    heavyMetalClass: "low", veterinaryResidueClass: "low",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.2, cutSurfaceSensitivity: 0.15,
+    heatSensitivity: 0.3, oxygenLightSensitivity: 0.25,
+    perishabilityDays: 7, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0,
+  sources: [{ label: FAO_ANIMAL, note: "Egg often used as DIAAS reference; typically >1.0" }],
+  notes: [
+    {
+      en: "Reference-quality protein + choline + retinol. Shell egg ≠ dairy ≠ muscle.",
+      de: "Protein in Referenzqualität + Cholin + Retinol. Ei ≠ Milchprodukt ≠ Muskel.",
+    },
+  ],
+});
+
+const DAIRY_RESIDUE: ResidueProfile = {
+  surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
+  contactPesticideLikelihood: 0.01, typicalMrlProximity: 0.09,
+  heavyMetalClass: "low", veterinaryResidueClass: "low",
+};
+
+const milkWhole = animal({
+  id: "milk_whole", name: "Whole milk, 3.5 % fat", nameDe: "Vollmilch, 3,5 % Fett",
+  class: "dairy", group: "milk", preparation: "processed",
+  ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: { ...DAIRY_RESIDUE, systemicPesticideLikelihood: 0.06, typicalMrlProximity: 0.1 },
+  degradation: {
+    waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.05,
+    heatSensitivity: 0.3, oxygenLightSensitivity: 0.35,
+    perishabilityDays: 8, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Complete milk proteins + calcium + lactose (active sugar). Not interchangeable with yogurt or cheese.",
+      de: "Vollständige Milchproteine + Calcium + Laktose (aktiver Zucker). Nicht austauschbar mit Joghurt oder Käse.",
+    },
+  ],
+});
+
+const yogurtPlainWhole = animal({
+  id: "yogurt_plain_whole", name: "Yogurt, plain, 3.5 % fat", nameDe: "Joghurt natur, 3,5 % Fett",
+  class: "dairy", group: "yogurt", preparation: "fermented",
+  ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: DAIRY_RESIDUE,
+  degradation: {
+    waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.05,
+    heatSensitivity: 0.25, oxygenLightSensitivity: 0.3,
+    perishabilityDays: 14, processingStability: "fermented",
+  },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Cultured dairy, still lactose-bearing unless strained. Not a fermented-cabbage analogue.",
+      de: "Gesäuertes Milchprodukt, enthält Laktose, sofern nicht abgetropft. Kein Gegenstück zu fermentiertem Kohl.",
+    },
+  ],
+});
+
+const quarkLowFat = animal({
+  id: "quark_low_fat", name: "Quark, low-fat", nameDe: "Magerquark",
+  class: "dairy", group: "quark", preparation: "fermented",
+  ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: DAIRY_RESIDUE,
+  degradation: { ...yogurtPlainWhole.degradation, perishabilityDays: 10 },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Fresh cheese from skimmed milk: casein-rich complete protein, very little fat.",
+      de: "Frischkäse aus Magermilch: caseinreiches vollständiges Protein, sehr wenig Fett.",
+    },
+  ],
+});
+
+const CHEESE_RESIDUE: ResidueProfile = {
+  surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
+  contactPesticideLikelihood: 0.01, typicalMrlProximity: 0.08,
+  heavyMetalClass: "low", veterinaryResidueClass: "low",
+};
+const CHEESE_DEGRADATION: DegradationProfile = {
+  waterSolubleVitaminLoad: 0.1, cutSurfaceSensitivity: 0.1,
+  heatSensitivity: 0.2, oxygenLightSensitivity: 0.35,
+  perishabilityDays: 60, processingStability: "fermented",
+};
+
+const cheddar = animal({
+  id: "cheddar", name: "Cheddar", nameDe: "Cheddar (Chester)",
+  class: "fermented_animal", group: "cheddar", preparation: "fermented",
+  ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: CHEESE_RESIDUE,
+  degradation: CHEESE_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Concentrated milk fat and casein. Calorie-dense. Sodium not scored as a nutrient win.",
+      de: "Konzentriertes Milchfett und Casein. Kalorienreich. Natrium zählt nicht als Nährstoffvorteil.",
+    },
+  ],
+});
+
+const gouda = animal({
+  id: "gouda", name: "Gouda, 48 % fat i.dm.", nameDe: "Gouda, 48 % Fett i. Tr.",
+  class: "fermented_animal", group: "gouda", preparation: "fermented",
+  ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: CHEESE_RESIDUE,
+  degradation: CHEESE_DEGRADATION,
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Ripened cheese: concentrated casein and calcium; sodium is high.",
+      de: "Gereifter Käse: konzentriertes Casein und Calcium; viel Natrium.",
+    },
+  ],
+});
+
+const emmentaler = animal({
+  id: "emmentaler", name: "Emmentaler", nameDe: "Emmentaler",
+  class: "fermented_animal", group: "emmentaler", preparation: "fermented",
+  ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: CHEESE_RESIDUE,
+  degradation: { ...CHEESE_DEGRADATION, perishabilityDays: 90 },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Propionic-ripened hard cheese: very high calcium, practically lactose-free.",
+      de: "Propionsäuregereifter Hartkäse: sehr viel Calcium, praktisch laktosefrei.",
+    },
+  ],
+});
+
+const parmesan = animal({
+  id: "parmesan", name: "Parmesan", nameDe: "Parmesan",
+  class: "fermented_animal", group: "parmesan", preparation: "fermented",
+  ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: CHEESE_RESIDUE,
+  degradation: { ...CHEESE_DEGRADATION, perishabilityDays: 120 },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Long-ripened hard cheese: lactose-free in practice; very high calcium and sodium.",
+      de: "Lange gereifter Hartkäse: praktisch laktosefrei; sehr viel Calcium und Natrium.",
+    },
+  ],
+});
+
+const kefirWhole = animal({
+  id: "kefir_whole", name: "Kefir, 3.5 % fat", nameDe: "Kefir, 3,5 % Fett",
+  class: "fermented_animal", group: "kefir", preparation: "fermented",
+  ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
+  animalCompounds: ZERO_ANIMAL,
+  residue: DAIRY_RESIDUE,
+  degradation: {
+    waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.05,
+    heatSensitivity: 0.25, oxygenLightSensitivity: 0.3,
+    perishabilityDays: 18, processingStability: "fermented",
+  },
+  phytochemicalIndex: 0,
+  notes: [
+    {
+      en: "Fermented animal product ≠ plant kraut. Residual lactose remains unless fully consumed by culture.",
+      de: "Fermentiertes tierisches Produkt ≠ pflanzliches Kraut. Restlaktose bleibt, sofern die Kultur sie nicht vollständig abbaut.",
+    },
+  ],
+});
+
+const rawMeat = { perishabilityDays: RAW_MEAT_DAYS, processingStability: "fresh" } as const;
 
 export const ANIMAL_FOODS: FoodRecord[] = [
-  defineFood({
-    id: "beef_ground_85_cooked",
-    name: "Beef, ground, 85% lean, cooked",
-    nameDe: "Rinderhack, 85% mager, gegart",
-    class: "muscle_ruminant",
-    edibleState: { en: "pan-cooked", de: "in der Pfanne gegart" },
-    fdcId: "174032",
-    kcalPer100g: 250,
-    proteinG: 25.93,
-    fatG: 15.37,
-    aminoAcids: {
-      his: 34, ile: 46, leu: 81, lys: 86, met: 27, cys: 12,
-      phe: 40, tyr: 34, thr: 43, trp: 11, val: 51,
-    },
-    ilealDigestibility: 0.95,
-    fattyAcids: {
-      sfa: 6.0, mufa: 6.7, pufa: 0.45, omega3Ala: 0.04, omega3Epa: 0.01,
-      omega3Dha: 0.002, omega6La: 0.35, omega6Aa: 0.04, oddChain: 0.18, cla: 0.12,
-    },
-    carbs: { total: 0, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 2.71, ironForm: "heme", zincMg: 6.31, zincBoundByPhytate: false,
-      vitaminARetinolUg: 3, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 2.64, b12IsAnalogue: false, folateUg: 7, vitaminCMg: 0,
-      vitaminDUg: 0.1, vitaminKUg: 1.5, calciumMg: 18, seleniumUg: 21.5, iodineUg: 8,
-      cholineMg: 82.4, magnesiumMg: 21,
-    },
-    animalCompounds: { creatineMg: 450, taurineMg: 38, carnosineMg: 350 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.1,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.3,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.4,
-      perishabilityDays: 3, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [
-      { label: USDA, id: "FDC 174032" },
-      { label: FAO, note: "Beef DIAAS commonly ≥1.0; complete EAA pattern" },
-    ],
+  prepared(beefMinceBraised, {
+    id: "beef_mince_raw", name: "Beef mince, raw", nameDe: "Rinderhackfleisch, roh", preparation: "raw",
+    degradation: { ...beefMinceBraised.degradation, perishabilityDays: 1, processingStability: "fresh" },
+  }),
+  beefMinceBraised,
+  lambFlankRoasted,
+  prepared(porkTenderloinRoasted, {
+    id: "pork_tenderloin_raw", name: "Pork tenderloin, raw", nameDe: "Schweinefilet, roh", preparation: "raw",
+    degradation: { ...porkTenderloinRoasted.degradation, ...rawMeat },
+  }),
+  porkTenderloinRoasted,
+  prepared(chickenBreastFried, {
+    id: "chicken_breast_raw", name: "Chicken breast, raw", nameDe: "Hähnchenbrust, roh", preparation: "raw",
+    degradation: { ...chickenBreastFried.degradation, ...rawMeat },
+  }),
+  chickenBreastFried,
+  turkeyBreastRaw,
+  prepared(turkeyBreastRaw, {
+    id: "turkey_breast_fried", name: "Turkey breast, pan-fried", nameDe: "Putenbrust, in der Pfanne gebraten", preparation: "fried",
+  }),
+  prepared(salmonRoasted, {
+    id: "salmon_raw", name: "Salmon, raw", nameDe: "Lachs, roh", preparation: "raw",
+    degradation: { ...salmonRoasted.degradation, ...rawMeat },
+  }),
+  salmonRoasted,
+  prepared(salmonRoasted, { id: "salmon_smoked", name: "Salmon, smoked", nameDe: "Lachs, geräuchert", preparation: "smoked" }),
+  sardineCanned,
+  prepared(sardineCanned, { id: "sardine_grilled", name: "Sardine, grilled", nameDe: "Sardine, gegrillt", preparation: "grilled" }),
+  herringPoached,
+  mackerelGrilled,
+  codPoached,
+  prepared(beefLiverFried, {
+    id: "beef_liver_raw", name: "Beef liver, raw", nameDe: "Rinderleber, roh", preparation: "raw",
+    degradation: { ...beefLiverFried.degradation, perishabilityDays: 1, processingStability: "fresh" },
+  }),
+  beefLiverFried,
+  prepared(chickenLiverFried, {
+    id: "chicken_liver_raw", name: "Chicken liver, raw", nameDe: "Hähnchenleber, roh", preparation: "raw",
+    degradation: { ...chickenLiverFried.degradation, perishabilityDays: 1, processingStability: "fresh" },
+  }),
+  chickenLiverFried,
+  porkLiverFried,
+  beefHeartBraised,
+  chickenHeartFried,
+  prepared(eggBoiled, {
+    id: "egg_raw", name: "Egg, raw", nameDe: "Hühnerei, roh", preparation: "raw",
+    ilealDigestibility: 0.55,
+    degradation: { ...eggBoiled.degradation, perishabilityDays: 21, processingStability: "fresh" },
+    sources: [...eggBoiled.sources, EVENEPOEL],
     notes: [
       {
-        en: "Complete protein, heme iron, creatine/carnosine/taurine. No fibre. Fat is ruminant, not seed oil.",
-        de: "Vollständiges Protein, Hämeisen, Kreatin/Carnosin/Taurin. Keine Ballaststoffe. Wiederkäuerfett, kein Samenöl.",
+        en: "Raw egg protein is poorly digested (51 % vs 91 % cooked in humans), and avidin binds biotin.",
+        de: "Rohes Eiprotein wird schlecht verdaut (51 % statt 91 % gekocht beim Menschen), und Avidin bindet Biotin.",
       },
     ],
   }),
-  defineFood({
-    id: "lamb_leg_cooked",
-    name: "Lamb, leg, cooked",
-    nameDe: "Lammkeule, gegart",
-    class: "muscle_ruminant",
-    edibleState: { en: "roasted", de: "gebraten" },
-    fdcId: "172518",
-    kcalPer100g: 258,
-    proteinG: 25.6,
-    fatG: 16.5,
-    aminoAcids: {
-      his: 33, ile: 47, leu: 80, lys: 85, met: 26, cys: 12,
-      phe: 41, tyr: 35, thr: 42, trp: 12, val: 50,
-    },
-    ilealDigestibility: 0.95,
-    fattyAcids: {
-      sfa: 6.8, mufa: 6.9, pufa: 1.0, omega3Ala: 0.12, omega3Epa: 0.02,
-      omega3Dha: 0.01, omega6La: 0.7, omega6Aa: 0.05, oddChain: 0.22, cla: 0.2,
-    },
-    carbs: { total: 0, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 1.97, ironForm: "heme", zincMg: 4.72, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 2.5, b12IsAnalogue: false, folateUg: 18, vitaminCMg: 0,
-      vitaminDUg: 0.1, vitaminKUg: 3.6, calciumMg: 12, seleniumUg: 27, iodineUg: 7,
-      cholineMg: 93, magnesiumMg: 24,
-    },
-    animalCompounds: { creatineMg: 420, taurineMg: 40, carnosineMg: 320 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.08,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.3,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.4,
-      perishabilityDays: 3, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 172518" }],
-    notes: [
-      {
-        en: "Pasture-associated CLA/odd-chain fat is a composition note, not a marketing halo.",
-        de: "Weidebedingtes CLA/ungeradzahliges Fett ist ein Hinweis zur Zusammensetzung, kein Marketing-Heiligenschein.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "pork_loin_cooked",
-    name: "Pork loin, cooked",
-    nameDe: "Schweinefilet, gegart",
-    class: "muscle_monogastric",
-    edibleState: { en: "roasted", de: "gebraten" },
-    fdcId: "168298",
-    kcalPer100g: 242,
-    proteinG: 27.32,
-    fatG: 13.92,
-    aminoAcids: {
-      his: 39, ile: 47, leu: 80, lys: 88, met: 27, cys: 12,
-      phe: 40, tyr: 35, thr: 44, trp: 12, val: 51,
-    },
-    ilealDigestibility: 0.94,
-    fattyAcids: {
-      sfa: 4.9, mufa: 6.2, pufa: 1.6, omega3Ala: 0.07, omega3Epa: 0,
-      omega3Dha: 0, omega6La: 1.4, omega6Aa: 0.08, oddChain: 0.02, cla: 0.01,
-    },
-    carbs: { total: 0, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.87, ironForm: "heme", zincMg: 2.39, zincBoundByPhytate: false,
-      vitaminARetinolUg: 2, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.7, b12IsAnalogue: false, folateUg: 5, vitaminCMg: 0,
-      vitaminDUg: 0.7, vitaminKUg: 0, calciumMg: 19, seleniumUg: 45.3, iodineUg: 5,
-      cholineMg: 102, magnesiumMg: 25,
-    },
-    animalCompounds: { creatineMg: 380, taurineMg: 25, carnosineMg: 400 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.06,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.12,
-      heavyMetalClass: "low", veterinaryResidueClass: "moderate",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.28, cutSurfaceSensitivity: 0.3,
-      heatSensitivity: 0.4, oxygenLightSensitivity: 0.4,
-      perishabilityDays: 3, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 168298" }],
-    notes: [
-      {
-        en: "Complete protein. Higher n-6 than ruminant. Thiamin-rich (not in core micro set).",
-        de: "Vollständiges Protein. Mehr n-6 als Wiederkäuer. Thiaminreich (nicht im Kern-Mikroset).",
-      },
-    ],
-  }),
-  defineFood({
-    id: "chicken_breast_cooked",
-    name: "Chicken breast, cooked",
-    nameDe: "Hähnchenbrust, gegart",
-    class: "muscle_poultry",
-    edibleState: { en: "roasted, skinless", de: "gebraten, ohne Haut" },
-    fdcId: "171477",
-    kcalPer100g: 165,
-    proteinG: 31.02,
-    fatG: 3.57,
-    aminoAcids: {
-      his: 37, ile: 52, leu: 80, lys: 90, met: 28, cys: 13,
-      phe: 40, tyr: 35, thr: 44, trp: 12, val: 52,
-    },
-    ilealDigestibility: 0.94,
-    fattyAcids: {
-      sfa: 1.01, mufa: 1.24, pufa: 0.78, omega3Ala: 0.02, omega3Epa: 0.01,
-      omega3Dha: 0.02, omega6La: 0.6, omega6Aa: 0.07, oddChain: 0, cla: 0,
-    },
-    carbs: { total: 0, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 1.04, ironForm: "heme", zincMg: 1.0, zincBoundByPhytate: false,
-      vitaminARetinolUg: 6, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.34, b12IsAnalogue: false, folateUg: 4, vitaminCMg: 0,
-      vitaminDUg: 0.1, vitaminKUg: 0.3, calciumMg: 15, seleniumUg: 27.6, iodineUg: 4,
-      cholineMg: 85, magnesiumMg: 29,
-    },
-    animalCompounds: { creatineMg: 300, taurineMg: 15, carnosineMg: 280 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.08,
-      contactPesticideLikelihood: 0.03, typicalMrlProximity: 0.14,
-      heavyMetalClass: "low", veterinaryResidueClass: "moderate",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.35,
-      heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 3, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 171477" }],
-    notes: [
-      {
-        en: "High EAA density, lean. Lower heme/zinc/B12 than ruminant. Not a fish-fat substitute.",
-        de: "Hohe EAA-Dichte, mager. Weniger Häm/Zink/B12 als Wiederkäuer. Kein Ersatz für Fischfett.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "salmon_atlantic_cooked",
-    name: "Atlantic salmon, cooked",
-    nameDe: "Atlantischer Lachs, gegart",
-    class: "muscle_fish",
-    edibleState: { en: "dry heat", de: "trocken gegart" },
-    fdcId: "175167",
-    kcalPer100g: 206,
-    proteinG: 22.1,
-    fatG: 12.35,
-    aminoAcids: {
-      his: 29, ile: 46, leu: 81, lys: 92, met: 30, cys: 11,
-      phe: 43, tyr: 34, thr: 44, trp: 11, val: 51,
-    },
-    ilealDigestibility: 0.95,
-    fattyAcids: {
-      sfa: 2.4, mufa: 4.4, pufa: 3.9, omega3Ala: 0.11, omega3Epa: 0.69,
-      omega3Dha: 1.43, omega6La: 0.67, omega6Aa: 0.27, oddChain: 0.02, cla: 0,
-    },
-    carbs: { total: 0, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.34, ironForm: "heme", zincMg: 0.43, zincBoundByPhytate: false,
-      vitaminARetinolUg: 40, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 3.05, b12IsAnalogue: false, folateUg: 4, vitaminCMg: 0,
-      vitaminDUg: 13.1, vitaminKUg: 0.5, calciumMg: 15, seleniumUg: 41.4, iodineUg: 32,
-      cholineMg: 90, magnesiumMg: 30,
-    },
-    animalCompounds: { creatineMg: 450, taurineMg: 60, carnosineMg: 40 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.15,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.2, cutSurfaceSensitivity: 0.35,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.55,
-      perishabilityDays: 2, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [
-      { label: USDA, id: "FDC 175167" },
-      { label: "EFSA n-3 LC-PUFA", note: "Preformed EPA+DHA; ALA conversion is not a substitute" },
-    ],
-    notes: [
-      {
-        en: "Preformed EPA/DHA. Farmed vs wild fat and contaminant profiles differ; metals are not zero.",
-        de: "Vorgeformtes EPA/DHA. Zucht- und Wildlachs unterscheiden sich in Fett- und Schadstoffprofil; Metalle sind nicht null.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "sardine_canned",
-    name: "Sardines, canned in oil, drained",
-    nameDe: "Sardinen, Dose, abgetropft",
-    class: "muscle_fish",
-    edibleState: { en: "canned, drained", de: "Konserve, abgetropft" },
-    fdcId: "175139",
-    kcalPer100g: 208,
-    proteinG: 24.62,
-    fatG: 11.45,
-    aminoAcids: {
-      his: 30, ile: 46, leu: 80, lys: 91, met: 29, cys: 11,
-      phe: 42, tyr: 33, thr: 43, trp: 11, val: 50,
-    },
-    ilealDigestibility: 0.95,
-    fattyAcids: {
-      sfa: 1.53, mufa: 3.87, pufa: 5.15, omega3Ala: 0.17, omega3Epa: 0.47,
-      omega3Dha: 0.51, omega6La: 3.54, omega6Aa: 0.04, oddChain: 0.03, cla: 0,
-    },
-    carbs: { total: 0, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 2.92, ironForm: "heme", zincMg: 1.31, zincBoundByPhytate: false,
-      vitaminARetinolUg: 32, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 8.94, b12IsAnalogue: false, folateUg: 10, vitaminCMg: 0,
-      vitaminDUg: 4.8, vitaminKUg: 2.6, calciumMg: 382, seleniumUg: 52.7, iodineUg: 35,
-      cholineMg: 75, magnesiumMg: 39,
-    },
-    animalCompounds: { creatineMg: 400, taurineMg: 80, carnosineMg: 30 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.12,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.15, cutSurfaceSensitivity: 0.05,
-      heatSensitivity: 0.2, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 365, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 175139" }],
-    notes: [
-      {
-        en: "Bones raise calcium. Oil pack raises n-6. Small pelagics: lower mercury than large predators.",
-        de: "Gräten erhöhen Calcium. Ölaufguss erhöht n-6. Kleine Schwarmfische: weniger Quecksilber als große Raubfische.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "beef_liver_cooked",
-    name: "Beef liver, cooked",
-    nameDe: "Rinderleber, gegart",
-    class: "organs",
-    edibleState: { en: "braised", de: "geschmort" },
-    fdcId: "168626",
-    kcalPer100g: 175,
-    proteinG: 26.52,
-    fatG: 4.68,
-    aminoAcids: {
-      his: 30, ile: 48, leu: 90, lys: 78, met: 26, cys: 18,
-      phe: 50, tyr: 38, thr: 44, trp: 13, val: 58,
-    },
-    ilealDigestibility: 0.95,
-    fattyAcids: {
-      sfa: 1.69, mufa: 0.54, pufa: 0.98, omega3Ala: 0.01, omega3Epa: 0,
-      omega3Dha: 0.02, omega6La: 0.35, omega6Aa: 0.3, oddChain: 0.08, cla: 0.04,
-    },
-    carbs: { total: 5.13, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 6.54, ironForm: "heme", zincMg: 5.3, zincBoundByPhytate: false,
-      vitaminARetinolUg: 9442, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 70.58, b12IsAnalogue: false, folateUg: 253, vitaminCMg: 1.9,
-      vitaminDUg: 1.2, vitaminKUg: 3.3, calciumMg: 6, seleniumUg: 36.1, iodineUg: 14,
-      cholineMg: 426, magnesiumMg: 21,
-    },
-    animalCompounds: { creatineMg: 200, taurineMg: 110, carnosineMg: 80 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.08,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.2,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "moderate",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.4,
-      heatSensitivity: 0.45, oxygenLightSensitivity: 0.4,
-      perishabilityDays: 2, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [
-      { label: USDA, id: "FDC 168626" },
-      { label: "EFSA vitamin A UL", note: "Preformed retinol is potent; chronic excess is a real toxicity risk" },
-    ],
-    notes: [
-      {
-        en: "Muscle meat is not an organ. Retinol here is preformed — not carotenoid-A. UL matters.",
-        de: "Muskelfleisch ist kein Organ. Retinol ist hier vorgeformt — kein Carotinoid-A. Die Obergrenze (UL) zählt.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "chicken_liver_cooked",
-    name: "Chicken liver, cooked",
-    nameDe: "Hühnerleber, gegart",
-    class: "organs",
-    edibleState: { en: "simmered", de: "sanft geköchelt" },
-    fdcId: "171061",
-    kcalPer100g: 167,
-    proteinG: 24.46,
-    fatG: 6.51,
-    aminoAcids: {
-      his: 28, ile: 50, leu: 88, lys: 76, met: 25, cys: 17,
-      phe: 48, tyr: 36, thr: 43, trp: 13, val: 56,
-    },
-    ilealDigestibility: 0.94,
-    fattyAcids: {
-      sfa: 2.3, mufa: 1.55, pufa: 1.3, omega3Ala: 0.02, omega3Epa: 0,
-      omega3Dha: 0.04, omega6La: 0.7, omega6Aa: 0.35, oddChain: 0.01, cla: 0,
-    },
-    carbs: { total: 0.87, sugars: 0, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 11.63, ironForm: "heme", zincMg: 3.98, zincBoundByPhytate: false,
-      vitaminARetinolUg: 3981, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 16.85, b12IsAnalogue: false, folateUg: 578, vitaminCMg: 27.9,
-      vitaminDUg: 0.2, vitaminKUg: 0, calciumMg: 11, seleniumUg: 82.4, iodineUg: 10,
-      cholineMg: 290, magnesiumMg: 25,
-    },
-    animalCompounds: { creatineMg: 150, taurineMg: 90, carnosineMg: 50 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.1,
-      contactPesticideLikelihood: 0.03, typicalMrlProximity: 0.22,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "moderate",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.45, cutSurfaceSensitivity: 0.45,
-      heatSensitivity: 0.5, oxygenLightSensitivity: 0.4,
-      perishabilityDays: 2, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 171061" }],
-    notes: [
-      {
-        en: "Exceptional folate + heme + retinol. Organ, not muscle. Residue/metal sequestration is real.",
-        de: "Außergewöhnlich viel Folat + Häm + Retinol. Organ, kein Muskel. Rückstands- und Metallanreicherung ist real.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "egg_whole_cooked",
-    name: "Egg, whole, cooked",
-    nameDe: "Hühnerei, gegart",
-    class: "eggs",
-    edibleState: { en: "hard-cooked", de: "hart gekocht" },
-    fdcId: "173424",
-    kcalPer100g: 155,
-    proteinG: 12.58,
-    fatG: 10.61,
-    aminoAcids: {
-      his: 24, ile: 56, leu: 86, lys: 72, met: 31, cys: 24,
-      phe: 54, tyr: 42, thr: 47, trp: 16, val: 68,
-    },
-    ilealDigestibility: 0.97,
-    fattyAcids: {
-      sfa: 3.1, mufa: 4.1, pufa: 1.4, omega3Ala: 0.04, omega3Epa: 0,
-      omega3Dha: 0.04, omega6La: 1.15, omega6Aa: 0.14, oddChain: 0, cla: 0,
-    },
-    carbs: { total: 1.12, sugars: 1.12, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 1.75, ironForm: "heme", zincMg: 1.29, zincBoundByPhytate: false,
-      vitaminARetinolUg: 160, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 10,
-      vitaminB12Ug: 1.11, b12IsAnalogue: false, folateUg: 44, vitaminCMg: 0,
-      vitaminDUg: 2.2, vitaminKUg: 0.3, calciumMg: 50, seleniumUg: 30.7, iodineUg: 24,
-      cholineMg: 294, magnesiumMg: 10,
-    },
-    animalCompounds: { creatineMg: 0, taurineMg: 0, carnosineMg: 0 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
-      contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.08,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.2, cutSurfaceSensitivity: 0.15,
-      heatSensitivity: 0.3, oxygenLightSensitivity: 0.25,
-      perishabilityDays: 7, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0,
-    sources: [
-      { label: USDA, id: "FDC 173424" },
-      { label: FAO, note: "Egg often used as DIAAS reference; typically >1.0" },
-    ],
-    notes: [
-      {
-        en: "Reference-quality protein + choline + retinol. Shell egg ≠ dairy ≠ muscle.",
-        de: "Protein in Referenzqualität + Cholin + Retinol. Ei ≠ Milchprodukt ≠ Muskel.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "milk_whole",
-    name: "Milk, whole, 3.25%",
-    nameDe: "Vollmilch, 3,25%",
-    class: "dairy",
-    edibleState: { en: "fluid, pasteurised", de: "flüssig, pasteurisiert" },
-    fdcId: "171265",
-    kcalPer100g: 61,
-    proteinG: 3.15,
-    fatG: 3.25,
-    aminoAcids: {
-      his: 27, ile: 54, leu: 95, lys: 79, met: 25, cys: 9,
-      phe: 48, tyr: 48, thr: 45, trp: 14, val: 64,
-    },
-    ilealDigestibility: 0.96,
-    fattyAcids: {
-      sfa: 1.86, mufa: 0.81, pufa: 0.2, omega3Ala: 0.02, omega3Epa: 0,
-      omega3Dha: 0, omega6La: 0.12, omega6Aa: 0, oddChain: 0.06, cla: 0.02,
-    },
-    carbs: { total: 4.8, sugars: 4.8, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.03, ironForm: "heme", zincMg: 0.37, zincBoundByPhytate: false,
-      vitaminARetinolUg: 46, vitaminABetaCaroteneUg: 7, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.45, b12IsAnalogue: false, folateUg: 5, vitaminCMg: 0,
-      vitaminDUg: 1.3, vitaminKUg: 0.3, calciumMg: 113, seleniumUg: 3.7, iodineUg: 27,
-      cholineMg: 14.4, magnesiumMg: 10,
-    },
-    animalCompounds: { creatineMg: 0, taurineMg: 0, carnosineMg: 0 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.06,
-      contactPesticideLikelihood: 0.01, typicalMrlProximity: 0.1,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.05,
-      heatSensitivity: 0.3, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 8, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 171265" }],
-    notes: [
-      {
-        en: "Complete milk proteins + calcium + lactose (active sugar). Not interchangeable with yogurt or cheese.",
-        de: "Vollständige Milchproteine + Calcium + Laktose (aktiver Zucker). Nicht austauschbar mit Joghurt oder Käse.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "yogurt_plain_whole",
-    name: "Yogurt, plain, whole milk",
-    nameDe: "Joghurt, natur, vollfett",
-    class: "dairy",
-    edibleState: { en: "cultured, unstrained", de: "mit Kulturen, nicht abgetropft" },
-    fdcId: "171284",
-    kcalPer100g: 61,
-    proteinG: 3.47,
-    fatG: 3.25,
-    aminoAcids: {
-      his: 27, ile: 54, leu: 96, lys: 80, met: 25, cys: 9,
-      phe: 48, tyr: 48, thr: 45, trp: 14, val: 65,
-    },
-    ilealDigestibility: 0.96,
-    fattyAcids: {
-      sfa: 2.1, mufa: 0.89, pufa: 0.09, omega3Ala: 0.02, omega3Epa: 0,
-      omega3Dha: 0, omega6La: 0.07, omega6Aa: 0, oddChain: 0.05, cla: 0.02,
-    },
-    carbs: { total: 4.66, sugars: 4.66, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.05, ironForm: "heme", zincMg: 0.59, zincBoundByPhytate: false,
-      vitaminARetinolUg: 27, vitaminABetaCaroteneUg: 5, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.37, b12IsAnalogue: false, folateUg: 7, vitaminCMg: 0.5,
-      vitaminDUg: 0.1, vitaminKUg: 0.2, calciumMg: 121, seleniumUg: 2.2, iodineUg: 16,
-      cholineMg: 15.2, magnesiumMg: 12,
-    },
-    animalCompounds: { creatineMg: 0, taurineMg: 0, carnosineMg: 0 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
-      contactPesticideLikelihood: 0.01, typicalMrlProximity: 0.09,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.05,
-      heatSensitivity: 0.25, oxygenLightSensitivity: 0.3,
-      perishabilityDays: 14, processingStability: "fermented",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 171284" }],
-    notes: [
-      {
-        en: "Cultured dairy, still lactose-bearing unless strained. Not a fermented-cabbage analogue.",
-        de: "Gesäuertes Milchprodukt, enthält Laktose, sofern nicht abgetropft. Kein Gegenstück zu fermentiertem Kohl.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "cheddar",
-    name: "Cheddar cheese",
-    nameDe: "Cheddar",
-    class: "fermented_animal",
-    edibleState: { en: "ripened cheese", de: "gereifter Käse" },
-    fdcId: "173414",
-    kcalPer100g: 403,
-    proteinG: 22.87,
-    fatG: 33.31,
-    aminoAcids: {
-      his: 28, ile: 55, leu: 98, lys: 82, met: 26, cys: 8,
-      phe: 52, tyr: 52, thr: 36, trp: 13, val: 66,
-    },
-    ilealDigestibility: 0.97,
-    fattyAcids: {
-      sfa: 18.9, mufa: 9.3, pufa: 0.94, omega3Ala: 0.11, omega3Epa: 0,
-      omega3Dha: 0, omega6La: 0.58, omega6Aa: 0, oddChain: 0.35, cla: 0.16,
-    },
-    carbs: { total: 3.37, sugars: 0.48, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.14, ironForm: "heme", zincMg: 3.64, zincBoundByPhytate: false,
-      vitaminARetinolUg: 265, vitaminABetaCaroteneUg: 85, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 1.1, b12IsAnalogue: false, folateUg: 27, vitaminCMg: 0,
-      vitaminDUg: 0.6, vitaminKUg: 2.8, calciumMg: 710, seleniumUg: 13.9, iodineUg: 30,
-      cholineMg: 16.5, magnesiumMg: 27,
-    },
-    animalCompounds: { creatineMg: 0, taurineMg: 0, carnosineMg: 0 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
-      contactPesticideLikelihood: 0.01, typicalMrlProximity: 0.08,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.1, cutSurfaceSensitivity: 0.1,
-      heatSensitivity: 0.2, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 60, processingStability: "fermented",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 173414" }],
-    notes: [
-      {
-        en: "Concentrated milk fat and casein. Calorie-dense. Sodium not scored as a nutrient win.",
-        de: "Konzentriertes Milchfett und Casein. Kalorienreich. Natrium zählt nicht als Nährstoffvorteil.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "kefir_whole",
-    name: "Kefir, plain, whole milk",
-    nameDe: "Kefir, natur, vollfett",
-    class: "fermented_animal",
-    edibleState: { en: "fermented milk", de: "fermentierte Milch" },
-    fdcId: "170904",
-    kcalPer100g: 64,
-    proteinG: 3.79,
-    fatG: 3.5,
-    aminoAcids: {
-      his: 27, ile: 54, leu: 96, lys: 80, met: 25, cys: 9,
-      phe: 48, tyr: 48, thr: 45, trp: 14, val: 64,
-    },
-    ilealDigestibility: 0.96,
-    fattyAcids: {
-      sfa: 2.2, mufa: 0.9, pufa: 0.1, omega3Ala: 0.02, omega3Epa: 0,
-      omega3Dha: 0, omega6La: 0.08, omega6Aa: 0, oddChain: 0.05, cla: 0.02,
-    },
-    carbs: { total: 4.5, sugars: 4.5, starch: 0, fibre: 0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.04, ironForm: "heme", zincMg: 0.5, zincBoundByPhytate: false,
-      vitaminARetinolUg: 40, vitaminABetaCaroteneUg: 6, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.3, b12IsAnalogue: false, folateUg: 8, vitaminCMg: 0.2,
-      vitaminDUg: 1.0, vitaminKUg: 0.3, calciumMg: 130, seleniumUg: 3.3, iodineUg: 20,
-      cholineMg: 15, magnesiumMg: 12,
-    },
-    animalCompounds: { creatineMg: 0, taurineMg: 0, carnosineMg: 0 },
-    residue: {
-      surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
-      contactPesticideLikelihood: 0.01, typicalMrlProximity: 0.09,
-      heavyMetalClass: "low", veterinaryResidueClass: "low",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.05,
-      heatSensitivity: 0.25, oxygenLightSensitivity: 0.3,
-      perishabilityDays: 18, processingStability: "fermented",
-    },
-    phytochemicalIndex: 0,
-    sources: [{ label: USDA, id: "FDC 170904", note: "Composition varies by grain and milk" }],
-    notes: [
-      {
-        en: "Fermented animal product ≠ plant kraut. Residual lactose remains unless fully consumed by culture.",
-        de: "Fermentiertes tierisches Produkt ≠ pflanzliches Kraut. Restlaktose bleibt, sofern die Kultur sie nicht vollständig abbaut.",
-      },
-    ],
-  }),
-];
+  eggBoiled,
+  prepared(eggBoiled, { id: "egg_fried", name: "Egg, fried without fat", nameDe: "Hühnerei, ohne Fett gebraten", preparation: "fried" }),
+  prepared(eggBoiled, { id: "egg_poached", name: "Egg, poached", nameDe: "Hühnerei, pochiert", preparation: "poached" }),
+  milkWhole,
+  yogurtPlainWhole,
+  quarkLowFat,
+  cheddar,
+  gouda,
+  emmentaler,
+  parmesan,
+  kefirWhole,
+].map(defineFood);

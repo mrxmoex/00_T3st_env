@@ -46,9 +46,8 @@ describe("UI messages", () => {
 });
 
 describe("bilingual data and engine output", () => {
-  it("ships every food's state and notes in both languages", () => {
+  it("ships every food's notes in both languages", () => {
     for (const food of FOODS) {
-      expectTranslated(food.edibleState, `${food.id} edibleState`);
       for (const note of food.notes) {
         expectTranslated(note, `${food.id} note`);
       }

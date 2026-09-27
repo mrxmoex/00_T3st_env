@@ -241,6 +241,8 @@ table.matrix {
   font-size: 0.78rem;
 }
 
+.heat-missing { background: var(--bg-mute); color: var(--muted); }
+
 .tier {
   display: inline-grid;
   place-items: center;

@@ -165,8 +165,8 @@ function plantOnly(foods: readonly FoodRecord[]): Recommendation {
       "lentils_boiled",
       "sauerkraut",
       "kale_raw",
-      "nori_dried",
-      "broccoli_sprouts",
+      "nori_roasted",
+      "soybeans_boiled",
     ],
   };
 }
@@ -240,10 +240,10 @@ function animalInclusive(foods: readonly FoodRecord[]): Recommendation {
       },
     ],
     suggestedFoodIds: [
-      "egg_whole_cooked",
-      "beef_liver_cooked",
-      "salmon_atlantic_cooked",
-      "beef_ground_85_cooked",
+      "egg_boiled",
+      "beef_liver_fried",
+      "salmon_roasted",
+      "beef_mince_braised",
       "kefir_whole",
     ],
   };
@@ -303,8 +303,8 @@ function hybrid(foods: readonly FoodRecord[]): Recommendation {
       },
     ],
     suggestedFoodIds: [
-      "egg_whole_cooked",
-      "salmon_atlantic_cooked",
+      "egg_boiled",
+      "salmon_roasted",
       "lentils_boiled",
       "sauerkraut",
       "kale_raw",

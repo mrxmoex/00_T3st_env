@@ -3,6 +3,7 @@
  * Scores are 0–100 unless noted. Formulas live in sibling modules.
  */
 
+import type { NutrientKey, NutrientProvenance, SourceEntry } from "../data/sources/snapshot";
 import type { LocalizedText } from "../i18n/locale";
 
 export const PLANT_CLASSES = [
@@ -79,6 +80,25 @@ export type ProcessingStability = (typeof PROCESSING_STABILITY)[number];
 export const IRON_FORMS = ["heme", "nonheme", "mixed"] as const;
 export type IronForm = (typeof IRON_FORMS)[number];
 
+export const PREPARATIONS = [
+  "raw",
+  "boiled",
+  "steamed",
+  "stewed",
+  "fried",
+  "roasted",
+  "baked",
+  "grilled",
+  "braised",
+  "poached",
+  "smoked",
+  "dried",
+  "canned",
+  "fermented",
+  "processed",
+] as const;
+export type Preparation = (typeof PREPARATIONS)[number];
+
 export interface AminoAcidsMgPerGProtein {
   his: number;
   ile: number;
@@ -102,8 +122,9 @@ export interface FattyAcidsGPer100g {
   omega3Dha: number;
   omega6La: number;
   omega6Aa: number;
-  oddChain: number;
-  cla: number;
+  /** C15:0 + C17:0; null when the source does not report them. */
+  oddChain: number | null;
+  cla: number | null;
 }
 
 export interface CarbsGPer100g {
@@ -114,26 +135,46 @@ export interface CarbsGPer100g {
   resistantStarch: number;
 }
 
+/** Per 100 g edible portion. Null means no source reports the value; it is never read as 0. */
 export interface MicrosPer100g {
   ironMg: number;
   ironForm: IronForm;
   zincMg: number;
   zincBoundByPhytate: boolean;
   vitaminARetinolUg: number;
-  vitaminABetaCaroteneUg: number;
-  vitaminAOtherCarotenoidsUg: number;
-  vitaminB12Ug: number;
+  vitaminABetaCaroteneUg: number | null;
+  /** Provitamin A carotenoids other than β-carotene (α-carotene, β-cryptoxanthin). */
+  vitaminAOtherCarotenoidsUg: number | null;
+  /** RAE as reported by the source; used when a carotenoid component is missing. */
+  vitaminARaeUg: number;
+  vitaminB12Ug: number | null;
   /** True when measured B12 is largely inactive corrinoid analogues (typical of many algae). */
   b12IsAnalogue: boolean;
   folateUg: number;
-  vitaminCMg: number;
+  vitaminCMg: number | null;
   vitaminDUg: number;
-  vitaminKUg: number;
+  vitaminEMg: number | null;
+  vitaminKUg: number | null;
+  thiaminMg: number;
+  riboflavinMg: number;
+  niacinMg: number;
+  vitaminB6Mg: number;
   calciumMg: number;
-  seleniumUg: number;
-  iodineUg: number;
-  cholineMg: number;
   magnesiumMg: number;
+  potassiumMg: number;
+  copperMg: number;
+  seleniumUg: number | null;
+  iodineUg: number | null;
+  cholineMg: number | null;
+}
+
+/** Composition values that matter for specific and medical diets; shown, not scored. */
+export interface CompositionPer100g {
+  waterG: number;
+  sodiumMg: number;
+  phosphorusMg: number;
+  cholesterolMg: number;
+  lactoseG: number | null;
 }
 
 export interface AnimalExclusiveCompounds {
@@ -172,8 +213,9 @@ export interface FoodRecord {
   name: string;
   nameDe: string;
   class: FoodClass;
-  edibleState: LocalizedText;
-  fdcId?: string;
+  /** Foods sharing a group are preparations of the same raw food. */
+  group: string;
+  preparation: Preparation;
   kcalPer100g: number;
   proteinG: number;
   fatG: number;
@@ -183,11 +225,18 @@ export interface FoodRecord {
   fattyAcids: FattyAcidsGPer100g;
   carbs: CarbsGPer100g;
   micros: MicrosPer100g;
+  composition: CompositionPer100g;
   animalCompounds: AnimalExclusiveCompounds;
   residue: ResidueProfile;
   degradation: DegradationProfile;
   /** 0–1 expert-curated phytochemical load relative to class peak. */
   phytochemicalIndex: number;
+  /** Database entries the nutrient values come from; the first is primary. */
+  sourceEntries: SourceEntry[];
+  /** Food whose amino acid pattern filled amino acids the sources lack. */
+  aminoAcidPattern?: string;
+  provenance: Record<NutrientKey, NutrientProvenance | null>;
+  /** Curated literature behind the non-database fields. */
   sources: SourceRef[];
   notes: LocalizedText[];
 }
@@ -213,11 +262,43 @@ export interface CarbBreakdown extends AxisBreakdown {
   passiveScore: number;
 }
 
+export const MICRO_NUTRIENTS = [
+  "iron",
+  "zinc",
+  "vitaminA",
+  "vitaminB12",
+  "folate",
+  "vitaminC",
+  "vitaminD",
+  "vitaminE",
+  "vitaminK",
+  "thiamin",
+  "riboflavin",
+  "niacin",
+  "vitaminB6",
+  "choline",
+  "calcium",
+  "magnesium",
+  "potassium",
+  "copper",
+  "selenium",
+  "iodine",
+] as const;
+export type MicroNutrient = (typeof MICRO_NUTRIENTS)[number];
+
+export interface MicroNutrientDensity {
+  /** Amount per 100 g after bioavailability adjustment; null when no source reports it. */
+  amount: number | null;
+  /** % of the Daily Value per 100 kcal. */
+  pctDvPer100kcal: number | null;
+}
+
 export interface MicroBreakdown extends AxisBreakdown {
   raeUg: number;
   absorbableIronMg: number;
   absorbableZincMg: number;
-  effectiveB12Ug: number;
+  effectiveB12Ug: number | null;
+  nutrients: Record<MicroNutrient, MicroNutrientDensity>;
 }
 
 export interface ScoreCard {
@@ -229,7 +310,8 @@ export interface ScoreCard {
   fibre: AxisBreakdown;
   residue: AxisBreakdown;
   degradation: AxisBreakdown;
-  extras: Record<string, number>;
+  /** Class-specific columns; null when the underlying value is not reported. */
+  extras: Record<string, number | null>;
   composite: number;
   tier: Tier;
   classRank: number;

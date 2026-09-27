@@ -15,9 +15,9 @@ export function ComparePage() {
   const { t, locale } = useLocale();
   const [params] = useSearchParams();
   const [ids, setIds] = useState<[string, string, string]>([
-    params.get("a") ?? "egg_whole_cooked",
+    params.get("a") ?? "egg_boiled",
     params.get("b") ?? "lentils_boiled",
-    params.get("c") ?? "salmon_atlantic_cooked",
+    params.get("c") ?? "salmon_roasted",
   ]);
 
   const selected = useMemo(

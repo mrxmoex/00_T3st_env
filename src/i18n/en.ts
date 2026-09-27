@@ -40,14 +40,14 @@ export const en: Messages = {
   food: {
     unknown: "Unknown food",
     back: "Back to matrix",
-    lede: ({ altName, state, fdcId, kcal, tier, rank, size }) =>
-      `${altName}. ${state}. FDC ${fdcId}. ${kcal} kcal / 100 g. Tier ${tier} (#${rank} of ${size} in class).`,
+    lede: ({ altName, preparation, source, kcal, tier, rank, size }) =>
+      `${altName}. Preparation: ${preparation}. Source: ${source}. ${kcal} kcal / 100 g. Tier ${tier} (#${rank} of ${size} in class).`,
     radarTitle: (name) => `${name}: axis profile`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
       `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limiting amino acid: ${limiting}. Ileal digestibility ${digestibility}.`,
     fatsCarbsMicros: "Fats, carbs, micros",
     microLine: ({ rae, iron, zinc, b12 }) =>
-      `RAE ${rae} µg · abs. Fe ${iron} mg · abs. Zn ${zinc} mg · B12 ${b12} µg`,
+      `RAE ${rae} µg · abs. Fe ${iron} mg · abs. Zn ${zinc} mg · B12 ${b12 ?? "—"} µg`,
     classColumns: "Class-specific columns",
     weights: (classLabel, w) =>
       `Composite weights for ${classLabel}: EAA ${w.eaa}, EFA ${w.efa}, carb ${w.carb}, micro ${w.micro}, fibre ${w.fibre}, residue ${w.residue}, stability ${w.degradation}.`,
@@ -62,7 +62,7 @@ export const en: Messages = {
     classTier: (classLabel, tier) => `${classLabel} · tier ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limiting ${limiting}`,
     compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Creatine ${creatineMg} mg · fibre ${fibreG} g · B12 ${b12Ug} µg`,
+      `Creatine ${creatineMg} mg · fibre ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
     radarHeading: "Axis profile",
     radarTitle: "Axis profile of the selected foods",
   },
@@ -253,7 +253,7 @@ export const en: Messages = {
     iodineSelenium: "Iodine + selenium",
     retinolDensity: "Retinol density",
     b12Density: "B12 density",
-    copperProxy: "Copper proxy",
+    copperDensity: "Copper",
     cholineDensity: "Choline",
     yolkFatQuality: "Yolk fat quality",
     calciumDensity: "Calcium density",

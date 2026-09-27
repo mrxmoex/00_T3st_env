@@ -6,7 +6,10 @@ export function heatColor(score: number): string {
   return `hsl(${hue} ${sat}% ${light}%)`;
 }
 
-export function HeatCell({ score }: { score: number }) {
+export function HeatCell({ score }: { score: number | null }) {
+  if (score === null) {
+    return <span className="heat heat-missing">—</span>;
+  }
   return (
     <span className="heat" style={{ background: heatColor(score) }}>
       {score.toFixed(1)}
