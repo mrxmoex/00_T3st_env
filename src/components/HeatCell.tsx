@@ -6,13 +6,26 @@ export function heatColor(score: number): string {
   return `hsl(${hue} ${sat}% ${light}%)`;
 }
 
-export function HeatCell({ score }: { score: number | null }) {
+/** Colour follows `score` (0–100); `label` replaces the printed number when given. */
+export function HeatCell({
+  score,
+  label,
+  warning = false,
+}: {
+  score: number | null;
+  label?: string;
+  warning?: boolean;
+}) {
   if (score === null) {
     return <span className="heat heat-missing">—</span>;
   }
+  const text = label ?? score.toFixed(1);
+  if (warning) {
+    return <span className="heat heat-warning">⚠ {text}</span>;
+  }
   return (
     <span className="heat" style={{ background: heatColor(score) }}>
-      {score.toFixed(1)}
+      {text}
     </span>
   );
 }

@@ -1,6 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 import { AxisRadar } from "../components/AxisRadar";
 import { axisValue } from "../components/MatrixTable";
+import { NutrientTable } from "../components/NutrientTable";
+import { PreparationPanel } from "../components/PreparationPanel";
 import { SourcePanel } from "../components/SourcePanel";
 import { FOODS, foodById } from "../data/catalog";
 import { CLASS_WEIGHTS } from "../data/classWeights";
@@ -66,6 +68,7 @@ export function FoodPage() {
         </div>
         <AxisRadar title={t.food.radarTitle(name)} entries={[{ id: food.id, label: name, card }]} />
       </div>
+      <PreparationPanel food={food} cards={cards} />
       <section className="grid-2">
         <article className="panel">
           <h2>{t.axes.eaa}</h2>
@@ -127,6 +130,7 @@ export function FoodPage() {
           </Link>
         </p>
       </section>
+      <NutrientTable food={food} card={card} />
       <SourcePanel food={food} card={card} />
     </main>
   );

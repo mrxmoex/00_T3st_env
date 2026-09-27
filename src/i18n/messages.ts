@@ -33,6 +33,8 @@ export interface Messages {
     all: string;
     pattern: string;
     sortAxis: string;
+    preparation: string;
+    allPreparations: string;
   };
   table: { food: string; class: string; tier: string; axis: string };
   food: {
@@ -61,6 +63,23 @@ export interface Messages {
     weights: (classLabel: string, weights: ClassWeights) => string;
     notes: string;
     compareCta: string;
+    preparationsHeading: string;
+    preparationsLede: string;
+    preparationsCompare: string;
+    nutrientsHeading: string;
+    nutrientsHint: string;
+    nutrientGroups: {
+      macros: string;
+      diet: string;
+      vitamins: string;
+      minerals: string;
+      aminoAcids: string;
+      fattyAcids: string;
+    };
+    dietHint: string;
+    columns: { nutrient: string; per100g: string; pctDv: string; source: string };
+    notReported: string;
+    patternNote: (foodName: string) => string;
   };
   compare: {
     title: string;
@@ -71,6 +90,8 @@ export interface Messages {
     compoundLine: (info: { creatineMg: number; fibreG: number; b12Ug: number | null }) => string;
     radarHeading: string;
     radarTitle: string;
+    microHeading: string;
+    microHint: string;
   };
   recommend: {
     title: string;
@@ -86,6 +107,12 @@ export interface Messages {
     title: string;
     /** Backticked spans render as code. */
     lede: (version: string, lastVerified: string) => string;
+    dataHeading: string;
+    dataPrimary: string;
+    /** Backticked spans render as code. */
+    dataScript: string;
+    dataMissing: string;
+    dataPreparation: string;
     eaaHeading: string;
     eaaPattern: string;
     eaaRatios: string;
@@ -107,10 +134,13 @@ export interface Messages {
       zincAnimal: number;
       zincPhytate: number;
       zincLowPhytate: number;
+      hemeSharePct: number;
     }) => string;
     microRae: (betaCarotene: string, otherCarotenoids: string) => string;
     /** Backticked spans render as code. */
-    microDensity: (refs: { ironMg: number; zincMg: number; raeUg: number; b12Ug: number }) => string;
+    microDensity: (saturationPct: number) => string;
+    microUpperLimit: string;
+    microTable: { nutrient: string; dailyValue: string; upperLimit: string };
     fibreHeading: string;
     fibreNote: string;
     residueHeading: string;
@@ -134,6 +164,13 @@ export interface Messages {
     updatePath: string;
     general: readonly string[];
     link: string;
+    entriesHeading: string;
+    primary: string;
+    matchSame: string;
+    matchSimilar: string;
+    fills: (nutrients: string) => string;
+    datasetsHeading: string;
+    curatedHeading: string;
     cardLine: (info: {
       aas: number;
       diaas: number;

@@ -1,7 +1,7 @@
 import { ANIMAL_FOODS } from "./foods/animal";
 import { PLANT_FOODS } from "./foods/plant";
 import { DATASET_VERSION, LAST_VERIFIED } from "./coefficients";
-import type { FoodClass, FoodRecord } from "../scoring/types";
+import { PREPARATIONS, type FoodClass, type FoodRecord } from "../scoring/types";
 
 export const FOODS: FoodRecord[] = [...PLANT_FOODS, ...ANIMAL_FOODS];
 
@@ -10,7 +10,7 @@ export const DATA_META = {
   lastVerified: LAST_VERIFIED,
   foodCount: FOODS.length,
   updatePath:
-    "Replace values in src/data/foods/*.ts, bump DATASET_VERSION and LAST_VERIFIED in coefficients.ts, re-run tests.",
+    "Map a food to its BLS/FDC entry in src/data/sources/manifest.json, run scripts/data/build_snapshot.py, add its curated spec in src/data/foods/*.ts, bump DATASET_VERSION and LAST_VERIFIED, re-run tests.",
 } as const;
 
 export function foodById(id: string): FoodRecord | undefined {
@@ -19,6 +19,13 @@ export function foodById(id: string): FoodRecord | undefined {
 
 export function foodsByClass(foodClass: FoodClass): FoodRecord[] {
   return FOODS.filter((food) => food.class === foodClass);
+}
+
+/** All preparations of the same food, raw first, in the order of PREPARATIONS. */
+export function foodsInGroup(group: string): FoodRecord[] {
+  return FOODS.filter((food) => food.group === group).sort(
+    (a, b) => PREPARATIONS.indexOf(a.preparation) - PREPARATIONS.indexOf(b.preparation),
+  );
 }
 
 export function requireFood(id: string): FoodRecord {

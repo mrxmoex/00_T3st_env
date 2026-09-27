@@ -235,6 +235,8 @@ export interface FoodRecord {
   sourceEntries: SourceEntry[];
   /** Food whose amino acid pattern filled amino acids the sources lack. */
   aminoAcidPattern?: string;
+  /** Source values per 100 g edible portion, in the snapshot's units. */
+  nutrients: Record<NutrientKey, number | null>;
   provenance: Record<NutrientKey, NutrientProvenance | null>;
   /** Curated literature behind the non-database fields. */
   sources: SourceRef[];

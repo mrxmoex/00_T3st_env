@@ -6,6 +6,7 @@ import { scoreCatalog } from "../scoring/scoreFood";
 import { DIETARY_PATTERNS, FOOD_CLASSES, kingdomOf } from "../scoring/types";
 import { de } from "./de";
 import { en } from "./en";
+import { MICRO_LABELS, NUTRIENT_LABELS, PREPARATION_LABELS, PROVENANCE_LABELS } from "./labels";
 import { LOCALES, isLocale, readLocale, type Locale, type LocalizedText } from "./locale";
 import type { Messages } from "./messages";
 
@@ -36,6 +37,17 @@ describe("UI messages", () => {
 
   it("keeps the German and English extra-column keys in sync", () => {
     expect(Object.keys(de.extras).sort()).toEqual(Object.keys(en.extras).sort());
+  });
+
+  it("labels every nutrient, provenance category, and preparation in both languages", () => {
+    const tables = { MICRO_LABELS, NUTRIENT_LABELS, PROVENANCE_LABELS, PREPARATION_LABELS };
+    for (const [table, labels] of Object.entries(tables)) {
+      for (const [key, label] of Object.entries(labels)) {
+        for (const locale of LOCALES) {
+          expect(label[locale].trim(), `${table}.${key} [${locale}]`).not.toBe("");
+        }
+      }
+    }
   });
 
   it("translates list content item by item", () => {

@@ -71,6 +71,29 @@ export const DENSITY_REFS: Readonly<Record<MicroNutrient, number>> = {
   iodine: 150,
 };
 
+export const DENSITY_REF_UNITS: Readonly<Record<MicroNutrient, string>> = {
+  iron: "mg",
+  zinc: "mg",
+  vitaminA: "µg RAE",
+  vitaminB12: "µg",
+  folate: "µg DFE",
+  vitaminC: "mg",
+  vitaminD: "µg",
+  vitaminE: "mg",
+  vitaminK: "µg",
+  thiamin: "mg",
+  riboflavin: "mg",
+  niacin: "mg",
+  vitaminB6: "mg",
+  choline: "mg",
+  calcium: "mg",
+  magnesium: "mg",
+  potassium: "mg",
+  copper: "mg",
+  selenium: "µg",
+  iodine: "µg",
+};
+
 /** %DV per 100 kcal at which one nutrient counts as fully covered (FDA "excellent source" level). */
 export const DENSITY_SATURATION_PCT_DV = 20;
 
@@ -92,5 +115,5 @@ export const UPPER_LIMITS: Readonly<Partial<Record<MicroNutrient, number>>> = {
 
 export const VITAMIN_C_IRON_ENHANCER_MG = 25;
 
-export const DATASET_VERSION = "2026.08.24";
-export const LAST_VERIFIED = "2026-08-24";
+export const DATASET_VERSION = "2026.09.27";
+export const LAST_VERIFIED = "2026-09-27";

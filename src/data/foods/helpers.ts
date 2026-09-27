@@ -240,6 +240,7 @@ export function defineFood(spec: FoodSpec): FoodRecord {
     phytochemicalIndex: spec.phytochemicalIndex,
     sourceEntries: source.sources,
     aminoAcidPattern: source.aminoAcidPattern,
+    nutrients: Object.fromEntries(NUTRIENT_KEYS.map((key) => [key, source.value(key)])) as FoodRecord["nutrients"],
     provenance: Object.fromEntries(NUTRIENT_KEYS.map((key) => [key, source.provenance(key)])) as FoodRecord["provenance"],
     sources: spec.sources,
     notes: spec.notes,
