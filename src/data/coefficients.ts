@@ -74,6 +74,22 @@ export const DENSITY_REFS: Readonly<Record<MicroNutrient, number>> = {
 /** %DV per 100 kcal at which one nutrient counts as fully covered (FDA "excellent source" level). */
 export const DENSITY_SATURATION_PCT_DV = 20;
 
+/**
+ * EFSA tolerable upper intake levels for adults, per day (EFSA 2006 compendium; selenium
+ * 2023, vitamin B6 2023, vitamin D 2023). Vitamin A applies to preformed retinol only.
+ * When 100 kcal of a food already exceed a whole day's UL, that nutrient counts as a cost.
+ */
+export const UPPER_LIMITS: Readonly<Partial<Record<MicroNutrient, number>>> = {
+  vitaminA: 3000,
+  iodine: 600,
+  selenium: 255,
+  copper: 5,
+  zinc: 25,
+  vitaminD: 100,
+  calcium: 2500,
+  vitaminB6: 12,
+};
+
 export const VITAMIN_C_IRON_ENHANCER_MG = 25;
 
 export const DATASET_VERSION = "2026.08.24";

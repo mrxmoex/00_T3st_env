@@ -5,6 +5,7 @@ import {
   HEME_SHARE_OF_MIXED_IRON,
   IRON_ABSORPTION,
   OTHER_CAROTENOID_TO_RAE,
+  UPPER_LIMITS,
   VITAMIN_C_IRON_ENHANCER_MG,
   ZINC_ABSORPTION,
 } from "../data/coefficients";
@@ -124,6 +125,41 @@ function pctDvPer100kcal(amount: number, ref: number, kcal: number): number {
   return ((amount / Math.max(kcal, 1)) * 100 * 100) / ref;
 }
 
+/** Intake-relevant amount per 100 g for the UL check: total, not absorbable; retinol, not RAE. */
+function intakeForUpperLimit(food: FoodRecord, nutrient: MicroNutrient): number | null {
+  const m = food.micros;
+  switch (nutrient) {
+    case "vitaminA":
+      return m.vitaminARetinolUg;
+    case "zinc":
+      return m.zincMg;
+    case "iodine":
+      return m.iodineUg;
+    case "selenium":
+      return m.seleniumUg;
+    case "copper":
+      return m.copperMg;
+    case "vitaminD":
+      return m.vitaminDUg;
+    case "calcium":
+      return m.calciumMg;
+    case "vitaminB6":
+      return m.vitaminB6Mg;
+    default:
+      return null;
+  }
+}
+
+/** Nutrients whose amount in 100 kcal of this food exceeds the whole-day EFSA upper limit. */
+export function upperLimitExceedances(food: FoodRecord): MicroNutrient[] {
+  const kcal = Math.max(food.kcalPer100g, 1);
+  return MICRO_NUTRIENTS.filter((nutrient) => {
+    const limit = UPPER_LIMITS[nutrient];
+    const intake = intakeForUpperLimit(food, nutrient);
+    return limit !== undefined && intake !== null && (intake / kcal) * 100 > limit;
+  });
+}
+
 function listLabels(nutrients: readonly MicroNutrient[]): LocalizedText {
   return {
     en: nutrients.map((n) => MICRO_LABELS[n].en).join(", "),
@@ -153,12 +189,22 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     }),
   ) as Record<MicroNutrient, MicroNutrientDensity>;
 
+  const excess = upperLimitExceedances(food);
   const scored = MICRO_NUTRIENTS.filter((nutrient) => amounts[nutrient] !== null);
   const contributions = scored.map((nutrient) =>
-    clamp01(pctDvPer100kcal(amounts[nutrient] ?? 0, DENSITY_REFS[nutrient], kcal) / DENSITY_SATURATION_PCT_DV),
+    excess.includes(nutrient)
+      ? -1
+      : clamp01(pctDvPer100kcal(amounts[nutrient] ?? 0, DENSITY_REFS[nutrient], kcal) / DENSITY_SATURATION_PCT_DV),
   );
-  const score = 100 * mean(contributions);
+  const score = 100 * Math.max(0, mean(contributions));
   const flags: LocalizedText[] = [];
+  if (excess.length > 0) {
+    const names = listLabels(excess);
+    flags.push({
+      en: `100 kcal exceed the EFSA daily upper limit for ${names.en}: counted as a cost, not a benefit`,
+      de: `100 kcal überschreiten die tägliche EFSA-Höchstmenge für ${names.de}: als Nachteil gewertet, nicht als Vorteil`,
+    });
+  }
 
   switch (food.micros.ironForm) {
     case "heme":
@@ -231,6 +277,7 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     parts: {
       meanCappedDensity: round2(mean(contributions)),
       nutrientsScored: scored.length,
+      upperLimitExceedances: excess.length,
     },
     flags,
   };

@@ -21,6 +21,7 @@ import {
   effectiveB12Ug,
   retinolActivityEquivalentsUg,
   scoreMicros,
+  upperLimitExceedances,
 } from "./micros";
 import { scoreCatalog, scoreFood } from "./scoreFood";
 import { tierFromScore } from "./tiers";
@@ -141,6 +142,29 @@ describe("bioavailability adjustments", () => {
     expect(effectiveB12Ug(nori)).toBe(0);
     const egg = requireFood("egg_boiled");
     expect(effectiveB12Ug(egg)).toBe(egg.micros.vitaminB12Ug);
+  });
+});
+
+describe("upper limits", () => {
+  it("counts nori iodine and liver retinol as a cost, not a benefit", () => {
+    expect(upperLimitExceedances(requireFood("nori_roasted"))).toContain("iodine");
+    expect(upperLimitExceedances(requireFood("beef_liver_fried"))).toContain("vitaminA");
+    const liver = scoreMicros(requireFood("beef_liver_fried"));
+    expect(liver.flags.some((flag) => flag.en.includes("upper limit"))).toBe(true);
+  });
+
+  it("applies the vitamin A limit to preformed retinol only", () => {
+    const carrot = requireFood("carrot_raw");
+    expect(retinolActivityEquivalentsUg(carrot)).toBeGreaterThan(0);
+    expect(upperLimitExceedances(carrot)).not.toContain("vitaminA");
+  });
+
+  it("only flags organs and algae in the current catalog", () => {
+    const flagged = FOODS.filter((food) => upperLimitExceedances(food).length > 0);
+    expect(flagged.length).toBeGreaterThan(0);
+    for (const food of flagged) {
+      expect(["organs", "algae"]).toContain(food.class);
+    }
   });
 });
 
