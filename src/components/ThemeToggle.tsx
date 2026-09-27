@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useLocale } from "../i18n/LocaleContext";
 import { applyTheme, readTheme, type Theme } from "../theme";
 
 export function ThemeToggle() {
+  const { t } = useLocale();
   const [theme, setTheme] = useState<Theme>("dark");
 
   useEffect(() => {
@@ -17,8 +19,8 @@ export function ThemeToggle() {
   }
 
   return (
-    <button type="button" className="btn" onClick={toggle} aria-label="Toggle color theme">
-      {theme === "dark" ? "Light" : "Dark"}
+    <button type="button" className="btn" onClick={toggle} aria-label={t.theme.toggle}>
+      {theme === "dark" ? t.theme.light : t.theme.dark}
     </button>
   );
 }

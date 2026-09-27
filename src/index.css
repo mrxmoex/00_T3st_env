@@ -129,6 +129,31 @@ h3 { font-size: 1.1rem; }
   cursor: pointer;
 }
 
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.segmented button {
+  border: 0;
+  background: var(--bg-elev);
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  padding: 0.38rem 0.62rem;
+  cursor: pointer;
+}
+
+.segmented button + button { border-left: 1px solid var(--line); }
+
+.segmented button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+
 .btn-accent {
   background: var(--accent);
   border-color: var(--accent);

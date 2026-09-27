@@ -1,41 +1,43 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { DATA_META } from "../data/catalog";
+import { useLocale } from "../i18n/LocaleContext";
+import { LanguageToggle } from "./LanguageToggle";
 import { ThemeToggle } from "./ThemeToggle";
 
 const LINKS = [
-  { to: "/", label: "Matrix" },
-  { to: "/compare", label: "Compare" },
-  { to: "/recommend", label: "Best practice" },
-  { to: "/method", label: "Methodology" },
-  { to: "/limits", label: "Non-claims" },
+  { to: "/", key: "matrix" },
+  { to: "/compare", key: "compare" },
+  { to: "/recommend", key: "recommend" },
+  { to: "/method", key: "method" },
+  { to: "/limits", key: "limits" },
 ] as const;
 
 export function Layout() {
+  const { t } = useLocale();
+
   return (
     <div className="app-shell">
       <header className="topbar">
         <NavLink to="/" className="brand">
           <strong>Du bist was du isst</strong>
-          <span>Biochemical food matrix · v{DATA_META.version}</span>
+          <span>{t.brandTagline(DATA_META.version)}</span>
         </NavLink>
-        <nav className="nav" aria-label="Primary">
+        <nav className="nav" aria-label={t.nav.label}>
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.to === "/"}
             >
-              {link.label}
+              {t.nav[link.key]}
             </NavLink>
           ))}
+          <LanguageToggle />
           <ThemeToggle />
         </nav>
       </header>
       <Outlet />
-      <footer className="site">
-        Free public access. Deterministic scores from raw tables + published coefficients.
-        Last verified {DATA_META.lastVerified}. Not medical advice.
-      </footer>
+      <footer className="site">{t.footer(DATA_META.lastVerified)}</footer>
     </div>
   );
 }

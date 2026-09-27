@@ -1,6 +1,7 @@
 import {
   FAO_2013_ADULT_MG_PER_G,
 } from "../data/coefficients";
+import type { LocalizedText } from "../i18n/locale";
 import { clamp01, round1, round2, round3, safeDiv } from "./math";
 import type { EaaBreakdown, FoodRecord } from "./types";
 
@@ -122,17 +123,29 @@ export function scoreEaa(food: FoodRecord): EaaBreakdown {
   const digestibility = clamp01(food.ilealDigestibility);
   const score = 100 * (0.55 * completeness + 0.3 * digestibility + 0.15 * density);
 
-  const flags: string[] = [];
+  const flags: LocalizedText[] = [];
   if (aas < 1) {
-    flags.push(`Incomplete protein: limiting ${limiting.toUpperCase()} (AAS ${round3(aas)})`);
+    flags.push({
+      en: `Incomplete protein: limiting ${limiting.toUpperCase()} (AAS ${round3(aas)})`,
+      de: `Unvollständiges Protein: limitierend ${limiting.toUpperCase()} (AAS ${round3(aas)})`,
+    });
   } else {
-    flags.push("Complete protein versus FAO 2013 adult pattern");
+    flags.push({
+      en: "Complete protein versus FAO 2013 adult pattern",
+      de: "Vollständiges Protein gemessen am FAO-2013-Muster für Erwachsene",
+    });
   }
   if (diaasValue < 1 && aas >= 1) {
-    flags.push("Complete pattern but digestibility < 1.0");
+    flags.push({
+      en: "Complete pattern but digestibility < 1.0",
+      de: "Vollständiges Muster, aber Verdaulichkeit < 1.0",
+    });
   }
   if (density < 0.25) {
-    flags.push("Low protein density — completeness describes the protein that exists, not a useful protein serving");
+    flags.push({
+      en: "Low protein density — completeness describes the protein that exists, not a useful protein serving",
+      de: "Geringe Proteindichte — Vollständigkeit beschreibt das vorhandene Protein, keine sinnvolle Proteinportion",
+    });
   }
 
   return {

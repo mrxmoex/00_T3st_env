@@ -2,6 +2,7 @@ import {
   ALA_TO_DHA_EFFICIENCY,
   ALA_TO_EPA_EFFICIENCY,
 } from "../data/coefficients";
+import type { LocalizedText } from "../i18n/locale";
 import { clamp, clamp01, round1, round2, safeDiv } from "./math";
 import type { AxisBreakdown, FoodRecord } from "./types";
 
@@ -35,7 +36,7 @@ export function n6ToN3Ratio(food: FoodRecord): number {
 export function scoreEfa(food: FoodRecord): AxisBreakdown {
   const fa = food.fattyAcids;
   const totalFat = Math.max(food.fatG, fa.sfa + fa.mufa + fa.pufa);
-  const flags: string[] = [];
+  const flags: LocalizedText[] = [];
 
   const lc = effectiveLongChainN3G(food);
   const lcScore = clamp01(lc / 0.5);
@@ -47,10 +48,16 @@ export function scoreEfa(food: FoodRecord): AxisBreakdown {
   let ratioScore: number;
   if (n6 + n3 < 0.2) {
     ratioScore = 0.7;
-    flags.push("Very low fat: n-6/n-3 ratio is not informative");
+    flags.push({
+      en: "Very low fat: n-6/n-3 ratio is not informative",
+      de: "Sehr fettarm: Das n-6/n-3-Verhältnis ist nicht aussagekräftig",
+    });
   } else {
     ratioScore = clamp01(1 - (ratio - 2) / 20);
-    flags.push(`n-6:n-3 ≈ ${round1(ratio)}:1 (better near ≤4:1, not a health claim)`);
+    flags.push({
+      en: `n-6:n-3 ≈ ${round1(ratio)}:1 (better near ≤4:1, not a health claim)`,
+      de: `n-6:n-3 ≈ ${round1(ratio)}:1 (besser nahe ≤4:1, keine Gesundheitsaussage)`,
+    });
   }
 
   const mufaFrac = safeDiv(fa.mufa, Math.max(totalFat, 0.01));
@@ -62,21 +69,31 @@ export function scoreEfa(food: FoodRecord): AxisBreakdown {
   let score: number;
   if (totalFat < 0.5) {
     score = 45;
-    flags.push("Essentially fat-free: no essential-fat contribution, not a fat-quality failure");
+    flags.push({
+      en: "Essentially fat-free: no essential-fat contribution, not a fat-quality failure",
+      de: "Praktisch fettfrei: kein Beitrag essentieller Fette, aber kein Mangel an Fettqualität",
+    });
   } else {
     score = 100 * (0.45 * lcScore + 0.35 * ratioScore + 0.2 * quality) + 100 * oddBonus;
   }
 
   if (fa.omega3Epa + fa.omega3Dha < 0.02 && fa.omega3Ala > 0.05) {
-    flags.push(
-      `ALA-only n-3. Conversion coefficients: EPA ${ALA_TO_EPA_EFFICIENCY}, DHA ${ALA_TO_DHA_EFFICIENCY}. Not equivalent to preformed EPA/DHA.`,
-    );
+    flags.push({
+      en: `ALA-only n-3. Conversion coefficients: EPA ${ALA_TO_EPA_EFFICIENCY}, DHA ${ALA_TO_DHA_EFFICIENCY}. Not equivalent to preformed EPA/DHA.`,
+      de: `Nur ALA als n-3. Umwandlungskoeffizienten: EPA ${ALA_TO_EPA_EFFICIENCY}, DHA ${ALA_TO_DHA_EFFICIENCY}. Nicht gleichwertig mit vorgeformtem EPA/DHA.`,
+    });
   }
   if (fa.omega3Epa + fa.omega3Dha >= 0.3) {
-    flags.push("Contains preformed long-chain EPA/DHA");
+    flags.push({
+      en: "Contains preformed long-chain EPA/DHA",
+      de: "Enthält vorgeformtes langkettiges EPA/DHA",
+    });
   }
   if (fa.oddChain + fa.cla > 0.05) {
-    flags.push("Ruminant odd-chain / conjugated fatty acids present");
+    flags.push({
+      en: "Ruminant odd-chain / conjugated fatty acids present",
+      de: "Ungeradzahlige / konjugierte Fettsäuren von Wiederkäuern vorhanden",
+    });
   }
 
   return {

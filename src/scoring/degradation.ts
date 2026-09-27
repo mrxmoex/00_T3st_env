@@ -1,6 +1,13 @@
 import { clamp01, round1, round2 } from "./math";
 import type { AxisBreakdown, FoodRecord, ProcessingStability } from "./types";
 
+const STABILITY_DE: Record<ProcessingStability, string> = {
+  fresh: "frisch",
+  fermented: "fermentiert",
+  dried: "getrocknet",
+  cooked: "gegart",
+};
+
 function stabilityBonus(value: ProcessingStability): number {
   switch (value) {
     case "fresh":
@@ -42,9 +49,18 @@ export function scoreDegradation(food: FoodRecord): AxisBreakdown {
       perishabilityDays: d.perishabilityDays,
     },
     flags: [
-      `Processing stability: ${d.processingStability}`,
-      `Water-soluble vitamin load ${d.waterSolubleVitaminLoad}`,
-      `Typical perishability ${d.perishabilityDays} days under ordinary refrigeration/pantry`,
+      {
+        en: `Processing stability: ${d.processingStability}`,
+        de: `Verarbeitungsstabilität: ${STABILITY_DE[d.processingStability]}`,
+      },
+      {
+        en: `Water-soluble vitamin load ${d.waterSolubleVitaminLoad}`,
+        de: `Last wasserlöslicher Vitamine ${d.waterSolubleVitaminLoad}`,
+      },
+      {
+        en: `Typical perishability ${d.perishabilityDays} days under ordinary refrigeration/pantry`,
+        de: `Typische Haltbarkeit ${d.perishabilityDays} Tage bei normaler Kühlung/Lagerung`,
+      },
     ],
   };
 }

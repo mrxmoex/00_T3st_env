@@ -6,7 +6,8 @@ import {
   VITAMIN_C_IRON_ENHANCER_MG,
   ZINC_ABSORPTION,
 } from "../data/coefficients";
-import { clamp01, mean, round1, round2 } from "./math";
+import type { LocalizedText } from "../i18n/locale";
+import { clamp01, mean, round1, round2, round3 } from "./math";
 import type { FoodRecord, IronForm, MicroBreakdown } from "./types";
 
 function ironAbsorptionCoefficient(form: IronForm, vitaminCMg: number, phytate: boolean): number {
@@ -79,7 +80,7 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
   const iron = absorbableIronMg(food);
   const zinc = absorbableZincMg(food);
   const b12 = effectiveB12Ug(food);
-  const flags: string[] = [];
+  const flags: LocalizedText[] = [];
 
   const contributions = [
     densityContribution(iron, DENSITY_REFS.ironMg, kcal),
@@ -101,16 +102,25 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
 
   switch (food.micros.ironForm) {
     case "heme":
-      flags.push(`Heme iron ${food.micros.ironMg} mg × absorption ${IRON_ABSORPTION.heme}`);
+      flags.push({
+        en: `Heme iron ${food.micros.ironMg} mg × absorption ${IRON_ABSORPTION.heme}`,
+        de: `Hämeisen ${food.micros.ironMg} mg × Resorption ${IRON_ABSORPTION.heme}`,
+      });
       break;
     case "mixed":
-      flags.push("Mixed heme/non-heme iron; weighted absorption applied");
+      flags.push({
+        en: "Mixed heme/non-heme iron; weighted absorption applied",
+        de: "Gemischtes Häm-/Nicht-Hämeisen; gewichtete Resorption angewendet",
+      });
       break;
-    case "nonheme":
-      flags.push(
-        `Non-heme iron ${food.micros.ironMg} mg. Not equivalent to heme. Phytate=${food.micros.zincBoundByPhytate}`,
-      );
+    case "nonheme": {
+      const phytate = food.micros.zincBoundByPhytate;
+      flags.push({
+        en: `Non-heme iron ${food.micros.ironMg} mg. Not equivalent to heme. Phytate present: ${phytate ? "yes" : "no"}`,
+        de: `Nicht-Hämeisen ${food.micros.ironMg} mg. Nicht gleichwertig mit Hämeisen. Phytat vorhanden: ${phytate ? "ja" : "nein"}`,
+      });
       break;
+    }
     default: {
       const _exhaustive: never = food.micros.ironForm;
       throw new Error(`Unhandled iron form: ${_exhaustive}`);
@@ -118,17 +128,28 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
   }
 
   if (food.micros.vitaminARetinolUg <= 0 && food.micros.vitaminABetaCaroteneUg > 0) {
-    flags.push(
-      `No preformed retinol. β-carotene ${food.micros.vitaminABetaCaroteneUg} µg × ${BETA_CAROTENE_TO_RAE} (1/12 food RAE)`,
-    );
+    const betaCarotene = food.micros.vitaminABetaCaroteneUg;
+    flags.push({
+      en: `No preformed retinol. β-carotene ${betaCarotene} µg × ${round3(BETA_CAROTENE_TO_RAE)} (1/12 food RAE)`,
+      de: `Kein vorgeformtes Retinol. β-Carotin ${betaCarotene} µg × ${round3(BETA_CAROTENE_TO_RAE)} (1/12 Lebensmittel-RAE)`,
+    });
   }
   if (food.micros.zincBoundByPhytate) {
-    flags.push(`Phytate-bound zinc: absorption ${ZINC_ABSORPTION.phytateBound} vs animal ${ZINC_ABSORPTION.animal}`);
+    flags.push({
+      en: `Phytate-bound zinc: absorption ${ZINC_ABSORPTION.phytateBound} vs animal ${ZINC_ABSORPTION.animal}`,
+      de: `Phytatgebundenes Zink: Resorption ${ZINC_ABSORPTION.phytateBound} vs. tierisch ${ZINC_ABSORPTION.animal}`,
+    });
   }
   if (food.micros.b12IsAnalogue) {
-    flags.push("Measured corrinoids treated as inactive B12 analogues (0 contribution)");
+    flags.push({
+      en: "Measured corrinoids treated as inactive B12 analogues (0 contribution)",
+      de: "Gemessene Corrinoide als inaktive B12-Analoga gewertet (Beitrag 0)",
+    });
   } else if (b12 <= 0) {
-    flags.push("No bioavailable vitamin B12");
+    flags.push({
+      en: "No bioavailable vitamin B12",
+      de: "Kein bioverfügbares Vitamin B12",
+    });
   }
 
   return {

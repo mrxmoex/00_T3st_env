@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import { altFoodName, foodName } from "../i18n/locale";
+import { useLocale } from "../i18n/LocaleContext";
 import { classExtraColumns } from "../scoring/extras";
 import type { AxisKey, FoodClass, FoodRecord, ScoreCard } from "../scoring/types";
 import { AXIS_KEYS } from "../scoring/types";
-import { AXIS_SHORT, CLASS_LABELS, EXTRA_LABELS } from "../ui/labels";
 import { HeatCell } from "./HeatCell";
 
 export function axisValue(card: ScoreCard, axis: AxisKey): number {
@@ -41,6 +42,7 @@ export function MatrixTable({
   onSort: (axis: AxisKey) => void;
   sortAxis: AxisKey;
 }) {
+  const { t, locale } = useLocale();
   const extras = extraClass === "all" ? [] : classExtraColumns(extraClass);
 
   return (
@@ -48,9 +50,9 @@ export function MatrixTable({
       <table className="matrix">
         <thead>
           <tr>
-            <th className="sticky">Food</th>
-            <th>Class</th>
-            <th>Tier</th>
+            <th className="sticky">{t.table.food}</th>
+            <th>{t.table.class}</th>
+            <th>{t.table.tier}</th>
             {AXIS_KEYS.map((axis) => (
               <th
                 key={axis}
@@ -58,12 +60,12 @@ export function MatrixTable({
                 onClick={() => onSort(axis)}
                 aria-sort={sortAxis === axis ? "descending" : "none"}
               >
-                {AXIS_SHORT[axis]}
+                {t.axesShort[axis]}
                 {sortAxis === axis ? " ↓" : ""}
               </th>
             ))}
             {extras.map((column) => (
-              <th key={column}>{EXTRA_LABELS[column] ?? column}</th>
+              <th key={column}>{t.extras[column] ?? column}</th>
             ))}
           </tr>
         </thead>
@@ -72,11 +74,11 @@ export function MatrixTable({
             <tr key={food.id}>
               <td className="sticky">
                 <Link className="food-link" to={`/food/${food.id}`}>
-                  {food.nameDe}
+                  {foodName(food, locale)}
                 </Link>
-                <div className="muted mono">{food.name}</div>
+                <div className="muted mono">{altFoodName(food, locale)}</div>
               </td>
-              <td>{CLASS_LABELS[food.class]}</td>
+              <td>{t.classes[food.class]}</td>
               <td>
                 <span className={`tier tier-${card.tier}`} title={`#${card.classRank} / ${card.classSize}`}>
                   {card.tier}

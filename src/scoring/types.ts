@@ -3,6 +3,8 @@
  * Scores are 0–100 unless noted. Formulas live in sibling modules.
  */
 
+import type { LocalizedText } from "../i18n/locale";
+
 export const PLANT_CLASSES = [
   "leafy_salad",
   "legumes",
@@ -170,7 +172,7 @@ export interface FoodRecord {
   name: string;
   nameDe: string;
   class: FoodClass;
-  edibleState: string;
+  edibleState: LocalizedText;
   fdcId?: string;
   kcalPer100g: number;
   proteinG: number;
@@ -187,13 +189,13 @@ export interface FoodRecord {
   /** 0–1 expert-curated phytochemical load relative to class peak. */
   phytochemicalIndex: number;
   sources: SourceRef[];
-  notes: string[];
+  notes: LocalizedText[];
 }
 
 export interface AxisBreakdown {
   score: number;
   parts: Record<string, number>;
-  flags: string[];
+  flags: LocalizedText[];
 }
 
 export interface EaaBreakdown extends AxisBreakdown {

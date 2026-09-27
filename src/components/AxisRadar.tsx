@@ -1,6 +1,6 @@
+import { useLocale } from "../i18n/LocaleContext";
 import type { ScoreCard } from "../scoring/types";
 import { AXIS_KEYS } from "../scoring/types";
-import { AXIS_LABELS, AXIS_SHORT } from "../ui/labels";
 import { axisValue } from "./MatrixTable";
 import { RadarChart } from "./RadarChart";
 
@@ -13,10 +13,12 @@ export interface AxisRadarEntry {
 }
 
 export function AxisRadar({ entries, title }: { entries: readonly AxisRadarEntry[]; title: string }) {
+  const { t } = useLocale();
+
   return (
     <RadarChart
       title={title}
-      axes={RADAR_AXES.map((axis) => ({ short: AXIS_SHORT[axis], label: AXIS_LABELS[axis] }))}
+      axes={RADAR_AXES.map((axis) => ({ short: t.axesShort[axis], label: t.axes[axis] }))}
       series={entries.map(({ id, label, card }) => ({
         id,
         label,

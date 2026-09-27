@@ -1,4 +1,5 @@
 import { FOODS } from "../data/catalog";
+import type { LocalizedText } from "../i18n/locale";
 import { scoreCatalog } from "../scoring/scoreFood";
 import type { DietaryPattern, FoodRecord, ScoreCard } from "../scoring/types";
 import { kingdomOf } from "../scoring/types";
@@ -6,15 +7,15 @@ import { kingdomOf } from "../scoring/types";
 export interface Gap {
   id: string;
   severity: "required" | "material" | "contextual";
-  title: string;
-  detail: string;
+  title: LocalizedText;
+  detail: LocalizedText;
 }
 
 export interface Recommendation {
   pattern: DietaryPattern;
-  headline: string;
+  headline: LocalizedText;
   gaps: Gap[];
-  practices: string[];
+  practices: LocalizedText[];
   suggestedFoodIds: string[];
 }
 
@@ -57,51 +58,65 @@ function plantOnly(foods: readonly FoodRecord[]): Recommendation {
     {
       id: "b12",
       severity: "required",
-      title: "Vitamin B12",
-      detail:
-        "No plant food in this matrix supplies bioavailable B12. Algal corrinoids are scored as inactive analogues. A plant-only pattern requires fortified food or cyanocobalamin/methylcobalamin supplementation. This is not optional.",
+      title: { en: "Vitamin B12", de: "Vitamin B12" },
+      detail: {
+        en: "No plant food in this matrix supplies bioavailable B12. Algal corrinoids are scored as inactive analogues. A plant-only pattern requires fortified food or cyanocobalamin/methylcobalamin supplementation. This is not optional.",
+        de: "Kein pflanzliches Lebensmittel in dieser Matrix liefert bioverfügbares B12. Corrinoide aus Algen werden als inaktive Analoga gewertet. Ein rein pflanzliches Muster erfordert angereicherte Lebensmittel oder eine Supplementierung mit Cyanocobalamin/Methylcobalamin. Das ist nicht optional.",
+      },
     },
     {
       id: "complete-protein",
       severity: "required",
-      title: "Complete, digestible protein",
-      detail:
-        "Plant proteins are incomplete and have lower DIAAS/PDCAAS than animal proteins. Complementary pairing (legume + cereal) can raise the meal AAS; it does not make a lentil a steak. Isolated protein or a deliberately mixed plate is required if this is the sole pattern.",
+      title: { en: "Complete, digestible protein", de: "Vollständiges, verdauliches Protein" },
+      detail: {
+        en: "Plant proteins are incomplete and have lower DIAAS/PDCAAS than animal proteins. Complementary pairing (legume + cereal) can raise the meal AAS; it does not make a lentil a steak. Isolated protein or a deliberately mixed plate is required if this is the sole pattern.",
+        de: "Pflanzliche Proteine sind unvollständig und haben niedrigere DIAAS/PDCAAS-Werte als tierische Proteine. Komplementäre Kombinationen (Hülsenfrucht + Getreide) können den AAS einer Mahlzeit erhöhen; sie machen aus einer Linse kein Steak. Isoliertes Protein oder ein bewusst gemischter Teller ist erforderlich, wenn dies das einzige Muster ist.",
+      },
     },
     {
       id: "epa-dha",
       severity: "required",
-      title: "Long-chain EPA/DHA",
-      detail:
-        "ALA conversion is inefficient (documented 8% → EPA, 1% → DHA). Preformed EPA/DHA on a plant-only pattern come from microalgae oil, not from flax, walnut, or leafy ALA. Do not treat ALA foods as marine-fat equivalents.",
+      title: { en: "Long-chain EPA/DHA", de: "Langkettiges EPA/DHA" },
+      detail: {
+        en: "ALA conversion is inefficient (documented 8% → EPA, 1% → DHA). Preformed EPA/DHA on a plant-only pattern come from microalgae oil, not from flax, walnut, or leafy ALA. Do not treat ALA foods as marine-fat equivalents.",
+        de: "Die ALA-Umwandlung ist ineffizient (dokumentiert 8 % → EPA, 1 % → DHA). Vorgeformtes EPA/DHA stammt bei rein pflanzlicher Ernährung aus Mikroalgenöl, nicht aus Leinsamen, Walnüssen oder ALA aus Blattgemüse. ALA-Lebensmittel sind kein Ersatz für Meeresfette.",
+      },
     },
     {
       id: "heme-iron",
       severity: "material",
-      title: "Heme iron",
-      detail:
-        "Non-heme iron plus phytate is not heme iron. Vitamin C helps; it does not erase the gap. Ferritin monitoring is the honest control, not a recipe claim.",
+      title: { en: "Heme iron", de: "Hämeisen" },
+      detail: {
+        en: "Non-heme iron plus phytate is not heme iron. Vitamin C helps; it does not erase the gap. Ferritin monitoring is the honest control, not a recipe claim.",
+        de: "Nicht-Hämeisen plus Phytat ist kein Hämeisen. Vitamin C hilft, schließt die Lücke aber nicht. Die ehrliche Kontrolle ist die Ferritin-Überwachung, nicht ein Rezeptversprechen.",
+      },
     },
     {
       id: "retinol",
       severity: "material",
-      title: "Preformed retinol",
-      detail:
-        "Carotenoid-derived vitamin A uses 1/12 (β-carotene) and 1/24 (other) food RAE factors. Conversion varies with genetics, fat, and thyroid status. Orange vegetables are not liver.",
+      title: { en: "Preformed retinol", de: "Vorgeformtes Retinol" },
+      detail: {
+        en: "Carotenoid-derived vitamin A uses 1/12 (β-carotene) and 1/24 (other) food RAE factors. Conversion varies with genetics, fat, and thyroid status. Orange vegetables are not liver.",
+        de: "Aus Carotinoiden gebildetes Vitamin A nutzt die RAE-Faktoren 1/12 (β-Carotin) und 1/24 (andere). Die Umwandlung variiert mit Genetik, Fettzufuhr und Schilddrüsenstatus. Orangefarbenes Gemüse ist keine Leber.",
+      },
     },
     {
       id: "animal-exclusives",
       severity: "material",
-      title: "Creatine, taurine, carnosine",
-      detail:
-        "These are animal-tissue compounds. A plant-only pattern does not contain them unless they are supplemented. Absence is compositional, not a moral failure.",
+      title: { en: "Creatine, taurine, carnosine", de: "Kreatin, Taurin, Carnosin" },
+      detail: {
+        en: "These are animal-tissue compounds. A plant-only pattern does not contain them unless they are supplemented. Absence is compositional, not a moral failure.",
+        de: "Das sind Verbindungen aus tierischem Gewebe. Ein rein pflanzliches Muster enthält sie nur, wenn sie supplementiert werden. Ihr Fehlen ist eine Frage der Zusammensetzung, kein moralisches Versagen.",
+      },
     },
     {
       id: "zinc",
       severity: "material",
-      title: "Phytate-bound zinc",
-      detail:
-        "Legume and grain zinc is poorly absorbed relative to animal zinc. Soaking, fermenting, and sprouting reduce phytate; they do not equal meat zinc.",
+      title: { en: "Phytate-bound zinc", de: "Phytatgebundenes Zink" },
+      detail: {
+        en: "Legume and grain zinc is poorly absorbed relative to animal zinc. Soaking, fermenting, and sprouting reduce phytate; they do not equal meat zinc.",
+        de: "Zink aus Hülsenfrüchten und Getreide wird im Vergleich zu tierischem Zink schlecht aufgenommen. Einweichen, Fermentieren und Keimen senken den Phytatgehalt; gleichwertig mit Zink aus Fleisch wird es dadurch nicht.",
+      },
     },
   ];
 
@@ -109,23 +124,42 @@ function plantOnly(foods: readonly FoodRecord[]): Recommendation {
     gaps.push({
       id: "iodine-excess",
       severity: "contextual",
-      title: "Iodine swing from algae",
-      detail:
-        "Seaweed can cover iodine or overshoot it by an order of magnitude. It does not cover B12.",
+      title: { en: "Iodine swing from algae", de: "Jodschwankungen durch Algen" },
+      detail: {
+        en: "Seaweed can cover iodine or overshoot it by an order of magnitude. It does not cover B12.",
+        de: "Seetang kann den Jodbedarf decken oder ihn um eine Größenordnung überschreiten. B12 deckt er nicht.",
+      },
     });
   }
 
   return {
     pattern: "plant-only",
-    headline:
-      "A plant-only pattern is not biochemically complete without fortification or supplementation. The matrix will not pretend otherwise.",
+    headline: {
+      en: "A plant-only pattern is not biochemically complete without fortification or supplementation. The matrix will not pretend otherwise.",
+      de: "Ein rein pflanzliches Muster ist ohne Anreicherung oder Supplementierung biochemisch nicht vollständig. Die Matrix tut nicht so, als wäre es anders.",
+    },
     gaps,
     practices: [
-      "Supplement B12. Algae sheets do not count.",
-      "If EPA/DHA is desired, use algal oil — not ALA hope.",
-      "Pair legumes with a complementary cereal if protein completeness is a goal; still expect lower DIAAS than eggs or dairy.",
-      "Ferment, soak, or sprout legumes to lower phytate; re-check iron and zinc status rather than assuming adequacy.",
-      "Do not collapse leafy salads, legumes, sprouts, kraut, mushrooms, and algae into one 'plant' score.",
+      {
+        en: "Supplement B12. Algae sheets do not count.",
+        de: "B12 supplementieren. Algenblätter zählen nicht.",
+      },
+      {
+        en: "If EPA/DHA is desired, use algal oil — not ALA hope.",
+        de: "Wenn EPA/DHA gewünscht ist, Algenöl verwenden — nicht auf ALA hoffen.",
+      },
+      {
+        en: "Pair legumes with a complementary cereal if protein completeness is a goal; still expect lower DIAAS than eggs or dairy.",
+        de: "Hülsenfrüchte mit einem ergänzenden Getreide kombinieren, wenn Proteinvollständigkeit das Ziel ist; trotzdem einen niedrigeren DIAAS als bei Eiern oder Milchprodukten erwarten.",
+      },
+      {
+        en: "Ferment, soak, or sprout legumes to lower phytate; re-check iron and zinc status rather than assuming adequacy.",
+        de: "Hülsenfrüchte fermentieren, einweichen oder keimen lassen, um Phytat zu senken; Eisen- und Zinkstatus kontrollieren, statt eine ausreichende Versorgung anzunehmen.",
+      },
+      {
+        en: "Do not collapse leafy salads, legumes, sprouts, kraut, mushrooms, and algae into one 'plant' score.",
+        de: "Blattsalate, Hülsenfrüchte, Sprossen, Kraut, Pilze und Algen nicht zu einem einzigen „Pflanzen“-Wert zusammenfassen.",
+      },
     ],
     suggestedFoodIds: [
       "lentils_boiled",
@@ -143,45 +177,67 @@ function animalInclusive(foods: readonly FoodRecord[]): Recommendation {
     gaps.push({
       id: "no-animal-selected",
       severity: "contextual",
-      title: "No animal food selected",
-      detail:
-        "The filter is animal-inclusive but the current plate is not. Animal-inclusive advantages do not apply until an animal food is present.",
+      title: { en: "No animal food selected", de: "Kein tierisches Lebensmittel gewählt" },
+      detail: {
+        en: "The filter is animal-inclusive but the current plate is not. Animal-inclusive advantages do not apply until an animal food is present.",
+        de: "Der Filter schließt tierische Lebensmittel ein, der aktuelle Teller aber nicht. Die Vorteile tierischer Lebensmittel greifen erst, wenn eines auf dem Teller ist.",
+      },
     });
   }
   gaps.push({
     id: "fibre",
     severity: "material",
-    title: "Fibre and phytochemicals",
-    detail:
-      "Muscle, organs, eggs, and dairy score 0 on fibre/phytochemicals. That is compositionally true. An animal-only plate is not a plant plate and does not inherit plant axes.",
+    title: { en: "Fibre and phytochemicals", de: "Ballaststoffe und sekundäre Pflanzenstoffe" },
+    detail: {
+      en: "Muscle, organs, eggs, and dairy score 0 on fibre/phytochemicals. That is compositionally true. An animal-only plate is not a plant plate and does not inherit plant axes.",
+      de: "Muskelfleisch, Innereien, Eier und Milchprodukte erhalten 0 bei Ballaststoffen/Pflanzenstoffen. Das stimmt kompositorisch. Ein rein tierischer Teller ist kein Pflanzenteller und erbt keine pflanzlichen Achsen.",
+    },
   });
   gaps.push({
     id: "vitamin-c",
     severity: "contextual",
-    title: "Vitamin C",
-    detail:
-      "Most muscle meats have none. Organs and a few animal foods have little. If the plate is animal-only, C is a real gap unless organs or another source is included.",
+    title: { en: "Vitamin C", de: "Vitamin C" },
+    detail: {
+      en: "Most muscle meats have none. Organs and a few animal foods have little. If the plate is animal-only, C is a real gap unless organs or another source is included.",
+      de: "Die meisten Muskelfleischsorten enthalten keins. Innereien und einige tierische Lebensmittel enthalten wenig. Bei einem rein tierischen Teller ist Vitamin C eine echte Lücke, sofern keine Innereien oder andere Quellen dabei sind.",
+    },
   });
   if (hasClass(foods, "organs")) {
     gaps.push({
       id: "retinol-ul",
       severity: "contextual",
-      title: "Preformed retinol upper limit",
-      detail:
-        "Liver is efficient, not harmless at unlimited frequency. Efficiency and toxicity can coexist.",
+      title: { en: "Preformed retinol upper limit", de: "Obergrenze für vorgeformtes Retinol" },
+      detail: {
+        en: "Liver is efficient, not harmless at unlimited frequency. Efficiency and toxicity can coexist.",
+        de: "Leber ist effizient, aber bei unbegrenzter Häufigkeit nicht harmlos. Effizienz und Toxizität können gleichzeitig bestehen.",
+      },
     });
   }
 
   return {
     pattern: "animal-inclusive",
-    headline:
-      "Animal foods close B12, complete protein, heme iron, retinol, and EPA/DHA gaps that plants cannot. They do not supply fibre.",
+    headline: {
+      en: "Animal foods close B12, complete protein, heme iron, retinol, and EPA/DHA gaps that plants cannot. They do not supply fibre.",
+      de: "Tierische Lebensmittel schließen Lücken bei B12, vollständigem Protein, Hämeisen, Retinol und EPA/DHA, die Pflanzen nicht schließen können. Ballaststoffe liefern sie nicht.",
+    },
     gaps,
     practices: [
-      "Prefer ruminant or fish when heme iron, zinc, or long-chain n-3 is the axis of interest.",
-      "Organs are a different class from muscle — do not hide liver inside a 'meat' average.",
-      "Eggs remain a protein-quality reference; they are not a fibre food.",
-      "If the plate is only muscle, add a plant class for fibre/phytochemicals or accept that axis as empty.",
+      {
+        en: "Prefer ruminant or fish when heme iron, zinc, or long-chain n-3 is the axis of interest.",
+        de: "Wiederkäuer oder Fisch bevorzugen, wenn Hämeisen, Zink oder langkettige n-3 im Fokus stehen.",
+      },
+      {
+        en: "Organs are a different class from muscle — do not hide liver inside a 'meat' average.",
+        de: "Innereien sind eine andere Klasse als Muskelfleisch — Leber nicht in einem „Fleisch“-Durchschnitt verstecken.",
+      },
+      {
+        en: "Eggs remain a protein-quality reference; they are not a fibre food.",
+        de: "Eier bleiben eine Referenz für Proteinqualität; sie sind kein Ballaststofflieferant.",
+      },
+      {
+        en: "If the plate is only muscle, add a plant class for fibre/phytochemicals or accept that axis as empty.",
+        de: "Besteht der Teller nur aus Muskelfleisch, eine pflanzliche Klasse für Ballaststoffe/Pflanzenstoffe ergänzen oder diese Achse als leer akzeptieren.",
+      },
     ],
     suggestedFoodIds: [
       "egg_whole_cooked",
@@ -202,30 +258,49 @@ function hybrid(foods: readonly FoodRecord[]): Recommendation {
     gaps.push({
       id: "hybrid-no-animal",
       severity: "required",
-      title: "Hybrid plate missing animal foods",
-      detail:
-        "A hybrid pattern without animal foods collapses to plant-only, including the B12/EPA/heme/retinol gaps.",
+      title: { en: "Hybrid plate missing animal foods", de: "Hybrider Teller ohne tierische Lebensmittel" },
+      detail: {
+        en: "A hybrid pattern without animal foods collapses to plant-only, including the B12/EPA/heme/retinol gaps.",
+        de: "Ein hybrides Muster ohne tierische Lebensmittel fällt auf rein pflanzlich zurück, einschließlich der Lücken bei B12/EPA/Häm/Retinol.",
+      },
     });
   }
   if (plant.length === 0) {
     gaps.push({
       id: "hybrid-no-plant",
       severity: "material",
-      title: "Hybrid plate missing plants",
-      detail: "A hybrid pattern without plants has no fibre/phytochemical axis.",
+      title: { en: "Hybrid plate missing plants", de: "Hybrider Teller ohne Pflanzen" },
+      detail: {
+        en: "A hybrid pattern without plants has no fibre/phytochemical axis.",
+        de: "Ein hybrides Muster ohne Pflanzen hat keine Ballaststoff-/Pflanzenstoffachse.",
+      },
     });
   }
 
   return {
     pattern: "hybrid",
-    headline:
-      "Hybrid is the only pattern that can cover plant axes and animal-exclusive compounds without mandatory fortification — if both kingdoms are actually on the plate.",
+    headline: {
+      en: "Hybrid is the only pattern that can cover plant axes and animal-exclusive compounds without mandatory fortification — if both kingdoms are actually on the plate.",
+      de: "Hybrid ist das einzige Muster, das pflanzliche Achsen und ausschließlich tierische Verbindungen ohne zwingende Anreicherung abdecken kann — sofern beide Reiche tatsächlich auf dem Teller sind.",
+    },
     gaps,
     practices: [
-      "Pair heme iron with a vitamin-C plant if non-heme plant iron is also being counted. Do not reverse the implication: plants do not create heme.",
-      "Use oily fish or algal oil for EPA/DHA; use ruminant fat if odd-chain/CLA composition is the question.",
-      "Keep fermented kraut and fermented dairy in separate columns. Shared fermentation is not shared biochemistry.",
-      "Organs cover retinol/B12/choline at low mass; muscle covers creatine/carnosine; legumes cover fibre and incomplete protein.",
+      {
+        en: "Pair heme iron with a vitamin-C plant if non-heme plant iron is also being counted. Do not reverse the implication: plants do not create heme.",
+        de: "Hämeisen mit einer Vitamin-C-reichen Pflanze kombinieren, wenn auch pflanzliches Nicht-Hämeisen mitgezählt wird. Den Schluss nicht umkehren: Pflanzen erzeugen kein Häm.",
+      },
+      {
+        en: "Use oily fish or algal oil for EPA/DHA; use ruminant fat if odd-chain/CLA composition is the question.",
+        de: "Für EPA/DHA fetten Fisch oder Algenöl nutzen; Wiederkäuerfett, wenn es um ungeradzahlige Fettsäuren/CLA geht.",
+      },
+      {
+        en: "Keep fermented kraut and fermented dairy in separate columns. Shared fermentation is not shared biochemistry.",
+        de: "Fermentiertes Kraut und fermentierte Milchprodukte in getrennten Spalten halten. Gemeinsame Fermentation ist keine gemeinsame Biochemie.",
+      },
+      {
+        en: "Organs cover retinol/B12/choline at low mass; muscle covers creatine/carnosine; legumes cover fibre and incomplete protein.",
+        de: "Innereien decken Retinol/B12/Cholin mit wenig Masse; Muskelfleisch deckt Kreatin/Carnosin; Hülsenfrüchte decken Ballaststoffe und unvollständiges Protein.",
+      },
     ],
     suggestedFoodIds: [
       "egg_whole_cooked",
