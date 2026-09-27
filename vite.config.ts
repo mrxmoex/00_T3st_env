@@ -6,6 +6,8 @@ import { fileURLToPath } from "node:url";
 const rootDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
+  // GitHub Pages serves the project under /<repo>/; the deploy workflow passes that prefix.
+  base: `${process.env.PAGES_BASE_PATH ?? ""}/`,
   plugins: [react()],
   resolve: {
     alias: {
