@@ -69,8 +69,8 @@ function plantOnly(foods: readonly FoodRecord[]): Recommendation {
       severity: "required",
       title: { en: "Complete, digestible protein", de: "Vollständiges, verdauliches Protein" },
       detail: {
-        en: "Plant proteins are incomplete and have lower DIAAS/PDCAAS than animal proteins. Complementary pairing (legume + cereal) can raise the meal AAS; it does not make a lentil a steak. Isolated protein or a deliberately mixed plate is required if this is the sole pattern.",
-        de: "Pflanzliche Proteine sind unvollständig und haben niedrigere DIAAS/PDCAAS-Werte als tierische Proteine. Komplementäre Kombinationen (Hülsenfrucht + Getreide) können den AAS einer Mahlzeit erhöhen; sie machen aus einer Linse kein Steak. Isoliertes Protein oder ein bewusst gemischter Teller ist erforderlich, wenn dies das einzige Muster ist.",
+        en: "Most plant proteins are limited in an amino acid or less digestible, so their DIAAS is lower than that of animal proteins; tofu, soy, and some beans come closest. Complementary pairing (legume + cereal) can raise the meal AAS; it does not make a lentil a steak. Isolated protein or a deliberately mixed plate is required if this is the sole pattern.",
+        de: "Die meisten pflanzlichen Proteine sind bei einer Aminosäure limitiert oder schlechter verdaulich, daher ist ihr DIAAS niedriger als der tierischer Proteine; Tofu, Soja und manche Bohnen kommen am nächsten. Komplementäre Kombinationen (Hülsenfrucht + Getreide) können den AAS einer Mahlzeit erhöhen; sie machen aus einer Linse kein Steak. Isoliertes Protein oder ein bewusst gemischter Teller ist erforderlich, wenn dies das einzige Muster ist.",
       },
     },
     {

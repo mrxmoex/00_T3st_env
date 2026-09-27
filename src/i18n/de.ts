@@ -16,7 +16,7 @@ export const de: Messages = {
   languageLabel: "Sprache",
   matrix: {
     lede:
-      "Eine ehrliche Matrix aus biochemischer Effizienz, Vollständigkeit und praktischem Nutzen. Pflanzliche Proteine sind unvollständig. Nicht-Hämeisen ist kein Hämeisen. Algen, Pilze, Sprossen, Kraut, Hülsenfrüchte und Blattsalate sind nicht austauschbar.",
+      "Eine ehrliche Matrix aus biochemischer Effizienz, Vollständigkeit und praktischem Nutzen. Die meisten pflanzlichen Proteine sind bei einer Aminosäure, bei der Verdaulichkeit oder bei der Dichte im Nachteil. Nicht-Hämeisen ist kein Hämeisen. Algen, Pilze, Sprossen, Kraut, Hülsenfrüchte und Blattsalate sind nicht austauschbar.",
     exportCsv: "CSV exportieren",
     exportJson: "JSON exportieren",
     inView: (count) => `${count} Lebensmittel angezeigt`,

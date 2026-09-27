@@ -24,8 +24,8 @@ const spinachRaw = plant({
   sources: [{ label: "IOM vitamin A RAE food factors", note: "β-carotene µg / 12" }],
   notes: [
     {
-      en: "High folate and K. Non-heme iron + oxalate/phytate. Incomplete, dilute protein.",
-      de: "Viel Folat und Vitamin K. Nicht-Hämeisen + Oxalat/Phytat. Unvollständiges, verdünntes Protein.",
+      en: "High folate and K. Non-heme iron + oxalate/phytate. Balanced but very dilute protein.",
+      de: "Viel Folat und Vitamin K. Nicht-Hämeisen + Oxalat/Phytat. Ausgewogenes, aber sehr verdünntes Protein.",
     },
   ],
 });
@@ -557,8 +557,8 @@ const soybeansBoiled = plant({
   phytochemicalIndex: 0.75,
   notes: [
     {
-      en: "The pulse closest to complete by the FAO pattern; phytate and isoflavones remain.",
-      de: "Die Hülsenfrucht, die dem FAO-Muster am nächsten kommt; Phytat und Isoflavone bleiben.",
+      en: "Complete by the FAO adult pattern before digestibility, just under it after; phytate and isoflavones remain.",
+      de: "Vor der Verdaulichkeit vollständig nach dem FAO-Muster für Erwachsene, danach knapp darunter; Phytat und Isoflavone bleiben.",
     },
   ],
 });

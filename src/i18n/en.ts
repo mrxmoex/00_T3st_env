@@ -16,7 +16,7 @@ export const en: Messages = {
   languageLabel: "Language",
   matrix: {
     lede:
-      "An honest matrix of biochemical efficiency, completeness, and real-world value. Plant proteins are incomplete. Non-heme iron is not heme iron. Algae, mushrooms, sprouts, kraut, legumes, and leafy salads are not interchangeable.",
+      "An honest matrix of biochemical efficiency, completeness, and real-world value. Most plant proteins fall short on an amino acid, on digestibility, or on density. Non-heme iron is not heme iron. Algae, mushrooms, sprouts, kraut, legumes, and leafy salads are not interchangeable.",
     exportCsv: "Export CSV",
     exportJson: "Export JSON",
     inView: (count) => `${count} foods in view`,
