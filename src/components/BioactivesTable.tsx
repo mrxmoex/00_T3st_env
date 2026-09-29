@@ -61,7 +61,7 @@ export function BioactivesTable({ food }: { food: FoodRecord }) {
         return (
           <>
             {localize(value.measured)}
-            {value.fromDryWeight ? null : ` · ${localize(MEASURED_STATE_LABELS[value.state])}`}
+            {value.state === "unspecified" ? ` · ${localize(MEASURED_STATE_LABELS.unspecified)}` : null}
             {value.rawValueForPreparedFood ? <span className="cell-note">{t.food.bioactiveRawValue}</span> : null}
             {value.fromDryWeight ? <span className="cell-note">{t.food.bioactiveDryWeight}</span> : null}
           </>
@@ -84,7 +84,7 @@ export function BioactivesTable({ food }: { food: FoodRecord }) {
       <h2>{t.food.bioactivesHeading}</h2>
       <p className="muted">{t.food.bioactivesLede}</p>
       <div className="matrix-wrap">
-        <table className="matrix nutrient-table">
+        <table className="matrix nutrient-table wrap-table">
           <thead>
             <tr>
               <th>{t.food.bioactiveColumns.compound}</th>

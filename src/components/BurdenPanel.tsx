@@ -99,12 +99,18 @@ export function BurdenPanel({ food, card }: { food: FoodRecord; card: ScoreCard 
         <div>
           <h3>{b.residuesHeading}</h3>
           <ul>
-            {[...card.residue.flags, ...card.degradation.flags].map((flag) => (
+            {card.residue.flags.map((flag) => (
               <li key={flag.en}>{localize(flag)}</li>
             ))}
           </ul>
           {isAnimalClass(food.class) ? <p className="muted">{b.hormones}</p> : null}
           {food.residue.heavyMetalClass !== "low" ? <p className="muted">{b.accumulation}</p> : null}
+          <h3>{t.axes.degradation}</h3>
+          <ul>
+            {card.degradation.flags.map((flag) => (
+              <li key={flag.en}>{localize(flag)}</li>
+            ))}
+          </ul>
           {stored.length > 0 ? (
             <>
               <h3>{b.storageHeading}</h3>

@@ -340,6 +340,8 @@ details.panel > summary {
 .nova-4 { background: #7a3a32; color: #ffe8e4; }
 
 .role, .cell-note { display: block; font-size: 0.78rem; color: var(--muted); }
+.wrap-table td { white-space: normal; vertical-align: top; }
+.wrap-table td:first-child { min-width: 11rem; max-width: 22rem; }
 .callout-warning { border-left: 4px solid var(--danger); padding-left: 0.6rem; }
 
 .food-overview { display: grid; gap: 1rem; align-items: center; }
