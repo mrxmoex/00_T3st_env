@@ -17,8 +17,11 @@ npm run build
 
 ## What you get
 
-- 92 foods in 17 classes, with nutrient values imported from BLS 4.0 and USDA FoodData Central
-- Preparation groups (raw, boiled, stewed, fried, …): each food page compares its preparations using the databases' own cooked entries
+- 95 foods in 17 classes, with nutrient values imported from BLS 4.0 and USDA FoodData Central
+- Benefit against burden: essential amino acids, fats, and micronutrients as the amount the body can absorb, against residues, nutrient loss, and processing (NOVA; ultra-processed foods stay in tier D)
+- Preparation groups (raw, boiled, stewed, fried, canned, instant, …): each food page compares its preparations per gram of dry matter using the databases' own entries
+- Bioactive compounds indexed by measured content with a citation per value: creatine, taurine, carnosine, anserine, CoQ10, L-carnitine, ergothioneine, glucosinolates
+- Which nutrients the body stores, and which contaminants it accumulates
 - Every nutrient value shows its database and how that database obtained it (analysis, literature, recipe calculation, …)
 - Composition relevant to specific and medical diets (sodium, potassium, phosphorus, lactose, cholesterol, phenylalanine), shown, not scored
 - Interactive heat-map matrix, sortable, filterable by class, preparation, and dietary pattern

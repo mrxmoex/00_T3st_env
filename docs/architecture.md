@@ -41,9 +41,11 @@ Each `FoodRecord` stores per 100 g (unless noted):
 - Carbohydrates split into sugars, starch, fibre, resistant starch
 - Micros (20 scored nutrients) with iron form, phytate-zinc flag, retinol vs carotenoids, B12 analogue flag; `null` where no source reports a value
 - Composition for specific diets: water, sodium, phosphorus, cholesterol, lactose
-- Animal-exclusive compounds (creatine, taurine, carnosine; curated estimates)
+- Processing: NOVA group, optional Open Food Facts evidence category, and for NOVA 3–4 foods the labile-vitamin retention against the home-prepared form (computed in `catalog.ts`)
 - Residue profile (surface area, systemic/contact, MRL proximity, metals, veterinary)
 - Degradation profile (water-soluble load, cut/heat/O₂, perishability, processing)
+
+Bioactive compounds (creatine, taurine, carnosine, anserine, CoQ10, L-carnitine, ergothioneine, glucosinolates) are not on the record; `src/data/bioactives.ts` resolves them per food from cited analyses.
 - Phytochemical index (0–1) and curated literature list
 
 ## Update path
