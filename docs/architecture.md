@@ -20,9 +20,10 @@ Dev server: Vite on port 3000 (`npm run dev`). Production: `npm run build` then 
 | Layer | Path | Responsibility |
 | --- | --- | --- |
 | Domain types | `src/scoring/types.ts` | Food classes, raw records, score cards |
-| Coefficients | `src/data/coefficients.ts` | FAO pattern, RAE factors, absorption midpoints, dataset version |
+| Coefficients | `src/data/coefficients.ts` | FAO pattern, RAE factors, absorption midpoints, Daily Values, EFSA upper limits, dataset version |
 | Weights | `src/data/classWeights.ts` | Class-specific composite weights (sum 1.0) |
-| Foods | `src/data/foods/*.ts`, `catalog.ts` | Versioned sample + sourced foods |
+| Source data | `src/data/sources/`, `scripts/data/build_snapshot.py` | Manifest, imported BLS 4.0 / USDA snapshot with per-value provenance |
+| Foods | `src/data/foods/*.ts`, `catalog.ts` | Curated specs merged with snapshot values; preparation groups |
 | Scoring | `src/scoring/*.ts` | Pure functions, one axis per module |
 | Recommend | `src/recommend/engine.ts` | Gap engine; never claims plant-only completeness |
 | Export | `src/export/matrixExport.ts` | CSV / JSON |
@@ -32,23 +33,26 @@ Dev server: Vite on port 3000 (`npm run dev`). Production: `npm run build` then 
 
 Each `FoodRecord` stores per 100 g (unless noted):
 
-- Identity: `id`, names, `class`, edible state, optional USDA FDC ID
+- Identity: `id`, names, `class`, `group` (shared by all preparations of one food), `preparation`
+- Source entries (BLS code and/or FDC id), raw `nutrients` by key, and per-value `provenance`
 - Macros: kcal, protein, fat
 - Amino acids in **mg/g protein** + `ilealDigestibility`
 - Fatty acids (SFA/MUFA/PUFA, ALA/EPA/DHA, LA/AA, odd-chain, CLA)
 - Carbohydrates split into sugars, starch, fibre, resistant starch
-- Micros with iron form, phytate-zinc flag, retinol vs carotenoids, B12 analogue flag
-- Animal-exclusive compounds (creatine, taurine, carnosine)
+- Micros (20 scored nutrients) with iron form, phytate-zinc flag, retinol vs carotenoids, B12 analogue flag; `null` where no source reports a value
+- Composition for specific diets: water, sodium, phosphorus, cholesterol, lactose
+- Animal-exclusive compounds (creatine, taurine, carnosine; curated estimates)
 - Residue profile (surface area, systemic/contact, MRL proximity, metals, veterinary)
 - Degradation profile (water-soluble load, cut/heat/O₂, perishability, processing)
-- Phytochemical index (0–1) and source list
+- Phytochemical index (0–1) and curated literature list
 
 ## Update path
 
-1. Edit a food file or add a record.
-2. Bump `DATASET_VERSION` and `LAST_VERIFIED` in `coefficients.ts`.
-3. Run `npm test` (formulas + catalog coverage).
-4. Rebuild. No migration of scores — scores are derived.
+1. Map the food to its BLS or FDC entry in `src/data/sources/manifest.json` and run `python3 scripts/data/build_snapshot.py` (see `docs/data-sources.md`).
+2. Add its curated spec in `src/data/foods/*.ts` (a cooked variant can reuse its raw base via `prepared()`).
+3. Bump `DATASET_VERSION` and `LAST_VERIFIED` in `coefficients.ts`.
+4. Run `npm test` (formulas, catalog coverage, snapshot integrity, preparation–source name check).
+5. Rebuild. No migration of scores — scores are derived.
 
 ## Extension points (non-breaking)
 

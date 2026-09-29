@@ -16,7 +16,7 @@ export const de: Messages = {
   languageLabel: "Sprache",
   matrix: {
     lede:
-      "Eine ehrliche Matrix aus biochemischer Effizienz, Vollständigkeit und praktischem Nutzen. Pflanzliche Proteine sind unvollständig. Nicht-Hämeisen ist kein Hämeisen. Algen, Pilze, Sprossen, Kraut, Hülsenfrüchte und Blattsalate sind nicht austauschbar.",
+      "Eine ehrliche Matrix aus biochemischer Effizienz, Vollständigkeit und praktischem Nutzen. Die meisten pflanzlichen Proteine sind bei einer Aminosäure, bei der Verdaulichkeit oder bei der Dichte im Nachteil. Nicht-Hämeisen ist kein Hämeisen. Algen, Pilze, Sprossen, Kraut, Hülsenfrüchte und Blattsalate sind nicht austauschbar.",
     exportCsv: "CSV exportieren",
     exportJson: "JSON exportieren",
     inView: (count) => `${count} Lebensmittel angezeigt`,
@@ -35,24 +35,47 @@ export const de: Messages = {
     all: "Alle",
     pattern: "Ernährungsmuster",
     sortAxis: "Sortierachse",
+    preparation: "Zubereitung",
+    allPreparations: "Alle Zubereitungen",
   },
   table: { food: "Lebensmittel", class: "Klasse", tier: "Stufe", axis: "Achse" },
   food: {
     unknown: "Unbekanntes Lebensmittel",
     back: "Zurück zur Matrix",
-    lede: ({ altName, state, fdcId, kcal, tier, rank, size }) =>
-      `${altName}. ${state}. FDC ${fdcId}. ${kcal} kcal / 100 g. Stufe ${tier} (Platz ${rank} von ${size} in der Klasse).`,
+    lede: ({ altName, preparation, source, kcal, tier, rank, size }) =>
+      `${altName}. Zubereitung: ${preparation}. Quelle: ${source}. ${kcal} kcal / 100 g. Stufe ${tier} (Platz ${rank} von ${size} in der Klasse).`,
     radarTitle: (name) => `${name}: Achsenprofil`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
       `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limitierende Aminosäure: ${limiting}. Ileale Verdaulichkeit ${digestibility}.`,
     fatsCarbsMicros: "Fette, Kohlenhydrate, Mikronährstoffe",
     microLine: ({ rae, iron, zinc, b12 }) =>
-      `RAE ${rae} µg · res. Fe ${iron} mg · res. Zn ${zinc} mg · B12 ${b12} µg`,
+      `RAE ${rae} µg · res. Fe ${iron} mg · res. Zn ${zinc} mg · B12 ${b12 ?? "—"} µg`,
     classColumns: "Klassenspezifische Spalten",
     weights: (classLabel, w) =>
       `Gewichte des Gesamtwerts für ${classLabel}: EAA ${w.eaa}, EFA ${w.efa}, Kohlenhydrate ${w.carb}, Mikro ${w.micro}, Ballaststoffe ${w.fibre}, Rückstände ${w.residue}, Stabilität ${w.degradation}.`,
     notes: "Hinweise",
     compareCta: "Dieses Lebensmittel vergleichen",
+    preparationsHeading: "Zubereitungen",
+    preparationsLede:
+      "Pro 100 g verzehrfertig, jeweils aus dem eigenen Datenbankeintrag. Garverluste stammen aus den Analysen und Rezeptberechnungen der Datenbanken; aufgenommenes oder verlorenes Wasser verdünnt oder konzentriert zusätzlich jeden Wert.",
+    preparationsCompare: "Diese Zubereitungen vergleichen",
+    nutrientsHeading: "Nährwerte und Herkunft jedes Werts",
+    nutrientsHint:
+      "Pro 100 g essbarem Anteil. %DV pro 100 kcal für die bewerteten Mikronährstoffe, nach Bioverfügbarkeitsanpassung. — heißt: Keine Datenbank nennt den Wert; er wird nicht als null gezählt.",
+    nutrientGroups: {
+      macros: "Energie und Makronährstoffe",
+      diet: "Relevant für spezielle und medizinische Kostformen",
+      vitamins: "Vitamine",
+      minerals: "Mineralstoffe",
+      aminoAcids: "Essentielle Aminosäuren",
+      fattyAcids: "Fettsäuren",
+    },
+    dietHint:
+      "Zusammensetzungswerte, auf die nierengerechte, natriumarme, laktosefreie, PKU- oder kohlenhydratberechnete Kostformen achten. Sie werden gezeigt, nicht bewertet, und sind keine Verordnung.",
+    columns: { nutrient: "Nährstoff", per100g: "pro 100 g", pctDv: "%DV / 100 kcal", source: "Quelle und Herkunft" },
+    notReported: "nicht angegeben",
+    patternNote: (foodName) =>
+      `Aminosäuren, die die Datenbanken nicht nennen, wurden aus dem Muster von ${foodName} ergänzt und auf das Protein dieses Lebensmittels skaliert.`,
   },
   compare: {
     title: "Direktvergleich",
@@ -62,9 +85,12 @@ export const de: Messages = {
     classTier: (classLabel, tier) => `${classLabel} · Stufe ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
     compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Kreatin ${creatineMg} mg · Ballaststoffe ${fibreG} g · B12 ${b12Ug} µg`,
+      `Kreatin ${creatineMg} mg · Ballaststoffe ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
     radarHeading: "Achsenprofil",
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
+    microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
+    microHint:
+      "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen Nährstoff, dessen Menge in 100 kcal die tägliche EFSA-Höchstmenge überschreitet.",
   },
   recommend: {
     title: "Empfehlungs-Engine",
@@ -81,6 +107,15 @@ export const de: Messages = {
     title: "Methodik",
     lede: (version, lastVerified) =>
       `Jeder Wert ist eine dokumentierte Funktion aus Rohtabellen und Koeffizienten. Datensatz ${version}, zuletzt geprüft am ${lastVerified}. Die Formeln sind in \`src/scoring/\` implementiert und durch Unit-Tests abgesichert.`,
+    dataHeading: "0. Datenquellen",
+    dataPrimary:
+      "Die Nährwerte stammen aus der deutschen Nährstoffdatenbank BLS 4.0 (Max Rubner-Institut, CC BY 4.0). Lebensmittel, die der BLS nicht führt, und Nährstoffe, die er nicht angibt (Cholin, Selen), stammen aus USDA FoodData Central SR Legacy (gemeinfrei).",
+    dataScript:
+      "Ein Skript (`scripts/data/build_snapshot.py`) lädt beide Datenbanken, prüft ihre SHA-256-Prüfsummen und schreibt den Datenstand, den die App ausliefert. Kein Nährwert wird von Hand eingetippt, und jeder Wert behält die Herkunftskategorie seiner Datenbank.",
+    dataMissing:
+      "Ein Wert, den keine Datenbank nennt, bleibt fehlend: Er wird als — angezeigt, nicht bewertet und in den Hinweisen des Lebensmittels genannt. Fehlende Aminosäuren werden aus dem Muster eines benannten ähnlichen Lebensmittels ergänzt, der Methode, die der BLS Musterberechnung nennt.",
+    dataPreparation:
+      "Gekochte, gedünstete, gebratene und andere Zubereitungen sind eigene Datenbankeinträge. Ihre Veränderungen, etwa Vitaminverluste oder aufgenommenes und verlorenes Wasser, stammen aus den Analysen und Rezeptberechnungen der Datenbanken, nicht aus einem Faktor dieser App.",
     eaaHeading: "1. Vollständigkeit essentieller Aminosäuren + Verdaulichkeit",
     eaaPattern: "FAO-2013-Referenzmuster für Erwachsene (mg/g Protein):",
     eaaRatios:
@@ -102,11 +137,14 @@ export const de: Messages = {
       "Kombiniert: 0.55 × passive_fraction + 0.25 × activeScore + 0.20 × (1 − sugar_fraction). Tierische Lebensmittel mit nahezu null Kohlenhydraten erhalten 70 (metabolisch ruhig, ohne Ballaststoffe).",
     microHeading: "4. Mikronährstoffdichte + Bioverfügbarkeit",
     microAbsorption: (v) =>
-      `Eisenresorption: Häm ${v.heme}, Nicht-Häm Basis ${v.nonhemeBase}, mit Vitamin C ${v.nonhemeWithVitaminC}, viel Phytat ${v.nonhemeHighPhytate}. Zink: tierisch ${v.zincAnimal}, phytatgebunden ${v.zincPhytate}, phytatarm pflanzlich ${v.zincLowPhytate}.`,
+      `Eisenresorption: Häm ${v.heme}, Nicht-Häm Basis ${v.nonhemeBase}, mit Vitamin C ${v.nonhemeWithVitaminC}, viel Phytat ${v.nonhemeHighPhytate}. Eisen in Fleisch, Fisch und Innereien gilt zu ${v.hemeSharePct} % als Häm; Eisen aus Ei und Milch ist Nicht-Häm. Zink: tierisch ${v.zincAnimal}, phytatgebunden ${v.zincPhytate}, phytatarm pflanzlich ${v.zincLowPhytate}.`,
     microRae: (betaCarotene, otherCarotenoids) =>
       `RAE = Retinol + β-Carotin × ${betaCarotene} (1/12) + andere Carotinoide × ${otherCarotenoids} (1/24). B12-Analoga aus Algen tragen 0 bei.`,
-    microDensity: ({ ironMg, zincMg, raeUg, b12Ug }) =>
-      `Jeder Nährstoff wird als % einer Referenz pro 100 kcal berechnet, gedeckelt bei 20 % DV / 100 kcal = 1.0, dann gemittelt. Referenzen: Fe ${ironMg} mg, Zn ${zincMg} mg, RAE ${raeUg} µg, B12 ${b12Ug} µg sowie die übrigen Vitamine/Mineralstoffe in \`coefficients.ts\`.`,
+    microDensity: (saturationPct) =>
+      `Zwanzig Nährstoffe werden bewertet, jeder als % seines FDA-Tageswerts pro 100 kcal nach den obigen Anpassungen, gedeckelt bei ${saturationPct} % DV / 100 kcal = 1.0, dann gemittelt über die Nährstoffe, die die Datenbanken nennen. Die Werte stehen in \`coefficients.ts\`.`,
+    microUpperLimit:
+      "Überschreiten 100 kcal eines Lebensmittels bereits die tägliche tolerierbare EFSA-Höchstmenge, zählt dieser Nährstoff −1 statt bis zu +1. Die Vitamin-A-Grenze gilt nur für vorgeformtes Retinol.",
+    microTable: { nutrient: "Nährstoff", dailyValue: "Tageswert (DV)", upperLimit: "EFSA-Höchstmenge" },
     fibreHeading: "5. Ballaststoffe / sekundäre Pflanzenstoffe",
     fibreNote: "Tierische Klassen haben die Basis 0. Das ist Zusammensetzung, keine Abwertung.",
     residueHeading: "6. Rückstands- / Kontaminationsrisiko",
@@ -138,11 +176,15 @@ export const de: Messages = {
       "Es verschweigt keine Agrarchemikalien, Metalle oder Tierarzneimittelrückstände.",
       "Es erzeugt keinen Blackbox-„KI-Ernährungsscore“.",
       "Es stellt die Matrix nicht hinter eine Bezahlschranke.",
+      "Es füllt keinen Wert, den keine Datenbank nennt, mit null auf und verschweigt nicht, aus welcher Datenbank ein Wert stammt.",
+      "Es gibt einen von einem ähnlichen Lebensmittel übernommenen Wert nicht als gemessen aus.",
     ],
     willDoHeading: "Was es tut",
     willDo: [
       "Lebensmittel innerhalb einer Klasse auf dokumentierten Achsen einordnen.",
       "Die limitierende Aminosäure, Umrechnungsfaktoren und Resorptionskoeffizienten zeigen.",
+      "Für jeden Nährwert zeigen, aus welcher Datenbank er stammt und wie diese ihn ermittelt hat.",
+      "Zeigen, wie die Zubereitung ein Lebensmittel verändert, anhand der gegarten Einträge der Datenbanken.",
       "Den Datensatz versionieren und das Datum der letzten Prüfung anzeigen.",
       "Die Matrix als CSV und JSON exportieren.",
       "Erforderliche Lücken rein pflanzlicher Muster klar benennen.",
@@ -151,17 +193,26 @@ export const de: Messages = {
   source: {
     summary: "Quelle & Methode",
     dataset: (version, lastVerified) =>
-      `Datensatz ${version}, zuletzt geprüft am ${lastVerified}. Die Werte werden im Browser aus Roh-Nährstoffdaten und dokumentierten Koeffizienten berechnet. Es gibt kein Blackbox-Modell.`,
+      `Datensatz ${version}, zuletzt geprüft am ${lastVerified}. Die Nährwerte werden per Skript aus den unten genannten Datenbanken übernommen; die Bewertungen berechnet der Browser aus diesen Werten und dokumentierten Koeffizienten. Es gibt kein Blackbox-Modell.`,
     updatePath:
-      "Werte in src/data/foods/*.ts ersetzen, DATASET_VERSION und LAST_VERIFIED in coefficients.ts anheben, Tests erneut ausführen.",
+      "Neues Lebensmittel: in src/data/sources/manifest.json seinem BLS- oder FDC-Eintrag zuordnen, scripts/data/build_snapshot.py ausführen, die kuratierten Angaben in src/data/foods/*.ts ergänzen, Tests erneut ausführen.",
     general: [
-      "USDA FoodData Central (FDC-IDs bei jedem Lebensmittel)",
+      "BLS 4.0, Max Rubner-Institut (CC BY 4.0): primäre Nährwertquelle",
+      "USDA FoodData Central SR Legacy (gemeinfrei): im BLS fehlende Lebensmittel, Cholin, Selen",
       "FAO-2013-Aminosäure-Referenzmuster für Erwachsene + DIAAS/PDCAAS-Literatur",
       "IOM/EFSA-RAE-Umrechnung (β-Carotin /12, andere Carotinoide /24)",
+      "FDA-Tageswerte; tolerierbare EFSA-Höchstmengen",
       "Eisen-/Zink-Resorptionsmittelwerte aus Bioverfügbarkeits-Metaanalysen",
       "EU/US-Rückstandshöchstgehalte (MRL) als Risikoklasse, kein Laborzertifikat",
     ],
     link: "Link",
+    entriesHeading: "Datenbankeinträge",
+    primary: "primär",
+    matchSame: "gleiches Lebensmittel, gleiche Zubereitung",
+    matchSimilar: "ähnliches Lebensmittel als Ersatz",
+    fills: (nutrients) => `ergänzt: ${nutrients}`,
+    datasetsHeading: "Datenbanken und Lizenzen",
+    curatedHeading: "Kuratierte Literatur",
     cardLine: ({ aas, diaas, pdcaas, limiting, rae, iron }) =>
       `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · limitierend ${limiting} · RAE ${rae} µg · resorbierbares Fe ${iron} mg`,
   },
@@ -255,7 +306,7 @@ export const de: Messages = {
     iodineSelenium: "Jod + Selen",
     retinolDensity: "Retinoldichte",
     b12Density: "B12-Dichte",
-    copperProxy: "Kupfer-Proxy",
+    copperDensity: "Kupfer",
     cholineDensity: "Cholin",
     yolkFatQuality: "Eigelb-Fettqualität",
     calciumDensity: "Calciumdichte",

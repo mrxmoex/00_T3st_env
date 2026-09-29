@@ -6,6 +6,7 @@ import { scoreCatalog } from "../scoring/scoreFood";
 import { DIETARY_PATTERNS, FOOD_CLASSES, kingdomOf } from "../scoring/types";
 import { de } from "./de";
 import { en } from "./en";
+import { MICRO_LABELS, NUTRIENT_LABELS, PREPARATION_LABELS, PROVENANCE_LABELS } from "./labels";
 import { LOCALES, isLocale, readLocale, type Locale, type LocalizedText } from "./locale";
 import type { Messages } from "./messages";
 
@@ -38,6 +39,17 @@ describe("UI messages", () => {
     expect(Object.keys(de.extras).sort()).toEqual(Object.keys(en.extras).sort());
   });
 
+  it("labels every nutrient, provenance category, and preparation in both languages", () => {
+    const tables = { MICRO_LABELS, NUTRIENT_LABELS, PROVENANCE_LABELS, PREPARATION_LABELS };
+    for (const [table, labels] of Object.entries(tables)) {
+      for (const [key, label] of Object.entries(labels)) {
+        for (const locale of LOCALES) {
+          expect(label[locale].trim(), `${table}.${key} [${locale}]`).not.toBe("");
+        }
+      }
+    }
+  });
+
   it("translates list content item by item", () => {
     expect(de.limits.nonClaims).toHaveLength(en.limits.nonClaims.length);
     expect(de.limits.willDo).toHaveLength(en.limits.willDo.length);
@@ -46,9 +58,8 @@ describe("UI messages", () => {
 });
 
 describe("bilingual data and engine output", () => {
-  it("ships every food's state and notes in both languages", () => {
+  it("ships every food's notes in both languages", () => {
     for (const food of FOODS) {
-      expectTranslated(food.edibleState, `${food.id} edibleState`);
       for (const note of food.notes) {
         expectTranslated(note, `${food.id} note`);
       }

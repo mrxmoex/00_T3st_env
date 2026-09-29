@@ -1,6 +1,6 @@
 import { clamp01, round1 } from "./math";
+import { hemeIronMg } from "./micros";
 import type { FoodClass, FoodRecord } from "./types";
-import { kingdomOf } from "./types";
 
 /**
  * Class-specific matrix columns. These do not replace the core axes.
@@ -35,7 +35,7 @@ export function classExtraColumns(foodClass: FoodClass): string[] {
     case "muscle_fish":
       return ["eaaCompleteness", "epaDha", "iodineSelenium", "metalLoad"];
     case "organs":
-      return ["retinolDensity", "b12Density", "copperProxy", "creatine"];
+      return ["retinolDensity", "b12Density", "copperDensity", "creatine"];
     case "eggs":
       return ["eaaCompleteness", "cholineDensity", "yolkFatQuality"];
     case "dairy":
@@ -49,22 +49,35 @@ export function classExtraColumns(foodClass: FoodClass): string[] {
   }
 }
 
-export function scoreClassExtras(food: FoodRecord): Record<string, number> {
-  const extras: Record<string, number> = {};
+export function scoreClassExtras(food: FoodRecord): Record<string, number | null> {
+  const extras: Record<string, number | null> = {};
   const columns = classExtraColumns(food.class);
   for (const column of columns) {
-    extras[column] = round1(scoreExtraColumn(food, column));
+    const value = scoreExtraColumn(food, column);
+    extras[column] = value === null ? null : round1(value);
   }
   return extras;
 }
 
-function scoreExtraColumn(food: FoodRecord, column: string): number {
+function per100kcal(amount: number | null, kcal: number): number | null {
+  return amount === null ? null : (amount / kcal) * 100;
+}
+
+function scaled(value: number | null, full: number): number | null {
+  return value === null ? null : 100 * clamp01(value / full);
+}
+
+function inverted(value: number | null, full: number): number | null {
+  return value === null ? null : 100 * (1 - clamp01(value / full));
+}
+
+function scoreExtraColumn(food: FoodRecord, column: string): number | null {
   const kcal = Math.max(food.kcalPer100g, 1);
   switch (column) {
     case "folateDensity":
-      return 100 * clamp01(((food.micros.folateUg / kcal) * 100) / 80);
+      return scaled(per100kcal(food.micros.folateUg, kcal), 80);
     case "vitaminKDensity":
-      return 100 * clamp01(((food.micros.vitaminKUg / kcal) * 100) / 200);
+      return scaled(per100kcal(food.micros.vitaminKUg, kcal), 200);
     case "nitrateProxy":
       return food.class === "leafy_salad" ? 70 : 40;
     case "surfaceResidue":
@@ -88,11 +101,11 @@ function scoreExtraColumn(food: FoodRecord, column: string): number {
     case "goitrogenProxy":
       return 55;
     case "vitaminCRetention":
-      return 100 * clamp01(food.micros.vitaminCMg / 80);
+      return scaled(food.micros.vitaminCMg, 80);
     case "organicAcidStability":
       return 88;
     case "sodiumNote":
-      return 40;
+      return inverted(food.composition.sodiumMg, 800);
     case "ergothioneineProxy":
       return food.id.includes("shiitake") ? 85 : 65;
     case "vitaminDPotential":
@@ -100,11 +113,11 @@ function scoreExtraColumn(food: FoodRecord, column: string): number {
     case "chitinDigestPenalty":
       return 100 * food.ilealDigestibility;
     case "iodineDensity":
-      return 100 * clamp01(((food.micros.iodineUg / kcal) * 100) / 80);
+      return scaled(per100kcal(food.micros.iodineUg, kcal), 80);
     case "preformedN3":
       return 100 * clamp01((food.fattyAcids.omega3Epa + food.fattyAcids.omega3Dha) / 0.3);
     case "inactiveB12Flag":
-      return food.micros.b12IsAnalogue ? 0 : 100 * clamp01(food.micros.vitaminB12Ug / 2.4);
+      return food.micros.b12IsAnalogue ? 0 : scaled(food.micros.vitaminB12Ug, 2.4);
     case "metalLoad":
       return food.residue.heavyMetalClass === "elevated"
         ? 25
@@ -116,42 +129,48 @@ function scoreExtraColumn(food: FoodRecord, column: string): number {
     case "carotenoidOnlyA":
       return food.micros.vitaminARetinolUg > 0 ? 90 : 40;
     case "vitaminCDensity":
-      return 100 * clamp01(((food.micros.vitaminCMg / kcal) * 100) / 40);
+      return scaled(per100kcal(food.micros.vitaminCMg, kcal), 40);
     case "waterWeight":
       return 100 * clamp01(1 - food.kcalPer100g / 80);
     case "eaaCompleteness":
       return 100 * clamp01(Math.min(1, (food.aminoAcids.lys / 48 + (food.aminoAcids.met + food.aminoAcids.cys) / 23) / 2));
-    case "oddChainCla":
-      return 100 * clamp01((food.fattyAcids.oddChain + food.fattyAcids.cla) / 0.4);
+    case "oddChainCla": {
+      const { oddChain, cla } = food.fattyAcids;
+      return oddChain === null && cla === null ? null : scaled((oddChain ?? 0) + (cla ?? 0), 0.4);
+    }
     case "creatine":
       return 100 * clamp01(food.animalCompounds.creatineMg / 400);
     case "hemeIron":
-      return food.micros.ironForm === "heme" ? 100 * clamp01(food.micros.ironMg / 3) : 20;
+      return 100 * clamp01(hemeIronMg(food) / 1.8);
     case "n6Load":
       return 100 * (1 - clamp01(food.fattyAcids.omega6La / 3));
     case "leanness":
       return 100 * clamp01(1 - food.fatG / 20);
     case "epaDha":
       return 100 * clamp01((food.fattyAcids.omega3Epa + food.fattyAcids.omega3Dha) / 1.5);
-    case "iodineSelenium":
-      return 100 * clamp01((food.micros.iodineUg / 50 + food.micros.seleniumUg / 40) / 2);
+    case "iodineSelenium": {
+      const parts = [scaled(food.micros.iodineUg, 50), scaled(food.micros.seleniumUg, 40)].filter(
+        (part): part is number => part !== null,
+      );
+      return parts.length === 0 ? null : parts.reduce((sum, part) => sum + part, 0) / parts.length;
+    }
     case "retinolDensity":
       return 100 * clamp01(food.micros.vitaminARetinolUg / 3000);
     case "b12Density":
-      return 100 * clamp01(food.micros.vitaminB12Ug / 20);
-    case "copperProxy":
-      return food.class === "organs" ? 80 : 20;
+      return scaled(food.micros.vitaminB12Ug, 20);
+    case "copperDensity":
+      return scaled(food.micros.copperMg, 2);
     case "cholineDensity":
-      return 100 * clamp01(food.micros.cholineMg / 250);
+      return scaled(food.micros.cholineMg, 250);
     case "yolkFatQuality":
       return 72;
     case "calciumDensity":
-      return 100 * clamp01(((food.micros.calciumMg / kcal) * 100) / 150);
+      return scaled(per100kcal(food.micros.calciumMg, kcal), 150);
     case "lactoseLoad":
-      return 100 * (1 - clamp01(food.carbs.sugars / 5));
+      return inverted(food.composition.lactoseG, 5);
     case "fermentationStability":
       return 85;
     default:
-      return kingdomOf(food.class) === "animal" ? 50 : 50;
+      return 50;
   }
 }

@@ -1,958 +1,849 @@
-import type { FoodRecord } from "../../scoring/types";
-import { NEGLIGIBLE_FAT, ZERO_ANIMAL, defineFood } from "./helpers";
+import type { FoodRecord, ResidueProfile } from "../../scoring/types";
+import { defineFood, plant, prepared } from "./helpers";
 
-const USDA = "USDA FoodData Central";
+const FAO_PULSES = { label: "FAO 2013 / DIAAS literature", note: "Pulse DIAAS typically 0.5–0.8; SAA limiting" };
+const ALGAL_B12 = { label: "Watanabe et al. algal corrinoids", note: "B12 analogues — not counted as B12" };
+
+const LEAFY_HIGH_SURFACE: ResidueProfile = {
+  surfaceAreaClass: "high", systemicPesticideLikelihood: 0.45,
+  contactPesticideLikelihood: 0.7, typicalMrlProximity: 0.4,
+  heavyMetalClass: "low", veterinaryResidueClass: "none",
+};
+
+const spinachRaw = plant({
+  id: "spinach_raw", name: "Spinach, raw", nameDe: "Spinat, roh",
+  class: "leafy_salad", group: "spinach", preparation: "raw",
+  ilealDigestibility: 0.76, zincBoundByPhytate: true, resistantStarchG: 0.1,
+  residue: LEAFY_HIGH_SURFACE,
+  degradation: {
+    waterSolubleVitaminLoad: 0.85, cutSurfaceSensitivity: 0.9,
+    heatSensitivity: 0.8, oxygenLightSensitivity: 0.85,
+    perishabilityDays: 5, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.82,
+  sources: [{ label: "IOM vitamin A RAE food factors", note: "β-carotene µg / 12" }],
+  notes: [
+    {
+      en: "High folate and K. Non-heme iron + oxalate/phytate. Balanced but very dilute protein.",
+      de: "Viel Folat und Vitamin K. Nicht-Hämeisen + Oxalat/Phytat. Ausgewogenes, aber sehr verdünntes Protein.",
+    },
+  ],
+});
+
+const kaleRaw = plant({
+  id: "kale_raw", name: "Kale, raw", nameDe: "Grünkohl, roh",
+  class: "leafy_salad", group: "kale", preparation: "raw",
+  ilealDigestibility: 0.75, zincBoundByPhytate: true, resistantStarchG: 0.1,
+  residue: {
+    surfaceAreaClass: "high", systemicPesticideLikelihood: 0.4,
+    contactPesticideLikelihood: 0.65, typicalMrlProximity: 0.38,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.8, cutSurfaceSensitivity: 0.75,
+    heatSensitivity: 0.7, oxygenLightSensitivity: 0.75,
+    perishabilityDays: 7, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.88,
+  notes: [
+    {
+      en: "Glucosinolates + carotenoids. Still no retinol, B12, or complete dense protein.",
+      de: "Glucosinolate + Carotinoide. Trotzdem kein Retinol, kein B12 und kein vollständiges, dichtes Protein.",
+    },
+  ],
+});
+
+const romaineRaw = plant({
+  id: "romaine_raw", name: "Romaine lettuce, raw", nameDe: "Römersalat, roh",
+  class: "leafy_salad", group: "romaine", preparation: "raw",
+  ilealDigestibility: 0.72, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "high", systemicPesticideLikelihood: 0.5,
+    contactPesticideLikelihood: 0.75, typicalMrlProximity: 0.45,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.7, cutSurfaceSensitivity: 0.95,
+    heatSensitivity: 0.6, oxygenLightSensitivity: 0.8,
+    perishabilityDays: 6, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.55,
+  notes: [
+    {
+      en: "High surface area: residue and pathogen risk are material. Protein is nutritionally trivial.",
+      de: "Große Oberfläche: Rückstands- und Keimrisiko sind erheblich. Protein ist ernährungsphysiologisch unbedeutend.",
+    },
+  ],
+});
+
+const lentilsBoiled = plant({
+  id: "lentils_boiled", name: "Lentils, boiled", nameDe: "Linsen, gekocht",
+  class: "legumes", group: "lentils", preparation: "boiled",
+  ilealDigestibility: 0.8, zincBoundByPhytate: true, resistantStarchG: 2,
+  residue: {
+    surfaceAreaClass: "low", systemicPesticideLikelihood: 0.25,
+    contactPesticideLikelihood: 0.15, typicalMrlProximity: 0.2,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.45, cutSurfaceSensitivity: 0.1,
+    heatSensitivity: 0.4, oxygenLightSensitivity: 0.25,
+    perishabilityDays: 4, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0.7,
+  sources: [FAO_PULSES],
+  notes: [
+    {
+      en: "Lysine-rich, SAA-limited. Phytate binds Fe/Zn. Not a complete protein food.",
+      de: "Lysinreich, SAA-limitiert. Phytat bindet Fe/Zn. Kein vollständiges Proteinlebensmittel.",
+    },
+  ],
+});
+
+const chickpeasBoiled = plant({
+  id: "chickpeas_boiled", name: "Chickpeas, boiled", nameDe: "Kichererbsen, gekocht",
+  class: "legumes", group: "chickpeas", preparation: "boiled",
+  ilealDigestibility: 0.78, zincBoundByPhytate: true, resistantStarchG: 1.5,
+  residue: {
+    surfaceAreaClass: "low", systemicPesticideLikelihood: 0.22,
+    contactPesticideLikelihood: 0.12, typicalMrlProximity: 0.18,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.1,
+    heatSensitivity: 0.4, oxygenLightSensitivity: 0.2,
+    perishabilityDays: 4, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0.65,
+  notes: [
+    {
+      en: "Better SAA than lentils, still incomplete vs FAO pattern after digestibility.",
+      de: "Mehr SAA als Linsen, nach Verdaulichkeit aber weiterhin unvollständig gemessen am FAO-Muster.",
+    },
+  ],
+});
+
+const blackBeansBoiled = plant({
+  id: "black_beans_boiled", name: "Black beans, boiled", nameDe: "Schwarze Bohnen, gekocht",
+  class: "legumes", group: "black_beans", preparation: "boiled",
+  ilealDigestibility: 0.77, zincBoundByPhytate: true, resistantStarchG: 2.4,
+  residue: {
+    surfaceAreaClass: "low", systemicPesticideLikelihood: 0.2,
+    contactPesticideLikelihood: 0.12, typicalMrlProximity: 0.16,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.1,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.2,
+    perishabilityDays: 4, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0.72,
+  notes: [
+    {
+      en: "Anthocyanins + fibre. Iron remains non-heme and phytate-bound.",
+      de: "Anthocyane + Ballaststoffe. Eisen bleibt Nicht-Hämeisen und phytatgebunden.",
+    },
+  ],
+});
+
+const alfalfaSprouts = plant({
+  id: "alfalfa_sprouts", name: "Alfalfa sprouts, raw", nameDe: "Alfalfasprossen, roh",
+  class: "sprouts", group: "alfalfa_sprouts", preparation: "raw",
+  ilealDigestibility: 0.73, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "high", systemicPesticideLikelihood: 0.12,
+    contactPesticideLikelihood: 0.18, typicalMrlProximity: 0.12,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.8, cutSurfaceSensitivity: 0.6,
+    heatSensitivity: 0.7, oxygenLightSensitivity: 0.85,
+    perishabilityDays: 3, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Historical Salmonella/E. coli outbreaks matter. Raw sprouts are a pathogen-risk class.",
+      de: "Frühere Salmonellen- und E.-coli-Ausbrüche sind relevant. Rohe Sprossen sind eine Risikoklasse für Keime.",
+    },
+  ],
+});
+
+const broccoliRaw = plant({
+  id: "broccoli_raw", name: "Broccoli, raw", nameDe: "Brokkoli, roh",
+  class: "cruciferous_fresh", group: "broccoli", preparation: "raw",
+  ilealDigestibility: 0.76, resistantStarchG: 0.2,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.3,
+    contactPesticideLikelihood: 0.45, typicalMrlProximity: 0.28,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.85, cutSurfaceSensitivity: 0.7,
+    heatSensitivity: 0.75, oxygenLightSensitivity: 0.7,
+    perishabilityDays: 6, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.86,
+  notes: [
+    {
+      en: "Fresh crucifer ≠ sauerkraut. Heat destroys myrosinase; vitamin C is labile.",
+      de: "Frischer Kreuzblütler ≠ Sauerkraut. Hitze zerstört Myrosinase; Vitamin C ist labil.",
+    },
+  ],
+});
+
+const cabbageRaw = plant({
+  id: "cabbage_raw", name: "White cabbage, raw", nameDe: "Weißkohl, roh",
+  class: "cruciferous_fresh", group: "white_cabbage", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0.1,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.28,
+    contactPesticideLikelihood: 0.4, typicalMrlProximity: 0.25,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.7, cutSurfaceSensitivity: 0.65,
+    heatSensitivity: 0.65, oxygenLightSensitivity: 0.6,
+    perishabilityDays: 14, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.7,
+  notes: [
+    {
+      en: "Storage cabbage is more stable than salad greens; still no animal-exclusive nutrients.",
+      de: "Lagerkohl ist stabiler als Blattsalat; trotzdem keine ausschließlich tierischen Nährstoffe.",
+    },
+  ],
+});
+
+const sauerkraut = plant({
+  id: "sauerkraut", name: "Sauerkraut, drained", nameDe: "Sauerkraut, abgetropft",
+  class: "cruciferous_fermented", group: "sauerkraut", preparation: "fermented",
+  ilealDigestibility: 0.78, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.15,
+    contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.15,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.55, cutSurfaceSensitivity: 0.2,
+    heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
+    perishabilityDays: 60, processingStability: "fermented",
+  },
+  phytochemicalIndex: 0.75,
+  notes: [
+    {
+      en: "Fermentation ≠ fresh cabbage. Organic acids improve stability; sodium is high. Not a probiotic medicine.",
+      de: "Fermentation ≠ frischer Kohl. Organische Säuren verbessern die Stabilität; Natrium ist hoch. Kein probiotisches Arzneimittel.",
+    },
+  ],
+});
+
+const kimchi = plant({
+  id: "kimchi", name: "Kimchi (cabbage)", nameDe: "Kimchi (Kohl)",
+  class: "cruciferous_fermented", group: "kimchi", preparation: "fermented",
+  ilealDigestibility: 0.78, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.18,
+    contactPesticideLikelihood: 0.22, typicalMrlProximity: 0.16,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.5, cutSurfaceSensitivity: 0.2,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.3,
+    perishabilityDays: 45, processingStability: "fermented",
+  },
+  phytochemicalIndex: 0.8,
+  notes: [
+    {
+      en: "Not interchangeable with sauerkraut or fresh cabbage. Some recipes include fish sauce (not assumed here).",
+      de: "Nicht austauschbar mit Sauerkraut oder frischem Kohl. Manche Rezepte enthalten Fischsauce (hier nicht angenommen).",
+    },
+  ],
+});
+
+const whiteMushroomRaw = plant({
+  id: "white_mushroom_raw", name: "Button mushroom, raw", nameDe: "Champignon, roh",
+  class: "mushrooms", group: "button_mushroom", preparation: "raw",
+  ilealDigestibility: 0.7, b12IsAnalogue: true, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.2,
+    contactPesticideLikelihood: 0.25, typicalMrlProximity: 0.2,
+    heavyMetalClass: "moderate", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.55, cutSurfaceSensitivity: 0.7,
+    heatSensitivity: 0.45, oxygenLightSensitivity: 0.5,
+    perishabilityDays: 5, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.5,
+  sources: [{ label: "Fungal B12", note: "Trace corrinoids are not reliable B12" }],
+  notes: [
+    {
+      en: "Fungi are not plants. Chitin lowers digestibility. Ergothioneine ≠ polyphenol load.",
+      de: "Pilze sind keine Pflanzen. Chitin senkt die Verdaulichkeit. Ergothionein ≠ Polyphenolgehalt.",
+    },
+  ],
+});
+
+const shiitakeRaw = plant({
+  id: "shiitake_raw", name: "Shiitake, raw", nameDe: "Shiitake, roh",
+  class: "mushrooms", group: "shiitake", preparation: "raw",
+  ilealDigestibility: 0.72, resistantStarchG: 0.2,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.18,
+    contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.18,
+    heavyMetalClass: "moderate", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.5, cutSurfaceSensitivity: 0.6,
+    heatSensitivity: 0.4, oxygenLightSensitivity: 0.45,
+    perishabilityDays: 7, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.62,
+  notes: [
+    {
+      en: "UV-exposed mushrooms can raise vitamin D2; D2 ≠ D3 equivalence assumed here.",
+      de: "UV-belichtete Pilze können Vitamin D2 erhöhen; D2 wird hier nicht mit D3 gleichgesetzt.",
+    },
+  ],
+});
+
+const noriRoasted = plant({
+  id: "nori_roasted", name: "Nori sheet, roasted", nameDe: "Nori-Blatt, geröstet",
+  class: "algae", group: "nori", preparation: "roasted",
+  ilealDigestibility: 0.72, b12IsAnalogue: true, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "high", systemicPesticideLikelihood: 0.05,
+    contactPesticideLikelihood: 0.05, typicalMrlProximity: 0.1,
+    heavyMetalClass: "moderate", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.1,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.45,
+    perishabilityDays: 180, processingStability: "dried",
+  },
+  phytochemicalIndex: 0.55,
+  sources: [ALGAL_B12],
+  notes: [
+    {
+      en: "Algae ≠ leafy greens ≠ mushrooms. Iodine can be excessive. B12 analogues score 0.",
+      de: "Algen ≠ Blattgemüse ≠ Pilze. Jod kann übermäßig sein. B12-Analoga zählen 0.",
+    },
+  ],
+});
+
+const wakameRaw = plant({
+  id: "wakame_raw", name: "Wakame, raw", nameDe: "Wakame, roh",
+  class: "algae", group: "wakame", preparation: "raw",
+  ilealDigestibility: 0.7, b12IsAnalogue: true, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "high", systemicPesticideLikelihood: 0.05,
+    contactPesticideLikelihood: 0.05, typicalMrlProximity: 0.1,
+    heavyMetalClass: "elevated", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.2,
+    heatSensitivity: 0.3, oxygenLightSensitivity: 0.35,
+    perishabilityDays: 14, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.5,
+  sources: [ALGAL_B12],
+  notes: [
+    {
+      en: "Some EPA, no DHA to speak of. Iodine and metals dominate risk. Not a salad green.",
+      de: "Etwas EPA, kaum DHA. Jod und Metalle dominieren das Risiko. Kein Blattsalat.",
+    },
+  ],
+});
+
+const carrotRaw = plant({
+  id: "carrot_raw", name: "Carrot, raw", nameDe: "Karotte, roh",
+  class: "roots_tubers", group: "carrot", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0.2,
+  residue: {
+    surfaceAreaClass: "low", systemicPesticideLikelihood: 0.35,
+    contactPesticideLikelihood: 0.3, typicalMrlProximity: 0.22,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.55,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.4,
+    perishabilityDays: 21, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.55,
+  sources: [{ label: "IOM RAE", note: "β-carotene µg / 12 → RAE, not retinol" }],
+  notes: [
+    {
+      en: "Carotenoid-A is not retinol. Conversion is inefficient and genetically variable.",
+      de: "Carotinoid-A ist kein Retinol. Die Umwandlung ist ineffizient und genetisch variabel.",
+    },
+  ],
+});
+
+const potatoBoiled = plant({
+  id: "potato_boiled", name: "Potato, peeled, boiled", nameDe: "Kartoffel, geschält, gekocht",
+  class: "roots_tubers", group: "potato", preparation: "boiled",
+  ilealDigestibility: 0.8, resistantStarchG: 1.3,
+  residue: {
+    surfaceAreaClass: "low", systemicPesticideLikelihood: 0.4,
+    contactPesticideLikelihood: 0.25, typicalMrlProximity: 0.3,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.5,
+    heatSensitivity: 0.45, oxygenLightSensitivity: 0.3,
+    perishabilityDays: 5, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0.25,
+  notes: [
+    {
+      en: "Active starch dominates. Cooling raises resistant starch; still not a micronutrient-dense food.",
+      de: "Aktive Stärke dominiert. Abkühlen erhöht die resistente Stärke; trotzdem kein mikronährstoffdichtes Lebensmittel.",
+    },
+  ],
+});
+
+const sweetPotatoBaked = plant({
+  id: "sweet_potato_baked", name: "Sweet potato, baked", nameDe: "Süßkartoffel, gebacken",
+  class: "roots_tubers", group: "sweet_potato", preparation: "baked",
+  ilealDigestibility: 0.78, resistantStarchG: 0.8,
+  residue: {
+    surfaceAreaClass: "low", systemicPesticideLikelihood: 0.3,
+    contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.2,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.4,
+    heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
+    perishabilityDays: 6, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0.48,
+  notes: [
+    {
+      en: "Orange flesh is carotenoid-A, not retinol. Active sugars are higher than white potato.",
+      de: "Oranges Fruchtfleisch liefert Carotinoid-A, kein Retinol. Mehr aktive Zucker als die weiße Kartoffel.",
+    },
+  ],
+});
+
+const tomatoRaw = plant({
+  id: "tomato_raw", name: "Tomato, raw", nameDe: "Tomate, roh",
+  class: "other_vegetables", group: "tomato", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.4,
+    contactPesticideLikelihood: 0.55, typicalMrlProximity: 0.35,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.55, cutSurfaceSensitivity: 0.6,
+    heatSensitivity: 0.45, oxygenLightSensitivity: 0.5,
+    perishabilityDays: 8, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.58,
+  notes: [
+    {
+      en: "Lycopene is a phytochemical, not vitamin A. Fruiting vegetables ≠ leafy or legume.",
+      de: "Lycopin ist ein sekundärer Pflanzenstoff, kein Vitamin A. Fruchtgemüse ≠ Blattgemüse oder Hülsenfrucht.",
+    },
+  ],
+});
+
+const redPepperRaw = plant({
+  id: "red_bell_pepper_raw", name: "Red bell pepper, raw", nameDe: "Paprika, rot, roh",
+  class: "other_vegetables", group: "red_pepper", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.42,
+    contactPesticideLikelihood: 0.6, typicalMrlProximity: 0.4,
+    heavyMetalClass: "low", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.9, cutSurfaceSensitivity: 0.7,
+    heatSensitivity: 0.8, oxygenLightSensitivity: 0.75,
+    perishabilityDays: 8, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Exceptional vitamin C density; C degrades rapidly after cutting.",
+      de: "Außergewöhnliche Vitamin-C-Dichte; Vitamin C zerfällt nach dem Schneiden schnell.",
+    },
+  ],
+});
+
+const rocketRaw = plant({
+  id: "rocket_raw", name: "Rocket, raw", nameDe: "Rucola, roh",
+  class: "leafy_salad", group: "rocket", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: LEAFY_HIGH_SURFACE,
+  degradation: { ...spinachRaw.degradation, perishabilityDays: 4 },
+  phytochemicalIndex: 0.8,
+  notes: [
+    {
+      en: "A crucifer leaf: glucosinolates and nitrate. Non-heme iron, dilute protein.",
+      de: "Ein Kreuzblütler-Blatt: Glucosinolate und Nitrat. Nicht-Hämeisen, verdünntes Protein.",
+    },
+  ],
+});
+
+const lambsLettuceRaw = plant({
+  id: "lambs_lettuce_raw", name: "Lamb's lettuce, raw", nameDe: "Feldsalat, roh",
+  class: "leafy_salad", group: "lambs_lettuce", preparation: "raw",
+  ilealDigestibility: 0.72, resistantStarchG: 0,
+  residue: romaineRaw.residue,
+  degradation: { ...romaineRaw.degradation, perishabilityDays: 4 },
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Tender leaf with a large surface: folate and provitamin A, still no retinol or B12.",
+      de: "Zartes Blatt mit großer Oberfläche: Folat und Provitamin A, trotzdem kein Retinol und kein B12.",
+    },
+  ],
+});
+
+const chardRaw = plant({
+  id: "chard_raw", name: "Swiss chard, raw", nameDe: "Mangold, roh",
+  class: "leafy_salad", group: "chard", preparation: "raw",
+  ilealDigestibility: 0.75, zincBoundByPhytate: true, resistantStarchG: 0,
+  residue: LEAFY_HIGH_SURFACE,
+  degradation: spinachRaw.degradation,
+  phytochemicalIndex: 0.75,
+  notes: [
+    {
+      en: "Betalain pigments and high oxalate; much of the calcium is oxalate-bound.",
+      de: "Betalain-Farbstoffe und viel Oxalat; ein großer Teil des Calciums ist oxalatgebunden.",
+    },
+  ],
+});
+
+const redLentilsBoiled = plant({
+  id: "red_lentils_boiled", name: "Red lentils, boiled", nameDe: "Rote Linsen, gekocht",
+  class: "legumes", group: "red_lentils", preparation: "boiled",
+  ilealDigestibility: 0.8, zincBoundByPhytate: true, resistantStarchG: 1.8,
+  residue: lentilsBoiled.residue,
+  degradation: lentilsBoiled.degradation,
+  phytochemicalIndex: 0.55,
+  sources: [FAO_PULSES],
+  notes: [
+    {
+      en: "Dehulled lentils: less fibre and polyphenol than whole lentils; still SAA-limited.",
+      de: "Geschälte Linsen: weniger Ballaststoffe und Polyphenole als ganze Linsen; weiterhin SAA-limitiert.",
+    },
+  ],
+});
+
+const kidneyBeansBoiled = plant({
+  id: "kidney_beans_boiled", name: "Kidney beans, boiled", nameDe: "Kidneybohnen, gekocht",
+  class: "legumes", group: "kidney_beans", preparation: "boiled",
+  ilealDigestibility: 0.77, zincBoundByPhytate: true, resistantStarchG: 2,
+  residue: blackBeansBoiled.residue,
+  degradation: blackBeansBoiled.degradation,
+  phytochemicalIndex: 0.7,
+  notes: [
+    {
+      en: "Must be boiled: raw kidney beans carry phytohaemagglutinin. Anthocyanins sit in the red coat.",
+      de: "Muss gekocht werden: Rohe Kidneybohnen enthalten Phytohämagglutinin. Anthocyane sitzen in der roten Schale.",
+    },
+  ],
+});
+
+const soybeansBoiled = plant({
+  id: "soybeans_boiled", name: "Soybeans, boiled", nameDe: "Sojabohnen, gekocht",
+  class: "legumes", group: "soybeans", preparation: "boiled",
+  ilealDigestibility: 0.85, zincBoundByPhytate: true, resistantStarchG: 0.5,
+  residue: chickpeasBoiled.residue,
+  degradation: chickpeasBoiled.degradation,
+  phytochemicalIndex: 0.75,
+  notes: [
+    {
+      en: "Complete by the FAO adult pattern before digestibility, just under it after; phytate and isoflavones remain.",
+      de: "Vor der Verdaulichkeit vollständig nach dem FAO-Muster für Erwachsene, danach knapp darunter; Phytat und Isoflavone bleiben.",
+    },
+  ],
+});
+
+const mungBeansBoiled = plant({
+  id: "mung_beans_boiled", name: "Mung beans, boiled", nameDe: "Mungbohnen, gekocht",
+  class: "legumes", group: "mung_beans", preparation: "boiled",
+  ilealDigestibility: 0.78, zincBoundByPhytate: true, resistantStarchG: 1.5,
+  residue: lentilsBoiled.residue,
+  degradation: lentilsBoiled.degradation,
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Lysine-rich and SAA-limited like most pulses; phytate binds iron and zinc.",
+      de: "Lysinreich und SAA-limitiert wie die meisten Hülsenfrüchte; Phytat bindet Eisen und Zink.",
+    },
+  ],
+});
+
+const tofu = plant({
+  id: "tofu", name: "Tofu", nameDe: "Tofu",
+  class: "legumes", group: "tofu", preparation: "processed",
+  ilealDigestibility: 0.9, zincBoundByPhytate: true, resistantStarchG: 0,
+  residue: chickpeasBoiled.residue,
+  degradation: {
+    waterSolubleVitaminLoad: 0.3, cutSurfaceSensitivity: 0.3,
+    heatSensitivity: 0.3, oxygenLightSensitivity: 0.3,
+    perishabilityDays: 7, processingStability: "cooked",
+  },
+  phytochemicalIndex: 0.5,
+  notes: [
+    {
+      en: "Soy curd: coagulation raises protein digestibility. Calcium depends on the coagulant.",
+      de: "Sojaquark: Die Gerinnung verbessert die Proteinverdaulichkeit. Der Calciumgehalt hängt vom Gerinnungsmittel ab.",
+    },
+  ],
+});
+
+const mungBeanSprouts = plant({
+  id: "mung_bean_sprouts", name: "Mung bean sprouts, raw", nameDe: "Mungbohnensprossen, roh",
+  class: "sprouts", group: "mung_bean_sprouts", preparation: "raw",
+  ilealDigestibility: 0.75, resistantStarchG: 0,
+  residue: alfalfaSprouts.residue,
+  degradation: alfalfaSprouts.degradation,
+  phytochemicalIndex: 0.55,
+  notes: [
+    {
+      en: "Sprouting lowers phytate; very watery and dilute in protein.",
+      de: "Keimen senkt den Phytatgehalt; sehr wasserreich und proteinarm.",
+    },
+  ],
+});
+
+const lentilSprouts = plant({
+  id: "lentil_sprouts", name: "Lentil sprouts, raw", nameDe: "Linsensprossen, roh",
+  class: "sprouts", group: "lentil_sprouts", preparation: "raw",
+  ilealDigestibility: 0.78, resistantStarchG: 0,
+  residue: alfalfaSprouts.residue,
+  degradation: alfalfaSprouts.degradation,
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Sprouting lowers phytate and raises vitamin C; pathogen risk as for all raw sprouts.",
+      de: "Keimen senkt Phytat und erhöht Vitamin C; Keimrisiko wie bei allen rohen Sprossen.",
+    },
+  ],
+});
+
+const cauliflowerRaw = plant({
+  id: "cauliflower_raw", name: "Cauliflower, raw", nameDe: "Blumenkohl, roh",
+  class: "cruciferous_fresh", group: "cauliflower", preparation: "raw",
+  ilealDigestibility: 0.76, resistantStarchG: 0.1,
+  residue: broccoliRaw.residue,
+  degradation: { ...broccoliRaw.degradation, perishabilityDays: 7 },
+  phytochemicalIndex: 0.72,
+  notes: [
+    {
+      en: "Glucosinolate-bearing crucifer with little carotenoid; vitamin C is its main micronutrient.",
+      de: "Glucosinolathaltiger Kreuzblütler mit wenig Carotinoiden; Vitamin C ist sein wichtigster Mikronährstoff.",
+    },
+  ],
+});
+
+const brusselsSproutsRaw = plant({
+  id: "brussels_sprouts_raw", name: "Brussels sprouts, raw", nameDe: "Rosenkohl, roh",
+  class: "cruciferous_fresh", group: "brussels_sprouts", preparation: "raw",
+  ilealDigestibility: 0.76, resistantStarchG: 0.1,
+  residue: cabbageRaw.residue,
+  degradation: { ...broccoliRaw.degradation, perishabilityDays: 7 },
+  phytochemicalIndex: 0.88,
+  notes: [
+    {
+      en: "Among the richest crucifers in glucosinolates; boiling leaches part of them.",
+      de: "Einer der glucosinolatreichsten Kreuzblütler; Kochen laugt einen Teil davon aus.",
+    },
+  ],
+});
+
+const chineseCabbageRaw = plant({
+  id: "chinese_cabbage_raw", name: "Chinese cabbage, raw", nameDe: "Chinakohl, roh",
+  class: "cruciferous_fresh", group: "chinese_cabbage", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: cabbageRaw.residue,
+  degradation: { ...cabbageRaw.degradation, perishabilityDays: 10 },
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Mild, watery crucifer and the base of kimchi; low in protein.",
+      de: "Milder, wasserreicher Kreuzblütler und Grundlage von Kimchi; wenig Protein.",
+    },
+  ],
+});
+
+const oysterMushroomRaw = plant({
+  id: "oyster_mushroom_raw", name: "Oyster mushroom, raw", nameDe: "Austernpilz, roh",
+  class: "mushrooms", group: "oyster_mushroom", preparation: "raw",
+  ilealDigestibility: 0.7, resistantStarchG: 0,
+  residue: whiteMushroomRaw.residue,
+  degradation: whiteMushroomRaw.degradation,
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Chitin-rich fungus with ergothioneine; no B12, and no vitamin D without UV exposure.",
+      de: "Chitinreicher Pilz mit Ergothionein; kein B12 und ohne UV-Belichtung kein Vitamin D.",
+    },
+  ],
+});
+
+const chanterelleRaw = plant({
+  id: "chanterelle_raw", name: "Chanterelle, raw", nameDe: "Pfifferling, roh",
+  class: "mushrooms", group: "chanterelle", preparation: "raw",
+  ilealDigestibility: 0.68, resistantStarchG: 0,
+  residue: { ...whiteMushroomRaw.residue, systemicPesticideLikelihood: 0.05, contactPesticideLikelihood: 0.05 },
+  degradation: { ...whiteMushroomRaw.degradation, perishabilityDays: 4 },
+  phytochemicalIndex: 0.55,
+  notes: [
+    {
+      en: "Wild mushroom: vitamin D2 from sunlight. Metal and radiocaesium load depend on where it grew.",
+      de: "Wildpilz: Vitamin D2 aus Sonnenlicht. Metall- und Radiocäsiumbelastung hängen vom Standort ab.",
+    },
+  ],
+});
+
+const spirulinaDried = plant({
+  id: "spirulina_dried", name: "Spirulina, dried", nameDe: "Spirulina, getrocknet",
+  class: "algae", group: "spirulina", preparation: "dried",
+  ilealDigestibility: 0.8, b12IsAnalogue: true, resistantStarchG: 0,
+  residue: {
+    surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
+    contactPesticideLikelihood: 0.05, typicalMrlProximity: 0.1,
+    heavyMetalClass: "moderate", veterinaryResidueClass: "none",
+  },
+  degradation: {
+    waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.1,
+    heatSensitivity: 0.35, oxygenLightSensitivity: 0.5,
+    perishabilityDays: 365, processingStability: "dried",
+  },
+  phytochemicalIndex: 0.7,
+  sources: [{ label: "Watanabe et al. 1999", note: "Spirulina B12 is predominantly inactive pseudovitamin B12" }],
+  notes: [
+    {
+      en: "A cyanobacterium, not a true alga. Its measured B12 is mostly inactive pseudovitamin B12.",
+      de: "Ein Cyanobakterium, keine echte Alge. Das gemessene B12 ist größtenteils inaktives Pseudovitamin B12.",
+    },
+  ],
+});
+
+const beetrootRaw = plant({
+  id: "beetroot_raw", name: "Beetroot, raw", nameDe: "Rote Bete, roh",
+  class: "roots_tubers", group: "beetroot", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: carrotRaw.residue,
+  degradation: { ...carrotRaw.degradation, perishabilityDays: 14 },
+  phytochemicalIndex: 0.8,
+  notes: [
+    {
+      en: "Betalains and nitrate; for a root, the carbohydrate is sugar-dominant.",
+      de: "Betalaine und Nitrat; für eine Wurzel sind die Kohlenhydrate zuckerdominiert.",
+    },
+  ],
+});
+
+const zucchiniRaw = plant({
+  id: "zucchini_raw", name: "Zucchini, raw", nameDe: "Zucchini, roh",
+  class: "other_vegetables", group: "zucchini", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: tomatoRaw.residue,
+  degradation: {
+    waterSolubleVitaminLoad: 0.6, cutSurfaceSensitivity: 0.6,
+    heatSensitivity: 0.5, oxygenLightSensitivity: 0.5,
+    perishabilityDays: 7, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.4,
+  notes: [
+    {
+      en: "Very watery: little of anything per gram, moderate density per calorie.",
+      de: "Sehr wasserreich: pro Gramm von allem wenig, pro Kalorie mäßige Dichte.",
+    },
+  ],
+});
+
+const aubergineRaw = plant({
+  id: "aubergine_raw", name: "Aubergine, raw", nameDe: "Aubergine, roh",
+  class: "other_vegetables", group: "aubergine", preparation: "raw",
+  ilealDigestibility: 0.74, resistantStarchG: 0,
+  residue: tomatoRaw.residue,
+  degradation: {
+    waterSolubleVitaminLoad: 0.5, cutSurfaceSensitivity: 0.7,
+    heatSensitivity: 0.5, oxygenLightSensitivity: 0.6,
+    perishabilityDays: 7, processingStability: "fresh",
+  },
+  phytochemicalIndex: 0.6,
+  notes: [
+    {
+      en: "Nasunin anthocyanin in the skin; low micronutrient density.",
+      de: "Nasunin-Anthocyan in der Schale; geringe Mikronährstoffdichte.",
+    },
+  ],
+});
 
 export const PLANT_FOODS: FoodRecord[] = [
-  defineFood({
-    id: "spinach_raw",
-    name: "Spinach, raw",
-    nameDe: "Spinat, roh",
-    class: "leafy_salad",
-    edibleState: { en: "raw leaves", de: "rohe Blätter" },
-    fdcId: "168462",
-    kcalPer100g: 23,
-    proteinG: 2.86,
-    fatG: 0.39,
-    aminoAcids: {
-      his: 22, ile: 44, leu: 78, lys: 61, met: 18, cys: 12,
-      phe: 45, tyr: 38, thr: 42, trp: 14, val: 56,
-    },
-    ilealDigestibility: 0.76,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.14, omega6La: 0.03 },
-    carbs: { total: 3.63, sugars: 0.42, starch: 0.1, fibre: 2.2, resistantStarch: 0.1 },
-    micros: {
-      ironMg: 2.71, ironForm: "nonheme", zincMg: 0.53, zincBoundByPhytate: true,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 5626, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 194, vitaminCMg: 28.1,
-      vitaminDUg: 0, vitaminKUg: 483, calciumMg: 99, seleniumUg: 1, iodineUg: 3,
-      cholineMg: 19.3, magnesiumMg: 79,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.45,
-      contactPesticideLikelihood: 0.7, typicalMrlProximity: 0.4,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.85, cutSurfaceSensitivity: 0.9,
-      heatSensitivity: 0.8, oxygenLightSensitivity: 0.85,
-      perishabilityDays: 5, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.82,
-    sources: [
-      { label: USDA, id: "FDC 168462", url: "https://fdc.nal.usda.gov/food-details/168462/nutrients" },
-      { label: "IOM vitamin A RAE food factors", note: "β-carotene µg / 12" },
-    ],
-    notes: [
-      {
-        en: "High folate and K. Non-heme iron + oxalate/phytate. Incomplete, dilute protein.",
-        de: "Viel Folat und Vitamin K. Nicht-Hämeisen + Oxalat/Phytat. Unvollständiges, verdünntes Protein.",
-      },
-    ],
+  spinachRaw,
+  prepared(spinachRaw, { id: "spinach_boiled", name: "Spinach, boiled", nameDe: "Spinat, gekocht", preparation: "boiled" }),
+  prepared(spinachRaw, { id: "spinach_stewed", name: "Spinach, stewed", nameDe: "Spinat, gedünstet", preparation: "stewed" }),
+  kaleRaw,
+  prepared(kaleRaw, { id: "kale_boiled", name: "Kale, boiled", nameDe: "Grünkohl, gekocht", preparation: "boiled" }),
+  prepared(kaleRaw, { id: "kale_steamed", name: "Kale, steamed", nameDe: "Grünkohl, gedämpft", preparation: "steamed" }),
+  romaineRaw,
+  rocketRaw,
+  lambsLettuceRaw,
+  chardRaw,
+  lentilsBoiled,
+  redLentilsBoiled,
+  chickpeasBoiled,
+  blackBeansBoiled,
+  kidneyBeansBoiled,
+  soybeansBoiled,
+  mungBeansBoiled,
+  tofu,
+  alfalfaSprouts,
+  mungBeanSprouts,
+  lentilSprouts,
+  broccoliRaw,
+  prepared(broccoliRaw, { id: "broccoli_boiled", name: "Broccoli, boiled", nameDe: "Brokkoli, gekocht", preparation: "boiled" }),
+  prepared(broccoliRaw, { id: "broccoli_stewed", name: "Broccoli, stewed", nameDe: "Brokkoli, gedünstet", preparation: "stewed" }),
+  cabbageRaw,
+  prepared(cabbageRaw, { id: "cabbage_boiled", name: "White cabbage, boiled", nameDe: "Weißkohl, gekocht", preparation: "boiled" }),
+  cauliflowerRaw,
+  brusselsSproutsRaw,
+  prepared(brusselsSproutsRaw, {
+    id: "brussels_sprouts_boiled", name: "Brussels sprouts, boiled", nameDe: "Rosenkohl, gekocht", preparation: "boiled",
   }),
-  defineFood({
-    id: "kale_raw",
-    name: "Kale, raw",
-    nameDe: "Grünkohl, roh",
-    class: "leafy_salad",
-    edibleState: { en: "raw leaves", de: "rohe Blätter" },
-    fdcId: "323505",
-    kcalPer100g: 35,
-    proteinG: 2.92,
-    fatG: 1.49,
-    aminoAcids: {
-      his: 20, ile: 42, leu: 74, lys: 55, met: 16, cys: 13,
-      phe: 44, tyr: 35, thr: 40, trp: 13, val: 54,
-    },
-    ilealDigestibility: 0.75,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.18, omega6La: 0.1, pufa: 0.34 },
-    carbs: { total: 4.42, sugars: 0.99, starch: 0.2, fibre: 4.1, resistantStarch: 0.1 },
-    micros: {
-      ironMg: 1.6, ironForm: "nonheme", zincMg: 0.39, zincBoundByPhytate: true,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 5927, vitaminAOtherCarotenoidsUg: 300,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 62, vitaminCMg: 93.4,
-      vitaminDUg: 0, vitaminKUg: 390, calciumMg: 254, seleniumUg: 0.9, iodineUg: 2,
-      cholineMg: 0.8, magnesiumMg: 33,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.4,
-      contactPesticideLikelihood: 0.65, typicalMrlProximity: 0.38,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.8, cutSurfaceSensitivity: 0.75,
-      heatSensitivity: 0.7, oxygenLightSensitivity: 0.75,
-      perishabilityDays: 7, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.88,
-    sources: [{ label: USDA, id: "FDC 323505" }],
-    notes: [
-      {
-        en: "Glucosinolates + carotenoids. Still no retinol, B12, or complete dense protein.",
-        de: "Glucosinolate + Carotinoide. Trotzdem kein Retinol, kein B12 und kein vollständiges, dichtes Protein.",
-      },
-    ],
+  chineseCabbageRaw,
+  sauerkraut,
+  prepared(sauerkraut, { id: "sauerkraut_stewed", name: "Sauerkraut, stewed", nameDe: "Sauerkraut, gedünstet", preparation: "stewed" }),
+  kimchi,
+  whiteMushroomRaw,
+  prepared(whiteMushroomRaw, {
+    id: "white_mushroom_fried", name: "Button mushroom, pan-fried", nameDe: "Champignon, in der Pfanne gebraten", preparation: "fried",
   }),
-  defineFood({
-    id: "romaine_raw",
-    name: "Romaine lettuce, raw",
-    nameDe: "Römersalat, roh",
-    class: "leafy_salad",
-    edibleState: { en: "raw leaves", de: "rohe Blätter" },
-    fdcId: "169247",
-    kcalPer100g: 17,
-    proteinG: 1.23,
-    fatG: 0.3,
-    aminoAcids: {
-      his: 18, ile: 38, leu: 68, lys: 50, met: 14, cys: 11,
-      phe: 40, tyr: 30, thr: 36, trp: 10, val: 48,
-    },
-    ilealDigestibility: 0.72,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.11 },
-    carbs: { total: 3.29, sugars: 1.19, starch: 0.1, fibre: 2.1, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.97, ironForm: "nonheme", zincMg: 0.23, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 5226, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 136, vitaminCMg: 4,
-      vitaminDUg: 0, vitaminKUg: 102, calciumMg: 33, seleniumUg: 0.4, iodineUg: 1,
-      cholineMg: 9.9, magnesiumMg: 14,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.5,
-      contactPesticideLikelihood: 0.75, typicalMrlProximity: 0.45,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.7, cutSurfaceSensitivity: 0.95,
-      heatSensitivity: 0.6, oxygenLightSensitivity: 0.8,
-      perishabilityDays: 6, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.55,
-    sources: [{ label: USDA, id: "FDC 169247" }],
-    notes: [
-      {
-        en: "High surface area: residue and pathogen risk are material. Protein is nutritionally trivial.",
-        de: "Große Oberfläche: Rückstands- und Keimrisiko sind erheblich. Protein ist ernährungsphysiologisch unbedeutend.",
-      },
-    ],
+  shiitakeRaw,
+  prepared(shiitakeRaw, { id: "shiitake_stewed", name: "Shiitake, stewed", nameDe: "Shiitake, gedünstet", preparation: "stewed" }),
+  prepared(shiitakeRaw, { id: "shiitake_dried", name: "Shiitake, dried", nameDe: "Shiitake, getrocknet", preparation: "dried" }),
+  oysterMushroomRaw,
+  chanterelleRaw,
+  noriRoasted,
+  wakameRaw,
+  spirulinaDried,
+  carrotRaw,
+  prepared(carrotRaw, { id: "carrot_boiled", name: "Carrot, boiled", nameDe: "Karotte, gekocht", preparation: "boiled" }),
+  potatoBoiled,
+  prepared(potatoBoiled, {
+    id: "potato_baked", name: "Potato, unpeeled, baked", nameDe: "Kartoffel, ungeschält, gebacken", preparation: "baked",
   }),
-  defineFood({
-    id: "lentils_boiled",
-    name: "Lentils, boiled",
-    nameDe: "Linsen, gekocht",
-    class: "legumes",
-    edibleState: { en: "boiled, drained", de: "gekocht, abgetropft" },
-    fdcId: "172421",
-    kcalPer100g: 116,
-    proteinG: 9.02,
-    fatG: 0.38,
-    aminoAcids: {
-      his: 28, ile: 43, leu: 72, lys: 70, met: 8, cys: 10,
-      phe: 49, tyr: 26, thr: 36, trp: 9, val: 50,
-    },
-    ilealDigestibility: 0.8,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.04, omega6La: 0.14 },
-    carbs: { total: 20.13, sugars: 1.8, starch: 10.4, fibre: 7.9, resistantStarch: 2.0 },
-    micros: {
-      ironMg: 3.33, ironForm: "nonheme", zincMg: 1.27, zincBoundByPhytate: true,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 5, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 181, vitaminCMg: 1.5,
-      vitaminDUg: 0, vitaminKUg: 1.7, calciumMg: 19, seleniumUg: 2.8, iodineUg: 1,
-      cholineMg: 32.7, magnesiumMg: 36,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "low", systemicPesticideLikelihood: 0.25,
-      contactPesticideLikelihood: 0.15, typicalMrlProximity: 0.2,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.45, cutSurfaceSensitivity: 0.1,
-      heatSensitivity: 0.4, oxygenLightSensitivity: 0.25,
-      perishabilityDays: 4, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0.7,
-    sources: [
-      { label: USDA, id: "FDC 172421" },
-      { label: "FAO 2013 / DIAAS literature", note: "Pulse DIAAS typically 0.5–0.8; SAA limiting" },
-    ],
-    notes: [
-      {
-        en: "Lysine-rich, SAA-limited. Phytate binds Fe/Zn. Not a complete protein food.",
-        de: "Lysinreich, SAA-limitiert. Phytat bindet Fe/Zn. Kein vollständiges Proteinlebensmittel.",
-      },
-    ],
+  prepared(sweetPotatoBaked, {
+    id: "sweet_potato_boiled", name: "Sweet potato, boiled", nameDe: "Süßkartoffel, gekocht", preparation: "boiled",
   }),
-  defineFood({
-    id: "chickpeas_boiled",
-    name: "Chickpeas, boiled",
-    nameDe: "Kichererbsen, gekocht",
-    class: "legumes",
-    edibleState: { en: "boiled, drained", de: "gekocht, abgetropft" },
-    fdcId: "173757",
-    kcalPer100g: 164,
-    proteinG: 8.86,
-    fatG: 2.59,
-    aminoAcids: {
-      his: 27, ile: 42, leu: 70, lys: 67, met: 13, cys: 13,
-      phe: 52, tyr: 26, thr: 33, trp: 9, val: 42,
-    },
-    ilealDigestibility: 0.78,
-    fattyAcids: {
-      sfa: 0.27, mufa: 0.58, pufa: 1.16, omega3Ala: 0.04, omega3Epa: 0, omega3Dha: 0,
-      omega6La: 1.11, omega6Aa: 0, oddChain: 0, cla: 0,
-    },
-    carbs: { total: 27.42, sugars: 4.8, starch: 13.8, fibre: 7.6, resistantStarch: 1.5 },
-    micros: {
-      ironMg: 2.89, ironForm: "nonheme", zincMg: 1.53, zincBoundByPhytate: true,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 16, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 172, vitaminCMg: 1.3,
-      vitaminDUg: 0, vitaminKUg: 4, calciumMg: 49, seleniumUg: 3.7, iodineUg: 1,
-      cholineMg: 42.8, magnesiumMg: 48,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "low", systemicPesticideLikelihood: 0.22,
-      contactPesticideLikelihood: 0.12, typicalMrlProximity: 0.18,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.1,
-      heatSensitivity: 0.4, oxygenLightSensitivity: 0.2,
-      perishabilityDays: 4, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0.65,
-    sources: [{ label: USDA, id: "FDC 173757" }],
-    notes: [
-      {
-        en: "Better SAA than lentils, still incomplete vs FAO pattern after digestibility.",
-        de: "Mehr SAA als Linsen, nach Verdaulichkeit aber weiterhin unvollständig gemessen am FAO-Muster.",
-      },
-    ],
+  sweetPotatoBaked,
+  beetrootRaw,
+  prepared(beetrootRaw, { id: "beetroot_boiled", name: "Beetroot, boiled", nameDe: "Rote Bete, gekocht", preparation: "boiled" }),
+  tomatoRaw,
+  redPepperRaw,
+  prepared(redPepperRaw, {
+    id: "red_bell_pepper_grilled", name: "Red bell pepper, grilled", nameDe: "Paprika, rot, gegrillt", preparation: "grilled",
   }),
-  defineFood({
-    id: "black_beans_boiled",
-    name: "Black beans, boiled",
-    nameDe: "Schwarze Bohnen, gekocht",
-    class: "legumes",
-    edibleState: { en: "boiled, drained", de: "gekocht, abgetropft" },
-    fdcId: "175186",
-    kcalPer100g: 132,
-    proteinG: 8.86,
-    fatG: 0.54,
-    aminoAcids: {
-      his: 27, ile: 43, leu: 78, lys: 68, met: 13, cys: 10,
-      phe: 53, tyr: 25, thr: 37, trp: 10, val: 46,
-    },
-    ilealDigestibility: 0.77,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega6La: 0.18, omega3Ala: 0.13, pufa: 0.31 },
-    carbs: { total: 23.71, sugars: 0.32, starch: 15.2, fibre: 8.7, resistantStarch: 2.4 },
-    micros: {
-      ironMg: 2.1, ironForm: "nonheme", zincMg: 1.12, zincBoundByPhytate: true,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 7, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 149, vitaminCMg: 0,
-      vitaminDUg: 0, vitaminKUg: 3.3, calciumMg: 27, seleniumUg: 1.2, iodineUg: 1,
-      cholineMg: 32.6, magnesiumMg: 70,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "low", systemicPesticideLikelihood: 0.2,
-      contactPesticideLikelihood: 0.12, typicalMrlProximity: 0.16,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.1,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.2,
-      perishabilityDays: 4, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0.72,
-    sources: [{ label: USDA, id: "FDC 175186" }],
-    notes: [
-      {
-        en: "Anthocyanins + fibre. Iron remains non-heme and phytate-bound.",
-        de: "Anthocyane + Ballaststoffe. Eisen bleibt Nicht-Hämeisen und phytatgebunden.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "broccoli_sprouts",
-    name: "Broccoli sprouts, raw",
-    nameDe: "Brokkolisprossen, roh",
-    class: "sprouts",
-    edibleState: { en: "raw live sprouts", de: "rohe, lebende Sprossen" },
-    fdcId: "168463",
-    kcalPer100g: 23,
-    proteinG: 2.5,
-    fatG: 0.4,
-    aminoAcids: {
-      his: 21, ile: 40, leu: 70, lys: 58, met: 17, cys: 14,
-      phe: 42, tyr: 32, thr: 38, trp: 12, val: 50,
-    },
-    ilealDigestibility: 0.74,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.1 },
-    carbs: { total: 2.8, sugars: 0.6, starch: 0.2, fibre: 1.8, resistantStarch: 0.1 },
-    micros: {
-      ironMg: 0.9, ironForm: "nonheme", zincMg: 0.4, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 800, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 70, vitaminCMg: 60,
-      vitaminDUg: 0, vitaminKUg: 90, calciumMg: 40, seleniumUg: 1, iodineUg: 1,
-      cholineMg: 18, magnesiumMg: 25,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.15,
-      contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.15,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.9, cutSurfaceSensitivity: 0.7,
-      heatSensitivity: 0.85, oxygenLightSensitivity: 0.9,
-      perishabilityDays: 3, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.95,
-    sources: [
-      { label: "Fahey et al. sulforaphane sprout literature", note: "Not interchangeable with mature broccoli" },
-      { label: USDA, note: "Proximate values approximated from sprout entries / broccoli immature" },
-    ],
-    notes: [
-      {
-        en: "Distinct class: high glucoraphanin, extreme perishability, sprout pathogen risk.",
-        de: "Eigene Klasse: viel Glucoraphanin, extrem verderblich, Keimrisiko bei Sprossen.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "alfalfa_sprouts",
-    name: "Alfalfa sprouts, raw",
-    nameDe: "Luzernesprossen, roh",
-    class: "sprouts",
-    edibleState: { en: "raw live sprouts", de: "rohe, lebende Sprossen" },
-    fdcId: "168384",
-    kcalPer100g: 23,
-    proteinG: 3.99,
-    fatG: 0.69,
-    aminoAcids: {
-      his: 22, ile: 41, leu: 68, lys: 52, met: 15, cys: 12,
-      phe: 44, tyr: 30, thr: 35, trp: 11, val: 48,
-    },
-    ilealDigestibility: 0.73,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.17, omega6La: 0.12 },
-    carbs: { total: 2.1, sugars: 0.2, starch: 0.1, fibre: 1.9, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.96, ironForm: "nonheme", zincMg: 0.92, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 87, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 36, vitaminCMg: 8.2,
-      vitaminDUg: 0, vitaminKUg: 30.5, calciumMg: 32, seleniumUg: 0.6, iodineUg: 1,
-      cholineMg: 14.4, magnesiumMg: 27,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.12,
-      contactPesticideLikelihood: 0.18, typicalMrlProximity: 0.12,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.8, cutSurfaceSensitivity: 0.6,
-      heatSensitivity: 0.7, oxygenLightSensitivity: 0.85,
-      perishabilityDays: 3, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.6,
-    sources: [{ label: USDA, id: "FDC 168384" }],
-    notes: [
-      {
-        en: "Not a broccoli-sprout substitute. Historical Salmonella/E. coli outbreaks matter.",
-        de: "Kein Ersatz für Brokkolisprossen. Frühere Salmonellen- und E.-coli-Ausbrüche sind relevant.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "broccoli_raw",
-    name: "Broccoli, raw",
-    nameDe: "Brokkoli, roh",
-    class: "cruciferous_fresh",
-    edibleState: { en: "raw florets", de: "rohe Röschen" },
-    fdcId: "170379",
-    kcalPer100g: 34,
-    proteinG: 2.82,
-    fatG: 0.37,
-    aminoAcids: {
-      his: 21, ile: 39, leu: 66, lys: 54, met: 16, cys: 13,
-      phe: 40, tyr: 29, thr: 35, trp: 12, val: 49,
-    },
-    ilealDigestibility: 0.76,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.02, omega6La: 0.05 },
-    carbs: { total: 6.64, sugars: 1.7, starch: 0.4, fibre: 2.6, resistantStarch: 0.2 },
-    micros: {
-      ironMg: 0.73, ironForm: "nonheme", zincMg: 0.41, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 361, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 63, vitaminCMg: 89.2,
-      vitaminDUg: 0, vitaminKUg: 102, calciumMg: 47, seleniumUg: 2.5, iodineUg: 2,
-      cholineMg: 18.7, magnesiumMg: 21,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.3,
-      contactPesticideLikelihood: 0.45, typicalMrlProximity: 0.28,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.85, cutSurfaceSensitivity: 0.7,
-      heatSensitivity: 0.75, oxygenLightSensitivity: 0.7,
-      perishabilityDays: 6, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.86,
-    sources: [{ label: USDA, id: "FDC 170379" }],
-    notes: [
-      {
-        en: "Fresh crucifer ≠ sauerkraut. Heat destroys myrosinase; vitamin C is labile.",
-        de: "Frischer Kreuzblütler ≠ Sauerkraut. Hitze zerstört Myrosinase; Vitamin C ist labil.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "cabbage_raw",
-    name: "Cabbage, raw",
-    nameDe: "Weißkohl, roh",
-    class: "cruciferous_fresh",
-    edibleState: { en: "raw head", de: "roher Kopf" },
-    fdcId: "169975",
-    kcalPer100g: 25,
-    proteinG: 1.28,
-    fatG: 0.1,
-    aminoAcids: {
-      his: 19, ile: 36, leu: 62, lys: 48, met: 14, cys: 12,
-      phe: 36, tyr: 24, thr: 32, trp: 10, val: 44,
-    },
-    ilealDigestibility: 0.74,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 5.8, sugars: 3.2, starch: 0.2, fibre: 2.5, resistantStarch: 0.1 },
-    micros: {
-      ironMg: 0.47, ironForm: "nonheme", zincMg: 0.18, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 42, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 43, vitaminCMg: 36.6,
-      vitaminDUg: 0, vitaminKUg: 76, calciumMg: 40, seleniumUg: 0.3, iodineUg: 1,
-      cholineMg: 10.7, magnesiumMg: 12,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.28,
-      contactPesticideLikelihood: 0.4, typicalMrlProximity: 0.25,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.7, cutSurfaceSensitivity: 0.65,
-      heatSensitivity: 0.65, oxygenLightSensitivity: 0.6,
-      perishabilityDays: 14, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.7,
-    sources: [{ label: USDA, id: "FDC 169975" }],
-    notes: [
-      {
-        en: "Storage cabbage is more stable than salad greens; still no animal-exclusive nutrients.",
-        de: "Lagerkohl ist stabiler als Blattsalat; trotzdem keine ausschließlich tierischen Nährstoffe.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "sauerkraut",
-    name: "Sauerkraut, canned solids and liquids",
-    nameDe: "Sauerkraut",
-    class: "cruciferous_fermented",
-    edibleState: { en: "lactic fermented cabbage", de: "milchsauer fermentierter Kohl" },
-    fdcId: "169279",
-    kcalPer100g: 19,
-    proteinG: 0.91,
-    fatG: 0.14,
-    aminoAcids: {
-      his: 18, ile: 35, leu: 60, lys: 46, met: 13, cys: 11,
-      phe: 34, tyr: 22, thr: 30, trp: 9, val: 42,
-    },
-    ilealDigestibility: 0.78,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 4.28, sugars: 1.78, starch: 0.1, fibre: 2.9, resistantStarch: 0 },
-    micros: {
-      ironMg: 1.47, ironForm: "nonheme", zincMg: 0.19, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 18, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 24, vitaminCMg: 14.7,
-      vitaminDUg: 0, vitaminKUg: 13, calciumMg: 30, seleniumUg: 0.6, iodineUg: 1,
-      cholineMg: 10.4, magnesiumMg: 13,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.15,
-      contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.15,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.55, cutSurfaceSensitivity: 0.2,
-      heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 60, processingStability: "fermented",
-    },
-    phytochemicalIndex: 0.75,
-    sources: [{ label: USDA, id: "FDC 169279" }],
-    notes: [
-      {
-        en: "Fermentation ≠ fresh cabbage. Organic acids improve stability; sodium is high. Not a probiotic medicine.",
-        de: "Fermentation ≠ frischer Kohl. Organische Säuren verbessern die Stabilität; Natrium ist hoch. Kein probiotisches Arzneimittel.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "kimchi",
-    name: "Kimchi, cabbage",
-    nameDe: "Kimchi",
-    class: "cruciferous_fermented",
-    edibleState: { en: "lactic fermented napa + chili", de: "milchsauer fermentierter Chinakohl + Chili" },
-    fdcId: "2346398",
-    kcalPer100g: 15,
-    proteinG: 1.1,
-    fatG: 0.5,
-    aminoAcids: {
-      his: 19, ile: 36, leu: 61, lys: 47, met: 14, cys: 11,
-      phe: 35, tyr: 23, thr: 31, trp: 10, val: 43,
-    },
-    ilealDigestibility: 0.78,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 2.4, sugars: 1.1, starch: 0.2, fibre: 1.6, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.8, ironForm: "nonheme", zincMg: 0.22, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 120, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 30, vitaminCMg: 10,
-      vitaminDUg: 0, vitaminKUg: 43, calciumMg: 33, seleniumUg: 0.5, iodineUg: 2,
-      cholineMg: 12, magnesiumMg: 14,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.18,
-      contactPesticideLikelihood: 0.22, typicalMrlProximity: 0.16,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.5, cutSurfaceSensitivity: 0.2,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.3,
-      perishabilityDays: 45, processingStability: "fermented",
-    },
-    phytochemicalIndex: 0.8,
-    sources: [{ label: USDA, id: "FDC 2346398", note: "Values vary widely by recipe; chili adds carotenoids" }],
-    notes: [
-      {
-        en: "Not interchangeable with sauerkraut or fresh cabbage. Some recipes include fish sauce (not assumed here).",
-        de: "Nicht austauschbar mit Sauerkraut oder frischem Kohl. Manche Rezepte enthalten Fischsauce (hier nicht angenommen).",
-      },
-    ],
-  }),
-  defineFood({
-    id: "white_mushroom_raw",
-    name: "White mushrooms, raw",
-    nameDe: "Champignons, roh",
-    class: "mushrooms",
-    edibleState: { en: "raw sporocarp", de: "roher Fruchtkörper" },
-    fdcId: "169251",
-    kcalPer100g: 22,
-    proteinG: 3.09,
-    fatG: 0.34,
-    aminoAcids: {
-      his: 24, ile: 35, leu: 58, lys: 45, met: 16, cys: 10,
-      phe: 32, tyr: 18, thr: 35, trp: 14, val: 40,
-    },
-    ilealDigestibility: 0.7,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 3.26, sugars: 1.98, starch: 0.2, fibre: 1.0, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.5, ironForm: "nonheme", zincMg: 0.52, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.04, b12IsAnalogue: true, folateUg: 17, vitaminCMg: 2.1,
-      vitaminDUg: 0.2, vitaminKUg: 0, calciumMg: 3, seleniumUg: 9.3, iodineUg: 2,
-      cholineMg: 17.3, magnesiumMg: 9,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.2,
-      contactPesticideLikelihood: 0.25, typicalMrlProximity: 0.2,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.55, cutSurfaceSensitivity: 0.7,
-      heatSensitivity: 0.45, oxygenLightSensitivity: 0.5,
-      perishabilityDays: 5, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.5,
-    sources: [
-      { label: USDA, id: "FDC 169251" },
-      { label: "Fungal B12", note: "Trace corrinoids are not reliable B12" },
-    ],
-    notes: [
-      {
-        en: "Fungi are not plants. Chitin lowers digestibility. Ergothioneine ≠ polyphenol load.",
-        de: "Pilze sind keine Pflanzen. Chitin senkt die Verdaulichkeit. Ergothionein ≠ Polyphenolgehalt.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "shiitake_cooked",
-    name: "Shiitake mushrooms, cooked",
-    nameDe: "Shiitake, gekocht",
-    class: "mushrooms",
-    edibleState: { en: "cooked", de: "gegart" },
-    fdcId: "168433",
-    kcalPer100g: 56,
-    proteinG: 1.56,
-    fatG: 0.22,
-    aminoAcids: {
-      his: 23, ile: 36, leu: 60, lys: 44, met: 17, cys: 11,
-      phe: 33, tyr: 19, thr: 36, trp: 15, val: 41,
-    },
-    ilealDigestibility: 0.72,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 14.39, sugars: 3.84, starch: 4.2, fibre: 2.1, resistantStarch: 0.2 },
-    micros: {
-      ironMg: 0.44, ironForm: "nonheme", zincMg: 1.33, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 0, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 14, vitaminCMg: 0.3,
-      vitaminDUg: 0.4, vitaminKUg: 0, calciumMg: 3, seleniumUg: 24.8, iodineUg: 2,
-      cholineMg: 0, magnesiumMg: 14,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.18,
-      contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.18,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.4,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 7, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0.62,
-    sources: [{ label: USDA, id: "FDC 168433" }],
-    notes: [
-      {
-        en: "UV-exposed mushrooms can raise vitamin D2; D2 ≠ D3 equivalence assumed here.",
-        de: "UV-belichtete Pilze können Vitamin D2 erhöhen; D2 wird hier nicht mit D3 gleichgesetzt.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "nori_dried",
-    name: "Nori, dried",
-    nameDe: "Nori, getrocknet",
-    class: "algae",
-    edibleState: { en: "dried sheets", de: "getrocknete Blätter" },
-    fdcId: "168458",
-    kcalPer100g: 35,
-    proteinG: 5.81,
-    fatG: 0.28,
-    aminoAcids: {
-      his: 18, ile: 40, leu: 70, lys: 40, met: 18, cys: 14,
-      phe: 42, tyr: 28, thr: 40, trp: 10, val: 55,
-    },
-    ilealDigestibility: 0.72,
-    fattyAcids: {
-      sfa: 0.06, mufa: 0.03, pufa: 0.11, omega3Ala: 0.001, omega3Epa: 0.08,
-      omega3Dha: 0, omega6La: 0.01, omega6Aa: 0.01, oddChain: 0, cla: 0,
-    },
-    carbs: { total: 5.11, sugars: 0.49, starch: 0.2, fibre: 0.3, resistantStarch: 0 },
-    micros: {
-      ironMg: 1.8, ironForm: "nonheme", zincMg: 1.05, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 232, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 1.5, b12IsAnalogue: true, folateUg: 146, vitaminCMg: 39,
-      vitaminDUg: 0, vitaminKUg: 4, calciumMg: 70, seleniumUg: 0.7, iodineUg: 2320,
-      cholineMg: 10, magnesiumMg: 2,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.05,
-      contactPesticideLikelihood: 0.05, typicalMrlProximity: 0.1,
-      heavyMetalClass: "moderate", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.1,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.45,
-      perishabilityDays: 180, processingStability: "dried",
-    },
-    phytochemicalIndex: 0.55,
-    sources: [
-      { label: USDA, id: "FDC 168458", note: "Laver; iodine highly variable" },
-      { label: "Watanabe et al. algal corrinoids", note: "Nori B12 analogues — not counted as B12" },
-    ],
-    notes: [
-      {
-        en: "Algae ≠ leafy greens ≠ mushrooms. Iodine can be excessive. B12 analogues score 0.",
-        de: "Algen ≠ Blattgemüse ≠ Pilze. Jod kann übermäßig sein. B12-Analoga zählen 0.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "wakame_raw",
-    name: "Wakame, raw",
-    nameDe: "Wakame, roh",
-    class: "algae",
-    edibleState: { en: "rehydrated / raw seaweed", de: "eingeweicht / roher Seetang" },
-    fdcId: "168457",
-    kcalPer100g: 45,
-    proteinG: 3.03,
-    fatG: 0.64,
-    aminoAcids: {
-      his: 17, ile: 38, leu: 66, lys: 38, met: 16, cys: 13,
-      phe: 40, tyr: 26, thr: 38, trp: 9, val: 50,
-    },
-    ilealDigestibility: 0.7,
-    fattyAcids: {
-      sfa: 0.13, mufa: 0.06, pufa: 0.22, omega3Ala: 0, omega3Epa: 0.19,
-      omega3Dha: 0, omega6La: 0.01, omega6Aa: 0.02, oddChain: 0, cla: 0,
-    },
-    carbs: { total: 9.14, sugars: 0.65, starch: 0.3, fibre: 0.5, resistantStarch: 0 },
-    micros: {
-      ironMg: 2.18, ironForm: "nonheme", zincMg: 0.38, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 216, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0.3, b12IsAnalogue: true, folateUg: 196, vitaminCMg: 3,
-      vitaminDUg: 0, vitaminKUg: 5.3, calciumMg: 150, seleniumUg: 0.7, iodineUg: 4200,
-      cholineMg: 13.9, magnesiumMg: 107,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "high", systemicPesticideLikelihood: 0.05,
-      contactPesticideLikelihood: 0.05, typicalMrlProximity: 0.1,
-      heavyMetalClass: "elevated", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.2,
-      heatSensitivity: 0.3, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 14, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.5,
-    sources: [{ label: USDA, id: "FDC 168457" }],
-    notes: [
-      {
-        en: "Some EPA, no DHA to speak of. Iodine and metals dominate risk. Not a salad green.",
-        de: "Etwas EPA, kaum DHA. Jod und Metalle dominieren das Risiko. Kein Blattsalat.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "carrot_raw",
-    name: "Carrot, raw",
-    nameDe: "Möhre, roh",
-    class: "roots_tubers",
-    edibleState: { en: "raw root", de: "rohe Wurzel" },
-    fdcId: "170393",
-    kcalPer100g: 41,
-    proteinG: 0.93,
-    fatG: 0.24,
-    aminoAcids: {
-      his: 16, ile: 34, leu: 55, lys: 40, met: 12, cys: 18,
-      phe: 30, tyr: 20, thr: 28, trp: 8, val: 40,
-    },
-    ilealDigestibility: 0.74,
-    fattyAcids: { ...NEGLIGIBLE_FAT, omega3Ala: 0.002, omega6La: 0.1 },
-    carbs: { total: 9.58, sugars: 4.74, starch: 1.43, fibre: 2.8, resistantStarch: 0.2 },
-    micros: {
-      ironMg: 0.3, ironForm: "nonheme", zincMg: 0.24, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 8285, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 19, vitaminCMg: 5.9,
-      vitaminDUg: 0, vitaminKUg: 13.2, calciumMg: 33, seleniumUg: 0.1, iodineUg: 1,
-      cholineMg: 8.8, magnesiumMg: 12,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "low", systemicPesticideLikelihood: 0.35,
-      contactPesticideLikelihood: 0.3, typicalMrlProximity: 0.22,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.55,
-      heatSensitivity: 0.35, oxygenLightSensitivity: 0.4,
-      perishabilityDays: 21, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.55,
-    sources: [
-      { label: USDA, id: "FDC 170393" },
-      { label: "IOM RAE", note: "8285 µg β-carotene → ~690 µg RAE, not retinol" },
-    ],
-    notes: [
-      {
-        en: "Carotenoid-A is not retinol. Conversion is inefficient and genetically variable.",
-        de: "Carotinoid-A ist kein Retinol. Die Umwandlung ist ineffizient und genetisch variabel.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "potato_boiled",
-    name: "Potato, boiled, flesh",
-    nameDe: "Kartoffel, gekocht",
-    class: "roots_tubers",
-    edibleState: { en: "boiled flesh", de: "gekocht, ohne Schale" },
-    fdcId: "170093",
-    kcalPer100g: 87,
-    proteinG: 1.87,
-    fatG: 0.1,
-    aminoAcids: {
-      his: 21, ile: 40, leu: 60, lys: 58, met: 16, cys: 14,
-      phe: 42, tyr: 28, thr: 36, trp: 16, val: 56,
-    },
-    ilealDigestibility: 0.8,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 20.13, sugars: 0.85, starch: 15.4, fibre: 1.8, resistantStarch: 1.3 },
-    micros: {
-      ironMg: 0.31, ironForm: "nonheme", zincMg: 0.3, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 1, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 10, vitaminCMg: 7.4,
-      vitaminDUg: 0, vitaminKUg: 2.2, calciumMg: 8, seleniumUg: 0.3, iodineUg: 3,
-      cholineMg: 13.5, magnesiumMg: 22,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "low", systemicPesticideLikelihood: 0.4,
-      contactPesticideLikelihood: 0.25, typicalMrlProximity: 0.3,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.5,
-      heatSensitivity: 0.45, oxygenLightSensitivity: 0.3,
-      perishabilityDays: 5, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0.25,
-    sources: [{ label: USDA, id: "FDC 170093" }],
-    notes: [
-      {
-        en: "Active starch dominates. Cooling raises resistant starch; still not a micronutrient-dense food.",
-        de: "Aktive Stärke dominiert. Abkühlen erhöht die resistente Stärke; trotzdem kein mikronährstoffdichtes Lebensmittel.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "sweet_potato_baked",
-    name: "Sweet potato, baked",
-    nameDe: "Süßkartoffel, gebacken",
-    class: "roots_tubers",
-    edibleState: { en: "baked flesh", de: "gebacken, Fruchtfleisch" },
-    fdcId: "168483",
-    kcalPer100g: 90,
-    proteinG: 2.01,
-    fatG: 0.15,
-    aminoAcids: {
-      his: 18, ile: 36, leu: 58, lys: 42, met: 14, cys: 12,
-      phe: 38, tyr: 24, thr: 34, trp: 11, val: 50,
-    },
-    ilealDigestibility: 0.78,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 20.71, sugars: 6.48, starch: 10.2, fibre: 3.3, resistantStarch: 0.8 },
-    micros: {
-      ironMg: 0.69, ironForm: "nonheme", zincMg: 0.32, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 11509, vitaminAOtherCarotenoidsUg: 0,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 6, vitaminCMg: 19.6,
-      vitaminDUg: 0, vitaminKUg: 2.3, calciumMg: 38, seleniumUg: 0.2, iodineUg: 2,
-      cholineMg: 13.1, magnesiumMg: 27,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "low", systemicPesticideLikelihood: 0.3,
-      contactPesticideLikelihood: 0.2, typicalMrlProximity: 0.2,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.4,
-      heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
-      perishabilityDays: 6, processingStability: "cooked",
-    },
-    phytochemicalIndex: 0.48,
-    sources: [{ label: USDA, id: "FDC 168483" }],
-    notes: [
-      {
-        en: "Orange flesh is carotenoid-A, not retinol. Active sugars are higher than white potato.",
-        de: "Oranges Fruchtfleisch liefert Carotinoid-A, kein Retinol. Mehr aktive Zucker als die weiße Kartoffel.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "tomato_raw",
-    name: "Tomato, raw",
-    nameDe: "Tomate, roh",
-    class: "other_vegetables",
-    edibleState: { en: "raw fruiting vegetable", de: "rohes Fruchtgemüse" },
-    fdcId: "170457",
-    kcalPer100g: 18,
-    proteinG: 0.88,
-    fatG: 0.2,
-    aminoAcids: {
-      his: 15, ile: 28, leu: 40, lys: 35, met: 10, cys: 10,
-      phe: 28, tyr: 16, thr: 26, trp: 7, val: 28,
-    },
-    ilealDigestibility: 0.74,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 3.89, sugars: 2.63, starch: 0.1, fibre: 1.2, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.27, ironForm: "nonheme", zincMg: 0.17, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 449, vitaminAOtherCarotenoidsUg: 123,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 15, vitaminCMg: 13.7,
-      vitaminDUg: 0, vitaminKUg: 7.9, calciumMg: 10, seleniumUg: 0, iodineUg: 1,
-      cholineMg: 6.7, magnesiumMg: 11,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.4,
-      contactPesticideLikelihood: 0.55, typicalMrlProximity: 0.35,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.55, cutSurfaceSensitivity: 0.6,
-      heatSensitivity: 0.45, oxygenLightSensitivity: 0.5,
-      perishabilityDays: 8, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.58,
-    sources: [{ label: USDA, id: "FDC 170457" }],
-    notes: [
-      {
-        en: "Lycopene is a phytochemical, not vitamin A. Fruiting vegetables ≠ leafy or legume.",
-        de: "Lycopin ist ein sekundärer Pflanzenstoff, kein Vitamin A. Fruchtgemüse ≠ Blattgemüse oder Hülsenfrucht.",
-      },
-    ],
-  }),
-  defineFood({
-    id: "red_bell_pepper_raw",
-    name: "Red bell pepper, raw",
-    nameDe: "Rote Paprika, roh",
-    class: "other_vegetables",
-    edibleState: { en: "raw fruiting vegetable", de: "rohes Fruchtgemüse" },
-    fdcId: "170108",
-    kcalPer100g: 31,
-    proteinG: 0.99,
-    fatG: 0.3,
-    aminoAcids: {
-      his: 16, ile: 30, leu: 45, lys: 36, met: 12, cys: 12,
-      phe: 30, tyr: 18, thr: 28, trp: 8, val: 32,
-    },
-    ilealDigestibility: 0.74,
-    fattyAcids: { ...NEGLIGIBLE_FAT },
-    carbs: { total: 6.03, sugars: 4.2, starch: 0.1, fibre: 2.1, resistantStarch: 0 },
-    micros: {
-      ironMg: 0.43, ironForm: "nonheme", zincMg: 0.25, zincBoundByPhytate: false,
-      vitaminARetinolUg: 0, vitaminABetaCaroteneUg: 1624, vitaminAOtherCarotenoidsUg: 490,
-      vitaminB12Ug: 0, b12IsAnalogue: false, folateUg: 46, vitaminCMg: 127.7,
-      vitaminDUg: 0, vitaminKUg: 4.9, calciumMg: 7, seleniumUg: 0.1, iodineUg: 1,
-      cholineMg: 5.6, magnesiumMg: 12,
-    },
-    animalCompounds: ZERO_ANIMAL,
-    residue: {
-      surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.42,
-      contactPesticideLikelihood: 0.6, typicalMrlProximity: 0.4,
-      heavyMetalClass: "low", veterinaryResidueClass: "none",
-    },
-    degradation: {
-      waterSolubleVitaminLoad: 0.9, cutSurfaceSensitivity: 0.7,
-      heatSensitivity: 0.8, oxygenLightSensitivity: 0.75,
-      perishabilityDays: 8, processingStability: "fresh",
-    },
-    phytochemicalIndex: 0.6,
-    sources: [{ label: USDA, id: "FDC 170108" }],
-    notes: [
-      {
-        en: "Exceptional vitamin C density; C degrades rapidly after cutting.",
-        de: "Außergewöhnliche Vitamin-C-Dichte; Vitamin C zerfällt nach dem Schneiden schnell.",
-      },
-    ],
-  }),
-];
+  zucchiniRaw,
+  aubergineRaw,
+].map(defineFood);

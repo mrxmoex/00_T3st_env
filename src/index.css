@@ -241,6 +241,18 @@ table.matrix {
   font-size: 0.78rem;
 }
 
+.heat-missing { background: var(--bg-mute); color: var(--muted); }
+.heat-warning { background: var(--danger); color: #fff; }
+
+.prep-table { min-width: 560px; }
+.prep-table th.current, .prep-table td.current { background: color-mix(in srgb, var(--accent) 14%, var(--bg-elev)); }
+.prep-table .change { color: var(--muted); font-size: 0.78rem; white-space: nowrap; }
+.prep-table .axis-row td { font-family: var(--font-mono); font-size: 0.8rem; }
+
+.nutrient-group { margin-top: 0.8rem; }
+.nutrient-group > summary { cursor: pointer; font-weight: 600; margin-bottom: 0.5rem; }
+.nutrient-table { min-width: 560px; }
+
 .tier {
   display: inline-grid;
   place-items: center;

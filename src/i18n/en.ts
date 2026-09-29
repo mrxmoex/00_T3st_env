@@ -16,7 +16,7 @@ export const en: Messages = {
   languageLabel: "Language",
   matrix: {
     lede:
-      "An honest matrix of biochemical efficiency, completeness, and real-world value. Plant proteins are incomplete. Non-heme iron is not heme iron. Algae, mushrooms, sprouts, kraut, legumes, and leafy salads are not interchangeable.",
+      "An honest matrix of biochemical efficiency, completeness, and real-world value. Most plant proteins fall short on an amino acid, on digestibility, or on density. Non-heme iron is not heme iron. Algae, mushrooms, sprouts, kraut, legumes, and leafy salads are not interchangeable.",
     exportCsv: "Export CSV",
     exportJson: "Export JSON",
     inView: (count) => `${count} foods in view`,
@@ -35,24 +35,47 @@ export const en: Messages = {
     all: "All",
     pattern: "Dietary pattern",
     sortAxis: "Sort axis",
+    preparation: "Preparation",
+    allPreparations: "All preparations",
   },
   table: { food: "Food", class: "Class", tier: "Tier", axis: "Axis" },
   food: {
     unknown: "Unknown food",
     back: "Back to matrix",
-    lede: ({ altName, state, fdcId, kcal, tier, rank, size }) =>
-      `${altName}. ${state}. FDC ${fdcId}. ${kcal} kcal / 100 g. Tier ${tier} (#${rank} of ${size} in class).`,
+    lede: ({ altName, preparation, source, kcal, tier, rank, size }) =>
+      `${altName}. Preparation: ${preparation}. Source: ${source}. ${kcal} kcal / 100 g. Tier ${tier} (#${rank} of ${size} in class).`,
     radarTitle: (name) => `${name}: axis profile`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
       `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limiting amino acid: ${limiting}. Ileal digestibility ${digestibility}.`,
     fatsCarbsMicros: "Fats, carbs, micros",
     microLine: ({ rae, iron, zinc, b12 }) =>
-      `RAE ${rae} µg · abs. Fe ${iron} mg · abs. Zn ${zinc} mg · B12 ${b12} µg`,
+      `RAE ${rae} µg · abs. Fe ${iron} mg · abs. Zn ${zinc} mg · B12 ${b12 ?? "—"} µg`,
     classColumns: "Class-specific columns",
     weights: (classLabel, w) =>
       `Composite weights for ${classLabel}: EAA ${w.eaa}, EFA ${w.efa}, carb ${w.carb}, micro ${w.micro}, fibre ${w.fibre}, residue ${w.residue}, stability ${w.degradation}.`,
     notes: "Notes",
     compareCta: "Compare this food",
+    preparationsHeading: "Preparations",
+    preparationsLede:
+      "Per 100 g as eaten, each from its own database entry. Cooking losses come from the databases' analyses and recipe calculations; water gained or lost also dilutes or concentrates every value.",
+    preparationsCompare: "Compare these preparations",
+    nutrientsHeading: "Nutrients and where each value comes from",
+    nutrientsHint:
+      "Per 100 g edible portion. %DV per 100 kcal for the scored micronutrients, after bioavailability adjustment. — means no database reports the value; it is not counted as zero.",
+    nutrientGroups: {
+      macros: "Energy and macronutrients",
+      diet: "Relevant for specific and medical diets",
+      vitamins: "Vitamins",
+      minerals: "Minerals",
+      aminoAcids: "Essential amino acids",
+      fattyAcids: "Fatty acids",
+    },
+    dietHint:
+      "Composition values that renal, low-sodium, lactose-free, PKU, or carbohydrate-counted diets track. They are shown, not scored, and are not a prescription.",
+    columns: { nutrient: "Nutrient", per100g: "per 100 g", pctDv: "%DV / 100 kcal", source: "Source and provenance" },
+    notReported: "not reported",
+    patternNote: (foodName) =>
+      `Amino acids the databases do not report were filled from the pattern of ${foodName}, scaled to this food's protein.`,
   },
   compare: {
     title: "Side-by-side",
@@ -62,9 +85,12 @@ export const en: Messages = {
     classTier: (classLabel, tier) => `${classLabel} · tier ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limiting ${limiting}`,
     compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Creatine ${creatineMg} mg · fibre ${fibreG} g · B12 ${b12Ug} µg`,
+      `Creatine ${creatineMg} mg · fibre ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
     radarHeading: "Axis profile",
     radarTitle: "Axis profile of the selected foods",
+    microHeading: "Micronutrient vector (%DV per 100 kcal)",
+    microHint:
+      "Colour saturates at 20 % DV per 100 kcal, the level scored as fully covered. ⚠ marks a nutrient whose amount in 100 kcal exceeds the EFSA daily upper limit.",
   },
   recommend: {
     title: "Best-practice engine",
@@ -81,6 +107,15 @@ export const en: Messages = {
     title: "Methodology",
     lede: (version, lastVerified) =>
       `Every score is a documented function of raw tables plus coefficients. Dataset ${version}, last verified ${lastVerified}. Formulas are implemented in \`src/scoring/\` and unit-tested.`,
+    dataHeading: "0. Data sources",
+    dataPrimary:
+      "Nutrient values come from the German national nutrient database BLS 4.0 (Max Rubner-Institut, CC BY 4.0). Foods BLS does not list, and nutrients it does not report (choline, selenium), come from USDA FoodData Central SR Legacy (public domain).",
+    dataScript:
+      "A script (`scripts/data/build_snapshot.py`) downloads both databases, checks their SHA-256 hashes, and writes the snapshot the app ships. No nutrient value is typed by hand, and every value keeps the database's own provenance category.",
+    dataMissing:
+      "A value no database reports stays missing: it is shown as —, left out of the score, and named in the food's flags. Amino acids a source lacks are filled from the pattern of a named similar food, the method BLS calls Musterberechnung.",
+    dataPreparation:
+      "Boiled, stewed, fried, and other preparations are separate database entries. Their changes, such as vitamin losses or water gained and lost, come from the databases' analyses and recipe calculations, not from a factor this app applies.",
     eaaHeading: "1. Essential amino acid completeness + digestibility",
     eaaPattern: "FAO 2013 adult scoring pattern (mg/g protein):",
     eaaRatios:
@@ -101,11 +136,14 @@ export const en: Messages = {
       "Combined: 0.55 × passive_fraction + 0.25 × activeScore + 0.20 × (1 − sugar_fraction). Near-zero carb animal foods score 70 (metabolically quiet, fibre absent).",
     microHeading: "4. Micronutrient density + bioavailability",
     microAbsorption: (v) =>
-      `Iron absorption: heme ${v.heme}, non-heme base ${v.nonhemeBase}, with vitamin C ${v.nonhemeWithVitaminC}, high phytate ${v.nonhemeHighPhytate}. Zinc: animal ${v.zincAnimal}, phytate ${v.zincPhytate}, low-phytate plant ${v.zincLowPhytate}.`,
+      `Iron absorption: heme ${v.heme}, non-heme base ${v.nonhemeBase}, with vitamin C ${v.nonhemeWithVitaminC}, high phytate ${v.nonhemeHighPhytate}. Iron in meat, fish, and organs is treated as ${v.hemeSharePct} % heme; egg and dairy iron is non-heme. Zinc: animal ${v.zincAnimal}, phytate ${v.zincPhytate}, low-phytate plant ${v.zincLowPhytate}.`,
     microRae: (betaCarotene, otherCarotenoids) =>
       `RAE = retinol + β-carotene × ${betaCarotene} (1/12) + other carotenoids × ${otherCarotenoids} (1/24). Algal B12 analogues contribute 0.`,
-    microDensity: ({ ironMg, zincMg, raeUg, b12Ug }) =>
-      `Each nutrient is % of a reference per 100 kcal, capped so 20% DV / 100 kcal = 1.0, then averaged. References: Fe ${ironMg} mg, Zn ${zincMg} mg, RAE ${raeUg} µg, B12 ${b12Ug} µg, and the remaining listed vitamins/minerals in \`coefficients.ts\`.`,
+    microDensity: (saturationPct) =>
+      `Twenty nutrients are scored, each as % of its FDA Daily Value per 100 kcal after the adjustments above, capped so ${saturationPct} % DV / 100 kcal = 1.0, then averaged over the nutrients the databases report. Values are in \`coefficients.ts\`.`,
+    microUpperLimit:
+      "If 100 kcal of a food already exceed a whole day's EFSA tolerable upper intake level, that nutrient counts −1 instead of up to +1. The vitamin A limit applies to preformed retinol only.",
+    microTable: { nutrient: "Nutrient", dailyValue: "Daily Value", upperLimit: "EFSA upper limit" },
     fibreHeading: "5. Fibre / phytochemicals",
     fibreNote: "Animal classes have baseline 0. That is composition, not a smear.",
     residueHeading: "6. Residue / contaminant risk",
@@ -136,11 +174,15 @@ export const en: Messages = {
       "It will not hide agricultural chemicals, metals, or veterinary residues.",
       "It will not produce a black-box “AI nutrition score.”",
       "It will not put the matrix behind a paywall.",
+      "It will not fill a value no database reports with zero, or hide which database a value comes from.",
+      "It will not present a value taken from a similar food as if it had been measured.",
     ],
     willDoHeading: "What it will do",
     willDo: [
       "Rank foods inside a class on documented axes.",
       "Show the limiting amino acid, conversion factors, and absorption coefficients.",
+      "Show for every nutrient value which database it comes from and how that database obtained it.",
+      "Show how preparation changes a food, using the databases' own cooked entries.",
       "Version the dataset and show the last verification date.",
       "Export the matrix as CSV and JSON.",
       "State required gaps for plant-only patterns in plain language.",
@@ -149,17 +191,26 @@ export const en: Messages = {
   source: {
     summary: "Source & method",
     dataset: (version, lastVerified) =>
-      `Dataset ${version}, last verified ${lastVerified}. Scores are computed in the client from raw nutrient fields plus documented coefficients. There is no black-box model.`,
+      `Dataset ${version}, last verified ${lastVerified}. Nutrient values are imported by script from the databases below; scores are computed in the browser from those values plus documented coefficients. There is no black-box model.`,
     updatePath:
-      "Replace values in src/data/foods/*.ts, bump DATASET_VERSION and LAST_VERIFIED in coefficients.ts, re-run tests.",
+      "To add a food: map it to its BLS or FDC entry in src/data/sources/manifest.json, run scripts/data/build_snapshot.py, add its curated spec in src/data/foods/*.ts, re-run tests.",
     general: [
-      "USDA FoodData Central (FDC IDs on each food)",
+      "BLS 4.0, Max Rubner-Institut (CC BY 4.0): primary nutrient source",
+      "USDA FoodData Central SR Legacy (public domain): foods BLS lacks, choline, selenium",
       "FAO 2013 adult amino acid scoring pattern + DIAAS/PDCAAS literature",
       "IOM/EFSA RAE conversion (β-carotene /12, other carotenoids /24)",
+      "FDA Daily Values; EFSA tolerable upper intake levels",
       "Iron/zinc absorption midpoints from bioavailability meta-analyses",
       "EU/US MRL residue logic as classed risk, not a lab certificate",
     ],
     link: "link",
+    entriesHeading: "Database entries",
+    primary: "primary",
+    matchSame: "same food and preparation",
+    matchSimilar: "similar food, used as a stand-in",
+    fills: (nutrients) => `fills: ${nutrients}`,
+    datasetsHeading: "Databases and licences",
+    curatedHeading: "Curated literature",
     cardLine: ({ aas, diaas, pdcaas, limiting, rae, iron }) =>
       `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · limiting ${limiting} · RAE ${rae} µg · absorbable Fe ${iron} mg`,
   },
@@ -253,7 +304,7 @@ export const en: Messages = {
     iodineSelenium: "Iodine + selenium",
     retinolDensity: "Retinol density",
     b12Density: "B12 density",
-    copperProxy: "Copper proxy",
+    copperDensity: "Copper",
     cholineDensity: "Choline",
     yolkFatQuality: "Yolk fat quality",
     calciumDensity: "Calcium density",

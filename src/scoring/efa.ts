@@ -4,7 +4,7 @@ import {
 } from "../data/coefficients";
 import type { LocalizedText } from "../i18n/locale";
 import { clamp, clamp01, round1, round2, safeDiv } from "./math";
-import type { AxisBreakdown, FoodRecord } from "./types";
+import { kingdomOf, type AxisBreakdown, type FoodRecord } from "./types";
 
 export function longChainN3G(food: FoodRecord): number {
   return food.fattyAcids.omega3Epa + food.fattyAcids.omega3Dha;
@@ -64,7 +64,7 @@ export function scoreEfa(food: FoodRecord): AxisBreakdown {
   const sfaFrac = safeDiv(fa.sfa, Math.max(totalFat, 0.01));
   const quality = clamp01(0.45 + 0.35 * mufaFrac + 0.1 * (1 - Math.abs(sfaFrac - 0.35)));
 
-  const oddBonus = clamp((fa.oddChain + fa.cla) / 2, 0, 0.1);
+  const oddBonus = clamp(((fa.oddChain ?? 0) + (fa.cla ?? 0)) / 2, 0, 0.1);
 
   let score: number;
   if (totalFat < 0.5) {
@@ -89,10 +89,16 @@ export function scoreEfa(food: FoodRecord): AxisBreakdown {
       de: "Enthält vorgeformtes langkettiges EPA/DHA",
     });
   }
-  if (fa.oddChain + fa.cla > 0.05) {
+  if ((fa.oddChain ?? 0) + (fa.cla ?? 0) > 0.05) {
     flags.push({
       en: "Ruminant odd-chain / conjugated fatty acids present",
       de: "Ungeradzahlige / konjugierte Fettsäuren von Wiederkäuern vorhanden",
+    });
+  }
+  if (kingdomOf(food.class) === "animal" && (fa.oddChain === null || fa.cla === null)) {
+    flags.push({
+      en: "Source does not report odd-chain fatty acids or CLA; the bonus counts only what is reported",
+      de: "Die Quelle nennt keine ungeradzahligen Fettsäuren oder kein CLA; der Bonus zählt nur Berichtetes",
     });
   }
 

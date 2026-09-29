@@ -16,6 +16,7 @@ export function MatrixPage() {
     query: "",
     kingdom: "all",
     foodClass: "all",
+    preparation: "all",
     pattern: "hybrid",
     sortAxis: "composite",
   });
@@ -25,6 +26,7 @@ export function MatrixPage() {
     const filtered = FOODS.filter((food) => {
       if (filters.kingdom !== "all" && kingdomOf(food.class) !== filters.kingdom) return false;
       if (filters.foodClass !== "all" && food.class !== filters.foodClass) return false;
+      if (filters.preparation !== "all" && food.preparation !== filters.preparation) return false;
       if (filters.pattern === "plant-only" && kingdomOf(food.class) !== "plant") return false;
       if (q && !`${food.name} ${food.nameDe} ${food.class}`.toLowerCase().includes(q)) return false;
       return true;

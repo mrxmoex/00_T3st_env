@@ -5,3 +5,4 @@ npm-debug.log*
 *.log
 /data/
 bulwark/eval/last-run.json
+.cache/

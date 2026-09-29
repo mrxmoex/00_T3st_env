@@ -5,6 +5,7 @@ import {
   ALA_TO_DHA_EFFICIENCY,
   BETA_CAROTENE_TO_RAE,
   FAO_2013_ADULT_MG_PER_G,
+  HEME_SHARE_OF_MIXED_IRON,
   IRON_ABSORPTION,
   OTHER_CAROTENOID_TO_RAE,
 } from "../data/coefficients";
@@ -20,6 +21,7 @@ import {
   effectiveB12Ug,
   retinolActivityEquivalentsUg,
   scoreMicros,
+  upperLimitExceedances,
 } from "./micros";
 import { scoreCatalog, scoreFood } from "./scoreFood";
 import { tierFromScore } from "./tiers";
@@ -40,7 +42,7 @@ describe("class weights", () => {
 describe("EAA completeness + digestibility", () => {
   it("uses FAO 2013 adult pattern and does not force plant AAS to 1", () => {
     const lentils = requireFood("lentils_boiled");
-    const egg = requireFood("egg_whole_cooked");
+    const egg = requireFood("egg_boiled");
     const lentilAas = aminoAcidScore(lentils);
     const eggAas = aminoAcidScore(egg);
     expect(lentilAas).toBeLessThan(1);
@@ -50,7 +52,7 @@ describe("EAA completeness + digestibility", () => {
   });
 
   it("DIAAS is AAS × digestibility and is not truncated; PDCAAS is", () => {
-    const egg = requireFood("egg_whole_cooked");
+    const egg = requireFood("egg_boiled");
     const aas = aminoAcidScore(egg);
     expect(diaas(egg)).toBeCloseTo(aas * egg.ilealDigestibility, 5);
     expect(pdcaas(egg)).toBeCloseTo(Math.min(1, aas) * egg.ilealDigestibility, 5);
@@ -60,7 +62,7 @@ describe("EAA completeness + digestibility", () => {
 
   it("low-protein leaves do not outrank eggs on the EAA axis", () => {
     const spinach = scoreEaa(requireFood("spinach_raw"));
-    const egg = scoreEaa(requireFood("egg_whole_cooked"));
+    const egg = scoreEaa(requireFood("egg_boiled"));
     expect(spinach.score).toBeLessThan(egg.score);
     expect(spinach.parts.proteinDensity).toBeLessThan(0.25);
   });
@@ -84,7 +86,7 @@ describe("carbohydrate type split", () => {
   });
 
   it("treats muscle meat as metabolically quiet, not a fibre food", () => {
-    const beef = scoreCarbs(requireFood("beef_ground_85_cooked"));
+    const beef = scoreCarbs(requireFood("beef_mince_braised"));
     expect(beef.score).toBe(70);
     expect(beef.flags.some((flag) => flag.en.includes("Fibre is absent"))).toBe(true);
   });
@@ -100,35 +102,75 @@ describe("carbohydrate type split", () => {
 describe("bioavailability adjustments", () => {
   it("applies 1/12 and 1/24 RAE factors and does not equate carrot to liver retinol", () => {
     const carrot = requireFood("carrot_raw");
-    const liver = requireFood("beef_liver_cooked");
+    const liver = requireFood("beef_liver_fried");
     const carrotRae = retinolActivityEquivalentsUg(carrot);
-    expect(carrotRae).toBeCloseTo(carrot.micros.vitaminABetaCaroteneUg * BETA_CAROTENE_TO_RAE, 5);
+    expect(carrot.micros.vitaminARetinolUg).toBe(0);
+    expect(carrotRae).toBeCloseTo(
+      (carrot.micros.vitaminABetaCaroteneUg ?? 0) * BETA_CAROTENE_TO_RAE +
+        (carrot.micros.vitaminAOtherCarotenoidsUg ?? 0) * OTHER_CAROTENOID_TO_RAE,
+      5,
+    );
     expect(OTHER_CAROTENOID_TO_RAE).toBeCloseTo(1 / 24, 8);
     expect(liver.micros.vitaminARetinolUg).toBeGreaterThan(carrotRae);
     expect(scoreMicros(liver).score).toBeGreaterThan(scoreMicros(carrot).score);
   });
 
-  it("scores heme iron above an equal milligram of high-phytate non-heme iron", () => {
-    const beef = requireFood("beef_ground_85_cooked");
+  it("absorbs more of each milligram of meat iron than of high-phytate non-heme iron", () => {
+    const beef = requireFood("beef_mince_braised");
     const spinach = requireFood("spinach_raw");
-    expect(beef.micros.ironMg).toBeCloseTo(spinach.micros.ironMg, 2);
-    expect(absorbableIronMg(beef)).toBeCloseTo(beef.micros.ironMg * IRON_ABSORPTION.heme, 5);
-    expect(absorbableIronMg(spinach)).toBeLessThan(absorbableIronMg(beef));
+    expect(beef.micros.ironForm).toBe("mixed");
+    expect(spinach.micros.ironForm).toBe("nonheme");
+    const mixed =
+      HEME_SHARE_OF_MIXED_IRON * IRON_ABSORPTION.heme + (1 - HEME_SHARE_OF_MIXED_IRON) * IRON_ABSORPTION.nonhemeBase;
+    expect(absorbableIronMg(beef)).toBeCloseTo(beef.micros.ironMg * mixed, 5);
+    expect(absorbableIronMg(spinach)).toBeCloseTo(spinach.micros.ironMg * IRON_ABSORPTION.nonhemeHighPhytate, 5);
+    expect(absorbableIronMg(beef) / beef.micros.ironMg).toBeGreaterThan(
+      absorbableIronMg(spinach) / spinach.micros.ironMg,
+    );
+  });
+
+  it("never treats egg or dairy iron as heme iron", () => {
+    for (const id of ["egg_boiled", "milk_whole", "cheddar"]) {
+      expect(requireFood(id).micros.ironForm).toBe("nonheme");
+    }
   });
 
   it("zeroes algal B12 analogues", () => {
-    const nori = requireFood("nori_dried");
+    const nori = requireFood("nori_roasted");
     expect(nori.micros.vitaminB12Ug).toBeGreaterThan(0);
     expect(nori.micros.b12IsAnalogue).toBe(true);
     expect(effectiveB12Ug(nori)).toBe(0);
-    const egg = requireFood("egg_whole_cooked");
+    const egg = requireFood("egg_boiled");
     expect(effectiveB12Ug(egg)).toBe(egg.micros.vitaminB12Ug);
+  });
+});
+
+describe("upper limits", () => {
+  it("counts nori iodine and liver retinol as a cost, not a benefit", () => {
+    expect(upperLimitExceedances(requireFood("nori_roasted"))).toContain("iodine");
+    expect(upperLimitExceedances(requireFood("beef_liver_fried"))).toContain("vitaminA");
+    const liver = scoreMicros(requireFood("beef_liver_fried"));
+    expect(liver.flags.some((flag) => flag.en.includes("upper limit"))).toBe(true);
+  });
+
+  it("applies the vitamin A limit to preformed retinol only", () => {
+    const carrot = requireFood("carrot_raw");
+    expect(retinolActivityEquivalentsUg(carrot)).toBeGreaterThan(0);
+    expect(upperLimitExceedances(carrot)).not.toContain("vitaminA");
+  });
+
+  it("only flags organs and algae in the current catalog", () => {
+    const flagged = FOODS.filter((food) => upperLimitExceedances(food).length > 0);
+    expect(flagged.length).toBeGreaterThan(0);
+    for (const food of flagged) {
+      expect(["organs", "algae"]).toContain(food.class);
+    }
   });
 });
 
 describe("EFA / glycerides", () => {
   it("credits preformed EPA/DHA far above ALA-only plants", () => {
-    const salmon = scoreEfa(requireFood("salmon_atlantic_cooked"));
+    const salmon = scoreEfa(requireFood("salmon_roasted"));
     const flaxLikeKale = scoreEfa(requireFood("kale_raw"));
     expect(salmon.score).toBeGreaterThan(flaxLikeKale.score);
     expect(salmon.flags.some((flag) => flag.en.includes("preformed long-chain"))).toBe(true);
@@ -148,7 +190,7 @@ describe("EFA / glycerides", () => {
 
 describe("fibre axis honesty", () => {
   it("gives animal foods 0 phytochemical baseline", () => {
-    const beef = scoreFibre(requireFood("beef_ground_85_cooked"));
+    const beef = scoreFibre(requireFood("beef_mince_braised"));
     const kale = scoreFibre(requireFood("kale_raw"));
     expect(beef.score).toBeLessThan(15);
     expect(kale.score).toBeGreaterThan(beef.score);
@@ -174,7 +216,7 @@ describe("composite and tiers", () => {
 
   it("ranks within class and never equates plant and animal protein quality", () => {
     const cards = scoreCatalog(FOODS);
-    const egg = cards.find((card) => card.foodId === "egg_whole_cooked");
+    const egg = cards.find((card) => card.foodId === "egg_boiled");
     const lentil = cards.find((card) => card.foodId === "lentils_boiled");
     expect(egg).toBeDefined();
     expect(lentil).toBeDefined();
@@ -237,7 +279,7 @@ describe("export", () => {
 
 describe("scoreFood determinism", () => {
   it("returns the same composite for the same food", () => {
-    const food = requireFood("salmon_atlantic_cooked");
+    const food = requireFood("salmon_roasted");
     expect(scoreFood(food).composite).toBe(scoreFood(food).composite);
   });
 });

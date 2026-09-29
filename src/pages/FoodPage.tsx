@@ -1,9 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 import { AxisRadar } from "../components/AxisRadar";
 import { axisValue } from "../components/MatrixTable";
+import { NutrientTable } from "../components/NutrientTable";
+import { PreparationPanel } from "../components/PreparationPanel";
 import { SourcePanel } from "../components/SourcePanel";
 import { FOODS, foodById } from "../data/catalog";
 import { CLASS_WEIGHTS } from "../data/classWeights";
+import { PREPARATION_LABELS } from "../i18n/labels";
 import { altFoodName, foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { scoreCatalog } from "../scoring/scoreFood";
@@ -40,8 +43,8 @@ export function FoodPage() {
       <p className="lede">
         {t.food.lede({
           altName: altFoodName(food, locale),
-          state: localize(food.edibleState),
-          fdcId: food.fdcId ?? "—",
+          preparation: localize(PREPARATION_LABELS[food.preparation]),
+          source: food.sourceEntries.map((entry) => `${entry.db} ${entry.code}`).join(" + "),
           kcal: food.kcalPer100g,
           tier: card.tier,
           rank: card.classRank,
@@ -65,6 +68,7 @@ export function FoodPage() {
         </div>
         <AxisRadar title={t.food.radarTitle(name)} entries={[{ id: food.id, label: name, card }]} />
       </div>
+      <PreparationPanel food={food} cards={cards} />
       <section className="grid-2">
         <article className="panel">
           <h2>{t.axes.eaa}</h2>
@@ -105,7 +109,7 @@ export function FoodPage() {
         <ul>
           {Object.entries(card.extras).map(([key, value]) => (
             <li key={key}>
-              {t.extras[key] ?? key}: <span className="mono">{value.toFixed(1)}</span>
+              {t.extras[key] ?? key}: <span className="mono">{value === null ? "—" : value.toFixed(1)}</span>
             </li>
           ))}
         </ul>
@@ -126,6 +130,7 @@ export function FoodPage() {
           </Link>
         </p>
       </section>
+      <NutrientTable food={food} card={card} />
       <SourcePanel food={food} card={card} />
     </main>
   );

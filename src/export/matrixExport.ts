@@ -8,7 +8,10 @@ export interface MatrixRow {
   name: string;
   nameDe: string;
   class: string;
-  fdcId: string;
+  group: string;
+  preparation: string;
+  /** Primary database entry, e.g. "BLS G211100" or "FDC 173735". */
+  source: string;
   kcalPer100g: number;
   eaa: number;
   aas: number;
@@ -30,12 +33,15 @@ export function toMatrixRows(cards: readonly ScoreCard[]): MatrixRow[] {
     if (!food) {
       throw new Error(`Missing food for scored id ${card.foodId}`);
     }
+    const primary = food.sourceEntries[0];
     return {
       id: food.id,
       name: food.name,
       nameDe: food.nameDe,
       class: food.class,
-      fdcId: food.fdcId ?? "",
+      group: food.group,
+      preparation: food.preparation,
+      source: primary ? `${primary.db} ${primary.code}` : "",
       kcalPer100g: food.kcalPer100g,
       eaa: card.eaa.score,
       aas: card.eaa.aas,
@@ -60,7 +66,9 @@ export function matrixToCsv(cards: readonly ScoreCard[]): string {
     "name",
     "nameDe",
     "class",
-    "fdcId",
+    "group",
+    "preparation",
+    "source",
     "kcalPer100g",
     ...AXIS_KEYS.filter((key) => key !== "composite"),
     "aas",
@@ -78,7 +86,9 @@ export function matrixToCsv(cards: readonly ScoreCard[]): string {
       csvEscape(row.name),
       csvEscape(row.nameDe),
       row.class,
-      row.fdcId,
+      row.group,
+      row.preparation,
+      row.source,
       row.kcalPer100g,
       row.eaa,
       row.efa,

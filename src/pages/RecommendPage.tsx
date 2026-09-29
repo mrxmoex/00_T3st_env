@@ -9,7 +9,7 @@ import { DIETARY_PATTERNS, type DietaryPattern } from "../scoring/types";
 export function RecommendPage() {
   const { t, locale, localize } = useLocale();
   const [pattern, setPattern] = useState<DietaryPattern>("plant-only");
-  const [selected, setSelected] = useState<string[]>(["kale_raw", "lentils_boiled", "nori_dried"]);
+  const [selected, setSelected] = useState<string[]>(["kale_raw", "lentils_boiled", "nori_roasted"]);
   const rec = useMemo(
     () => recommend({ pattern, selectedIds: selected }),
     [pattern, selected],

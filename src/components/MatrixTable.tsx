@@ -91,7 +91,7 @@ export function MatrixTable({
               ))}
               {extras.map((column) => (
                 <td key={column}>
-                  <HeatCell score={card.extras[column] ?? 0} />
+                  <HeatCell score={card.extras[column] ?? null} />
                 </td>
               ))}
             </tr>

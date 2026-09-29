@@ -5,22 +5,28 @@ import {
   ALA_TO_EPA_EFFICIENCY,
   BETA_CAROTENE_TO_RAE,
   DATASET_VERSION,
+  DENSITY_REF_UNITS,
   DENSITY_REFS,
+  DENSITY_SATURATION_PCT_DV,
   FAO_2013_ADULT_MG_PER_G,
+  HEME_SHARE_OF_MIXED_IRON,
   IRON_ABSORPTION,
   LAST_VERIFIED,
   OTHER_CAROTENOID_TO_RAE,
+  UPPER_LIMITS,
   ZINC_ABSORPTION,
 } from "../data/coefficients";
+import { DATASETS, SOURCE_DBS } from "../data/sources/snapshot";
+import { MICRO_LABELS } from "../i18n/labels";
 import { useLocale } from "../i18n/LocaleContext";
-import { FOOD_CLASSES } from "../scoring/types";
+import { FOOD_CLASSES, MICRO_NUTRIENTS } from "../scoring/types";
 
 function coefficient(value: number): string {
   return String(Number(value.toPrecision(3)));
 }
 
 export function MethodPage() {
-  const { t } = useLocale();
+  const { t, localize } = useLocale();
   const m = t.method;
 
   return (
@@ -29,6 +35,23 @@ export function MethodPage() {
       <p className="lede">
         <RichText text={m.lede(DATASET_VERSION, LAST_VERIFIED)} />
       </p>
+
+      <section className="panel">
+        <h2>{m.dataHeading}</h2>
+        <p>{m.dataPrimary}</p>
+        <p>
+          <RichText text={m.dataScript} />
+        </p>
+        <p>{m.dataMissing}</p>
+        <p>{m.dataPreparation}</p>
+        <ul className="muted">
+          {SOURCE_DBS.map((db) => (
+            <li key={db}>
+              {DATASETS[db].citation} ({DATASETS[db].license})
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="panel">
         <h2>{m.eaaHeading}</h2>
@@ -74,21 +97,41 @@ export function MethodPage() {
             zincAnimal: ZINC_ABSORPTION.animal,
             zincPhytate: ZINC_ABSORPTION.phytateBound,
             zincLowPhytate: ZINC_ABSORPTION.lowPhytatePlant,
+            hemeSharePct: Math.round(HEME_SHARE_OF_MIXED_IRON * 100),
           })}
         </p>
         <p>
           {m.microRae(coefficient(BETA_CAROTENE_TO_RAE), coefficient(OTHER_CAROTENOID_TO_RAE))}
         </p>
         <p>
-          <RichText
-            text={m.microDensity({
-              ironMg: DENSITY_REFS.ironMg,
-              zincMg: DENSITY_REFS.zincMg,
-              raeUg: DENSITY_REFS.vitaminARaeUg,
-              b12Ug: DENSITY_REFS.vitaminB12Ug,
-            })}
-          />
+          <RichText text={m.microDensity(DENSITY_SATURATION_PCT_DV)} />
         </p>
+        <p>{m.microUpperLimit}</p>
+        <div className="matrix-wrap">
+          <table className="matrix">
+            <thead>
+              <tr>
+                <th>{m.microTable.nutrient}</th>
+                <th>{m.microTable.dailyValue}</th>
+                <th>{m.microTable.upperLimit}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {MICRO_NUTRIENTS.map((nutrient) => {
+                const limit = UPPER_LIMITS[nutrient];
+                return (
+                  <tr key={nutrient}>
+                    <td>{localize(MICRO_LABELS[nutrient])}</td>
+                    <td className="mono">
+                      {DENSITY_REFS[nutrient]} {DENSITY_REF_UNITS[nutrient]}
+                    </td>
+                    <td className="mono">{limit === undefined ? "—" : `${limit} ${DENSITY_REF_UNITS[nutrient]}`}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </section>
 
       <section className="panel">

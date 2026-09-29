@@ -17,5 +17,7 @@ The system will **not**:
 11. Hide agricultural chemicals, metals, or veterinary residues.
 12. Emit a black-box AI nutrition score.
 13. Put access behind a paywall.
+14. Fill a value no database reports with zero, or hide which database a value comes from.
+15. Present a value taken from a similar food as if it had been measured.
 
-It **will** rank within class, show limiting amino acids and coefficients, version the data, and export the matrix.
+It **will** rank within class, show limiting amino acids and coefficients, show each value's database and provenance, show how preparation changes a food using the databases' own cooked entries, version the data, and export the matrix.

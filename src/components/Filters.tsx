@@ -1,22 +1,31 @@
+import { FOODS } from "../data/catalog";
+import { PREPARATION_LABELS } from "../i18n/labels";
 import { useLocale } from "../i18n/LocaleContext";
 import {
   ANIMAL_CLASSES,
   AXIS_KEYS,
   DIETARY_PATTERNS,
   PLANT_CLASSES,
+  PREPARATIONS,
   type AxisKey,
   type DietaryPattern,
   type FoodClass,
   type Kingdom,
+  type Preparation,
 } from "../scoring/types";
 
 export interface FilterState {
   query: string;
   kingdom: "all" | Kingdom;
   foodClass: "all" | FoodClass;
+  preparation: "all" | Preparation;
   pattern: DietaryPattern;
   sortAxis: AxisKey;
 }
+
+const PREPARATIONS_IN_CATALOG = PREPARATIONS.filter((preparation) =>
+  FOODS.some((food) => food.preparation === preparation),
+);
 
 export function Filters({
   value,
@@ -25,7 +34,7 @@ export function Filters({
   value: FilterState;
   onChange: (next: FilterState) => void;
 }) {
-  const { t } = useLocale();
+  const { t, localize } = useLocale();
 
   return (
     <div className="toolbar" role="search">
@@ -78,6 +87,22 @@ export function Filters({
               </option>
             ))}
           </optgroup>
+        </select>
+      </label>
+      <label>
+        {t.filters.preparation}
+        <select
+          value={value.preparation}
+          onChange={(event) =>
+            onChange({ ...value, preparation: event.target.value as FilterState["preparation"] })
+          }
+        >
+          <option value="all">{t.filters.allPreparations}</option>
+          {PREPARATIONS_IN_CATALOG.map((preparation) => (
+            <option key={preparation} value={preparation}>
+              {localize(PREPARATION_LABELS[preparation])}
+            </option>
+          ))}
         </select>
       </label>
       <label>
