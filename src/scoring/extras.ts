@@ -1,3 +1,4 @@
+import { bioactiveMg } from "../data/bioactives";
 import { clamp01, round1 } from "./math";
 import { hemeIronMg } from "./micros";
 import type { FoodClass, FoodRecord } from "./types";
@@ -13,13 +14,13 @@ export function classExtraColumns(foodClass: FoodClass): string[] {
     case "legumes":
       return ["lysineAdequacy", "saaAdequacy", "phytatePenalty", "resistantStarch"];
     case "sprouts":
-      return ["livingTissueLability", "pathogenProxy", "sulforaphaneProxy"];
+      return ["livingTissueLability", "pathogenProxy", "folateDensity"];
     case "cruciferous_fresh":
-      return ["glucosinolateProxy", "goitrogenProxy", "vitaminCRetention"];
+      return ["glucosinolates", "goitrogenProxy", "vitaminCRetention"];
     case "cruciferous_fermented":
-      return ["organicAcidStability", "glucosinolateProxy", "sodiumNote"];
+      return ["organicAcidStability", "glucosinolates", "sodiumNote"];
     case "mushrooms":
-      return ["ergothioneineProxy", "vitaminDPotential", "chitinDigestPenalty"];
+      return ["ergothioneine", "vitaminDPotential", "chitinDigestPenalty"];
     case "algae":
       return ["iodineDensity", "preformedN3", "inactiveB12Flag", "metalLoad"];
     case "roots_tubers":
@@ -94,10 +95,8 @@ function scoreExtraColumn(food: FoodRecord, column: string): number | null {
       return 100 * (1 - clamp01(food.degradation.perishabilityDays / 10));
     case "pathogenProxy":
       return food.class === "sprouts" ? 30 : 70;
-    case "sulforaphaneProxy":
-      return food.id.includes("broccoli") ? 85 : 45;
-    case "glucosinolateProxy":
-      return 80;
+    case "glucosinolates":
+      return scaled(bioactiveMg(food, "glucosinolates"), 100);
     case "goitrogenProxy":
       return 55;
     case "vitaminCRetention":
@@ -106,8 +105,8 @@ function scoreExtraColumn(food: FoodRecord, column: string): number | null {
       return 88;
     case "sodiumNote":
       return inverted(food.composition.sodiumMg, 800);
-    case "ergothioneineProxy":
-      return food.id.includes("shiitake") ? 85 : 65;
+    case "ergothioneine":
+      return scaled(bioactiveMg(food, "ergothioneine"), 10);
     case "vitaminDPotential":
       return 100 * clamp01(food.micros.vitaminDUg / 5);
     case "chitinDigestPenalty":
@@ -139,7 +138,7 @@ function scoreExtraColumn(food: FoodRecord, column: string): number | null {
       return oddChain === null && cla === null ? null : scaled((oddChain ?? 0) + (cla ?? 0), 0.4);
     }
     case "creatine":
-      return 100 * clamp01(food.animalCompounds.creatineMg / 400);
+      return scaled(bioactiveMg(food, "creatine"), 400);
     case "hemeIron":
       return 100 * clamp01(hemeIronMg(food) / 1.8);
     case "n6Load":

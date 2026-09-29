@@ -47,9 +47,48 @@ export const en: Messages = {
     radarTitle: (name) => `${name}: axis profile`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
       `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limiting amino acid: ${limiting}. Ileal digestibility ${digestibility}.`,
+    benefitsHeading: "Benefit",
+    burdensHeading: "Burden (higher score = less burden)",
     fatsCarbsMicros: "Fats, carbs, micros",
-    microLine: ({ rae, iron, zinc, b12 }) =>
-      `RAE ${rae} µg · abs. Fe ${iron} mg · abs. Zn ${zinc} mg · B12 ${b12 ?? "—"} µg`,
+    microLine: ({ rae, iron, zinc, calcium, b12 }) =>
+      `RAE ${rae} µg · abs. Fe ${iron} mg · abs. Zn ${zinc} mg · abs. Ca ${calcium ?? "—"} mg · B12 ${b12 ?? "—"} µg`,
+    bioactivesHeading: "Bioactive compounds",
+    bioactivesLede:
+      "Compounds the nutrient databases do not report, indexed by content from published analyses. Shown, not scored. “No data” means no analysis was found, not zero; “not detected” means an analysis looked and found none.",
+    bioactiveColumns: { compound: "Compound", content: "mg per 100 g", measured: "What was measured", source: "Source" },
+    bioactiveStatus: { notDetected: "not detected", notExpected: "not expected", noData: "no data" },
+    bioactiveRawValue: "raw tissue value; cooking changes it",
+    bioactiveDryWeight: "scaled from dry weight with this food's water content",
+    bioactiveRange: (min, max) => `range ${min}–${max}`,
+    burden: {
+      heading: "Burdens: processing, residues, storage",
+      lede: "What stands against the nutrients: how far the food is processed, what residues it may carry, and what the body keeps from it.",
+      processingHeading: "Processing",
+      nova: (group, label) => `NOVA ${group}: ${label}`,
+      novaMeaning: {
+        1: "Whole food, possibly cooked, dried, frozen, pasteurised, or fermented without additions.",
+        2: "Oil, butter, salt, or sugar: ingredients for cooking, not eaten on their own.",
+        3: "A whole food preserved with salt, sugar, oil, brine, or smoke.",
+        4: "Industrial formulation with ingredients or additives not used in home kitchens, such as emulsifiers.",
+      },
+      capped: (from, to) => `Ultra-processed: composite capped from ${from} to ${to}, the top of tier D.`,
+      evidence: ({ where, classified, nova4, nova3, retrieved }) =>
+        `${where}: of ${classified} classified products in this category, ${nova4} are NOVA 4 and ${nova3} NOVA 3 (Open Food Facts, retrieved ${retrieved}).`,
+      evidenceAll: "All countries",
+      evidenceGermany: "Germany",
+      additives: (products) => `Most frequent additives among the ${products} products in the category:`,
+      retention: ({ reference, kept, details }) =>
+        `Against ${reference}: kept ${kept} % of the labile vitamins per gram of dry matter (${details}). The stability axis is scaled by that share.`,
+      sodium: ({ reference, from, to }) => `Sodium ${to} mg per 100 g, against ${from} mg in ${reference}.`,
+      residuesHeading: "Residues and contaminants",
+      hormones:
+        "Hormonal growth promoters have been banned in EU livestock farming since 1988 (now Directive 96/22/EC). For animal foods, the residue axis scores veterinary drug residues.",
+      accumulation:
+        "Heavy metals such as cadmium, lead, and methylmercury are stored for years in kidney, bone, and brain; regular intake adds up instead of passing through.",
+      storageHeading: "Stored by the body",
+      storage: (nutrients) =>
+        `This food supplies nutrients the body stores for months to years: ${nutrients}. Stores bridge gaps between meals, and they also let excess build up.`,
+    },
     classColumns: "Class-specific columns",
     weights: (classLabel, w) =>
       `Composite weights for ${classLabel}: EAA ${w.eaa}, EFA ${w.efa}, carb ${w.carb}, micro ${w.micro}, fibre ${w.fibre}, residue ${w.residue}, stability ${w.degradation}.`,
@@ -57,11 +96,12 @@ export const en: Messages = {
     compareCta: "Compare this food",
     preparationsHeading: "Preparations",
     preparationsLede:
-      "Per 100 g as eaten, each from its own database entry. Cooking losses come from the databases' analyses and recipe calculations; water gained or lost also dilutes or concentrates every value.",
+      "Per 100 g as eaten, each from its own database entry. The % change compares each preparation with the first per gram of dry matter, so water gained or lost neither hides nor fakes a loss; energy and water change per 100 g. Losses come from the databases' analyses and recipe calculations.",
+    preparationsProcessing: "Processing (NOVA)",
     preparationsCompare: "Compare these preparations",
     nutrientsHeading: "Nutrients and where each value comes from",
     nutrientsHint:
-      "Per 100 g edible portion. %DV per 100 kcal for the scored micronutrients, after bioavailability adjustment. — means no database reports the value; it is not counted as zero.",
+      "Per 100 g edible portion. “Available” is the estimated absorbed amount where absorption studies exist; %DV per 100 kcal counts available amounts. “Body store” says how long the body holds a nutrient. — means no database reports the value; it is not counted as zero.",
     nutrientGroups: {
       macros: "Energy and macronutrients",
       diet: "Relevant for specific and medical diets",
@@ -72,7 +112,14 @@ export const en: Messages = {
     },
     dietHint:
       "Composition values that renal, low-sodium, lactose-free, PKU, or carbohydrate-counted diets track. They are shown, not scored, and are not a prescription.",
-    columns: { nutrient: "Nutrient", per100g: "per 100 g", pctDv: "%DV / 100 kcal", source: "Source and provenance" },
+    columns: {
+      nutrient: "Nutrient",
+      per100g: "per 100 g",
+      available: "available",
+      pctDv: "%DV / 100 kcal",
+      store: "body store",
+      source: "Source and provenance",
+    },
     notReported: "not reported",
     patternNote: (foodName) =>
       `Amino acids the databases do not report were filled from the pattern of ${foodName}, scaled to this food's protein.`,
@@ -85,7 +132,12 @@ export const en: Messages = {
     classTier: (classLabel, tier) => `${classLabel} · tier ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limiting ${limiting}`,
     compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Creatine ${creatineMg} mg · fibre ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
+      `Creatine ${creatineMg === null ? "—" : `${creatineMg} mg`} · fibre ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
+    novaLine: (group, label) => `NOVA ${group} · ${label}`,
+    bioactivesHeading: "Bioactive compounds (mg per 100 g)",
+    bioactivesHint:
+      "From published analyses; not scored. * raw-tissue value for a cooked food · — no analysis found · n.d. analysed, not detected · ∅ not expected in this kind of food.",
+    notDetectedShort: "n.d.",
     radarHeading: "Axis profile",
     radarTitle: "Axis profile of the selected foods",
     microHeading: "Micronutrient vector (%DV per 100 kcal)",
@@ -116,6 +168,13 @@ export const en: Messages = {
       "A value no database reports stays missing: it is shown as —, left out of the score, and named in the food's flags. Amino acids a source lacks are filled from the pattern of a named similar food, the method BLS calls Musterberechnung.",
     dataPreparation:
       "Boiled, stewed, fried, and other preparations are separate database entries. Their changes, such as vitamin losses or water gained and lost, come from the databases' analyses and recipe calculations, not from a factor this app applies.",
+    frameHeading: "Benefit against burden",
+    frameBenefits:
+      "Benefit: essential amino acids with their digestibility, essential fats with the ALA conversion loss, carbohydrate type and fibre, and micronutrients as the amount the body can absorb.",
+    frameBurdens:
+      "Burden: pesticide, metal, and veterinary drug residues; nutrient loss from storage, cooking, and industrial processing; processing level and additives (NOVA). Nutrients the body stores and contaminants it accumulates are marked, because both build up.",
+    frameComposite:
+      "The composite weighs these per food class. Ultra-processed products (NOVA 4) stay in tier D: nutrients added or left over do not buy back the processing.",
     eaaHeading: "1. Essential amino acid completeness + digestibility",
     eaaPattern: "FAO 2013 adult scoring pattern (mg/g protein):",
     eaaRatios:
@@ -143,14 +202,46 @@ export const en: Messages = {
       `Twenty nutrients are scored, each as % of its FDA Daily Value per 100 kcal after the adjustments above, capped so ${saturationPct} % DV / 100 kcal = 1.0, then averaged over the nutrients the databases report. Values are in \`coefficients.ts\`.`,
     microUpperLimit:
       "If 100 kcal of a food already exceed a whole day's EFSA tolerable upper intake level, that nutrient counts −1 instead of up to +1. The vitamin A limit applies to preformed retinol only.",
+    microAvailability: (v) =>
+      `Availability, not the label amount: iron, zinc, and calcium count as the absorbed amount divided by the absorption the Daily Value already assumes (iron ${v.iron} %, zinc ${v.zinc} %, calcium ${v.calcium} % as from milk). Absorption is counted once, not twice, and oxalate-bound calcium in spinach counts about a sixth of milk calcium.`,
+    calciumTable: { studied: "Food studied", absorption: "Absorbed", usedFor: "Applied to" },
+    calciumNote:
+      "Fractional calcium absorption measured in humans at the same calcium load (Weaver, Proulx & Heaney 1999). Foods marked * use the value of a related food. Foods without a study count like milk calcium.",
     microTable: { nutrient: "Nutrient", dailyValue: "Daily Value", upperLimit: "EFSA upper limit" },
+    storageHeading: "10. Storage in the body",
+    storageNutrients:
+      "Daily intake recommendations treat every day alike. The body does store some nutrients: stores bridge weeks without intake, and they also let excess accumulate. Nutrients with small pools, such as thiamin and vitamin C, have to come in regularly.",
+    storageTable: { nutrient: "Nutrient", store: "Held for", site: "Where" },
+    storageContaminantsLead: "Contaminants the body accumulates (EFSA risk assessments):",
+    storageContaminants: [
+      "Cadmium: kidney, biological half-life 10–30 years.",
+      "Lead: bone, decades.",
+      "Methylmercury: brain and blood, half-life about two months; builds up with regular intake of large predatory fish.",
+      "Dioxins and dioxin-like PCBs: body fat, half-lives of several years; taken in mainly with animal fat and fatty fish.",
+      "Most current pesticides are excreted within days, so the concern is regular exposure rather than storage. Older organochlorines such as DDT persist in body fat.",
+    ],
+    bioactivesHeading: "11. Bioactive compounds",
+    bioactivesNote:
+      "Creatine, taurine, carnosine, anserine, coenzyme Q10, L-carnitine, ergothioneine, and glucosinolates are not in BLS or FoodData Central. They are indexed by content from the analyses below, each value with the tissue and state that was measured. They are shown, not scored, so compounds the body can also make do not outrank essential nutrients. Ergothioneine is converted from dry weight with each food's water content; a raw-tissue value shown for a cooked food is marked.",
+    processingHeading: "9. Processing (NOVA)",
+    processingGroups:
+      "NOVA (Monteiro et al. 2019) sorts foods by processing: 1 whole foods, cooked or not; 2 culinary ingredients; 3 whole foods preserved with salt, sugar, oil, brine, or smoke; 4 industrial formulations with ingredients or additives not used in home cooking. Home-cooked foods keep group 1; canned and smoked foods are group 3.",
+    processingCap: (ceiling) =>
+      `NOVA 4 foods have their composite capped at ${ceiling}, the top of tier D. Their nutrients are not worth the processing unless food is scarce.`,
+    processingEvidence:
+      "Where the group depends on the product, the matrix uses market data: Open Food Facts (ODbL) counts how the products in a category are classified and which additives their ingredient lists name. The counts are stored with their retrieval date in `src/data/sources/processing-evidence.json`.",
+    processingSulfite:
+      "Sulfur dioxide and sulfites (E220–E228), common in potato products, destroy thiamin. US law therefore bars them from foods recognised as a source of vitamin B1 (21 CFR 182.3766).",
+    hormonesNote:
+      "Hormones: hormonal growth promoters have been banned in EU livestock farming since 1988 (now Directive 96/22/EC), and the German foods in BLS come from that system. Veterinary drug residues are scored as a residue class. Natural hormones in milk and plant isoflavones are not scored.",
     fibreHeading: "5. Fibre / phytochemicals",
     fibreNote: "Animal classes have baseline 0. That is composition, not a smear.",
     residueHeading: "6. Residue / contaminant risk",
     residueNote:
       "Higher score = lower risk. Leafy high surface area is not scored like a tuber. Fish/algae metals and veterinary residues are first-class, not footnotes.",
-    degradationHeading: "7. Degradation sensitivity",
-    degradationNote: "Bonuses: cooked +0.08, fermented +0.22, dried +0.28. Fresh leafy stays labile.",
+    degradationHeading: "7. Stability and nutrient loss",
+    degradationNote:
+      "Bonuses: cooked +0.08, fermented +0.22, dried +0.28. Fresh leafy stays labile. An industrially processed food (NOVA 3–4) is scaled by the share of vitamin C, thiamin, folate, and B6 per gram of dry matter it kept against the home-prepared form of the same food, so a long shelf life bought by destroying vitamins does not count as stability.",
     compositeHeading: "8. Composite and tiers",
     compositeNote:
       "Weights are class-specific and sum to 1. Fibre is down-weighted for animal classes because absence is expected — the fibre axis itself still reads 0.",
@@ -176,6 +267,9 @@ export const en: Messages = {
       "It will not put the matrix behind a paywall.",
       "It will not fill a value no database reports with zero, or hide which database a value comes from.",
       "It will not present a value taken from a similar food as if it had been measured.",
+      "It will not count the amount on a label as the amount the body absorbs.",
+      "It will not let nutrients lift an ultra-processed product out of tier D.",
+      "It will not present a compound value measured in one tissue or preparation as if it had been measured in another.",
     ],
     willDoHeading: "What it will do",
     willDo: [
@@ -183,6 +277,9 @@ export const en: Messages = {
       "Show the limiting amino acid, conversion factors, and absorption coefficients.",
       "Show for every nutrient value which database it comes from and how that database obtained it.",
       "Show how preparation changes a food, using the databases' own cooked entries.",
+      "Show what industrial processing costs: nutrient loss per gram of dry matter, salt, processing level, and typical additives.",
+      "Index creatine, taurine, carnosine, coenzyme Q10, ergothioneine, and similar compounds by measured content, with the study behind each value.",
+      "Show which nutrients the body stores and which contaminants it accumulates.",
       "Version the dataset and show the last verification date.",
       "Export the matrix as CSV and JSON.",
       "State required gaps for plant-only patterns in plain language.",
@@ -201,6 +298,9 @@ export const en: Messages = {
       "IOM/EFSA RAE conversion (β-carotene /12, other carotenoids /24)",
       "FDA Daily Values; EFSA tolerable upper intake levels",
       "Iron/zinc absorption midpoints from bioavailability meta-analyses",
+      "Calcium absorption by food: Weaver, Proulx & Heaney 1999",
+      "Bioactive compound contents: published analyses, cited per value",
+      "Open Food Facts (ODbL): NOVA groups and additives per product category",
       "EU/US MRL residue logic as classed risk, not a lab certificate",
     ],
     link: "link",
@@ -240,7 +340,7 @@ export const en: Messages = {
     micro: "Micros + bioavailability",
     fibre: "Fibre / phytochemicals",
     residue: "Residue / contaminants",
-    degradation: "Post-harvest stability",
+    degradation: "Stability / nutrient loss",
     composite: "Composite",
   },
   axesShort: {
@@ -277,13 +377,12 @@ export const en: Messages = {
     resistantStarch: "Resistant starch",
     livingTissueLability: "Living-tissue lability",
     pathogenProxy: "Sprout pathogen proxy",
-    sulforaphaneProxy: "Sulforaphane proxy",
-    glucosinolateProxy: "Glucosinolate proxy",
+    glucosinolates: "Glucosinolates (measured)",
     goitrogenProxy: "Goitrogen note",
     vitaminCRetention: "Vitamin C",
     organicAcidStability: "Organic-acid stability",
     sodiumNote: "Sodium (higher=better/lower Na)",
-    ergothioneineProxy: "Ergothioneine proxy",
+    ergothioneine: "Ergothioneine (measured)",
     vitaminDPotential: "Vitamin D potential",
     chitinDigestPenalty: "Chitin digestibility",
     iodineDensity: "Iodine density",

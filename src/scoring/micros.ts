@@ -1,7 +1,9 @@
+import { calciumAbsorption } from "../data/absorption";
 import {
   BETA_CAROTENE_TO_RAE,
   DENSITY_REFS,
   DENSITY_SATURATION_PCT_DV,
+  DV_REFERENCE_ABSORPTION,
   HEME_SHARE_OF_MIXED_IRON,
   IRON_ABSORPTION,
   OTHER_CAROTENOID_TO_RAE,
@@ -88,18 +90,29 @@ export function absorbableZincMg(food: FoodRecord): number {
   return food.micros.zincMg * coeff;
 }
 
+/** Null when no human absorption study covers this food. */
+export function absorbableCalciumMg(food: FoodRecord): number | null {
+  const absorption = calciumAbsorption(food);
+  return absorption === null ? null : food.micros.calciumMg * absorption.fraction;
+}
+
 /** Null when no source reports B12; algal and fungal analogues count as 0. */
 export function effectiveB12Ug(food: FoodRecord): number | null {
   if (food.micros.b12IsAnalogue) return 0;
   return food.micros.vitaminB12Ug;
 }
 
-/** Amount per 100 g that enters the density score, after bioavailability adjustment. */
+/**
+ * Amount per 100 g that enters the density score, in Daily Value units. Iron, zinc,
+ * and calcium are the absorbed amount divided by the absorption the DV assumes;
+ * calcium without an absorption study counts like milk calcium.
+ */
 export function microAmounts(food: FoodRecord): Record<MicroNutrient, number | null> {
   const m = food.micros;
+  const calcium = absorbableCalciumMg(food);
   return {
-    iron: absorbableIronMg(food),
-    zinc: absorbableZincMg(food),
+    iron: absorbableIronMg(food) / DV_REFERENCE_ABSORPTION.iron,
+    zinc: absorbableZincMg(food) / DV_REFERENCE_ABSORPTION.zinc,
     vitaminA: retinolActivityEquivalentsUg(food),
     vitaminB12: effectiveB12Ug(food),
     folate: m.folateUg,
@@ -112,7 +125,7 @@ export function microAmounts(food: FoodRecord): Record<MicroNutrient, number | n
     niacin: m.niacinMg,
     vitaminB6: m.vitaminB6Mg,
     choline: m.cholineMg,
-    calcium: m.calciumMg,
+    calcium: calcium === null ? m.calciumMg : calcium / DV_REFERENCE_ABSORPTION.calcium,
     magnesium: m.magnesiumMg,
     potassium: m.potassiumMg,
     copper: m.copperMg,
@@ -168,9 +181,9 @@ function listLabels(nutrients: readonly MicroNutrient[]): LocalizedText {
 }
 
 /**
- * Micronutrient density per calorie after bioavailability adjustment, over the
- * nutrients the sources report. Non-heme iron, phytate-bound zinc, and carotenoid-A
- * are not treated as equal to heme iron, animal zinc, or preformed retinol.
+ * Available micronutrient density per calorie, over the nutrients the sources report.
+ * Non-heme iron, phytate-bound zinc, oxalate-bound calcium, and carotenoid-A are not
+ * treated as equal to heme iron, animal zinc, milk calcium, or preformed retinol.
  * Algal B12 analogues contribute 0. Missing values are excluded, never read as 0.
  */
 export function scoreMicros(food: FoodRecord): MicroBreakdown {
@@ -246,6 +259,19 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
       de: `Phytatgebundenes Zink: Resorption ${ZINC_ABSORPTION.phytateBound} vs. tierisch ${ZINC_ABSORPTION.animal}`,
     });
   }
+  const calcium = calciumAbsorption(food);
+  if (calcium !== null && calcium.fraction !== DV_REFERENCE_ABSORPTION.calcium) {
+    const pct = round1(calcium.fraction * 100);
+    const milkPct = round1(DV_REFERENCE_ABSORPTION.calcium * 100);
+    const basis = calcium.carriedOver
+      ? { en: ` (measured for ${calcium.studiedFood.en})`, de: ` (gemessen für ${calcium.studiedFood.de})` }
+      : { en: "", de: "" };
+    flags.push({
+      en: `Calcium ${food.micros.calciumMg} mg × absorption ${pct} %${basis.en} vs milk ${milkPct} %`,
+      de: `Calcium ${food.micros.calciumMg} mg × Resorption ${pct} %${basis.de} vs. Milch ${milkPct} %`,
+    });
+  }
+  const absorbedCalcium = absorbableCalciumMg(food);
   const b12 = effectiveB12Ug(food);
   if (food.micros.b12IsAnalogue) {
     flags.push({
@@ -272,6 +298,7 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     raeUg: round1(retinolActivityEquivalentsUg(food)),
     absorbableIronMg: round2(absorbableIronMg(food)),
     absorbableZincMg: round2(absorbableZincMg(food)),
+    absorbableCalciumMg: absorbedCalcium === null ? null : round1(absorbedCalcium),
     effectiveB12Ug: b12 === null ? null : round2(b12),
     nutrients,
     parts: {

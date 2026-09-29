@@ -1,5 +1,5 @@
 import type { Gap } from "../recommend/engine";
-import type { AxisKey, ClassWeights, DietaryPattern, FoodClass, Kingdom, Tier } from "../scoring/types";
+import type { AxisKey, ClassWeights, DietaryPattern, FoodClass, Kingdom, NovaGroup, Tier } from "../scoring/types";
 
 export interface Messages {
   nav: {
@@ -57,14 +57,43 @@ export interface Messages {
       limiting: string;
       digestibility: number;
     }) => string;
+    benefitsHeading: string;
+    burdensHeading: string;
     fatsCarbsMicros: string;
-    microLine: (info: { rae: number; iron: number; zinc: number; b12: number | null }) => string;
+    microLine: (info: { rae: number; iron: number; zinc: number; calcium: number | null; b12: number | null }) => string;
+    bioactivesHeading: string;
+    bioactivesLede: string;
+    bioactiveColumns: { compound: string; content: string; measured: string; source: string };
+    bioactiveStatus: { notDetected: string; notExpected: string; noData: string };
+    bioactiveRawValue: string;
+    bioactiveDryWeight: string;
+    bioactiveRange: (min: string, max: string) => string;
+    burden: {
+      heading: string;
+      lede: string;
+      processingHeading: string;
+      nova: (group: NovaGroup, label: string) => string;
+      novaMeaning: Record<NovaGroup, string>;
+      capped: (from: string, to: string) => string;
+      evidence: (info: { where: string; classified: number; nova4: number; nova3: number; retrieved: string }) => string;
+      evidenceAll: string;
+      evidenceGermany: string;
+      additives: (products: number) => string;
+      retention: (info: { reference: string; kept: number; details: string }) => string;
+      sodium: (info: { reference: string; from: string; to: string }) => string;
+      residuesHeading: string;
+      hormones: string;
+      accumulation: string;
+      storageHeading: string;
+      storage: (nutrients: string) => string;
+    };
     classColumns: string;
     weights: (classLabel: string, weights: ClassWeights) => string;
     notes: string;
     compareCta: string;
     preparationsHeading: string;
     preparationsLede: string;
+    preparationsProcessing: string;
     preparationsCompare: string;
     nutrientsHeading: string;
     nutrientsHint: string;
@@ -77,7 +106,7 @@ export interface Messages {
       fattyAcids: string;
     };
     dietHint: string;
-    columns: { nutrient: string; per100g: string; pctDv: string; source: string };
+    columns: { nutrient: string; per100g: string; available: string; pctDv: string; store: string; source: string };
     notReported: string;
     patternNote: (foodName: string) => string;
   };
@@ -87,7 +116,11 @@ export interface Messages {
     slot: (position: number) => string;
     classTier: (classLabel: string, tier: Tier) => string;
     eaaLine: (info: { aas: number; diaas: number; limiting: string }) => string;
-    compoundLine: (info: { creatineMg: number; fibreG: number; b12Ug: number | null }) => string;
+    compoundLine: (info: { creatineMg: number | null; fibreG: number; b12Ug: number | null }) => string;
+    novaLine: (group: NovaGroup, label: string) => string;
+    bioactivesHeading: string;
+    bioactivesHint: string;
+    notDetectedShort: string;
     radarHeading: string;
     radarTitle: string;
     microHeading: string;
@@ -113,6 +146,10 @@ export interface Messages {
     dataScript: string;
     dataMissing: string;
     dataPreparation: string;
+    frameHeading: string;
+    frameBenefits: string;
+    frameBurdens: string;
+    frameComposite: string;
     eaaHeading: string;
     eaaPattern: string;
     eaaRatios: string;
@@ -140,7 +177,23 @@ export interface Messages {
     /** Backticked spans render as code. */
     microDensity: (saturationPct: number) => string;
     microUpperLimit: string;
+    microAvailability: (values: { iron: number; zinc: number; calcium: number }) => string;
+    calciumTable: { studied: string; absorption: string; usedFor: string };
+    calciumNote: string;
     microTable: { nutrient: string; dailyValue: string; upperLimit: string };
+    storageHeading: string;
+    storageNutrients: string;
+    storageTable: { nutrient: string; store: string; site: string };
+    storageContaminantsLead: string;
+    storageContaminants: readonly string[];
+    bioactivesHeading: string;
+    bioactivesNote: string;
+    processingHeading: string;
+    processingGroups: string;
+    processingCap: (ceiling: string) => string;
+    processingEvidence: string;
+    processingSulfite: string;
+    hormonesNote: string;
     fibreHeading: string;
     fibreNote: string;
     residueHeading: string;

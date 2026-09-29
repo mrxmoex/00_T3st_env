@@ -218,6 +218,7 @@ const cabbageRaw = plant({
 const sauerkraut = plant({
   id: "sauerkraut", name: "Sauerkraut, drained", nameDe: "Sauerkraut, abgetropft",
   class: "cruciferous_fermented", group: "sauerkraut", preparation: "fermented",
+  processing: { nova: 3 },
   ilealDigestibility: 0.78, resistantStarchG: 0,
   residue: {
     surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.15,
@@ -241,6 +242,7 @@ const sauerkraut = plant({
 const kimchi = plant({
   id: "kimchi", name: "Kimchi (cabbage)", nameDe: "Kimchi (Kohl)",
   class: "cruciferous_fermented", group: "kimchi", preparation: "fermented",
+  processing: { nova: 3 },
   ilealDigestibility: 0.78, resistantStarchG: 0,
   residue: {
     surfaceAreaClass: "medium", systemicPesticideLikelihood: 0.18,
@@ -399,6 +401,23 @@ const potatoBoiled = plant({
     {
       en: "Active starch dominates. Cooling raises resistant starch; still not a micronutrient-dense food.",
       de: "Aktive Stärke dominiert. Abkühlen erhöht die resistente Stärke; trotzdem kein mikronährstoffdichtes Lebensmittel.",
+    },
+  ],
+});
+
+const SULFITE_RULE = {
+  label: "21 CFR 182.3766 (sodium metabisulfite)",
+  url: "https://www.ecfr.gov/current/title-21/chapter-I/subchapter-B/part-182/subpart-D/section-182.3766",
+  note: "US rule: not used in meats or in food recognized as a source of vitamin B1, because sulfites destroy thiamin",
+};
+
+const potatoMash = prepared(potatoBoiled, {
+  id: "potato_mash", name: "Mashed potatoes with whole milk", nameDe: "Kartoffelpüree mit Vollmilch",
+  group: "potato_mash", preparation: "mashed",
+  notes: [
+    {
+      en: "Home-made from boiled potatoes and whole milk: the reference for the instant version made with the same milk.",
+      de: "Selbst gemacht aus gekochten Kartoffeln und Vollmilch: die Referenz für die Instant-Version mit derselben Milch.",
     },
   ],
 });
@@ -581,6 +600,7 @@ const mungBeansBoiled = plant({
 const tofu = plant({
   id: "tofu", name: "Tofu", nameDe: "Tofu",
   class: "legumes", group: "tofu", preparation: "processed",
+  processing: { nova: 3 },
   ilealDigestibility: 0.9, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: chickpeasBoiled.residue,
   degradation: {
@@ -832,6 +852,31 @@ export const PLANT_FOODS: FoodRecord[] = [
   potatoBoiled,
   prepared(potatoBoiled, {
     id: "potato_baked", name: "Potato, unpeeled, baked", nameDe: "Kartoffel, ungeschält, gebacken", preparation: "baked",
+  }),
+  prepared(potatoBoiled, {
+    id: "potato_canned", name: "Potatoes, precooked, canned, drained", nameDe: "Kartoffeln, vorgegart, Konserve, abgetropft",
+    preparation: "canned",
+    processing: { nova: 3, evidence: "en:canned-potatoes" },
+    sources: [SULFITE_RULE],
+    notes: [
+      {
+        en: "Precooked and kept in brine: water-soluble vitamins leach into the liquid that is poured away, salt goes in. Sulfites, common in this category, destroy thiamin.",
+        de: "Vorgegart und in Lake gelagert: wasserlösliche Vitamine gehen in die Flüssigkeit, die weggegossen wird, Salz geht hinein. Sulfite, in dieser Kategorie verbreitet, zerstören Thiamin.",
+      },
+    ],
+  }),
+  potatoMash,
+  prepared(potatoMash, {
+    id: "potato_mash_instant", name: "Mashed potatoes from instant powder, with whole milk",
+    nameDe: "Kartoffelpüree aus Instantpulver, mit Vollmilch", preparation: "instant",
+    processing: { nova: 4, evidence: "en:instant-mashed-potatoes" },
+    sources: [SULFITE_RULE],
+    notes: [
+      {
+        en: "Dehydrated flakes: drying and storage leave almost no vitamin C, B6, or folate. Emulsifiers and sulfites keep the powder usable, which is what makes it ultra-processed.",
+        de: "Getrocknete Flocken: Trocknung und Lagerung lassen kaum Vitamin C, B6 oder Folat übrig. Emulgatoren und Sulfite halten das Pulver verwendbar, das macht es hochverarbeitet.",
+      },
+    ],
   }),
   prepared(sweetPotatoBaked, {
     id: "sweet_potato_boiled", name: "Sweet potato, boiled", nameDe: "Süßkartoffel, gekocht", preparation: "boiled",

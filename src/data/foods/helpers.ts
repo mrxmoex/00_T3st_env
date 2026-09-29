@@ -1,12 +1,13 @@
 import { NUTRIENT_KEYS, sourcedFood, type NutrientKey } from "../sources/snapshot";
 import type { LocalizedText } from "../../i18n/locale";
 import type {
-  AnimalExclusiveCompounds,
   DegradationProfile,
   FoodClass,
   FoodRecord,
   IronForm,
+  NovaGroup,
   Preparation,
+  ProcessingInfo,
   ProcessingStability,
   ResidueProfile,
   SourceRef,
@@ -25,7 +26,7 @@ export interface FoodSpec {
   zincBoundByPhytate: boolean;
   b12IsAnalogue: boolean;
   resistantStarchG: number;
-  animalCompounds: AnimalExclusiveCompounds;
+  processing: ProcessingInfo;
   residue: ResidueProfile;
   degradation: DegradationProfile;
   phytochemicalIndex: number;
@@ -33,27 +34,19 @@ export interface FoodSpec {
   notes: LocalizedText[];
 }
 
-type Curated = Omit<FoodSpec, "ironForm" | "b12IsAnalogue" | "animalCompounds" | "sources" | "notes" | "zincBoundByPhytate">;
+type Optional = "ironForm" | "b12IsAnalogue" | "processing" | "sources" | "notes" | "zincBoundByPhytate";
+type Curated = Omit<FoodSpec, Optional>;
 
-export const ZERO_ANIMAL: AnimalExclusiveCompounds = {
-  creatineMg: 0,
-  taurineMg: 0,
-  carnosineMg: 0,
-};
-
-export const ANIMAL_COMPOUND_ESTIMATE: SourceRef = {
-  label: "Creatine, taurine, carnosine",
-  note: "curated estimates by food class; not reported by BLS 4.0 or USDA SR Legacy",
-};
+const UNPROCESSED: ProcessingInfo = { nova: 1 };
 
 export function plant(
-  spec: Curated & Partial<Pick<FoodSpec, "zincBoundByPhytate" | "b12IsAnalogue" | "sources" | "notes">>,
+  spec: Curated & Partial<Pick<FoodSpec, "zincBoundByPhytate" | "b12IsAnalogue" | "processing" | "sources" | "notes">>,
 ): FoodSpec {
   return {
     ironForm: "nonheme",
     zincBoundByPhytate: false,
     b12IsAnalogue: false,
-    animalCompounds: ZERO_ANIMAL,
+    processing: UNPROCESSED,
     sources: [],
     notes: [],
     ...spec,
@@ -61,17 +54,15 @@ export function plant(
 }
 
 export function animal(
-  spec: Curated &
-    Pick<FoodSpec, "ironForm" | "animalCompounds"> &
-    Partial<Pick<FoodSpec, "sources" | "notes">>,
+  spec: Curated & Pick<FoodSpec, "ironForm"> & Partial<Pick<FoodSpec, "processing" | "sources" | "notes">>,
 ): FoodSpec {
-  const hasCompounds = Object.values(spec.animalCompounds).some((value) => value > 0);
   return {
     zincBoundByPhytate: false,
     b12IsAnalogue: false,
+    processing: UNPROCESSED,
+    sources: [],
     notes: [],
     ...spec,
-    sources: [...(spec.sources ?? []), ...(hasCompounds ? [ANIMAL_COMPOUND_ESTIMATE] : [])],
   };
 }
 
@@ -90,6 +81,8 @@ const STABILITY_BY_PREPARATION: Record<Preparation, ProcessingStability | null> 
   smoked: "dried",
   dried: "dried",
   fermented: "fermented",
+  mashed: "cooked",
+  instant: "cooked",
   processed: null,
 };
 
@@ -109,13 +102,36 @@ const SHELF_DAYS_BY_PREPARATION: Record<Preparation, number | null> = {
   smoked: 14,
   dried: 180,
   fermented: null,
+  mashed: 3,
+  instant: 3,
+  processed: null,
+};
+
+/** NOVA group a preparation implies by itself (salt, brine, smoke); null keeps the base food's group. */
+const NOVA_BY_PREPARATION: Record<Preparation, NovaGroup | null> = {
+  raw: null,
+  boiled: null,
+  steamed: null,
+  stewed: null,
+  fried: null,
+  roasted: null,
+  baked: null,
+  grilled: null,
+  braised: null,
+  poached: null,
+  canned: 3,
+  smoked: 3,
+  dried: null,
+  fermented: null,
+  mashed: null,
+  instant: null,
   processed: null,
 };
 
 /**
  * Another preparation of the same food. Curated fields carry over from the base;
- * stability follows the preparation. Nutrient values still come from the variant's
- * own database entry, so cooking losses are the database's, not ours.
+ * stability and processing follow the preparation. Nutrient values still come from
+ * the variant's own database entry, so cooking losses are the database's, not ours.
  */
 export function prepared(
   base: FoodSpec,
@@ -123,9 +139,11 @@ export function prepared(
 ): FoodSpec {
   const stability = STABILITY_BY_PREPARATION[changes.preparation] ?? base.degradation.processingStability;
   const shelfDays = SHELF_DAYS_BY_PREPARATION[changes.preparation] ?? base.degradation.perishabilityDays;
+  const nova = NOVA_BY_PREPARATION[changes.preparation];
   return {
     ...base,
     notes: [],
+    processing: nova === null ? base.processing : { nova },
     ...changes,
     degradation: {
       ...base.degradation,
@@ -234,7 +252,7 @@ export function defineFood(spec: FoodSpec): FoodRecord {
       cholesterolMg: required("cholesterol"),
       lactoseG: optional("lactose"),
     },
-    animalCompounds: spec.animalCompounds,
+    processing: spec.processing,
     residue: spec.residue,
     degradation: spec.degradation,
     phytochemicalIndex: spec.phytochemicalIndex,

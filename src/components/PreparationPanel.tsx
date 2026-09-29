@@ -3,10 +3,11 @@ import { foodsInGroup } from "../data/catalog";
 import { NUTRIENT_UNITS, type NutrientKey } from "../data/sources/snapshot";
 import { NUTRIENT_LABELS, PREPARATION_LABELS } from "../i18n/labels";
 import { useLocale } from "../i18n/LocaleContext";
+import { perGramDryMatter } from "../scoring/retention";
 import type { FoodRecord, ScoreCard } from "../scoring/types";
 import { formatAmount, formatChange } from "./format";
 
-/** Nutrients that cooking changes most visibly. */
+/** Nutrients that cooking and processing change most visibly. */
 const ROWS: readonly NutrientKey[] = [
   "kcal",
   "water",
@@ -16,9 +17,19 @@ const ROWS: readonly NutrientKey[] = [
   "thiamin",
   "vitaminB6",
   "potassium",
+  "sodium",
   "iron",
   "betaCarotene",
 ];
+
+/** Rows compared per 100 g; every other row is compared per gram of dry matter. */
+const PER_100G_ROWS: ReadonlySet<NutrientKey> = new Set(["kcal", "water"]);
+
+function changeAgainst(base: FoodRecord, variant: FoodRecord, key: NutrientKey): string | null {
+  return PER_100G_ROWS.has(key)
+    ? formatChange(variant.nutrients[key], base.nutrients[key])
+    : formatChange(perGramDryMatter(variant, key), perGramDryMatter(base, key));
+}
 
 export function PreparationPanel({ food, cards }: { food: FoodRecord; cards: readonly ScoreCard[] }) {
   const { t, localize } = useLocale();
@@ -62,7 +73,7 @@ export function PreparationPanel({ food, cards }: { food: FoodRecord; cards: rea
                 </td>
                 {variants.map((variant) => {
                   const value = variant.nutrients[key];
-                  const change = variant === base ? null : formatChange(value, base.nutrients[key]);
+                  const change = variant === base ? null : changeAgainst(base, variant, key);
                   return (
                     <td key={variant.id} className={variant.id === food.id ? "current" : undefined}>
                       {value === null ? <span className="muted">—</span> : formatAmount(value)}
@@ -85,6 +96,14 @@ export function PreparationPanel({ food, cards }: { food: FoodRecord; cards: rea
                 })}
               </tr>
             ))}
+            <tr className="axis-row">
+              <td className="sticky">{t.food.preparationsProcessing}</td>
+              {variants.map((variant) => (
+                <td key={variant.id} className={variant.id === food.id ? "current" : undefined}>
+                  <span className={`nova-badge nova-${variant.processing.nova}`}>NOVA {variant.processing.nova}</span>
+                </td>
+              ))}
+            </tr>
           </tbody>
         </table>
       </div>

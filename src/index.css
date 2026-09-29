@@ -314,6 +314,34 @@ details.panel > summary {
 }
 .bar > span { display: block; height: 100%; background: var(--accent-2); }
 
+.bars-heading {
+  margin: 0.5rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bar-row.burden .bar > span { background: var(--accent); }
+.bar-row.composite { font-weight: 600; border-top: 1px solid var(--line); padding-top: 0.45rem; }
+
+.nova-badge {
+  display: inline-block;
+  padding: 0.05rem 0.45rem;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.nova-1 { background: #2f6d5c; color: #e8fff6; }
+.nova-2 { background: #4d7350; color: #f3ffef; }
+.nova-3 { background: #8a7a3d; color: #fff8d9; }
+.nova-4 { background: #7a3a32; color: #ffe8e4; }
+
+.role, .cell-note { display: block; font-size: 0.78rem; color: var(--muted); }
+.callout-warning { border-left: 4px solid var(--danger); padding-left: 0.6rem; }
+
 .food-overview { display: grid; gap: 1rem; align-items: center; }
 
 .radar { margin: 0; }

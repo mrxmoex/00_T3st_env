@@ -47,9 +47,49 @@ export const de: Messages = {
     radarTitle: (name) => `${name}: Achsenprofil`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
       `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limitierende Aminosäure: ${limiting}. Ileale Verdaulichkeit ${digestibility}.`,
+    benefitsHeading: "Nutzen",
+    burdensHeading: "Last (höherer Wert = weniger Last)",
     fatsCarbsMicros: "Fette, Kohlenhydrate, Mikronährstoffe",
-    microLine: ({ rae, iron, zinc, b12 }) =>
-      `RAE ${rae} µg · res. Fe ${iron} mg · res. Zn ${zinc} mg · B12 ${b12 ?? "—"} µg`,
+    microLine: ({ rae, iron, zinc, calcium, b12 }) =>
+      `RAE ${rae} µg · res. Fe ${iron} mg · res. Zn ${zinc} mg · res. Ca ${calcium ?? "—"} mg · B12 ${b12 ?? "—"} µg`,
+    bioactivesHeading: "Bioaktive Stoffe",
+    bioactivesLede:
+      "Stoffe, die die Nährstoffdatenbanken nicht angeben, nach Gehalt aus veröffentlichten Analysen erfasst. Gezeigt, nicht bewertet. „Keine Daten“ heißt, dass keine Analyse gefunden wurde, nicht null; „nicht nachgewiesen“ heißt, eine Analyse hat gesucht und nichts gefunden.",
+    bioactiveColumns: { compound: "Stoff", content: "mg pro 100 g", measured: "Was gemessen wurde", source: "Quelle" },
+    bioactiveStatus: { notDetected: "nicht nachgewiesen", notExpected: "nicht zu erwarten", noData: "keine Daten" },
+    bioactiveRawValue: "Wert aus rohem Gewebe; Garen verändert ihn",
+    bioactiveDryWeight: "aus der Trockenmasse mit dem Wassergehalt dieses Lebensmittels umgerechnet",
+    bioactiveRange: (min, max) => `Spanne ${min}–${max}`,
+    burden: {
+      heading: "Lasten: Verarbeitung, Rückstände, Speicherung",
+      lede: "Was den Nährstoffen gegenübersteht: wie stark das Lebensmittel verarbeitet ist, welche Rückstände es tragen kann und was der Körper davon behält.",
+      processingHeading: "Verarbeitung",
+      nova: (group, label) => `NOVA ${group}: ${label}`,
+      novaMeaning: {
+        1: "Ganzes Lebensmittel, eventuell gegart, getrocknet, tiefgekühlt, pasteurisiert oder ohne Zusätze fermentiert.",
+        2: "Öl, Butter, Salz oder Zucker: Zutaten zum Kochen, die man nicht allein isst.",
+        3: "Ein ganzes Lebensmittel, haltbar gemacht mit Salz, Zucker, Öl, Lake oder Rauch.",
+        4: "Industrielle Rezeptur mit Zutaten oder Zusatzstoffen, die in keiner Haushaltsküche vorkommen, etwa Emulgatoren.",
+      },
+      capped: (from, to) =>
+        `Hochverarbeitet: Gesamtwert von ${from} auf ${to} begrenzt, die Obergrenze von Stufe D.`,
+      evidence: ({ where, classified, nova4, nova3, retrieved }) =>
+        `${where}: Von ${classified} eingestuften Produkten dieser Kategorie sind ${nova4} NOVA 4 und ${nova3} NOVA 3 (Open Food Facts, abgerufen am ${retrieved}).`,
+      evidenceAll: "Alle Länder",
+      evidenceGermany: "Deutschland",
+      additives: (products) => `Häufigste Zusatzstoffe unter den ${products} Produkten der Kategorie:`,
+      retention: ({ reference, kept, details }) =>
+        `Gegenüber ${reference}: ${kept} % der empfindlichen Vitamine je Gramm Trockenmasse erhalten (${details}). Die Stabilitätsachse wird mit diesem Anteil skaliert.`,
+      sodium: ({ reference, from, to }) => `Natrium ${to} mg pro 100 g, gegenüber ${from} mg bei ${reference}.`,
+      residuesHeading: "Rückstände und Kontaminanten",
+      hormones:
+        "Hormonelle Masthilfsmittel sind in der EU-Tierhaltung seit 1988 verboten (heute Richtlinie 96/22/EG). Bei tierischen Lebensmitteln bewertet die Rückstandsachse Tierarzneimittelrückstände.",
+      accumulation:
+        "Schwermetalle wie Cadmium, Blei und Methylquecksilber werden über Jahre in Niere, Knochen und Gehirn gespeichert; regelmäßige Aufnahme summiert sich, statt durchzulaufen.",
+      storageHeading: "Vom Körper gespeichert",
+      storage: (nutrients) =>
+        `Dieses Lebensmittel liefert Nährstoffe, die der Körper Monate bis Jahre speichert: ${nutrients}. Speicher überbrücken Lücken zwischen Mahlzeiten, lassen aber auch Überschüsse anwachsen.`,
+    },
     classColumns: "Klassenspezifische Spalten",
     weights: (classLabel, w) =>
       `Gewichte des Gesamtwerts für ${classLabel}: EAA ${w.eaa}, EFA ${w.efa}, Kohlenhydrate ${w.carb}, Mikro ${w.micro}, Ballaststoffe ${w.fibre}, Rückstände ${w.residue}, Stabilität ${w.degradation}.`,
@@ -57,11 +97,12 @@ export const de: Messages = {
     compareCta: "Dieses Lebensmittel vergleichen",
     preparationsHeading: "Zubereitungen",
     preparationsLede:
-      "Pro 100 g verzehrfertig, jeweils aus dem eigenen Datenbankeintrag. Garverluste stammen aus den Analysen und Rezeptberechnungen der Datenbanken; aufgenommenes oder verlorenes Wasser verdünnt oder konzentriert zusätzlich jeden Wert.",
+      "Pro 100 g verzehrfertig, jeweils aus dem eigenen Datenbankeintrag. Die %-Änderung vergleicht jede Zubereitung mit der ersten je Gramm Trockenmasse, damit aufgenommenes oder verlorenes Wasser keinen Verlust verdeckt oder vortäuscht; Energie und Wasser ändern sich pro 100 g. Die Verluste stammen aus den Analysen und Rezeptberechnungen der Datenbanken.",
+    preparationsProcessing: "Verarbeitung (NOVA)",
     preparationsCompare: "Diese Zubereitungen vergleichen",
     nutrientsHeading: "Nährwerte und Herkunft jedes Werts",
     nutrientsHint:
-      "Pro 100 g essbarem Anteil. %DV pro 100 kcal für die bewerteten Mikronährstoffe, nach Bioverfügbarkeitsanpassung. — heißt: Keine Datenbank nennt den Wert; er wird nicht als null gezählt.",
+      "Pro 100 g essbarem Anteil. „Verfügbar“ ist die geschätzte aufgenommene Menge, wo Resorptionsstudien vorliegen; %DV pro 100 kcal zählt die verfügbare Menge. „Körperspeicher“ sagt, wie lange der Körper einen Nährstoff hält. — heißt: Keine Datenbank nennt den Wert; er wird nicht als null gezählt.",
     nutrientGroups: {
       macros: "Energie und Makronährstoffe",
       diet: "Relevant für spezielle und medizinische Kostformen",
@@ -72,7 +113,14 @@ export const de: Messages = {
     },
     dietHint:
       "Zusammensetzungswerte, auf die nierengerechte, natriumarme, laktosefreie, PKU- oder kohlenhydratberechnete Kostformen achten. Sie werden gezeigt, nicht bewertet, und sind keine Verordnung.",
-    columns: { nutrient: "Nährstoff", per100g: "pro 100 g", pctDv: "%DV / 100 kcal", source: "Quelle und Herkunft" },
+    columns: {
+      nutrient: "Nährstoff",
+      per100g: "pro 100 g",
+      available: "verfügbar",
+      pctDv: "%DV / 100 kcal",
+      store: "Körperspeicher",
+      source: "Quelle und Herkunft",
+    },
     notReported: "nicht angegeben",
     patternNote: (foodName) =>
       `Aminosäuren, die die Datenbanken nicht nennen, wurden aus dem Muster von ${foodName} ergänzt und auf das Protein dieses Lebensmittels skaliert.`,
@@ -85,7 +133,12 @@ export const de: Messages = {
     classTier: (classLabel, tier) => `${classLabel} · Stufe ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
     compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Kreatin ${creatineMg} mg · Ballaststoffe ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
+      `Kreatin ${creatineMg === null ? "—" : `${creatineMg} mg`} · Ballaststoffe ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
+    novaLine: (group, label) => `NOVA ${group} · ${label}`,
+    bioactivesHeading: "Bioaktive Stoffe (mg pro 100 g)",
+    bioactivesHint:
+      "Aus veröffentlichten Analysen; nicht bewertet. * Wert aus rohem Gewebe bei gegartem Lebensmittel · — keine Analyse gefunden · n. n. untersucht, nicht nachgewiesen · ∅ in dieser Art Lebensmittel nicht zu erwarten.",
+    notDetectedShort: "n. n.",
     radarHeading: "Achsenprofil",
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
     microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
@@ -116,6 +169,13 @@ export const de: Messages = {
       "Ein Wert, den keine Datenbank nennt, bleibt fehlend: Er wird als — angezeigt, nicht bewertet und in den Hinweisen des Lebensmittels genannt. Fehlende Aminosäuren werden aus dem Muster eines benannten ähnlichen Lebensmittels ergänzt, der Methode, die der BLS Musterberechnung nennt.",
     dataPreparation:
       "Gekochte, gedünstete, gebratene und andere Zubereitungen sind eigene Datenbankeinträge. Ihre Veränderungen, etwa Vitaminverluste oder aufgenommenes und verlorenes Wasser, stammen aus den Analysen und Rezeptberechnungen der Datenbanken, nicht aus einem Faktor dieser App.",
+    frameHeading: "Nutzen gegen Last",
+    frameBenefits:
+      "Nutzen: essentielle Aminosäuren mit ihrer Verdaulichkeit, essentielle Fette mit dem Umwandlungsverlust von ALA, Kohlenhydratart und Ballaststoffe sowie Mikronährstoffe als die Menge, die der Körper aufnehmen kann.",
+    frameBurdens:
+      "Last: Rückstände von Pestiziden, Metallen und Tierarzneimitteln; Nährstoffverlust durch Lagerung, Garen und industrielle Verarbeitung; Verarbeitungsgrad und Zusatzstoffe (NOVA). Nährstoffe, die der Körper speichert, und Kontaminanten, die er anreichert, werden markiert, weil sich beide aufbauen.",
+    frameComposite:
+      "Der Gesamtwert gewichtet das je Lebensmittelklasse. Hochverarbeitete Produkte (NOVA 4) bleiben in Stufe D: Zugesetzte oder übrig gebliebene Nährstoffe kaufen die Verarbeitung nicht frei.",
     eaaHeading: "1. Vollständigkeit essentieller Aminosäuren + Verdaulichkeit",
     eaaPattern: "FAO-2013-Referenzmuster für Erwachsene (mg/g Protein):",
     eaaRatios:
@@ -144,15 +204,46 @@ export const de: Messages = {
       `Zwanzig Nährstoffe werden bewertet, jeder als % seines FDA-Tageswerts pro 100 kcal nach den obigen Anpassungen, gedeckelt bei ${saturationPct} % DV / 100 kcal = 1.0, dann gemittelt über die Nährstoffe, die die Datenbanken nennen. Die Werte stehen in \`coefficients.ts\`.`,
     microUpperLimit:
       "Überschreiten 100 kcal eines Lebensmittels bereits die tägliche tolerierbare EFSA-Höchstmenge, zählt dieser Nährstoff −1 statt bis zu +1. Die Vitamin-A-Grenze gilt nur für vorgeformtes Retinol.",
+    microAvailability: (v) =>
+      `Verfügbarkeit statt Etikettmenge: Eisen, Zink und Calcium zählen als aufgenommene Menge geteilt durch die Resorption, die der Tageswert schon annimmt (Eisen ${v.iron} %, Zink ${v.zinc} %, Calcium ${v.calcium} % wie aus Milch). So wird die Resorption einmal gezählt, nicht doppelt, und oxalatgebundenes Calcium aus Spinat zählt etwa ein Sechstel von Milchcalcium.`,
+    calciumTable: { studied: "Untersuchtes Lebensmittel", absorption: "Aufgenommen", usedFor: "Angewendet auf" },
+    calciumNote:
+      "Beim Menschen gemessener Anteil des aufgenommenen Calciums bei gleicher Calciummenge (Weaver, Proulx & Heaney 1999). Mit * markierte Lebensmittel verwenden den Wert eines verwandten Lebensmittels. Lebensmittel ohne Studie zählen wie Milchcalcium.",
     microTable: { nutrient: "Nährstoff", dailyValue: "Tageswert (DV)", upperLimit: "EFSA-Höchstmenge" },
+    storageHeading: "10. Speicherung im Körper",
+    storageNutrients:
+      "Empfehlungen zur Tageszufuhr behandeln jeden Tag gleich. Der Körper speichert aber manche Nährstoffe: Speicher überbrücken Wochen ohne Zufuhr und lassen ebenso Überschüsse anwachsen. Nährstoffe mit kleinem Vorrat, etwa Thiamin und Vitamin C, müssen regelmäßig kommen.",
+    storageTable: { nutrient: "Nährstoff", store: "Gehalten für", site: "Wo" },
+    storageContaminantsLead: "Kontaminanten, die der Körper anreichert (Risikobewertungen der EFSA):",
+    storageContaminants: [
+      "Cadmium: Niere, biologische Halbwertszeit 10–30 Jahre.",
+      "Blei: Knochen, Jahrzehnte.",
+      "Methylquecksilber: Gehirn und Blut, Halbwertszeit etwa zwei Monate; baut sich bei regelmäßigem Verzehr großer Raubfische auf.",
+      "Dioxine und dioxinähnliche PCB: Körperfett, Halbwertszeiten von mehreren Jahren; vor allem über tierisches Fett und fetten Fisch aufgenommen.",
+      "Die meisten heutigen Pestizide werden binnen Tagen ausgeschieden; das Problem ist die regelmäßige Belastung, nicht die Speicherung. Ältere Organochlorverbindungen wie DDT bleiben im Körperfett.",
+    ],
+    bioactivesHeading: "11. Bioaktive Stoffe",
+    bioactivesNote:
+      "Kreatin, Taurin, Carnosin, Anserin, Coenzym Q10, L-Carnitin, Ergothionein und Glucosinolate stehen weder im BLS noch in FoodData Central. Sie werden nach Gehalt aus den unten genannten Analysen erfasst, jeder Wert mit dem Gewebe und Zustand, der gemessen wurde. Sie werden gezeigt, nicht bewertet, damit Stoffe, die der Körper auch selbst bilden kann, essentielle Nährstoffe nicht überholen. Ergothionein wird mit dem Wassergehalt jedes Lebensmittels aus der Trockenmasse umgerechnet; ein Rohwert bei einem gegarten Lebensmittel ist markiert.",
+    processingHeading: "9. Verarbeitung (NOVA)",
+    processingGroups:
+      "NOVA (Monteiro et al. 2019) ordnet Lebensmittel nach Verarbeitung: 1 ganze Lebensmittel, gegart oder nicht; 2 Küchenzutaten; 3 ganze Lebensmittel, haltbar gemacht mit Salz, Zucker, Öl, Lake oder Rauch; 4 industrielle Rezepturen mit Zutaten oder Zusatzstoffen, die beim Kochen zu Hause nicht vorkommen. Selbst Gekochtes bleibt Gruppe 1; Konserven und Geräuchertes sind Gruppe 3.",
+    processingCap: (ceiling) =>
+      `Bei NOVA-4-Lebensmitteln wird der Gesamtwert auf ${ceiling} begrenzt, die Obergrenze von Stufe D. Ihre Nährstoffe sind die Verarbeitung nicht wert, solange Nahrung nicht knapp ist.`,
+    processingEvidence:
+      "Wo die Gruppe vom Produkt abhängt, nutzt die Matrix Marktdaten: Open Food Facts (ODbL) zählt, wie die Produkte einer Kategorie eingestuft sind und welche Zusatzstoffe ihre Zutatenlisten nennen. Die Zahlen liegen mit Abrufdatum in `src/data/sources/processing-evidence.json`.",
+    processingSulfite:
+      "Schwefeldioxid und Sulfite (E220–E228), in Kartoffelprodukten verbreitet, zerstören Thiamin. Das US-Recht schließt sie deshalb für Lebensmittel aus, die als Vitamin-B1-Quelle gelten (21 CFR 182.3766).",
+    hormonesNote:
+      "Hormone: Hormonelle Masthilfsmittel sind in der EU-Tierhaltung seit 1988 verboten (heute Richtlinie 96/22/EG), und die deutschen Lebensmittel im BLS stammen aus diesem System. Tierarzneimittelrückstände werden als Rückstandsklasse bewertet. Natürliche Hormone in Milch und pflanzliche Isoflavone werden nicht bewertet.",
     fibreHeading: "5. Ballaststoffe / sekundäre Pflanzenstoffe",
     fibreNote: "Tierische Klassen haben die Basis 0. Das ist Zusammensetzung, keine Abwertung.",
     residueHeading: "6. Rückstands- / Kontaminationsrisiko",
     residueNote:
       "Höherer Wert = geringeres Risiko. Blattgemüse mit großer Oberfläche wird nicht wie eine Knolle bewertet. Metalle in Fisch/Algen und Tierarzneimittelrückstände sind vollwertige Faktoren, keine Fußnoten.",
-    degradationHeading: "7. Abbauempfindlichkeit",
+    degradationHeading: "7. Stabilität und Nährstoffverlust",
     degradationNote:
-      "Boni: gegart +0.08, fermentiert +0.22, getrocknet +0.28. Frisches Blattgemüse bleibt labil.",
+      "Boni: gegart +0.08, fermentiert +0.22, getrocknet +0.28. Frisches Blattgemüse bleibt labil. Ein industriell verarbeitetes Lebensmittel (NOVA 3–4) wird mit dem Anteil an Vitamin C, Thiamin, Folat und B6 je Gramm Trockenmasse skaliert, den es gegenüber der selbst zubereiteten Form desselben Lebensmittels behalten hat. Eine lange Haltbarkeit, erkauft mit zerstörten Vitaminen, zählt nicht als Stabilität.",
     compositeHeading: "8. Gesamtwert und Stufen",
     compositeNote:
       "Die Gewichte sind klassenspezifisch und summieren sich zu 1. Ballaststoffe werden bei tierischen Klassen geringer gewichtet, weil ihr Fehlen erwartet wird — die Ballaststoffachse selbst zeigt trotzdem 0.",
@@ -178,6 +269,9 @@ export const de: Messages = {
       "Es stellt die Matrix nicht hinter eine Bezahlschranke.",
       "Es füllt keinen Wert, den keine Datenbank nennt, mit null auf und verschweigt nicht, aus welcher Datenbank ein Wert stammt.",
       "Es gibt einen von einem ähnlichen Lebensmittel übernommenen Wert nicht als gemessen aus.",
+      "Es zählt die Menge auf dem Etikett nicht als die Menge, die der Körper aufnimmt.",
+      "Es lässt Nährstoffe ein hochverarbeitetes Produkt nicht aus Stufe D heben.",
+      "Es gibt einen in einem Gewebe oder einer Zubereitung gemessenen Stoffgehalt nicht als in einem anderen gemessen aus.",
     ],
     willDoHeading: "Was es tut",
     willDo: [
@@ -185,6 +279,9 @@ export const de: Messages = {
       "Die limitierende Aminosäure, Umrechnungsfaktoren und Resorptionskoeffizienten zeigen.",
       "Für jeden Nährwert zeigen, aus welcher Datenbank er stammt und wie diese ihn ermittelt hat.",
       "Zeigen, wie die Zubereitung ein Lebensmittel verändert, anhand der gegarten Einträge der Datenbanken.",
+      "Zeigen, was industrielle Verarbeitung kostet: Nährstoffverlust je Gramm Trockenmasse, Salz, Verarbeitungsgrad und typische Zusatzstoffe.",
+      "Kreatin, Taurin, Carnosin, Coenzym Q10, Ergothionein und ähnliche Stoffe nach gemessenem Gehalt erfassen, mit der Studie hinter jedem Wert.",
+      "Zeigen, welche Nährstoffe der Körper speichert und welche Kontaminanten er anreichert.",
       "Den Datensatz versionieren und das Datum der letzten Prüfung anzeigen.",
       "Die Matrix als CSV und JSON exportieren.",
       "Erforderliche Lücken rein pflanzlicher Muster klar benennen.",
@@ -203,6 +300,9 @@ export const de: Messages = {
       "IOM/EFSA-RAE-Umrechnung (β-Carotin /12, andere Carotinoide /24)",
       "FDA-Tageswerte; tolerierbare EFSA-Höchstmengen",
       "Eisen-/Zink-Resorptionsmittelwerte aus Bioverfügbarkeits-Metaanalysen",
+      "Calciumresorption je Lebensmittel: Weaver, Proulx & Heaney 1999",
+      "Gehalte bioaktiver Stoffe: veröffentlichte Analysen, je Wert zitiert",
+      "Open Food Facts (ODbL): NOVA-Gruppen und Zusatzstoffe je Produktkategorie",
       "EU/US-Rückstandshöchstgehalte (MRL) als Risikoklasse, kein Laborzertifikat",
     ],
     link: "Link",
@@ -242,7 +342,7 @@ export const de: Messages = {
     micro: "Mikros + Bioverfügbarkeit",
     fibre: "Ballaststoffe / Pflanzenstoffe",
     residue: "Rückstände / Kontaminanten",
-    degradation: "Stabilität nach Ernte",
+    degradation: "Stabilität / Nährstoffverlust",
     composite: "Gesamtwert",
   },
   axesShort: {
@@ -279,13 +379,12 @@ export const de: Messages = {
     resistantStarch: "Resistente Stärke",
     livingTissueLability: "Labilität lebenden Gewebes",
     pathogenProxy: "Keimrisiko-Proxy (Sprossen)",
-    sulforaphaneProxy: "Sulforaphan-Proxy",
-    glucosinolateProxy: "Glucosinolat-Proxy",
+    glucosinolates: "Glucosinolate (gemessen)",
     goitrogenProxy: "Goitrogen-Hinweis",
     vitaminCRetention: "Vitamin C",
     organicAcidStability: "Stabilität durch organische Säuren",
     sodiumNote: "Natrium (höher = weniger Na)",
-    ergothioneineProxy: "Ergothionein-Proxy",
+    ergothioneine: "Ergothionein (gemessen)",
     vitaminDPotential: "Vitamin-D-Potenzial",
     chitinDigestPenalty: "Chitin-Verdaulichkeit",
     iodineDensity: "Joddichte",

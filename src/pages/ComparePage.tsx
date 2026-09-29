@@ -4,9 +4,10 @@ import { AxisRadar } from "../components/AxisRadar";
 import { formatAmount } from "../components/format";
 import { HeatCell } from "../components/HeatCell";
 import { axisValue } from "../components/MatrixTable";
+import { BIOACTIVE_COMPOUNDS, bioactiveMg, bioactiveValue, type BioactiveValue } from "../data/bioactives";
 import { FOODS, foodsByClass } from "../data/catalog";
 import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
-import { MICRO_LABELS } from "../i18n/labels";
+import { BIOACTIVE_LABELS, MICRO_LABELS, NOVA_LABELS } from "../i18n/labels";
 import { foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { upperLimitExceedances } from "../scoring/micros";
@@ -14,6 +15,23 @@ import { scoreCatalog } from "../scoring/scoreFood";
 import { AXIS_KEYS, FOOD_CLASSES, MICRO_NUTRIENTS } from "../scoring/types";
 
 const cards = scoreCatalog(FOODS);
+
+function bioactiveCell(value: BioactiveValue, notDetected: string): string {
+  switch (value.status) {
+    case "value":
+      return `${formatAmount(value.mgPer100g)}${value.rawValueForPreparedFood ? "*" : ""}`;
+    case "notDetected":
+      return notDetected;
+    case "notExpected":
+      return "∅";
+    case "noData":
+      return "—";
+    default: {
+      const _exhaustive: never = value;
+      return _exhaustive;
+    }
+  }
+}
 
 export function ComparePage() {
   const { t, locale, localize } = useLocale();
@@ -73,6 +91,11 @@ export function ComparePage() {
             </h2>
             <p className="muted">{t.compare.classTier(t.classes[food.class], card.tier)}</p>
             <p>
+              <span className={`nova-badge nova-${food.processing.nova}`}>
+                {t.compare.novaLine(food.processing.nova, localize(NOVA_LABELS[food.processing.nova]))}
+              </span>
+            </p>
+            <p>
               {t.compare.eaaLine({
                 aas: card.eaa.aas,
                 diaas: card.eaa.diaas,
@@ -81,7 +104,7 @@ export function ComparePage() {
             </p>
             <p>
               {t.compare.compoundLine({
-                creatineMg: food.animalCompounds.creatineMg,
+                creatineMg: bioactiveMg(food, "creatine"),
                 fibreG: food.carbs.fibre,
                 b12Ug: card.micro.effectiveB12Ug,
               })}
@@ -153,6 +176,34 @@ export function ComparePage() {
                       </td>
                     );
                   })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section className="panel">
+        <h2>{t.compare.bioactivesHeading}</h2>
+        <p className="muted">{t.compare.bioactivesHint}</p>
+        <div className="matrix-wrap">
+          <table className="matrix">
+            <thead>
+              <tr>
+                <th className="sticky">{t.food.bioactiveColumns.compound}</th>
+                {selected.map(({ food }, index) => (
+                  <th key={`${index}-${food.id}`}>{foodName(food, locale)}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {BIOACTIVE_COMPOUNDS.map((compound) => (
+                <tr key={compound}>
+                  <td className="sticky">{localize(BIOACTIVE_LABELS[compound])}</td>
+                  {selected.map(({ food }, index) => (
+                    <td key={`${index}-${food.id}`} className="mono">
+                      {bioactiveCell(bioactiveValue(food, compound), t.compare.notDetectedShort)}
+                    </td>
+                  ))}
                 </tr>
               ))}
             </tbody>

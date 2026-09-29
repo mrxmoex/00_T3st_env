@@ -1,9 +1,29 @@
 import { ANIMAL_FOODS } from "./foods/animal";
 import { PLANT_FOODS } from "./foods/plant";
 import { DATASET_VERSION, LAST_VERIFIED } from "./coefficients";
+import { labileRetention } from "../scoring/retention";
 import { PREPARATIONS, type FoodClass, type FoodRecord } from "../scoring/types";
 
-export const FOODS: FoodRecord[] = [...PLANT_FOODS, ...ANIMAL_FOODS];
+function byPreparation(a: FoodRecord, b: FoodRecord): number {
+  return PREPARATIONS.indexOf(a.preparation) - PREPARATIONS.indexOf(b.preparation);
+}
+
+/**
+ * Industrially processed foods (NOVA 3–4) are measured against the first home-prepared
+ * (NOVA 1) preparation of the same food, so what processing destroyed counts as a burden.
+ */
+function withProcessingRetention(foods: readonly FoodRecord[]): FoodRecord[] {
+  return foods.map((food) => {
+    if (food.processing.nova < 3) return food;
+    const reference = foods
+      .filter((other) => other.group === food.group && other.processing.nova === 1)
+      .sort(byPreparation)[0];
+    const retention = reference ? labileRetention(food, reference) : null;
+    return retention ? { ...food, processing: { ...food.processing, retention } } : food;
+  });
+}
+
+export const FOODS: FoodRecord[] = withProcessingRetention([...PLANT_FOODS, ...ANIMAL_FOODS]);
 
 export const DATA_META = {
   version: DATASET_VERSION,
@@ -23,9 +43,7 @@ export function foodsByClass(foodClass: FoodClass): FoodRecord[] {
 
 /** All preparations of the same food, raw first, in the order of PREPARATIONS. */
 export function foodsInGroup(group: string): FoodRecord[] {
-  return FOODS.filter((food) => food.group === group).sort(
-    (a, b) => PREPARATIONS.indexOf(a.preparation) - PREPARATIONS.indexOf(b.preparation),
-  );
+  return FOODS.filter((food) => food.group === group).sort(byPreparation);
 }
 
 export function requireFood(id: string): FoodRecord {

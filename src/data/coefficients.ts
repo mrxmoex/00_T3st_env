@@ -45,6 +45,18 @@ export const ZINC_ABSORPTION = {
 } as const;
 
 /**
+ * Absorption the Daily Value already assumes. The US iron RDA assumes 18 % from a mixed
+ * diet and the zinc RDA 41 % (IOM 2001); calcium is referenced to milk, 32.1 %
+ * (Weaver et al. 1999). An absorbed amount divided by this factor is in DV units, so
+ * absorption is counted once, not twice.
+ */
+export const DV_REFERENCE_ABSORPTION = {
+  iron: 0.18,
+  zinc: 0.41,
+  calcium: 0.321,
+} as const;
+
+/**
  * FDA Daily Values for adults (21 CFR 101.9, 2016 rule), used only for density per
  * calorie, not as clinical advice. Units match MicrosPer100g: mg, µg RAE, µg DFE, µg.
  */
@@ -115,5 +127,5 @@ export const UPPER_LIMITS: Readonly<Partial<Record<MicroNutrient, number>>> = {
 
 export const VITAMIN_C_IRON_ENHANCER_MG = 25;
 
-export const DATASET_VERSION = "2026.09.27";
-export const LAST_VERIFIED = "2026-09-27";
+export const DATASET_VERSION = "2026.09.29";
+export const LAST_VERIFIED = "2026-09-29";

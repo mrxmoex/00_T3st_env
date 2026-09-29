@@ -1,6 +1,7 @@
+import { BODY_STORAGE } from "../data/absorption";
 import { foodById } from "../data/catalog";
 import { NUTRIENT_UNITS, type NutrientKey } from "../data/sources/snapshot";
-import { NUTRIENT_LABELS, PROVENANCE_LABELS } from "../i18n/labels";
+import { BODY_STORE_LABELS, NUTRIENT_LABELS, PROVENANCE_LABELS } from "../i18n/labels";
 import { foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import type { Messages } from "../i18n/messages";
@@ -29,6 +30,24 @@ const MICRO_FOR_KEY: Partial<Record<NutrientKey, MicroNutrient>> = {
   selenium: "selenium",
   iodine: "iodine",
 };
+
+/** Absorbed or bioactive amount per 100 g, in the row's unit, where the scoring estimates one. */
+function availableAmount(key: NutrientKey, card: ScoreCard): number | null {
+  switch (key) {
+    case "iron":
+      return card.micro.absorbableIronMg;
+    case "zinc":
+      return card.micro.absorbableZincMg;
+    case "calcium":
+      return card.micro.absorbableCalciumMg;
+    case "vitaminARae":
+      return card.micro.raeUg;
+    case "vitaminB12":
+      return card.micro.effectiveB12Ug;
+    default:
+      return null;
+  }
+}
 
 type GroupId = keyof Messages["food"]["nutrientGroups"];
 
@@ -93,7 +112,9 @@ export function NutrientTable({ food, card }: { food: FoodRecord; card: ScoreCar
                 <tr>
                   <th>{t.food.columns.nutrient}</th>
                   <th>{t.food.columns.per100g}</th>
+                  <th>{t.food.columns.available}</th>
                   <th>{t.food.columns.pctDv}</th>
+                  <th>{t.food.columns.store}</th>
                   <th>{t.food.columns.source}</th>
                 </tr>
               </thead>
@@ -103,6 +124,8 @@ export function NutrientTable({ food, card }: { food: FoodRecord; card: ScoreCar
                   const provenance = food.provenance[key];
                   const micro = MICRO_FOR_KEY[key];
                   const pct = micro ? card.micro.nutrients[micro].pctDvPer100kcal : null;
+                  const available = value === null ? null : availableAmount(key, card);
+                  const storage = micro ? BODY_STORAGE[micro] : undefined;
                   return (
                     <tr key={key}>
                       <td>{localize(NUTRIENT_LABELS[key])}</td>
@@ -113,7 +136,15 @@ export function NutrientTable({ food, card }: { food: FoodRecord; card: ScoreCar
                           `${formatAmount(value)} ${NUTRIENT_UNITS[key]}`
                         )}
                       </td>
+                      <td className="mono">
+                        {available === null ? "" : `${formatAmount(available)} ${NUTRIENT_UNITS[key]}`}
+                      </td>
                       <td className="mono">{pct === null ? "" : `${formatAmount(pct)} %`}</td>
+                      <td>
+                        {storage ? (
+                          <span title={localize(storage.site)}>{localize(BODY_STORE_LABELS[storage.store])}</span>
+                        ) : null}
+                      </td>
                       <td className="muted">
                         {provenance ? `${provenance.db} · ${localize(PROVENANCE_LABELS[provenance.category])}` : "—"}
                       </td>

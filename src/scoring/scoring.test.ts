@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { bioactiveMg } from "../data/bioactives";
 import { FOODS, requireFood } from "../data/catalog";
 import { CLASS_WEIGHTS, assertWeightsSumToOne } from "../data/classWeights";
 import {
@@ -239,7 +240,7 @@ describe("catalog coverage", () => {
     for (const food of FOODS) {
       if (food.class === "leafy_salad" || food.class === "legumes") {
         expect(kingdomOf(food.class)).toBe("plant");
-        expect(food.animalCompounds.creatineMg).toBe(0);
+        expect(bioactiveMg(food, "creatine")).toBe(0);
       }
       if (food.class.startsWith("muscle")) {
         expect(kingdomOf(food.class)).toBe("animal");

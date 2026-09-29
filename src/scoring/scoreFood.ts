@@ -7,7 +7,7 @@ import { scoreClassExtras } from "./extras";
 import { scoreFibre } from "./fibre";
 import { scoreMicros } from "./micros";
 import { scoreResidue } from "./residue";
-import { compareByCompositeDesc, tierFromScore } from "./tiers";
+import { ULTRA_PROCESSED_CEILING, compareByCompositeDesc, tierFromScore } from "./tiers";
 import type { FoodRecord, ScoreCard } from "./types";
 
 export function scoreFood(food: FoodRecord): Omit<ScoreCard, "classRank" | "classSize"> {
@@ -18,7 +18,7 @@ export function scoreFood(food: FoodRecord): Omit<ScoreCard, "classRank" | "clas
   const fibre = scoreFibre(food);
   const residue = scoreResidue(food);
   const degradation = scoreDegradation(food);
-  const composite = scoreComposite(
+  const uncappedComposite = scoreComposite(
     {
       eaa: eaa.score,
       efa: efa.score,
@@ -30,6 +30,8 @@ export function scoreFood(food: FoodRecord): Omit<ScoreCard, "classRank" | "clas
     },
     food.class,
   );
+  const capped = food.processing.nova === 4 && uncappedComposite > ULTRA_PROCESSED_CEILING;
+  const composite = capped ? ULTRA_PROCESSED_CEILING : uncappedComposite;
 
   return {
     foodId: food.id,
@@ -41,6 +43,7 @@ export function scoreFood(food: FoodRecord): Omit<ScoreCard, "classRank" | "clas
     residue,
     degradation,
     extras: scoreClassExtras(food),
+    processing: { nova: food.processing.nova, capped, uncappedComposite },
     composite,
     tier: tierFromScore(composite),
   };
