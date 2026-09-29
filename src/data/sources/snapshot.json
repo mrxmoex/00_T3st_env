@@ -14056,6 +14056,938 @@
     ]
    }
   },
+  "potato_canned": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "K110902",
+     "name": {
+      "de": "Kartoffel geschält, gekocht, Konserve, abgetropft",
+      "en": "Potatoe peeled, boiled, canned, drained"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170444",
+     "name": {
+      "en": "Potatoes, canned, drained solids"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     65.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     79.8,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     1.772,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     0.089,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     13.248,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.877,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     0.542,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     12.706,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.048,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.065,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.105,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.134,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.014,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.035,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.08,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.083,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.072,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.024,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.094,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.0297,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0128,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.0113,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.00259,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.0087,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "c15": [
+     0.00032,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.00024,
+     "recipe",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     4.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.072,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     1.5,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.0202,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.0037,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     0.172,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.0127,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     7.588,
+     "recipe",
+     "BLS"
+    ],
+    "choline": null,
+    "sodium": [
+     242.5,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     303.3,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     9.4,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     19.8,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     28.8,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     0.37,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     0.276,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": [
+     4.0,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     0.9,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     16.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "potato_mash": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "X634012",
+     "name": {
+      "de": "Kartoffelpüree mit Milch 3,5 % Fett",
+      "en": "Potato puree with milk 3.5 % fat"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170493",
+     "name": {
+      "en": "Potatoes, mashed, home-prepared, whole milk added"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     88.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     81.5,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     2.35,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     2.98,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     12.43,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     0.923,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     1.74,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     10.69,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     1.14,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.063,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.099,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.171,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.185,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.034,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.033,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.107,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.109,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.095,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.032,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.13,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     1.883,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.645,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.067,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.013,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.001,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.001,
+     "recipe",
+     "BLS"
+    ],
+    "dha": [
+     0.0002,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.048,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.003,
+     "recipe",
+     "BLS"
+    ],
+    "c15": [
+     0.031,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.02,
+     "recipe",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "retinol": [
+     25.2,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     16.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     27.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.006,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.123,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.061,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.046,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     0.305,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.105,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     8.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     9.705,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     13.3,
+     "recipe",
+     "FDC"
+    ],
+    "sodium": [
+     118.0,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     271.0,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     41.0,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     17.2,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     48.0,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     0.581,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     0.37,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.07,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": [
+     7.0,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     0.8,
+     "recipe",
+     "FDC"
+    ],
+    "cholesterol": [
+     9.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     11.2,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "potato_mash_instant": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "X637012",
+     "name": {
+      "de": "Kartoffelpüree, zubereitet aus Instantpulver und Milch 3,5 % Fett",
+      "en": "Potato puree, made from instant powder and milk 3.5 % fat"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170446",
+     "name": {
+      "en": "Potatoes, mashed, dehydrated, prepared from flakes without milk, whole milk and butter added"
+     },
+     "match": "similar"
+    }
+   ],
+   "values": {
+    "kcal": [
+     108.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     74.4,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     4.61,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     3.59,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     13.84,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     0.836,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     4.07,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     9.766,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     3.93,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.131,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.217,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.395,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.388,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.092,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.044,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.219,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.23,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.191,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.059,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.269,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     2.253,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.796,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.077,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.025,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.049,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.003,
+     "recipe",
+     "BLS"
+    ],
+    "c15": [
+     0.042,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.022,
+     "recipe",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "retinol": [
+     23.3,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     13.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     24.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.076,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     1.6,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.06,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.126,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     0.479,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.037,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     3.64,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.35,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.48262,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     10.9,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     184.0,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     343.0,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     123.0,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     21.0,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     137.0,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     0.267,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     0.45,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.03,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": [
+     14.0,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     2.5,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     14.1,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
   "sweet_potato_boiled": {
    "sources": [
     {
