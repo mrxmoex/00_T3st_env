@@ -132,6 +132,22 @@ export const en: Messages = {
       "More than three ingredients means a formulation, not a home-cooked meal. A home meal can use many whole foods and stay unprocessed. A formulation is fine as a treat. Eaten as the regular food, the rest of this matrix stops meaning much: it is the liverwurst the dog gets every day.",
     treatIngredients: ({ median, over, known }) =>
       `In this product category the median ingredient list has ${median} entries; ${over} of ${known} lists run past three.`,
+    digestionHeading: "Digestion",
+    digestionGi: "Glycemic index",
+    digestionLoad: (load) => `Glycemic load ${load} per 100 g`,
+    digestionBands: { low: "low", medium: "medium", high: "high" },
+    digestionTooLittle: (carbG) =>
+      `Not tested. Available carbohydrate is ${carbG} g per 100 g, below the amount the tables use.`,
+    digestionNoGi: "No mean in the 2021 ISO tables for this food and preparation.",
+    digestionCarried: "Tested on a close preparation, not on this one.",
+    digestionFerment: "Fermentable carbohydrate",
+    digestionLactose: (g) => `Lactose ${g} g per 100 g, from the nutrient database. It ferments only when lactase is low.`,
+    digestionNoFermentData: "No open gram value for the fermentable carbohydrates in this food. That is not a claim that there are none.",
+    digestionSpongy: "What can feel heavy or spongy",
+    digestionMatrix: "Meal and matrix",
+    digestionMilieu: "Milieu, not a natural-versus-artificial rule",
+    digestionMetabolism: "Enzymes differ. A metabolism type sold from a DNA swab does not.",
+    digestionSources: "Sources",
   },
   person: {
     heading: "This person",
