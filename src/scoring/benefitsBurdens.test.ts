@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { BODY_STORAGE, CALCIUM_TABLE_GROUPS, calciumAbsorption } from "../data/absorption";
 import { preparationIdeas, qualityBeyondTable, residueReality } from "../data/sourcing";
 import { isTreat } from "../data/treat";
+import { METABOLISM_NOTES, MILIEU_LIMIT, fermentable } from "../data/digestion";
+import { glycemicAssessment, glycemicLoad } from "../data/glycemic";
 import { energyKcal, restingEnergyKcal } from "../person/context";
 import {
   BIOACTIVE_COMPOUNDS,
@@ -241,6 +243,45 @@ describe("processing burden", () => {
     }
     expect(qualityBeyondTable(requireFood("potato_steamed"))).not.toBeNull();
     expect(qualityBeyondTable(requireFood("beef_mince_raw"))).toBeNull();
+  });
+
+  it("indexes glycemic index only where the 2021 tables give a mean", () => {
+    const boiled = glycemicAssessment(requireFood("potato_boiled"));
+    const instant = glycemicAssessment(requireFood("potato_mash_instant"));
+    const lentils = glycemicAssessment(requireFood("lentils_boiled"));
+    const milk = glycemicAssessment(requireFood("milk_whole"));
+    const beef = glycemicAssessment(requireFood("beef_mince_raw"));
+    expect(boiled.status).toBe("value");
+    expect(instant.status).toBe("value");
+    expect(lentils.status).toBe("value");
+    if (boiled.status !== "value" || instant.status !== "value" || lentils.status !== "value" || milk.status !== "value") return;
+    expect(boiled.gi).toBe(73);
+    expect(instant.gi).toBe(84);
+    expect(lentils.gi).toBeLessThan(boiled.gi);
+    expect(milk.gi).toBe(37);
+    expect(boiled.loadPer100g).toBe(glycemicLoad(73, requireFood("potato_boiled").carbs.sugars + requireFood("potato_boiled").carbs.starch));
+    expect(glycemicAssessment(requireFood("potato_steamed")).status === "value" && glycemicAssessment(requireFood("potato_steamed")).status === "value").toBe(true);
+    const steamed = glycemicAssessment(requireFood("potato_steamed"));
+    expect(steamed.status === "value" && steamed.carriedOver).toBe(true);
+    expect(beef.status).toBe("tooLittleCarbohydrate");
+    expect(glycemicAssessment(requireFood("potato_baked")).status).toBe("noData");
+  });
+
+  it("keeps fermentable lactose measured and does not invent a gram value for legumes", () => {
+    const milk = fermentable(requireFood("milk_whole"));
+    expect(milk.status).toBe("measured");
+    const lentils = fermentable(requireFood("lentils_boiled"));
+    expect(lentils.status).toBe("class");
+    if (lentils.status === "class") expect(lentils.level).toBe("high");
+    const tofu = fermentable(requireFood("tofu"));
+    expect(tofu.status === "class" && tofu.level).toBe("low");
+    expect(fermentable(requireFood("beef_mince_raw")).status).toBe("notExpected");
+  });
+
+  it("states the matrix limit and the metabolism notes in both languages", () => {
+    expect(MILIEU_LIMIT.de).not.toBe(MILIEU_LIMIT.en);
+    expect(MILIEU_LIMIT.en.toLowerCase()).toContain("folic acid");
+    for (const note of METABOLISM_NOTES) expect(note.de).not.toBe(note.en);
   });
 
   it("only applies retention to industrially processed foods", () => {

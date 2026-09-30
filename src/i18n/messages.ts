@@ -117,6 +117,21 @@ export interface Messages {
     treatBadge: string;
     treatNote: string;
     treatIngredients: (info: { median: number; over: number; known: number }) => string;
+    digestionHeading: string;
+    digestionGi: string;
+    digestionLoad: (load: number) => string;
+    digestionBands: { low: string; medium: string; high: string };
+    digestionTooLittle: (carbG: number) => string;
+    digestionNoGi: string;
+    digestionCarried: string;
+    digestionFerment: string;
+    digestionLactose: (g: number) => string;
+    digestionNoFermentData: string;
+    digestionSpongy: string;
+    digestionMatrix: string;
+    digestionMilieu: string;
+    digestionMetabolism: string;
+    digestionSources: string;
   };
   person: {
     heading: string;

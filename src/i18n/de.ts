@@ -133,6 +133,24 @@ export const de: Messages = {
       "Mehr als drei Zutaten heißt eine Rezeptur, keine Hausmannskost. Ein Essen zu Hause kann viele ganze Lebensmittel verwenden und bleibt unverarbeitet. Eine Rezeptur ist als Leckerli in Ordnung. Als regelmäßiges Essen wird der Rest dieser Matrix bedeutungslos: das ist die Leberwurst, die der Hund jeden Tag bekommt.",
     treatIngredients: ({ median, over, known }) =>
       `In dieser Produktkategorie hat die Zutatenliste im Median ${median} Einträge; ${over} von ${known} Listen gehen über drei hinaus.`,
+    digestionHeading: "Verdauung",
+    digestionGi: "Glykämischer Index",
+    digestionLoad: (load) => `Glykämische Last ${load} pro 100 g`,
+    digestionBands: { low: "niedrig", medium: "mittel", high: "hoch" },
+    digestionTooLittle: (carbG) =>
+      `Nicht gemessen. Verfügbare Kohlenhydrate liegen bei ${carbG} g pro 100 g, unter der Menge, mit der die Tabellen testen.`,
+    digestionNoGi: "Kein Mittelwert in den ISO-Tabellen von 2021 für dieses Lebensmittel und diese Zubereitung.",
+    digestionCarried: "Gemessen an einer nahen Zubereitung, nicht an dieser.",
+    digestionFerment: "Fermentierbares Kohlenhydrat",
+    digestionLactose: (g) =>
+      `Laktose ${g} g pro 100 g, aus der Nährwertdatenbank. Sie fermentiert nur, wenn die Laktase niedrig ist.`,
+    digestionNoFermentData:
+      "Kein offener Grammwert für die fermentierbaren Kohlenhydrate in diesem Lebensmittel. Das ist keine Behauptung, dass keine vorhanden sind.",
+    digestionSpongy: "Was sich schwer oder schwammig anfühlen kann",
+    digestionMatrix: "Mahlzeit und Matrix",
+    digestionMilieu: "Milieu, keine Regel natürlich gegen künstlich",
+    digestionMetabolism: "Enzyme unterscheiden sich. Ein aus einem DNA-Abstrich verkaufter Stoffwechseltyp nicht.",
+    digestionSources: "Quellen",
   },
   person: {
     heading: "Diese Person",
