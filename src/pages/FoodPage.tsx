@@ -6,6 +6,7 @@ import { axisValue } from "../components/MatrixTable";
 import { NutrientTable } from "../components/NutrientTable";
 import { PreparationPanel } from "../components/PreparationPanel";
 import { DigestionPanel } from "../components/DigestionPanel";
+import { ExposurePanel } from "../components/ExposurePanel";
 import { ContextPanels } from "../components/SourcingPanel";
 import { SourcePanel } from "../components/SourcePanel";
 import { FOODS, foodById } from "../data/catalog";
@@ -125,6 +126,7 @@ export function FoodPage() {
       </section>
       <BioactivesTable food={food} />
       <BurdenPanel food={food} card={card} />
+      <ExposurePanel food={food} />
       <ContextPanels food={food} />
       <DigestionPanel food={food} />
       <section className="panel">

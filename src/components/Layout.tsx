@@ -10,6 +10,7 @@ const LINKS = [
   { to: "/compare", key: "compare" },
   { to: "/recommend", key: "recommend" },
   { to: "/method", key: "method" },
+  { to: "/exposure", key: "exposure" },
   { to: "/limits", key: "limits" },
 ] as const;
 

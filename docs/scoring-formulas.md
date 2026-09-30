@@ -103,6 +103,14 @@ The GI is the food eaten alone. Fat, protein, and acid in the same meal slow gas
 
 Lactase (Enattah et al. 2002) and AMY1 copy number (Perry et al. 2007) change how the same food is digested. Food4Me found that advice fitted to the person beat generic advice, and that adding genotype did not clearly beat diet and phenotype (Celis-Morales et al. 2017). The app does not sell a metabolism type.
 
+## Exposure mentions and E-numbers
+
+Shown, not scored. Implementation: `src/data/exposure.ts`. A mention is attached only when a published source ties the substance to the food class or the preparation. No concentration is filled in.
+
+Fluoride is built into bone and tooth mineral; the adult upper level is 7 mg/day and the main sources are water and tea, which this catalog does not measure (EFSA 2013). Glyphosate is tagged on field crops with both the IARC Group 2A classification and the 2023 EU renewal, and without a milligram value. Long-chain PFAS bind albumin, are not metabolised, and have half-lives of years (EFSA 2020; group TWI 4.4 ng/kg per week); fish, eggs, and industrially packaged foods get the mention. Hydrophobic contaminants partition into body fat and can adsorb to plastic; WHO 2022 did not find a measured health risk from dietary microplastics at the exposures then estimated. Acrylamide is tagged on dry, hot starch (frying, baking, roasting, instant drying), not on boiling or steaming (EFSA 2015). Methylmercury is tagged on fish, cadmium on offal, seaweed and leafy crops, lead on offal.
+
+E-numbers found in the counted Open Food Facts categories are named, including the ones that are ordinary molecules (ascorbic acid, citric acid). Codes with a separate published body note that those categories did not contain (titanium dioxide, nitrite, aspartame, BHA, tartrazine) are listed too and marked as not seen in the counts. The legal inventory remains Regulation (EC) No 1333/2008.
+
 ## Fibre / phytochemicals
 
 ```

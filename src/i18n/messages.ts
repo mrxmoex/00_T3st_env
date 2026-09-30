@@ -9,6 +9,7 @@ export interface Messages {
     compare: string;
     recommend: string;
     method: string;
+    exposure: string;
     limits: string;
   };
   brandTagline: (version: string) => string;
@@ -252,6 +253,19 @@ export interface Messages {
     degradationNote: string;
     compositeHeading: string;
     compositeNote: string;
+  };
+  exposure: {
+    title: string;
+    lede: string;
+    foodHeading: string;
+    foodLede: string;
+    enumbersHere: string;
+    more: string;
+    enumberHeading: string;
+    enumberLede: string;
+    seenYes: string;
+    seenNo: string;
+    columns: { code: string; name: string; body: string; seen: string };
   };
   limits: {
     title: string;

@@ -3,6 +3,7 @@ import { BODY_STORAGE, CALCIUM_TABLE_GROUPS, calciumAbsorption } from "../data/a
 import { preparationIdeas, qualityBeyondTable, residueReality } from "../data/sourcing";
 import { isTreat } from "../data/treat";
 import { METABOLISM_NOTES, MILIEU_LIMIT, fermentable } from "../data/digestion";
+import { ADDITIVE_ENTRIES, EXPOSURE_CARDS, exposureForFood, trackedAdditiveCodes } from "../data/exposure";
 import { glycemicAssessment, glycemicLoad } from "../data/glycemic";
 import { energyKcal, restingEnergyKcal } from "../person/context";
 import {
@@ -276,6 +277,27 @@ describe("processing burden", () => {
     const tofu = fermentable(requireFood("tofu"));
     expect(tofu.status === "class" && tofu.level).toBe("low");
     expect(fermentable(requireFood("beef_mince_raw")).status).toBe("notExpected");
+  });
+
+  it("mentions exposures only where a source ties them to the class or the preparation", () => {
+    expect(exposureForFood(requireFood("potato_boiled"))).toEqual(["glyphosate"]);
+    expect(exposureForFood(requireFood("potato_baked"))).toEqual(expect.arrayContaining(["glyphosate", "acrylamide"]));
+    expect(exposureForFood(requireFood("potato_steamed"))).not.toContain("acrylamide");
+    expect(exposureForFood(requireFood("potato_mash_instant"))).toContain("acrylamide");
+    expect(exposureForFood(requireFood("beef_mince_raw"))).not.toContain("glyphosate");
+    expect(exposureForFood(requireFood("beef_mince_raw"))).not.toContain("fluoride");
+    const salmon = exposureForFood(requireFood("salmon_raw"));
+    expect(salmon).toEqual(expect.arrayContaining(["pfas", "methylmercury", "microplastics"]));
+    expect(EXPOSURE_CARDS.pfas.body.en.toLowerCase()).toContain("albumin");
+    expect(EXPOSURE_CARDS.fluoride.body.en).toContain("7 mg");
+    for (const card of Object.values(EXPOSURE_CARDS)) {
+      expect(card.body.de).not.toBe(card.body.en);
+      expect(card.sources.length).toBeGreaterThan(0);
+    }
+    const codes = new Set(ADDITIVE_ENTRIES.map((item) => item.code));
+    for (const code of trackedAdditiveCodes()) expect(codes.has(code), code).toBe(true);
+    expect(ADDITIVE_ENTRIES.find((item) => item.code === "E300")?.body?.en.toLowerCase()).toContain("vitamin c");
+    expect(ADDITIVE_ENTRIES.find((item) => item.code === "E171")?.inTrackedCategories).toBe(false);
   });
 
   it("states the matrix limit and the metabolism notes in both languages", () => {
