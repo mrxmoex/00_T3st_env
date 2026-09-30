@@ -63,10 +63,11 @@ Ca_abs = Ca × fraction absorbed in humans (Weaver et al. 1999; table below), no
 Fe* = Fe_abs / 0.18      Zn* = Zn_abs / 0.41      Ca* = Ca_abs / 0.321, or Ca without a study
 B12*= 0 if analogue flag else B12
 N   = the 20 nutrients below that a source reports          (missing values are excluded, not 0)
-contrib_i = −1                                              if 100 kcal exceed the EFSA daily UL
-          = clamp( (%DV of available amount per 100 kcal) / 20%, 0, 1 ) otherwise
+contrib_i = clamp( (%DV of available amount per 100 kcal) / 20%, 0, 1 )
 Micro = 100 × max(0, mean_{i ∈ N}(contrib_i))
 ```
+
+A stored nutrient past the adult upper limit is marked with how many limit-days 100 g covers. It does not lower the score: the body buffers a portion eaten now and then, and frequency is the person's.
 
 The Daily Values already assume an absorption: the US iron RDA assumes 18 % from a mixed diet, the zinc RDA 41 % (IOM 2001), and calcium is referenced to milk (32.1 %). Dividing the absorbed amount by that factor expresses it in DV units, so absorption is counted once. Before this, absorbed iron and zinc were compared with intake-based DVs, which discounted them twice.
 

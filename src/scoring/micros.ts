@@ -1,4 +1,4 @@
-import { calciumAbsorption } from "../data/absorption";
+import { BODY_STORAGE, calciumAbsorption } from "../data/absorption";
 import {
   BETA_CAROTENE_TO_RAE,
   DENSITY_REFS,
@@ -163,6 +163,21 @@ function intakeForUpperLimit(food: FoodRecord, nutrient: MicroNutrient): number 
   }
 }
 
+/**
+ * Stored nutrients where 100 g already covers more than one day of the adult upper limit.
+ * Frequency matters; the amount does not lower the score.
+ */
+export function storedNutrientCoverage(food: FoodRecord): { nutrient: MicroNutrient; daysPer100g: number }[] {
+  return MICRO_NUTRIENTS.flatMap((nutrient) => {
+    const limit = UPPER_LIMITS[nutrient];
+    const intake = intakeForUpperLimit(food, nutrient);
+    const store = BODY_STORAGE[nutrient].store;
+    if (limit === undefined || intake === null || intake < limit) return [];
+    if (store !== "years" && store !== "months") return [];
+    return [{ nutrient, daysPer100g: round1(intake / limit) }];
+  });
+}
+
 /** Nutrients whose amount in 100 kcal of this food exceeds the whole-day EFSA upper limit. */
 export function upperLimitExceedances(food: FoodRecord): MicroNutrient[] {
   const kcal = Math.max(food.kcalPer100g, 1);
@@ -202,20 +217,21 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     }),
   ) as Record<MicroNutrient, MicroNutrientDensity>;
 
-  const excess = upperLimitExceedances(food);
+  const coverage = storedNutrientCoverage(food);
   const scored = MICRO_NUTRIENTS.filter((nutrient) => amounts[nutrient] !== null);
   const contributions = scored.map((nutrient) =>
-    excess.includes(nutrient)
-      ? -1
-      : clamp01(pctDvPer100kcal(amounts[nutrient] ?? 0, DENSITY_REFS[nutrient], kcal) / DENSITY_SATURATION_PCT_DV),
+    clamp01(pctDvPer100kcal(amounts[nutrient] ?? 0, DENSITY_REFS[nutrient], kcal) / DENSITY_SATURATION_PCT_DV),
   );
   const score = 100 * Math.max(0, mean(contributions));
   const flags: LocalizedText[] = [];
-  if (excess.length > 0) {
-    const names = listLabels(excess);
+  if (coverage.length > 0) {
+    const detail = {
+      en: coverage.map((item) => `${MICRO_LABELS[item.nutrient].en} ${item.daysPer100g} days`).join(", "),
+      de: coverage.map((item) => `${MICRO_LABELS[item.nutrient].de} ${item.daysPer100g} Tage`).join(", "),
+    };
     flags.push({
-      en: `100 kcal exceed the EFSA daily upper limit for ${names.en}: counted as a cost, not a benefit`,
-      de: `100 kcal überschreiten die tägliche EFSA-Höchstmenge für ${names.de}: als Nachteil gewertet, nicht als Vorteil`,
+      en: `100 g covers more than a day of the adult upper limit (${detail.en}). The body stores it, so daily eating fills the store and spacing it out does not. One portion does not lower the score.`,
+      de: `100 g decken mehr als einen Tag der Höchstmenge für Erwachsene (${detail.de}). Der Körper speichert das, deshalb füllt tägliches Essen den Speicher und Abstände tun das nicht. Eine Portion senkt den Wert nicht.`,
     });
   }
 
@@ -304,7 +320,7 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     parts: {
       meanCappedDensity: round2(mean(contributions)),
       nutrientsScored: scored.length,
-      upperLimitExceedances: excess.length,
+      upperLimitExceedances: coverage.length,
     },
     flags,
   };

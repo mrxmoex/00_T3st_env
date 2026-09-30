@@ -340,6 +340,19 @@ details.panel > summary {
 .nova-4 { background: #7a3a32; color: #ffe8e4; }
 
 .role, .cell-note { display: block; font-size: 0.78rem; color: var(--muted); }
+.person-bar { margin: 0.6rem var(--pad) 0; }
+.person-fields { display: flex; flex-wrap: wrap; gap: 0.6rem 0.8rem; align-items: end; }
+.person-fields label { display: grid; gap: 0.2rem; font-size: 0.82rem; }
+.person-fields input, .person-fields select { font: inherit; padding: 0.25rem 0.4rem; }
+.treat-badge {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 99px;
+  background: #8a5a32;
+  color: #fff1e4;
+  font-size: 0.85rem;
+}
+.panel.treat { border-left: 4px solid #8a5a32; }
 .wrap-table td { white-space: normal; vertical-align: top; }
 .wrap-table td:first-child { min-width: 11rem; max-width: 22rem; }
 .callout-warning { border-left: 4px solid var(--danger); padding-left: 0.6rem; }

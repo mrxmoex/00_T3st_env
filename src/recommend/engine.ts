@@ -208,8 +208,8 @@ function animalInclusive(foods: readonly FoodRecord[]): Recommendation {
       severity: "contextual",
       title: { en: "Preformed retinol upper limit", de: "Obergrenze für vorgeformtes Retinol" },
       detail: {
-        en: "Liver is efficient, not harmless at unlimited frequency. Efficiency and toxicity can coexist.",
-        de: "Leber ist effizient, aber bei unbegrenzter Häufigkeit nicht harmlos. Effizienz und Toxizität können gleichzeitig bestehen.",
+        en: "One portion of liver fills the vitamin A store for days. The body buffers and excretes a spaced-out portion; eating it every day is where storage becomes the problem. Frequency is the person's, not a schedule.",
+        de: "Eine Portion Leber füllt den Vitamin-A-Speicher für Tage. Der Körper puffert und scheidet eine seltene Portion ab; täglich gegessen wird die Speicherung zum Problem. Die Häufigkeit bestimmt die Person, kein Plan.",
       },
     });
   }

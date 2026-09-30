@@ -124,6 +124,41 @@ export const de: Messages = {
     notReported: "nicht angegeben",
     patternNote: (foodName) =>
       `Aminosäuren, die die Datenbanken nicht nennen, wurden aus dem Muster von ${foodName} ergänzt und auf das Protein dieses Lebensmittels skaliert.`,
+    sourcingHeading: "Herkunft und Zubereitung",
+    sourcingPreparation: "Zubereitung",
+    sourcingResidues: "Was Waschen nicht richtet",
+    qualityHeading: "Was die Nährwerttabelle nicht sieht",
+    treatBadge: "Leckerli",
+    treatNote:
+      "Mehr als drei Zutaten heißt eine Rezeptur, keine Hausmannskost. Ein Essen zu Hause kann viele ganze Lebensmittel verwenden und bleibt unverarbeitet. Eine Rezeptur ist als Leckerli in Ordnung. Als regelmäßiges Essen wird der Rest dieser Matrix bedeutungslos: das ist die Leberwurst, die der Hund jeden Tag bekommt.",
+    treatIngredients: ({ median, over, known }) =>
+      `In dieser Produktkategorie hat die Zutatenliste im Median ${median} Einträge; ${over} von ${known} Listen gehen über drei hinaus.`,
+  },
+  person: {
+    heading: "Diese Person",
+    lede: "Mengen gehören zu einer Person. Wer groß ist und schwer arbeitet, verliert mehr Natrium über den Schweiß als jemand Kleines, der den Tag sitzend verbringt. Diese Zahlen sind Schätzverfahren, keine Zufuhrempfehlung und kein Rat.",
+    sex: "Geschlecht",
+    female: "Weiblich",
+    male: "Männlich",
+    age: "Alter",
+    weight: "Gewicht, kg",
+    height: "Größe, cm",
+    activity: "Tag",
+    activities: {
+      seated: "Überwiegend sitzend",
+      active: "Auf den Beinen",
+      heavy: "Schwere Arbeit",
+    },
+    sweat: "Schweiß",
+    sweatLevels: { little: "Wenig", some: "Etwas", aLot: "Viel" },
+    apply: "Diesen Kontext verwenden",
+    clear: "Zurücksetzen",
+    summary: ({ energy, protein, sodiumLow, sodiumHigh }) =>
+      `Geschätzte Energie ${energy} kcal/Tag. Protein-Referenzpunkt ${protein} g/Tag. Natrium über den beschriebenen Schweiß etwa ${sodiumLow}–${sodiumHigh} mg.`,
+    coverageHeading: "Gelesen für diese Person",
+    coverage: ({ energyPct, proteinG, proteinRef, sodiumMg, sodiumLow, sodiumHigh }) =>
+      `100 g sind ${energyPct} % der geschätzten Tagesenergie und ${proteinG} g des Protein-Referenzpunkts von ${proteinRef} g. Enthalten sind ${sodiumMg} mg Natrium; der beschriebene Schweiß trägt etwa ${sodiumLow}–${sodiumHigh} mg.`,
+    notAllowance: "Die Stufe bleibt eine Eigenschaft des Lebensmittels. Die Körpergröße schreibt sie nicht um. Nur der Anteil am Tag dieser Person ändert sich.",
   },
   compare: {
     title: "Direktvergleich",
@@ -143,7 +178,7 @@ export const de: Messages = {
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
     microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
     microHint:
-      "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen Nährstoff, dessen Menge in 100 kcal die tägliche EFSA-Höchstmenge überschreitet.",
+      "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen gespeicherten Nährstoff, dessen Menge in 100 kcal die Höchstmenge für Erwachsene überschreitet. Die Häufigkeit zählt; die Markierung senkt den Wert nicht.",
   },
   recommend: {
     title: "Empfehlungs-Engine",
@@ -203,7 +238,7 @@ export const de: Messages = {
     microDensity: (saturationPct) =>
       `Zwanzig Nährstoffe werden bewertet, jeder als % seines FDA-Tageswerts pro 100 kcal nach den obigen Anpassungen, gedeckelt bei ${saturationPct} % DV / 100 kcal = 1.0, dann gemittelt über die Nährstoffe, die die Datenbanken nennen. Die Werte stehen in \`coefficients.ts\`.`,
     microUpperLimit:
-      "Überschreiten 100 kcal eines Lebensmittels bereits die tägliche tolerierbare EFSA-Höchstmenge, zählt dieser Nährstoff −1 statt bis zu +1. Die Vitamin-A-Grenze gilt nur für vorgeformtes Retinol.",
+      "Ein gespeicherter Nährstoff über der Höchstmenge für Erwachsene wird markiert, nicht bestraft. Der Körper puffert und scheidet eine seltene Portion ab; täglich gegessen füllt sich der Speicher. Die Vitamin-A-Grenze gilt nur für vorgeformtes Retinol. Wie oft, entscheidet die Person, kein Plan.",
     microAvailability: (v) =>
       `Verfügbarkeit statt Etikettmenge: Eisen, Zink und Calcium zählen als aufgenommene Menge geteilt durch die Resorption, die der Tageswert schon annimmt (Eisen ${v.iron} %, Zink ${v.zinc} %, Calcium ${v.calcium} % wie aus Milch). So wird die Resorption einmal gezählt, nicht doppelt, und oxalatgebundenes Calcium aus Spinat zählt etwa ein Sechstel von Milchcalcium.`,
     calciumTable: { studied: "Untersuchtes Lebensmittel", absorption: "Aufgenommen", usedFor: "Angewendet auf" },

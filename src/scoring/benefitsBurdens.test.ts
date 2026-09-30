@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { BODY_STORAGE, CALCIUM_TABLE_GROUPS, calciumAbsorption } from "../data/absorption";
+import { preparationIdeas, qualityBeyondTable, residueReality } from "../data/sourcing";
+import { isTreat } from "../data/treat";
+import { energyKcal, restingEnergyKcal } from "../person/context";
 import {
   BIOACTIVE_COMPOUNDS,
   BIOACTIVE_SOURCES,
@@ -10,7 +13,7 @@ import {
 import { FOODS, requireFood } from "../data/catalog";
 import { DV_REFERENCE_ABSORPTION } from "../data/coefficients";
 import { PROCESSING_EVIDENCE, classifiedProducts } from "../data/processing";
-import { absorbableCalciumMg, absorbableIronMg, absorbableZincMg, microAmounts } from "./micros";
+import { absorbableCalciumMg, absorbableIronMg, absorbableZincMg, microAmounts, storedNutrientCoverage } from "./micros";
 import { labileRetention, perGramDryMatter } from "./retention";
 import { scoreFood } from "./scoreFood";
 import { ULTRA_PROCESSED_CEILING, tierFromScore } from "./tiers";
@@ -146,7 +149,7 @@ describe("processing burden", () => {
     const boiled = requireFood("potato_boiled");
     expect(perGramDryMatter(canned, "vitaminC") ?? 1).toBeLessThan(perGramDryMatter(boiled, "vitaminC") ?? 0);
     expect(canned.composition.sodiumMg).toBeGreaterThan(50 * boiled.composition.sodiumMg);
-    expect(canned.processing.retention?.reference).toBe("potato_boiled");
+    expect(canned.processing.retention?.reference).toBe("potato_steamed");
     expect(canned.processing.retention?.fraction).toBeLessThan(0.5);
     expect(requireFood("potato_mash_instant").processing.retention?.reference).toBe("potato_mash");
     expect(requireFood("sardine_canned").processing.retention?.reference).toBe("sardine_grilled");
@@ -196,6 +199,48 @@ describe("processing burden", () => {
       const majority = Math.max(stats.nova["1"], stats.nova["2"], stats.nova["3"], stats.nova["4"]);
       expect(stats.nova[`${food.processing.nova}`], `${food.id} follows the category majority`).toBe(majority);
     }
+  });
+
+  it("marks formulations as a treat and leaves home cooking alone", () => {
+    expect(isTreat(requireFood("potato_mash_instant"))).toBe(true);
+    expect(isTreat(requireFood("potato_canned"))).toBe(true);
+    expect(isTreat(requireFood("potato_boiled"))).toBe(false);
+    expect(isTreat(requireFood("potato_steamed"))).toBe(false);
+    expect(isTreat(requireFood("cheddar"))).toBe(false);
+    expect(isTreat(requireFood("egg_fried"))).toBe(false);
+  });
+
+  it("keeps a pressure-steamed potato ahead of the canned one on vitamin C", () => {
+    const steamed = requireFood("potato_steamed");
+    const canned = requireFood("potato_canned");
+    expect(steamed.processing.nova).toBe(1);
+    expect(steamed.nutrients.vitaminC ?? 0).toBeGreaterThan(canned.nutrients.vitaminC ?? 0);
+    expect(canned.composition.sodiumMg).toBeGreaterThan(100 * (steamed.composition.sodiumMg || 1));
+  });
+
+  it("reports how many upper-limit days a stored nutrient in 100 g covers", () => {
+    const liver = storedNutrientCoverage(requireFood("beef_liver_fried"));
+    const retinol = liver.find((item) => item.nutrient === "vitaminA");
+    expect(retinol?.daysPer100g).toBeGreaterThan(1);
+  });
+
+  it("estimates energy from body size and the day, without one shared allowance", () => {
+    const seated = { sex: "male" as const, ageYears: 30, weightKg: 80, heightCm: 180, activity: "seated" as const, sweat: "little" as const };
+    expect(restingEnergyKcal(seated)).toBe(1780);
+    const heavy = { ...seated, activity: "heavy" as const };
+    expect(energyKcal(heavy)).toBeGreaterThan(energyKcal(seated));
+  });
+
+  it("states preparation, residue, and potato-quality notes in both languages", () => {
+    for (const food of FOODS) {
+      for (const note of [...preparationIdeas(food), ...residueReality(food)]) {
+        expect(note.de, food.id).not.toBe(note.en);
+      }
+      const quality = qualityBeyondTable(food);
+      if (quality) expect(quality.de).not.toBe(quality.en);
+    }
+    expect(qualityBeyondTable(requireFood("potato_steamed"))).not.toBeNull();
+    expect(qualityBeyondTable(requireFood("beef_mince_raw"))).toBeNull();
   });
 
   it("only applies retention to industrially processed foods", () => {

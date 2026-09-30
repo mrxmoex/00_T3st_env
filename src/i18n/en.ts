@@ -123,6 +123,41 @@ export const en: Messages = {
     notReported: "not reported",
     patternNote: (foodName) =>
       `Amino acids the databases do not report were filled from the pattern of ${foodName}, scaled to this food's protein.`,
+    sourcingHeading: "Sourcing and preparation",
+    sourcingPreparation: "Preparation",
+    sourcingResidues: "What a wash does not fix",
+    qualityHeading: "What the nutrient table cannot see",
+    treatBadge: "Treat",
+    treatNote:
+      "More than three ingredients means a formulation, not a home-cooked meal. A home meal can use many whole foods and stay unprocessed. A formulation is fine as a treat. Eaten as the regular food, the rest of this matrix stops meaning much: it is the liverwurst the dog gets every day.",
+    treatIngredients: ({ median, over, known }) =>
+      `In this product category the median ingredient list has ${median} entries; ${over} of ${known} lists run past three.`,
+  },
+  person: {
+    heading: "This person",
+    lede: "Amounts belong to a person. A large person doing heavy work loses more sweat sodium than a small person sitting all day. These figures are estimation methods, not allowances and not advice.",
+    sex: "Sex",
+    female: "Female",
+    male: "Male",
+    age: "Age",
+    weight: "Weight, kg",
+    height: "Height, cm",
+    activity: "Day",
+    activities: {
+      seated: "Mostly seated",
+      active: "On your feet",
+      heavy: "Heavy work",
+    },
+    sweat: "Sweat",
+    sweatLevels: { little: "Little", some: "Some", aLot: "A lot" },
+    apply: "Use this context",
+    clear: "Clear",
+    summary: ({ energy, protein, sodiumLow, sodiumHigh }) =>
+      `Estimated energy ${energy} kcal/day. Protein reference point ${protein} g/day. Sweat sodium about ${sodiumLow}–${sodiumHigh} mg for the sweat described.`,
+    coverageHeading: "Read against this person",
+    coverage: ({ energyPct, proteinG, proteinRef, sodiumMg, sodiumLow, sodiumHigh }) =>
+      `100 g is ${energyPct} % of the estimated daily energy and ${proteinG} g of the ${proteinRef} g protein reference point. It contains ${sodiumMg} mg sodium; the described sweat carries about ${sodiumLow}–${sodiumHigh} mg.`,
+    notAllowance: "The tier stays a property of the food. Body size does not rewrite it. Only the share of this person's day changes.",
   },
   compare: {
     title: "Side-by-side",
@@ -142,7 +177,7 @@ export const en: Messages = {
     radarTitle: "Axis profile of the selected foods",
     microHeading: "Micronutrient vector (%DV per 100 kcal)",
     microHint:
-      "Colour saturates at 20 % DV per 100 kcal, the level scored as fully covered. ⚠ marks a nutrient whose amount in 100 kcal exceeds the EFSA daily upper limit.",
+      "Colour saturates at 20 % DV per 100 kcal, the level scored as fully covered. ⚠ marks a stored nutrient whose amount in 100 kcal exceeds the adult upper limit. Frequency matters; the mark does not lower the score.",
   },
   recommend: {
     title: "Best-practice engine",
@@ -201,7 +236,7 @@ export const en: Messages = {
     microDensity: (saturationPct) =>
       `Twenty nutrients are scored, each as % of its FDA Daily Value per 100 kcal after the adjustments above, capped so ${saturationPct} % DV / 100 kcal = 1.0, then averaged over the nutrients the databases report. Values are in \`coefficients.ts\`.`,
     microUpperLimit:
-      "If 100 kcal of a food already exceed a whole day's EFSA tolerable upper intake level, that nutrient counts −1 instead of up to +1. The vitamin A limit applies to preformed retinol only.",
+      "A stored nutrient past the adult upper limit is marked, not penalised. The body buffers and excretes a portion eaten now and then; eating it every day is where the store fills up. The vitamin A limit applies to preformed retinol only. How often is the person's decision, not a schedule.",
     microAvailability: (v) =>
       `Availability, not the label amount: iron, zinc, and calcium count as the absorbed amount divided by the absorption the Daily Value already assumes (iron ${v.iron} %, zinc ${v.zinc} %, calcium ${v.calcium} % as from milk). Absorption is counted once, not twice, and oxalate-bound calcium in spinach counts about a sixth of milk calcium.`,
     calciumTable: { studied: "Food studied", absorption: "Absorbed", usedFor: "Applied to" },

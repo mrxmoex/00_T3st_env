@@ -267,8 +267,8 @@ const porkLiverFried = animal({
   phytochemicalIndex: 0,
   notes: [
     {
-      en: "Organ with very high iron, vitamin A and B12; the retinol upper limit applies.",
-      de: "Organ mit sehr viel Eisen, Vitamin A und B12; die Retinol-Obergrenze gilt.",
+      en: "Organ with very high iron, vitamin A and B12. One portion fills the vitamin A store for days; the score is not reduced for that.",
+      de: "Organ mit sehr viel Eisen, Vitamin A und B12. Eine Portion füllt den Vitamin-A-Speicher für Tage; der Wert wird dafür nicht gesenkt.",
     },
   ],
 });

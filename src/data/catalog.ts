@@ -1,7 +1,7 @@
 import { ANIMAL_FOODS } from "./foods/animal";
 import { PLANT_FOODS } from "./foods/plant";
 import { DATASET_VERSION, LAST_VERIFIED } from "./coefficients";
-import { labileRetention } from "../scoring/retention";
+import { labileRetention, perGramDryMatter } from "../scoring/retention";
 import { PREPARATIONS, type FoodClass, type FoodRecord } from "../scoring/types";
 
 function byPreparation(a: FoodRecord, b: FoodRecord): number {
@@ -17,7 +17,7 @@ function withProcessingRetention(foods: readonly FoodRecord[]): FoodRecord[] {
     if (food.processing.nova < 3) return food;
     const reference = foods
       .filter((other) => other.group === food.group && other.processing.nova === 1)
-      .sort(byPreparation)[0];
+      .sort((a, b) => (perGramDryMatter(b, "vitaminC") ?? -1) - (perGramDryMatter(a, "vitaminC") ?? -1) || byPreparation(a, b))[0];
     const retention = reference ? labileRetention(food, reference) : null;
     return retention ? { ...food, processing: { ...food.processing, retention } } : food;
   });

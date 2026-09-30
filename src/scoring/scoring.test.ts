@@ -147,11 +147,12 @@ describe("bioavailability adjustments", () => {
 });
 
 describe("upper limits", () => {
-  it("counts nori iodine and liver retinol as a cost, not a benefit", () => {
+  it("names a stored excess and does not turn one portion into a score penalty", () => {
     expect(upperLimitExceedances(requireFood("nori_roasted"))).toContain("iodine");
     expect(upperLimitExceedances(requireFood("beef_liver_fried"))).toContain("vitaminA");
     const liver = scoreMicros(requireFood("beef_liver_fried"));
-    expect(liver.flags.some((flag) => flag.en.includes("upper limit"))).toBe(true);
+    expect(liver.flags.some((flag) => flag.en.includes("does not lower the score"))).toBe(true);
+    expect(liver.score).toBeGreaterThan(0);
   });
 
   it("applies the vitamin A limit to preformed retinol only", () => {

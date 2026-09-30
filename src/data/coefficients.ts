@@ -127,5 +127,5 @@ export const UPPER_LIMITS: Readonly<Partial<Record<MicroNutrient, number>>> = {
 
 export const VITAMIN_C_IRON_ENHANCER_MG = 25;
 
-export const DATASET_VERSION = "2026.09.29";
-export const LAST_VERIFIED = "2026-09-29";
+export const DATASET_VERSION = "2026.09.30";
+export const LAST_VERIFIED = "2026-09-30";

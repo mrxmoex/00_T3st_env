@@ -1,4 +1,5 @@
 import type { Gap } from "../recommend/engine";
+import type { Activity, SweatLevel } from "../person/context";
 import type { AxisKey, ClassWeights, DietaryPattern, FoodClass, Kingdom, NovaGroup, Tier } from "../scoring/types";
 
 export interface Messages {
@@ -109,6 +110,40 @@ export interface Messages {
     columns: { nutrient: string; per100g: string; available: string; pctDv: string; store: string; source: string };
     notReported: string;
     patternNote: (foodName: string) => string;
+    sourcingHeading: string;
+    sourcingPreparation: string;
+    sourcingResidues: string;
+    qualityHeading: string;
+    treatBadge: string;
+    treatNote: string;
+    treatIngredients: (info: { median: number; over: number; known: number }) => string;
+  };
+  person: {
+    heading: string;
+    lede: string;
+    sex: string;
+    female: string;
+    male: string;
+    age: string;
+    weight: string;
+    height: string;
+    activity: string;
+    activities: Record<Activity, string>;
+    sweat: string;
+    sweatLevels: Record<SweatLevel, string>;
+    apply: string;
+    clear: string;
+    summary: (info: { energy: number; protein: number; sodiumLow: number; sodiumHigh: number }) => string;
+    coverageHeading: string;
+    coverage: (info: {
+      energyPct: number;
+      proteinG: number;
+      proteinRef: number;
+      sodiumMg: number;
+      sodiumLow: number;
+      sodiumHigh: number;
+    }) => string;
+    notAllowance: string;
   };
   compare: {
     title: string;
