@@ -89,6 +89,20 @@ Scored nutrients and FDA Daily Values: iron 18 mg, zinc 11 mg, vitamin A 900 µg
 
 EFSA upper limits checked per 100 kcal: preformed retinol 3000 µg, iodine 600 µg, selenium 255 µg, copper 5 mg, zinc 25 mg, vitamin D 100 µg, calcium 2500 mg, B6 12 mg. The vitamin A limit uses retinol, not RAE, so carotenoid-A never trips it.
 
+## Glycemic index, fermentation, and the food matrix
+
+Shown, not scored. Implementation: `src/data/glycemic.ts`, `src/data/digestion.ts`.
+
+Glycemic index is the ISO glucose-scale mean from Atkinson et al. 2021 (Am J Clin Nutr, doi:10.1093/ajcn/nqab233) when that paper's supplemental table gives a mean for the food and preparation. Boiled potato 73 (29 studies), mashed potato 79, instant mash 84, boiled sweet potato 46, roasted sweet potato 86, boiled lentils 16, carrots 32, full-fat milk 37, yoghurts 33. A close preparation is marked as carried over (steamed potato uses the boiled mean; canned chickpeas and kidney beans stand in for the boiled legumes). Foods under 5 g available carbohydrate per 100 g are usually untested. Glycemic load per 100 g = GI × (sugars + starch) / 100. Cooling a cooked potato drops the GI to 49 in the same tables.
+
+A high GI is one way a meal feels spongy: glycogen binds about 3 g of water per gram (Olsson & Saltin 1970). Fermentable carbohydrate that escapes the small intestine is another (gas). Sodium is a third (water outside the cells). They are not one score.
+
+Lactose grams come from the nutrient database. Other FODMAP classes (legume GOS, mushroom mannitol, firm tofu low) follow the Monash University public food list. Their laboratory gram values are not copied.
+
+The GI is the food eaten alone. Fat, protein, and acid in the same meal slow gastric emptying (Jenkins et al. 1981). The food matrix changes absorption (Parada & Aguilera 2007). It does not make every natural molecule fully used or every isolated one inert: supplemental folic acid is counted as 1.7 times food folate (IOM 1998).
+
+Lactase (Enattah et al. 2002) and AMY1 copy number (Perry et al. 2007) change how the same food is digested. Food4Me found that advice fitted to the person beat generic advice, and that adding genotype did not clearly beat diet and phenotype (Celis-Morales et al. 2017). The app does not sell a metabolism type.
+
 ## Fibre / phytochemicals
 
 ```
