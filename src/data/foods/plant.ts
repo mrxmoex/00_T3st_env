@@ -851,6 +851,16 @@ export const PLANT_FOODS: FoodRecord[] = [
   prepared(carrotRaw, { id: "carrot_boiled", name: "Carrot, boiled", nameDe: "Karotte, gekocht", preparation: "boiled" }),
   potatoBoiled,
   prepared(potatoBoiled, {
+    id: "potato_steamed", name: "Potato, peeled, pressure-steamed", nameDe: "Kartoffel, geschält, druckgedämpft",
+    preparation: "steamed",
+    notes: [
+      {
+        en: "Steamed at home from a whole potato: the reference for what boiling and canning do to the same tuber. The database row is still an average, not this farm or this season.",
+        de: "Zu Hause aus einer ganzen Kartoffel gedämpft: die Referenz dafür, was Kochen und Konservieren mit derselben Knolle machen. Der Datenbankeintrag bleibt ein Mittelwert, nicht dieser Hof und nicht diese Saison.",
+      },
+    ],
+  }),
+  prepared(potatoBoiled, {
     id: "potato_baked", name: "Potato, unpeeled, baked", nameDe: "Kartoffel, ungeschält, gebacken", preparation: "baked",
   }),
   prepared(potatoBoiled, {

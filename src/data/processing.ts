@@ -5,6 +5,12 @@ export interface CategoryStats {
   products: number;
   nova: Record<`${NovaGroup}`, number>;
   novaUnknown: number;
+  /** Products whose ingredient list length is known. */
+  ingredientsKnown: number;
+  /** Median number of ingredients; null when none of the products report it. */
+  ingredientsMedian: number | null;
+  /** Of the known lists, how many name more than three ingredients. */
+  ingredientsOver3: number;
   additives: readonly { code: string; products: number }[];
 }
 

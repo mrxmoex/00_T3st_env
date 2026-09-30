@@ -13744,6 +13744,318 @@
     ]
    }
   },
+  "potato_steamed": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "K110143",
+     "name": {
+      "de": "Kartoffel geschält, druckgedämpft",
+      "en": "Potatoe peeled, pressure-steamed"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170440",
+     "name": {
+      "en": "Potatoes, boiled, cooked without skin, flesh, without salt"
+     },
+     "match": "similar"
+    }
+   ],
+   "values": {
+    "kcal": [
+     81.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     76.63,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     2.08,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     0.04,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     17.353,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.7,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     0.873,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     16.48,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.053,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.072,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.115,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.146,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.016,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.038,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.087,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.09,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.079,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.025,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.103,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.0343,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0148,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.0131,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.00299,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.0101,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "c15": [
+     0.00037,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.00028,
+     "recipe",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     5.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.071,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     1.4,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.0864,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.0076,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     0.276,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.0436,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     9.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     25.56,
+     "analysis",
+     "BLS"
+    ],
+    "choline": [
+     13.2,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     1.8,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     434.2,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     7.5,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     24.2,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     35.5,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     0.4074,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     0.3107,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.0836,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     4.5,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     0.3,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     14.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
   "potato_baked": {
    "sources": [
     {

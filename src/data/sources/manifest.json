@@ -47,6 +47,7 @@
     {"id": "carrot_raw", "bls": "G620100", "fdc": "170393", "fdcMatch": "same"},
     {"id": "carrot_boiled", "bls": "G620132", "fdc": "170394", "fdcMatch": "same"},
     {"id": "potato_boiled", "bls": "K110132", "fdc": "170440", "fdcMatch": "same"},
+    {"id": "potato_steamed", "bls": "K110143", "fdc": "170440", "fdcMatch": "similar"},
     {"id": "potato_baked", "bls": "K120164", "fdc": "170093", "fdcMatch": "same"},
     {"id": "potato_canned", "bls": "K110902", "fdc": "170444", "fdcMatch": "same"},
     {"id": "potato_mash", "bls": "X634012", "fdc": "170493", "fdcMatch": "same"},

@@ -40,7 +40,7 @@ def fetch_category(category: str) -> list[dict]:
             "q": f'categories_tags:"{category}"',
             "page_size": 100,
             "page": page,
-            "fields": "code,nova_group,ingredients_tags,countries_tags",
+            "fields": "code,nova_group,ingredients_n,ingredients_tags,countries_tags",
         })
         request = urllib.request.Request(f"{SEARCH}?{query}", headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(request, timeout=60) as response:
@@ -60,10 +60,16 @@ def e_numbers(product: dict) -> set[str]:
 def summarize(products: list[dict]) -> dict:
     nova = collections.Counter(p.get("nova_group") for p in products)
     additives = collections.Counter(code for p in products for code in e_numbers(p))
+    counts = sorted(p["ingredients_n"] for p in products if isinstance(p.get("ingredients_n"), int))
+    middle = len(counts) // 2
+    median = None if not counts else counts[middle] if len(counts) % 2 else (counts[middle - 1] + counts[middle]) / 2
     return {
         "products": len(products),
         "nova": {str(group): nova.get(group, 0) for group in (1, 2, 3, 4)},
         "novaUnknown": nova.get(None, 0),
+        "ingredientsKnown": len(counts),
+        "ingredientsMedian": median,
+        "ingredientsOver3": sum(1 for count in counts if count > 3),
         "additives": [{"code": code, "products": count} for code, count in additives.most_common(TOP_ADDITIVES)],
     }
 
@@ -75,9 +81,9 @@ def main() -> None:
         germany = [p for p in products if "en:germany" in (p.get("countries_tags") or [])]
         categories[category] = {"all": summarize(products), "germany": summarize(germany)}
     evidence = {
-        "about": "Aggregate counts from Open Food Facts product records: NOVA group and E numbers found in the "
-        "ingredient list. Products without a NOVA classification are counted separately. Additive counts are a "
-        "lower bound because some ingredient lists are incomplete.",
+        "about": "Aggregate counts from Open Food Facts product records: NOVA group, ingredient-list length, and "
+        "E numbers found in the ingredient list. Products without a NOVA classification or an ingredient count are "
+        "counted separately. Additive counts are a lower bound because some ingredient lists are incomplete.",
         "source": {
             "title": "Open Food Facts",
             "url": "https://world.openfoodfacts.org",

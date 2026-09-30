@@ -1,5 +1,5 @@
 {
- "about": "Aggregate counts from Open Food Facts product records: NOVA group and E numbers found in the ingredient list. Products without a NOVA classification are counted separately. Additive counts are a lower bound because some ingredient lists are incomplete.",
+ "about": "Aggregate counts from Open Food Facts product records: NOVA group, ingredient-list length, and E numbers found in the ingredient list. Products without a NOVA classification or an ingredient count are counted separately. Additive counts are a lower bound because some ingredient lists are incomplete.",
  "source": {
   "title": "Open Food Facts",
   "url": "https://world.openfoodfacts.org",
@@ -7,7 +7,7 @@
   "attribution": "Open Food Facts contributors, https://world.openfoodfacts.org",
   "api": "https://search.openfoodfacts.org/search"
  },
- "retrieved": "2026-09-29",
+ "retrieved": "2026-09-30",
  "categories": {
   "en:instant-mashed-potatoes": {
    "all": {
@@ -19,6 +19,9 @@
      "4": 292
     },
     "novaUnknown": 85,
+    "ingredientsKnown": 335,
+    "ingredientsMedian": 11,
+    "ingredientsOver3": 304,
     "additives": [
      {
       "code": "E471",
@@ -55,6 +58,9 @@
      "4": 48
     },
     "novaUnknown": 12,
+    "ingredientsKnown": 50,
+    "ingredientsMedian": 10.0,
+    "ingredientsOver3": 49,
     "additives": [
      {
       "code": "E471",
@@ -93,6 +99,9 @@
      "4": 17
     },
     "novaUnknown": 42,
+    "ingredientsKnown": 59,
+    "ingredientsMedian": 5,
+    "ingredientsOver3": 51,
     "additives": [
      {
       "code": "E300",
@@ -129,6 +138,9 @@
      "4": 2
     },
     "novaUnknown": 1,
+    "ingredientsKnown": 3,
+    "ingredientsMedian": 7,
+    "ingredientsOver3": 3,
     "additives": [
      {
       "code": "E300",
