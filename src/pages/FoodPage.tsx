@@ -1,18 +1,34 @@
 import { Link, useParams } from "react-router-dom";
 import { AxisRadar } from "../components/AxisRadar";
+import { BioactivesTable } from "../components/BioactivesTable";
+import { BurdenPanel } from "../components/BurdenPanel";
 import { axisValue } from "../components/MatrixTable";
 import { NutrientTable } from "../components/NutrientTable";
 import { PreparationPanel } from "../components/PreparationPanel";
+import { ContextPanels } from "../components/SourcingPanel";
 import { SourcePanel } from "../components/SourcePanel";
 import { FOODS, foodById } from "../data/catalog";
 import { CLASS_WEIGHTS } from "../data/classWeights";
-import { PREPARATION_LABELS } from "../i18n/labels";
+import { NOVA_LABELS, PREPARATION_LABELS } from "../i18n/labels";
 import { altFoodName, foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { scoreCatalog } from "../scoring/scoreFood";
-import { AXIS_KEYS, kingdomOf } from "../scoring/types";
+import { BENEFIT_AXES, BURDEN_AXES, kingdomOf, type AxisKey, type ScoreCard } from "../scoring/types";
 
 const cards = scoreCatalog(FOODS);
+
+function AxisBar({ label, card, axis, className }: { label: string; card: ScoreCard; axis: AxisKey; className?: string }) {
+  const score = axisValue(card, axis);
+  return (
+    <div className={className ? `bar-row ${className}` : "bar-row"}>
+      <span>{label}</span>
+      <div className="bar">
+        <span style={{ width: `${score}%` }} />
+      </div>
+      <span className="mono">{score.toFixed(1)}</span>
+    </div>
+  );
+}
 
 export function FoodPage() {
   const { id } = useParams();
@@ -53,18 +69,19 @@ export function FoodPage() {
       </p>
       <div className="food-overview">
         <div className="axis-bars">
-          {AXIS_KEYS.map((axis) => {
-            const score = axisValue(card, axis);
-            return (
-              <div className="bar-row" key={axis}>
-                <span>{t.axes[axis]}</span>
-                <div className="bar">
-                  <span style={{ width: `${score}%` }} />
-                </div>
-                <span className="mono">{score.toFixed(1)}</span>
-              </div>
-            );
-          })}
+          <p className="bars-heading">{t.food.benefitsHeading}</p>
+          {BENEFIT_AXES.map((axis) => (
+            <AxisBar key={axis} label={t.axes[axis]} card={card} axis={axis} />
+          ))}
+          <p className="bars-heading">{t.food.burdensHeading}</p>
+          {BURDEN_AXES.map((axis) => (
+            <AxisBar key={axis} label={t.axes[axis]} card={card} axis={axis} className="burden" />
+          ))}
+          <AxisBar label={t.axes.composite} card={card} axis="composite" className="composite" />
+          <p>
+            <span className={`nova-badge nova-${food.processing.nova}`}>NOVA {food.processing.nova}</span>{" "}
+            <span className="muted">{localize(NOVA_LABELS[food.processing.nova])}</span>
+          </p>
         </div>
         <AxisRadar title={t.food.radarTitle(name)} entries={[{ id: food.id, label: name, card }]} />
       </div>
@@ -99,11 +116,15 @@ export function FoodPage() {
               rae: card.micro.raeUg,
               iron: card.micro.absorbableIronMg,
               zinc: card.micro.absorbableZincMg,
+              calcium: card.micro.absorbableCalciumMg,
               b12: card.micro.effectiveB12Ug,
             })}
           </p>
         </article>
       </section>
+      <BioactivesTable food={food} />
+      <BurdenPanel food={food} card={card} />
+      <ContextPanels food={food} />
       <section className="panel">
         <h2>{t.food.classColumns}</h2>
         <ul>
@@ -118,11 +139,9 @@ export function FoodPage() {
       <section className="panel">
         <h2>{t.food.notes}</h2>
         <ul>
-          {[...food.notes, ...card.fibre.flags, ...card.residue.flags, ...card.degradation.flags].map(
-            (note) => (
-              <li key={note.en}>{localize(note)}</li>
-            ),
-          )}
+          {[...food.notes, ...card.fibre.flags].map((note) => (
+            <li key={note.en}>{localize(note)}</li>
+          ))}
         </ul>
         <p>
           <Link className="btn" to={`/compare?a=${food.id}`}>

@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { DATA_META } from "../data/catalog";
 import { useLocale } from "../i18n/LocaleContext";
 import { LanguageToggle } from "./LanguageToggle";
+import { PersonBar } from "./PersonBar";
 import { ThemeToggle } from "./ThemeToggle";
 
 const LINKS = [
@@ -36,6 +37,7 @@ export function Layout() {
           <ThemeToggle />
         </nav>
       </header>
+      <PersonBar />
       <Outlet />
       <footer className="site">{t.footer(DATA_META.lastVerified)}</footer>
     </div>

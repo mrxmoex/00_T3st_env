@@ -19,5 +19,8 @@ The system will **not**:
 13. Put access behind a paywall.
 14. Fill a value no database reports with zero, or hide which database a value comes from.
 15. Present a value taken from a similar food as if it had been measured.
+16. Count the amount on a label as the amount the body absorbs.
+17. Let nutrients lift an ultra-processed product (NOVA 4) out of tier D.
+18. Present a compound value measured in one tissue or preparation as if it had been measured in another.
 
-It **will** rank within class, show limiting amino acids and coefficients, show each value's database and provenance, show how preparation changes a food using the databases' own cooked entries, version the data, and export the matrix.
+It **will** rank within class, show limiting amino acids and coefficients, show each value's database and provenance, show how preparation changes a food using the databases' own cooked entries, show what industrial processing costs (nutrient loss per gram of dry matter, salt, NOVA group, typical additives), index bioactive compounds by measured content with a citation per value, mark which nutrients the body stores and which contaminants it accumulates, version the data, and export the matrix.

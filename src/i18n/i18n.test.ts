@@ -1,4 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { BODY_STORAGE, calciumStudyRows } from "../data/absorption";
+import { BIOACTIVE_COMPOUNDS, bioactiveValue } from "../data/bioactives";
 import { FOODS } from "../data/catalog";
 import { recommend } from "../recommend/engine";
 import { classExtraColumns } from "../scoring/extras";
@@ -6,7 +8,17 @@ import { scoreCatalog } from "../scoring/scoreFood";
 import { DIETARY_PATTERNS, FOOD_CLASSES, kingdomOf } from "../scoring/types";
 import { de } from "./de";
 import { en } from "./en";
-import { MICRO_LABELS, NUTRIENT_LABELS, PREPARATION_LABELS, PROVENANCE_LABELS } from "./labels";
+import {
+  ADDITIVE_LABELS,
+  BIOACTIVE_LABELS,
+  BIOACTIVE_ROLES,
+  BODY_STORE_LABELS,
+  MICRO_LABELS,
+  NOVA_LABELS,
+  NUTRIENT_LABELS,
+  PREPARATION_LABELS,
+  PROVENANCE_LABELS,
+} from "./labels";
 import { LOCALES, isLocale, readLocale, type Locale, type LocalizedText } from "./locale";
 import type { Messages } from "./messages";
 
@@ -54,6 +66,16 @@ describe("UI messages", () => {
     expect(de.limits.nonClaims).toHaveLength(en.limits.nonClaims.length);
     expect(de.limits.willDo).toHaveLength(en.limits.willDo.length);
     expect(de.source.general).toHaveLength(en.source.general.length);
+    expect(de.method.storageContaminants).toHaveLength(en.method.storageContaminants.length);
+  });
+
+  it("labels compounds, NOVA groups, body stores, and additives in both languages", () => {
+    const tables = { BIOACTIVE_LABELS, BIOACTIVE_ROLES, NOVA_LABELS, BODY_STORE_LABELS, ADDITIVE_LABELS };
+    for (const [table, labels] of Object.entries(tables)) {
+      for (const [key, label] of Object.entries(labels)) {
+        expectTranslated(label, `${table}.${key}`);
+      }
+    }
   });
 });
 
@@ -64,6 +86,22 @@ describe("bilingual data and engine output", () => {
         expectTranslated(note, `${food.id} note`);
       }
     }
+  });
+
+  it("describes every compound value, body store, and calcium study in both languages", () => {
+    for (const food of FOODS) {
+      for (const compound of BIOACTIVE_COMPOUNDS) {
+        const value = bioactiveValue(food, compound);
+        if (value.status === "value" || value.status === "notDetected") {
+          expectTranslated(value.measured, `${food.id} ${compound} measured`);
+        }
+        if (value.status === "notExpected") expectTranslated(value.reason, `${food.id} ${compound} reason`);
+      }
+    }
+    for (const [nutrient, storage] of Object.entries(BODY_STORAGE)) {
+      expectTranslated(storage.site, `BODY_STORAGE.${nutrient}`);
+    }
+    for (const row of calciumStudyRows()) expectTranslated(row.studiedFood, "calcium study");
   });
 
   it("emits every scoring flag in both languages", () => {

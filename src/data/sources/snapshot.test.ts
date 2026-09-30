@@ -29,6 +29,8 @@ const PREPARATION_WORDS: Partial<Record<Preparation, readonly string[]>> = {
   smoked: ["geräuchert", "smoked"],
   dried: ["getrocknet", "dried"],
   canned: ["Konserve", "canned"],
+  mashed: ["püree", "mashed"],
+  instant: ["Instant", "instant"],
 };
 
 describe("manifest, snapshot, and catalog", () => {

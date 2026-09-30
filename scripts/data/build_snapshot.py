@@ -418,8 +418,10 @@ def main() -> None:
     fdc = load_fdc(ensure_archive(FDC_ARCHIVE, FDC_SHA256, lambda: FDC_URL), fdc_ids)
 
     snapshot = build(manifest, bls, fdc)
-    args.output.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
-    print(f"wrote {args.output.relative_to(ROOT)}: {len(snapshot['foods'])} foods", file=sys.stderr)
+    output = args.output.resolve()
+    output.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    shown = output.relative_to(ROOT) if output.is_relative_to(ROOT) else output
+    print(f"wrote {shown}: {len(snapshot['foods'])} foods", file=sys.stderr)
 
 
 if __name__ == "__main__":

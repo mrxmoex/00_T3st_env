@@ -1,6 +1,90 @@
+import type { BodyStore } from "../data/absorption";
+import type { BioactiveCompound, MeasuredState } from "../data/bioactives";
 import type { NutrientKey, ProvenanceCategory } from "../data/sources/snapshot";
-import type { MicroNutrient, Preparation } from "../scoring/types";
+import type { MicroNutrient, NovaGroup, Preparation } from "../scoring/types";
 import type { LocalizedText } from "./locale";
+
+export const BIOACTIVE_LABELS: Readonly<Record<BioactiveCompound, LocalizedText>> = {
+  creatine: { en: "Creatine", de: "Kreatin" },
+  taurine: { en: "Taurine", de: "Taurin" },
+  carnosine: { en: "Carnosine", de: "Carnosin" },
+  anserine: { en: "Anserine", de: "Anserin" },
+  coq10: { en: "Coenzyme Q10", de: "Coenzym Q10" },
+  carnitine: { en: "L-carnitine", de: "L-Carnitin" },
+  ergothioneine: { en: "Ergothioneine", de: "Ergothionein" },
+  glucosinolates: { en: "Glucosinolates", de: "Glucosinolate" },
+};
+
+export const BIOACTIVE_ROLES: Readonly<Record<BioactiveCompound, LocalizedText>> = {
+  creatine: {
+    en: "Phosphocreatine energy buffer in muscle and brain. The body makes about half of what it turns over; heat converts part of it to creatinine.",
+    de: "Energiepuffer (Phosphokreatin) in Muskel und Gehirn. Der Körper bildet etwa die Hälfte des Umsatzes selbst; Hitze wandelt einen Teil in Kreatinin um.",
+  },
+  taurine: {
+    en: "Bile acid conjugation, cell volume, and calcium handling in heart, retina, and muscle.",
+    de: "Bindung der Gallensäuren, Zellvolumen und Calciumhaushalt in Herz, Netzhaut und Muskel.",
+  },
+  carnosine: {
+    en: "β-Alanyl-histidine: pH buffer and antioxidant in muscle and brain.",
+    de: "β-Alanyl-Histidin: pH-Puffer und Antioxidans in Muskel und Gehirn.",
+  },
+  anserine: {
+    en: "Methylated carnosine with the same buffer role; dominant in poultry and many fish.",
+    de: "Methyliertes Carnosin mit derselben Pufferfunktion; überwiegt bei Geflügel und vielen Fischen.",
+  },
+  coq10: {
+    en: "Electron carrier in the mitochondria and fat-soluble antioxidant; also made by the body.",
+    de: "Elektronenüberträger in den Mitochondrien und fettlösliches Antioxidans; wird auch selbst gebildet.",
+  },
+  carnitine: {
+    en: "Carries long-chain fatty acids into the mitochondria; also made by the body from lysine and methionine.",
+    de: "Transportiert langkettige Fettsäuren in die Mitochondrien; wird auch aus Lysin und Methionin gebildet.",
+  },
+  ergothioneine: {
+    en: "Antioxidant with its own transporter (OCTN1). Humans cannot make it; mushrooms are the richest source.",
+    de: "Antioxidans mit eigenem Transporter (OCTN1). Der Mensch kann es nicht bilden; Pilze sind die reichste Quelle.",
+  },
+  glucosinolates: {
+    en: "Precursors of isothiocyanates such as sulforaphane. Conversion needs the plant enzyme myrosinase, which cooking destroys.",
+    de: "Vorstufen von Isothiocyanaten wie Sulforaphan. Die Umwandlung braucht das Pflanzenenzym Myrosinase, das beim Kochen zerstört wird.",
+  },
+};
+
+export const MEASURED_STATE_LABELS: Readonly<Record<MeasuredState, LocalizedText>> = {
+  raw: { en: "raw", de: "roh" },
+  cooked: { en: "cooked", de: "gegart" },
+  unspecified: { en: "state not given", de: "Zustand nicht angegeben" },
+};
+
+export const NOVA_LABELS: Readonly<Record<NovaGroup, LocalizedText>> = {
+  1: { en: "unprocessed or minimally processed", de: "unverarbeitet oder minimal verarbeitet" },
+  2: { en: "processed culinary ingredient", de: "verarbeitete Küchenzutat" },
+  3: { en: "processed food", de: "verarbeitetes Lebensmittel" },
+  4: { en: "ultra-processed", de: "hochverarbeitet" },
+};
+
+export const BODY_STORE_LABELS: Readonly<Record<BodyStore, LocalizedText>> = {
+  years: { en: "years", de: "Jahre" },
+  months: { en: "months", de: "Monate" },
+  weeks: { en: "weeks", de: "Wochen" },
+  none: { en: "none", de: "keiner" },
+};
+
+/** Additives found in the processing evidence; other codes are shown as the bare E number. */
+export const ADDITIVE_LABELS: Readonly<Record<string, LocalizedText>> = {
+  E100: { en: "curcumin (colour)", de: "Kurkumin (Farbstoff)" },
+  E221: { en: "sodium sulfite (preservative)", de: "Natriumsulfit (Konservierungsstoff)" },
+  E223: { en: "sodium metabisulfite (preservative)", de: "Natriummetabisulfit (Konservierungsstoff)" },
+  E300: { en: "ascorbic acid (antioxidant)", de: "Ascorbinsäure (Antioxidationsmittel)" },
+  E304: { en: "ascorbyl palmitate (antioxidant)", de: "Ascorbylpalmitat (Antioxidationsmittel)" },
+  E330: { en: "citric acid (acidity regulator)", de: "Citronensäure (Säuerungsmittel)" },
+  E385: { en: "calcium disodium EDTA (sequestrant)", de: "Calciumdinatrium-EDTA (Komplexbildner)" },
+  E392: { en: "rosemary extract (antioxidant)", de: "Rosmarinextrakt (Antioxidationsmittel)" },
+  E450: { en: "diphosphates (stabiliser)", de: "Diphosphate (Stabilisator)" },
+  E471: { en: "mono- and diglycerides of fatty acids (emulsifier)", de: "Mono- und Diglyceride von Speisefettsäuren (Emulgator)" },
+  E509: { en: "calcium chloride (firming agent)", de: "Calciumchlorid (Festigungsmittel)" },
+  E621: { en: "monosodium glutamate (flavour enhancer)", de: "Mononatriumglutamat (Geschmacksverstärker)" },
+};
 
 export const MICRO_LABELS: Readonly<Record<MicroNutrient, LocalizedText>> = {
   iron: { en: "Iron", de: "Eisen" },
@@ -117,5 +201,7 @@ export const PREPARATION_LABELS: Readonly<Record<Preparation, LocalizedText>> = 
   dried: { en: "dried", de: "getrocknet" },
   canned: { en: "canned", de: "Konserve" },
   fermented: { en: "fermented", de: "fermentiert" },
+  mashed: { en: "mashed, home-made", de: "Püree, selbst gemacht" },
+  instant: { en: "from instant powder", de: "aus Instantpulver" },
   processed: { en: "processed", de: "verarbeitet" },
 };

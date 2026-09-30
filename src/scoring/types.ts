@@ -60,6 +60,11 @@ export const AXIS_KEYS = [
 ] as const;
 export type AxisKey = (typeof AXIS_KEYS)[number];
 
+/** Axes that measure what a food provides. */
+export const BENEFIT_AXES = ["eaa", "efa", "carb", "micro", "fibre"] as const satisfies readonly AxisKey[];
+/** Axes that measure what stands against it; a higher score means less burden. */
+export const BURDEN_AXES = ["residue", "degradation"] as const satisfies readonly AxisKey[];
+
 export const SURFACE_AREA_CLASSES = ["high", "medium", "low", "none"] as const;
 export type SurfaceAreaClass = (typeof SURFACE_AREA_CLASSES)[number];
 
@@ -95,9 +100,40 @@ export const PREPARATIONS = [
   "dried",
   "canned",
   "fermented",
+  "mashed",
+  "instant",
   "processed",
 ] as const;
 export type Preparation = (typeof PREPARATIONS)[number];
+
+/**
+ * NOVA food processing groups (Monteiro et al. 2019): 1 unprocessed or minimally
+ * processed, 2 processed culinary ingredients, 3 processed foods, 4 ultra-processed.
+ */
+export const NOVA_GROUPS = [1, 2, 3, 4] as const;
+export type NovaGroup = (typeof NOVA_GROUPS)[number];
+
+/** Open Food Facts categories with stored NOVA and additive counts. */
+export const PROCESSING_EVIDENCE_CATEGORIES = ["en:instant-mashed-potatoes", "en:canned-potatoes"] as const;
+export type ProcessingEvidenceCategory = (typeof PROCESSING_EVIDENCE_CATEGORIES)[number];
+
+/** Labile vitamins an industrially processed food kept, against a home-prepared reference. */
+export interface ProcessingRetention {
+  /** Food id of the NOVA 1 preparation of the same food. */
+  reference: string;
+  /** Median of the per-nutrient retentions, each capped at 1. */
+  fraction: number;
+  /** Per gram of dry matter, relative to the reference; uncapped. */
+  nutrients: Readonly<Partial<Record<NutrientKey, number>>>;
+}
+
+export interface ProcessingInfo {
+  nova: NovaGroup;
+  /** Product category whose market data backs the NOVA group and typical additives. */
+  evidence?: ProcessingEvidenceCategory;
+  /** Set by the catalog for NOVA 3–4 foods whose group has a NOVA 1 reference. */
+  retention?: ProcessingRetention;
+}
 
 export interface AminoAcidsMgPerGProtein {
   his: number;
@@ -177,12 +213,6 @@ export interface CompositionPer100g {
   lactoseG: number | null;
 }
 
-export interface AnimalExclusiveCompounds {
-  creatineMg: number;
-  taurineMg: number;
-  carnosineMg: number;
-}
-
 export interface ResidueProfile {
   surfaceAreaClass: SurfaceAreaClass;
   systemicPesticideLikelihood: number;
@@ -226,7 +256,7 @@ export interface FoodRecord {
   carbs: CarbsGPer100g;
   micros: MicrosPer100g;
   composition: CompositionPer100g;
-  animalCompounds: AnimalExclusiveCompounds;
+  processing: ProcessingInfo;
   residue: ResidueProfile;
   degradation: DegradationProfile;
   /** 0–1 expert-curated phytochemical load relative to class peak. */
@@ -289,7 +319,10 @@ export const MICRO_NUTRIENTS = [
 export type MicroNutrient = (typeof MICRO_NUTRIENTS)[number];
 
 export interface MicroNutrientDensity {
-  /** Amount per 100 g after bioavailability adjustment; null when no source reports it. */
+  /**
+   * Amount per 100 g in Daily Value units: iron, zinc, and calcium as absorbed amount
+   * over the absorption the DV assumes. Null when no source reports it.
+   */
   amount: number | null;
   /** % of the Daily Value per 100 kcal. */
   pctDvPer100kcal: number | null;
@@ -299,8 +332,18 @@ export interface MicroBreakdown extends AxisBreakdown {
   raeUg: number;
   absorbableIronMg: number;
   absorbableZincMg: number;
+  /** Null when no absorption study covers this food; its calcium then counts like milk calcium. */
+  absorbableCalciumMg: number | null;
   effectiveB12Ug: number | null;
   nutrients: Record<MicroNutrient, MicroNutrientDensity>;
+}
+
+export interface ProcessingOutcome {
+  nova: NovaGroup;
+  /** True when the ultra-processing cap lowered the composite. */
+  capped: boolean;
+  /** Composite before the cap. */
+  uncappedComposite: number;
 }
 
 export interface ScoreCard {
@@ -314,6 +357,7 @@ export interface ScoreCard {
   degradation: AxisBreakdown;
   /** Class-specific columns; null when the underlying value is not reported. */
   extras: Record<string, number | null>;
+  processing: ProcessingOutcome;
   composite: number;
   tier: Tier;
   classRank: number;

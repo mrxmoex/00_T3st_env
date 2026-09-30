@@ -1,5 +1,5 @@
-import type { AnimalExclusiveCompounds, DegradationProfile, FoodRecord, ResidueProfile } from "../../scoring/types";
-import { ZERO_ANIMAL, animal, defineFood, prepared } from "./helpers";
+import type { DegradationProfile, FoodRecord, ResidueProfile } from "../../scoring/types";
+import { animal, defineFood, prepared } from "./helpers";
 
 const FAO_ANIMAL = "FAO 2013 dietary protein quality / DIAAS literature";
 const EVENEPOEL = {
@@ -14,7 +14,6 @@ const beefMinceBraised = animal({
   id: "beef_mince_braised", name: "Beef mince, braised", nameDe: "Rinderhackfleisch, geschmort",
   class: "muscle_ruminant", group: "beef_mince", preparation: "braised",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: { creatineMg: 450, taurineMg: 38, carnosineMg: 350 },
   residue: {
     surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
     contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.1,
@@ -39,7 +38,6 @@ const lambFlankRoasted = animal({
   id: "lamb_flank_roasted", name: "Lamb thick flank, roasted", nameDe: "Lammnuss, im Ofen gebraten",
   class: "muscle_ruminant", group: "lamb_flank", preparation: "roasted",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: { creatineMg: 420, taurineMg: 40, carnosineMg: 320 },
   residue: {
     surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
     contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.08,
@@ -63,7 +61,6 @@ const porkTenderloinRoasted = animal({
   id: "pork_tenderloin_roasted", name: "Pork tenderloin, roasted", nameDe: "Schweinefilet, im Ofen gebraten",
   class: "muscle_monogastric", group: "pork_tenderloin", preparation: "roasted",
   ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: { creatineMg: 380, taurineMg: 25, carnosineMg: 400 },
   residue: {
     surfaceAreaClass: "none", systemicPesticideLikelihood: 0.06,
     contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.12,
@@ -93,13 +90,11 @@ const POULTRY_DEGRADATION: DegradationProfile = {
   heatSensitivity: 0.4, oxygenLightSensitivity: 0.35,
   perishabilityDays: 3, processingStability: "cooked",
 };
-const POULTRY_COMPOUNDS: AnimalExclusiveCompounds = { creatineMg: 300, taurineMg: 15, carnosineMg: 280 };
 
 const chickenBreastFried = animal({
   id: "chicken_breast_fried", name: "Chicken breast, pan-fried", nameDe: "Hähnchenbrust, in der Pfanne gebraten",
   class: "muscle_poultry", group: "chicken_breast", preparation: "fried",
   ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: POULTRY_COMPOUNDS,
   residue: POULTRY_RESIDUE,
   degradation: POULTRY_DEGRADATION,
   phytochemicalIndex: 0,
@@ -115,7 +110,6 @@ const turkeyBreastRaw = animal({
   id: "turkey_breast_raw", name: "Turkey breast, raw", nameDe: "Putenbrust, roh",
   class: "muscle_poultry", group: "turkey_breast", preparation: "raw",
   ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: POULTRY_COMPOUNDS,
   residue: POULTRY_RESIDUE,
   degradation: { ...POULTRY_DEGRADATION, perishabilityDays: RAW_MEAT_DAYS, processingStability: "fresh" },
   phytochemicalIndex: 0,
@@ -127,7 +121,6 @@ const turkeyBreastRaw = animal({
   ],
 });
 
-const FISH_COMPOUNDS: AnimalExclusiveCompounds = { creatineMg: 450, taurineMg: 60, carnosineMg: 40 };
 const FISH_DEGRADATION: DegradationProfile = {
   waterSolubleVitaminLoad: 0.2, cutSurfaceSensitivity: 0.35,
   heatSensitivity: 0.35, oxygenLightSensitivity: 0.55,
@@ -138,7 +131,6 @@ const salmonRoasted = animal({
   id: "salmon_roasted", name: "Salmon, oven-roasted", nameDe: "Lachs, im Ofen gegart",
   class: "muscle_fish", group: "salmon", preparation: "roasted",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: FISH_COMPOUNDS,
   residue: {
     surfaceAreaClass: "none", systemicPesticideLikelihood: 0.05,
     contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.15,
@@ -158,8 +150,8 @@ const salmonRoasted = animal({
 const sardineCanned = animal({
   id: "sardine_canned", name: "Sardines in oil, drained", nameDe: "Sardinen in Öl, abgetropft",
   class: "muscle_fish", group: "sardine", preparation: "canned",
+  processing: { nova: 3 },
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: { creatineMg: 400, taurineMg: 80, carnosineMg: 30 },
   residue: {
     surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
     contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.12,
@@ -183,7 +175,6 @@ const herringPoached = animal({
   id: "herring_poached", name: "Herring, poached", nameDe: "Hering, pochiert",
   class: "muscle_fish", group: "herring", preparation: "poached",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: FISH_COMPOUNDS,
   residue: sardineCanned.residue,
   degradation: FISH_DEGRADATION,
   phytochemicalIndex: 0,
@@ -199,7 +190,6 @@ const mackerelGrilled = animal({
   id: "mackerel_grilled", name: "Mackerel, grilled", nameDe: "Makrele, gegrillt",
   class: "muscle_fish", group: "mackerel", preparation: "grilled",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: FISH_COMPOUNDS,
   residue: sardineCanned.residue,
   degradation: FISH_DEGRADATION,
   phytochemicalIndex: 0,
@@ -215,7 +205,6 @@ const codPoached = animal({
   id: "cod_poached", name: "Cod, poached", nameDe: "Kabeljau, pochiert",
   class: "muscle_fish", group: "cod", preparation: "poached",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: FISH_COMPOUNDS,
   residue: { ...sardineCanned.residue, heavyMetalClass: "low" },
   degradation: FISH_DEGRADATION,
   phytochemicalIndex: 0,
@@ -237,13 +226,11 @@ const ORGAN_DEGRADATION: DegradationProfile = {
   heatSensitivity: 0.45, oxygenLightSensitivity: 0.4,
   perishabilityDays: 2, processingStability: "cooked",
 };
-const ORGAN_COMPOUNDS: AnimalExclusiveCompounds = { creatineMg: 200, taurineMg: 110, carnosineMg: 80 };
 
 const beefLiverFried = animal({
   id: "beef_liver_fried", name: "Beef liver, pan-fried", nameDe: "Rinderleber, in der Pfanne gebraten",
   class: "organs", group: "beef_liver", preparation: "fried",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: ORGAN_COMPOUNDS,
   residue: ORGAN_RESIDUE,
   degradation: ORGAN_DEGRADATION,
   phytochemicalIndex: 0,
@@ -260,7 +247,6 @@ const chickenLiverFried = animal({
   id: "chicken_liver_fried", name: "Chicken liver, pan-fried", nameDe: "Hähnchenleber, in der Pfanne gebraten",
   class: "organs", group: "chicken_liver", preparation: "fried",
   ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: { creatineMg: 150, taurineMg: 90, carnosineMg: 50 },
   residue: { ...ORGAN_RESIDUE, systemicPesticideLikelihood: 0.1, contactPesticideLikelihood: 0.03, typicalMrlProximity: 0.22 },
   degradation: { ...ORGAN_DEGRADATION, waterSolubleVitaminLoad: 0.45, cutSurfaceSensitivity: 0.45, heatSensitivity: 0.5 },
   phytochemicalIndex: 0,
@@ -276,14 +262,13 @@ const porkLiverFried = animal({
   id: "pork_liver_fried", name: "Pork liver, pan-fried", nameDe: "Schweineleber, in der Pfanne gebraten",
   class: "organs", group: "pork_liver", preparation: "fried",
   ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: ORGAN_COMPOUNDS,
   residue: ORGAN_RESIDUE,
   degradation: ORGAN_DEGRADATION,
   phytochemicalIndex: 0,
   notes: [
     {
-      en: "Organ with very high iron, vitamin A and B12; the retinol upper limit applies.",
-      de: "Organ mit sehr viel Eisen, Vitamin A und B12; die Retinol-Obergrenze gilt.",
+      en: "Organ with very high iron, vitamin A and B12. One portion fills the vitamin A store for days; the score is not reduced for that.",
+      de: "Organ mit sehr viel Eisen, Vitamin A und B12. Eine Portion füllt den Vitamin-A-Speicher für Tage; der Wert wird dafür nicht gesenkt.",
     },
   ],
 });
@@ -292,7 +277,6 @@ const beefHeartBraised = animal({
   id: "beef_heart_braised", name: "Beef heart, braised", nameDe: "Rinderherz, geschmort",
   class: "organs", group: "beef_heart", preparation: "braised",
   ilealDigestibility: 0.95, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: ORGAN_COMPOUNDS,
   residue: ORGAN_RESIDUE,
   degradation: { ...ORGAN_DEGRADATION, perishabilityDays: 3 },
   phytochemicalIndex: 0,
@@ -308,7 +292,6 @@ const chickenHeartFried = animal({
   id: "chicken_heart_fried", name: "Chicken heart, pan-fried", nameDe: "Hähnchenherz, in der Pfanne gebraten",
   class: "organs", group: "chicken_heart", preparation: "fried",
   ilealDigestibility: 0.94, ironForm: "mixed", resistantStarchG: 0,
-  animalCompounds: ORGAN_COMPOUNDS,
   residue: ORGAN_RESIDUE,
   degradation: ORGAN_DEGRADATION,
   phytochemicalIndex: 0,
@@ -324,7 +307,6 @@ const eggBoiled = animal({
   id: "egg_boiled", name: "Egg, boiled", nameDe: "Hühnerei, gekocht",
   class: "eggs", group: "egg", preparation: "boiled",
   ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: {
     surfaceAreaClass: "none", systemicPesticideLikelihood: 0.04,
     contactPesticideLikelihood: 0.02, typicalMrlProximity: 0.08,
@@ -355,7 +337,6 @@ const milkWhole = animal({
   id: "milk_whole", name: "Whole milk, 3.5 % fat", nameDe: "Vollmilch, 3,5 % Fett",
   class: "dairy", group: "milk", preparation: "processed",
   ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: { ...DAIRY_RESIDUE, systemicPesticideLikelihood: 0.06, typicalMrlProximity: 0.1 },
   degradation: {
     waterSolubleVitaminLoad: 0.25, cutSurfaceSensitivity: 0.05,
@@ -375,7 +356,6 @@ const yogurtPlainWhole = animal({
   id: "yogurt_plain_whole", name: "Yogurt, plain, 3.5 % fat", nameDe: "Joghurt natur, 3,5 % Fett",
   class: "dairy", group: "yogurt", preparation: "fermented",
   ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: DAIRY_RESIDUE,
   degradation: {
     waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.05,
@@ -395,7 +375,6 @@ const quarkLowFat = animal({
   id: "quark_low_fat", name: "Quark, low-fat", nameDe: "Magerquark",
   class: "dairy", group: "quark", preparation: "fermented",
   ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: DAIRY_RESIDUE,
   degradation: { ...yogurtPlainWhole.degradation, perishabilityDays: 10 },
   phytochemicalIndex: 0,
@@ -421,8 +400,8 @@ const CHEESE_DEGRADATION: DegradationProfile = {
 const cheddar = animal({
   id: "cheddar", name: "Cheddar", nameDe: "Cheddar (Chester)",
   class: "fermented_animal", group: "cheddar", preparation: "fermented",
+  processing: { nova: 3 },
   ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: CHEESE_RESIDUE,
   degradation: CHEESE_DEGRADATION,
   phytochemicalIndex: 0,
@@ -437,8 +416,8 @@ const cheddar = animal({
 const gouda = animal({
   id: "gouda", name: "Gouda, 48 % fat i.dm.", nameDe: "Gouda, 48 % Fett i. Tr.",
   class: "fermented_animal", group: "gouda", preparation: "fermented",
+  processing: { nova: 3 },
   ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: CHEESE_RESIDUE,
   degradation: CHEESE_DEGRADATION,
   phytochemicalIndex: 0,
@@ -453,8 +432,8 @@ const gouda = animal({
 const emmentaler = animal({
   id: "emmentaler", name: "Emmentaler", nameDe: "Emmentaler",
   class: "fermented_animal", group: "emmentaler", preparation: "fermented",
+  processing: { nova: 3 },
   ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: CHEESE_RESIDUE,
   degradation: { ...CHEESE_DEGRADATION, perishabilityDays: 90 },
   phytochemicalIndex: 0,
@@ -469,8 +448,8 @@ const emmentaler = animal({
 const parmesan = animal({
   id: "parmesan", name: "Parmesan", nameDe: "Parmesan",
   class: "fermented_animal", group: "parmesan", preparation: "fermented",
+  processing: { nova: 3 },
   ilealDigestibility: 0.97, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: CHEESE_RESIDUE,
   degradation: { ...CHEESE_DEGRADATION, perishabilityDays: 120 },
   phytochemicalIndex: 0,
@@ -486,7 +465,6 @@ const kefirWhole = animal({
   id: "kefir_whole", name: "Kefir, 3.5 % fat", nameDe: "Kefir, 3,5 % Fett",
   class: "fermented_animal", group: "kefir", preparation: "fermented",
   ilealDigestibility: 0.96, ironForm: "nonheme", resistantStarchG: 0,
-  animalCompounds: ZERO_ANIMAL,
   residue: DAIRY_RESIDUE,
   degradation: {
     waterSolubleVitaminLoad: 0.22, cutSurfaceSensitivity: 0.05,
@@ -532,7 +510,10 @@ export const ANIMAL_FOODS: FoodRecord[] = [
   salmonRoasted,
   prepared(salmonRoasted, { id: "salmon_smoked", name: "Salmon, smoked", nameDe: "Lachs, geräuchert", preparation: "smoked" }),
   sardineCanned,
-  prepared(sardineCanned, { id: "sardine_grilled", name: "Sardine, grilled", nameDe: "Sardine, gegrillt", preparation: "grilled" }),
+  prepared(sardineCanned, {
+    id: "sardine_grilled", name: "Sardine, grilled", nameDe: "Sardine, gegrillt", preparation: "grilled",
+    processing: { nova: 1 },
+  }),
   herringPoached,
   mackerelGrilled,
   codPoached,

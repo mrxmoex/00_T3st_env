@@ -1,7 +1,9 @@
+import { BODY_STORAGE, calciumAbsorption } from "../data/absorption";
 import {
   BETA_CAROTENE_TO_RAE,
   DENSITY_REFS,
   DENSITY_SATURATION_PCT_DV,
+  DV_REFERENCE_ABSORPTION,
   HEME_SHARE_OF_MIXED_IRON,
   IRON_ABSORPTION,
   OTHER_CAROTENOID_TO_RAE,
@@ -88,18 +90,29 @@ export function absorbableZincMg(food: FoodRecord): number {
   return food.micros.zincMg * coeff;
 }
 
+/** Null when no human absorption study covers this food. */
+export function absorbableCalciumMg(food: FoodRecord): number | null {
+  const absorption = calciumAbsorption(food);
+  return absorption === null ? null : food.micros.calciumMg * absorption.fraction;
+}
+
 /** Null when no source reports B12; algal and fungal analogues count as 0. */
 export function effectiveB12Ug(food: FoodRecord): number | null {
   if (food.micros.b12IsAnalogue) return 0;
   return food.micros.vitaminB12Ug;
 }
 
-/** Amount per 100 g that enters the density score, after bioavailability adjustment. */
+/**
+ * Amount per 100 g that enters the density score, in Daily Value units. Iron, zinc,
+ * and calcium are the absorbed amount divided by the absorption the DV assumes;
+ * calcium without an absorption study counts like milk calcium.
+ */
 export function microAmounts(food: FoodRecord): Record<MicroNutrient, number | null> {
   const m = food.micros;
+  const calcium = absorbableCalciumMg(food);
   return {
-    iron: absorbableIronMg(food),
-    zinc: absorbableZincMg(food),
+    iron: absorbableIronMg(food) / DV_REFERENCE_ABSORPTION.iron,
+    zinc: absorbableZincMg(food) / DV_REFERENCE_ABSORPTION.zinc,
     vitaminA: retinolActivityEquivalentsUg(food),
     vitaminB12: effectiveB12Ug(food),
     folate: m.folateUg,
@@ -112,7 +125,7 @@ export function microAmounts(food: FoodRecord): Record<MicroNutrient, number | n
     niacin: m.niacinMg,
     vitaminB6: m.vitaminB6Mg,
     choline: m.cholineMg,
-    calcium: m.calciumMg,
+    calcium: calcium === null ? m.calciumMg : calcium / DV_REFERENCE_ABSORPTION.calcium,
     magnesium: m.magnesiumMg,
     potassium: m.potassiumMg,
     copper: m.copperMg,
@@ -150,6 +163,21 @@ function intakeForUpperLimit(food: FoodRecord, nutrient: MicroNutrient): number 
   }
 }
 
+/**
+ * Stored nutrients where 100 g already covers more than one day of the adult upper limit.
+ * Frequency matters; the amount does not lower the score.
+ */
+export function storedNutrientCoverage(food: FoodRecord): { nutrient: MicroNutrient; daysPer100g: number }[] {
+  return MICRO_NUTRIENTS.flatMap((nutrient) => {
+    const limit = UPPER_LIMITS[nutrient];
+    const intake = intakeForUpperLimit(food, nutrient);
+    const store = BODY_STORAGE[nutrient].store;
+    if (limit === undefined || intake === null || intake < limit) return [];
+    if (store !== "years" && store !== "months") return [];
+    return [{ nutrient, daysPer100g: round1(intake / limit) }];
+  });
+}
+
 /** Nutrients whose amount in 100 kcal of this food exceeds the whole-day EFSA upper limit. */
 export function upperLimitExceedances(food: FoodRecord): MicroNutrient[] {
   const kcal = Math.max(food.kcalPer100g, 1);
@@ -168,9 +196,9 @@ function listLabels(nutrients: readonly MicroNutrient[]): LocalizedText {
 }
 
 /**
- * Micronutrient density per calorie after bioavailability adjustment, over the
- * nutrients the sources report. Non-heme iron, phytate-bound zinc, and carotenoid-A
- * are not treated as equal to heme iron, animal zinc, or preformed retinol.
+ * Available micronutrient density per calorie, over the nutrients the sources report.
+ * Non-heme iron, phytate-bound zinc, oxalate-bound calcium, and carotenoid-A are not
+ * treated as equal to heme iron, animal zinc, milk calcium, or preformed retinol.
  * Algal B12 analogues contribute 0. Missing values are excluded, never read as 0.
  */
 export function scoreMicros(food: FoodRecord): MicroBreakdown {
@@ -189,20 +217,21 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     }),
   ) as Record<MicroNutrient, MicroNutrientDensity>;
 
-  const excess = upperLimitExceedances(food);
+  const coverage = storedNutrientCoverage(food);
   const scored = MICRO_NUTRIENTS.filter((nutrient) => amounts[nutrient] !== null);
   const contributions = scored.map((nutrient) =>
-    excess.includes(nutrient)
-      ? -1
-      : clamp01(pctDvPer100kcal(amounts[nutrient] ?? 0, DENSITY_REFS[nutrient], kcal) / DENSITY_SATURATION_PCT_DV),
+    clamp01(pctDvPer100kcal(amounts[nutrient] ?? 0, DENSITY_REFS[nutrient], kcal) / DENSITY_SATURATION_PCT_DV),
   );
   const score = 100 * Math.max(0, mean(contributions));
   const flags: LocalizedText[] = [];
-  if (excess.length > 0) {
-    const names = listLabels(excess);
+  if (coverage.length > 0) {
+    const detail = {
+      en: coverage.map((item) => `${MICRO_LABELS[item.nutrient].en} ${item.daysPer100g} days`).join(", "),
+      de: coverage.map((item) => `${MICRO_LABELS[item.nutrient].de} ${item.daysPer100g} Tage`).join(", "),
+    };
     flags.push({
-      en: `100 kcal exceed the EFSA daily upper limit for ${names.en}: counted as a cost, not a benefit`,
-      de: `100 kcal überschreiten die tägliche EFSA-Höchstmenge für ${names.de}: als Nachteil gewertet, nicht als Vorteil`,
+      en: `100 g covers more than a day of the adult upper limit (${detail.en}). The body stores it, so daily eating fills the store and spacing it out does not. One portion does not lower the score.`,
+      de: `100 g decken mehr als einen Tag der Höchstmenge für Erwachsene (${detail.de}). Der Körper speichert das, deshalb füllt tägliches Essen den Speicher und Abstände tun das nicht. Eine Portion senkt den Wert nicht.`,
     });
   }
 
@@ -246,6 +275,19 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
       de: `Phytatgebundenes Zink: Resorption ${ZINC_ABSORPTION.phytateBound} vs. tierisch ${ZINC_ABSORPTION.animal}`,
     });
   }
+  const calcium = calciumAbsorption(food);
+  if (calcium !== null && calcium.fraction !== DV_REFERENCE_ABSORPTION.calcium) {
+    const pct = round1(calcium.fraction * 100);
+    const milkPct = round1(DV_REFERENCE_ABSORPTION.calcium * 100);
+    const basis = calcium.carriedOver
+      ? { en: ` (measured for ${calcium.studiedFood.en})`, de: ` (gemessen für ${calcium.studiedFood.de})` }
+      : { en: "", de: "" };
+    flags.push({
+      en: `Calcium ${food.micros.calciumMg} mg × absorption ${pct} %${basis.en} vs milk ${milkPct} %`,
+      de: `Calcium ${food.micros.calciumMg} mg × Resorption ${pct} %${basis.de} vs. Milch ${milkPct} %`,
+    });
+  }
+  const absorbedCalcium = absorbableCalciumMg(food);
   const b12 = effectiveB12Ug(food);
   if (food.micros.b12IsAnalogue) {
     flags.push({
@@ -272,12 +314,13 @@ export function scoreMicros(food: FoodRecord): MicroBreakdown {
     raeUg: round1(retinolActivityEquivalentsUg(food)),
     absorbableIronMg: round2(absorbableIronMg(food)),
     absorbableZincMg: round2(absorbableZincMg(food)),
+    absorbableCalciumMg: absorbedCalcium === null ? null : round1(absorbedCalcium),
     effectiveB12Ug: b12 === null ? null : round2(b12),
     nutrients,
     parts: {
       meanCappedDensity: round2(mean(contributions)),
       nutrientsScored: scored.length,
-      upperLimitExceedances: excess.length,
+      upperLimitExceedances: coverage.length,
     },
     flags,
   };
