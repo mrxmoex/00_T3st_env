@@ -7,6 +7,7 @@ export const de: Messages = {
     compare: "Vergleich",
     recommend: "Empfehlungen",
     method: "Methodik",
+    exposure: "Belastung",
     limits: "Grenzen",
   },
   brandTagline: (version) => `Biochemische Lebensmittelmatrix · v${version}`,
@@ -300,6 +301,19 @@ export const de: Messages = {
     compositeHeading: "8. Gesamtwert und Stufen",
     compositeNote:
       "Die Gewichte sind klassenspezifisch und summieren sich zu 1. Ballaststoffe werden bei tierischen Klassen geringer gewichtet, weil ihr Fehlen erwartet wird — die Ballaststoffachse selbst zeigt trotzdem 0.",
+  },
+  exposure: {
+    title: "Belastung",
+    lede: "Ehrenvolle Erwähnungen für Stoffe, die die Nährwertzeile nicht trägt: wie sie sich im Körper verhalten, und die Quelle. Eine Erwähnung bei einem Lebensmittel ist eine Klasse oder eine Zubereitung, kein Laborergebnis für diese Probe. Eine E-Nummer ist ein gesetzlicher Name. Manche sind Nährstoffe, manche gewöhnliche Metaboliten, und manche haben eine veröffentlichte Grenze oder ein Verbot.",
+    foodHeading: "Belastungshinweise",
+    foodLede: "Das sind keine Konzentrationen. Die Nährwertdatenbanken nennen sie für dieses Lebensmittel nicht.",
+    enumbersHere: "E-Nummern in dieser Produktkategorie",
+    more: "Alle Belastungshinweise und E-Nummern",
+    enumberHeading: "E-Nummern",
+    enumberLede: "Jeder Code aus den Open-Food-Facts-Kategorien, die diese App zählt, plus eine kurze Liste von Codes mit einem veröffentlichten Körperhinweis, die in diesen Kategorien nicht vorkamen. Das vollständige gesetzliche Verzeichnis ist die Verordnung (EG) Nr. 1333/2008. Das hier ist nicht dieses Verzeichnis und keine Gefahreneinstufung.",
+    seenYes: "In einer gezählten Kategorie gesehen",
+    seenNo: "Nicht in den gezählten Kategorien",
+    columns: { code: "Code", name: "Name", body: "Im Körper", seen: "In den Zählungen" },
   },
   limits: {
     title: "Was dieses System nicht behauptet",

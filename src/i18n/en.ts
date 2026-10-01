@@ -7,6 +7,7 @@ export const en: Messages = {
     compare: "Compare",
     recommend: "Best practice",
     method: "Methodology",
+    exposure: "Exposure",
     limits: "Non-claims",
   },
   brandTagline: (version) => `Biochemical food matrix · v${version}`,
@@ -296,6 +297,19 @@ export const en: Messages = {
     compositeHeading: "8. Composite and tiers",
     compositeNote:
       "Weights are class-specific and sum to 1. Fibre is down-weighted for animal classes because absence is expected — the fibre axis itself still reads 0.",
+  },
+  exposure: {
+    title: "Exposure",
+    lede: "Honorary mentions for substances the nutrient row does not carry: how they behave in the body, and the source. A mention on a food is a class or a preparation, not a laboratory result for that sample. An E-number is a legal name. Some are nutrients, some are ordinary metabolites, and some have a published limit or a ban.",
+    foodHeading: "Exposure mentions",
+    foodLede: "These are not concentrations. The nutrient databases do not report them for this food.",
+    enumbersHere: "E-numbers in this product category",
+    more: "All exposure mentions and E-numbers",
+    enumberHeading: "E-numbers",
+    enumberLede: "Every code found in the Open Food Facts categories this app counts, plus a short list of codes with a published body note that those categories did not contain. The full legal inventory is Regulation (EC) No 1333/2008. This is not that inventory, and it is not a hazard ranking.",
+    seenYes: "Seen in a counted category",
+    seenNo: "Not in the counted categories",
+    columns: { code: "Code", name: "Name", body: "In the body", seen: "In the counts" },
   },
   limits: {
     title: "What this system will not claim",
