@@ -9,6 +9,8 @@ export interface RadarSeries {
   id: string;
   label: string;
   values: readonly number[];
+  /** Hover text per spoke. Falls back to the 0–100 length. */
+  tips?: readonly string[];
 }
 
 const WIDTH = 420;
@@ -49,14 +51,22 @@ function labelBaseline(angle: number): "auto" | "middle" | "hanging" {
   return "middle";
 }
 
+export interface RadarCenterLine {
+  text: string;
+  seriesClass?: string;
+}
+
 export function RadarChart({
   axes,
   series,
   title,
+  center,
 }: {
   axes: readonly RadarAxis[];
   series: readonly RadarSeries[];
   title: string;
+  /** Energy or other absolute values drawn in the middle of the polygon. */
+  center?: readonly RadarCenterLine[];
 }) {
   const titleId = useId();
   const count = axes.length;
@@ -72,11 +82,13 @@ export function RadarChart({
           const [x, y] = pointAt(index, count, MAX);
           return <line key={axis.short} className="radar-grid" x1={CX} y1={CY} x2={x} y2={y} />;
         })}
-        {RINGS.map((ring) => (
-          <text key={ring} className="radar-tick" x={CX + 4} y={CY - (ring / MAX) * RADIUS - 2}>
-            {ring}
-          </text>
-        ))}
+        {center === undefined
+          ? RINGS.map((ring) => (
+              <text key={ring} className="radar-tick" x={CX + 4} y={CY - (ring / MAX) * RADIUS - 2}>
+                {ring}
+              </text>
+            ))
+          : null}
         {axes.map((axis, index) => {
           const angle = angleAt(index, count);
           const [x, y] = pointAt(index, count, MAX, LABEL_RADIUS);
@@ -100,14 +112,39 @@ export function RadarChart({
             {item.values.map((value, index) => {
               const [x, y] = pointAt(index, count, value);
               const axis = axes[index];
+              const tip = item.tips?.[index] ?? `${item.label} · ${axis?.label ?? ""}: ${value.toFixed(1)}`;
               return (
                 <circle key={axis?.short ?? index} className="radar-dot" cx={x} cy={y} r={3.2}>
-                  <title>{`${item.label} · ${axis?.label ?? ""}: ${value.toFixed(1)}`}</title>
+                  <title>{tip}</title>
                 </circle>
               );
             })}
           </g>
         ))}
+        {center && center.length > 0 ? (
+          <g className="radar-center">
+            <rect
+              className="radar-center-plate"
+              x={CX - 84}
+              y={CY - (center.length * 15) / 2 - 8}
+              width={168}
+              height={center.length * 15 + 16}
+              rx={8}
+            />
+            {center.map((line, index) => (
+              <text
+                key={`${line.seriesClass ?? "center"}-${index}`}
+                className={line.seriesClass ? `radar-center-text ${line.seriesClass}` : "radar-center-text"}
+                x={CX}
+                y={CY - ((center.length - 1) * 15) / 2 + index * 15}
+                textAnchor="middle"
+                dominantBaseline="middle"
+              >
+                {line.text}
+              </text>
+            ))}
+          </g>
+        ) : null}
       </svg>
       {series.length > 1 ? (
         <figcaption>

@@ -174,6 +174,28 @@ export interface Messages {
     notDetectedShort: string;
     radarHeading: string;
     radarTitle: string;
+    nutrientRadarHeading: string;
+    nutrientRadarTitle: string;
+    nutrientRadarHint: string;
+    nutrientShort: Record<"protein" | "fat" | "sugar", string>;
+    nutrientRows: {
+      protein: string;
+      fat: string;
+      sugar: string;
+      kcal: string;
+      kJ: string;
+      digestibility: string;
+      diaas: string;
+      source: string;
+      nova: string;
+    };
+    axisGroups: {
+      kind: string;
+      general: string;
+      importance: string;
+      sourcing: string;
+      digestibility: string;
+    };
     microHeading: string;
     microHint: string;
   };

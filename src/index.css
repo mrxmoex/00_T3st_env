@@ -194,6 +194,7 @@ table.matrix {
   width: 100%;
   font-size: 0.86rem;
 }
+table.matrix.compare-axes { min-width: 40rem; }
 
 .matrix th, .matrix td {
   padding: 0.55rem 0.55rem;
@@ -387,6 +388,28 @@ details.panel > summary {
 }
 .radar-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
 .radar-swatch { width: 0.8rem; height: 0.8rem; border-radius: 3px; background: var(--series); }
+.radar-center-plate { fill: var(--bg-elev); stroke: var(--line); pointer-events: none; }
+.radar-center-text {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  pointer-events: none;
+}
+.radar-center-text.series-1,
+.radar-center-text.series-2,
+.radar-center-text.series-3 { fill: var(--series); }
+.radar-pair { display: grid; gap: 1.2rem; align-items: start; }
+.radar-pair .muted { margin: 0.35rem 0 0; font-size: 0.84rem; }
+.matrix tr.group-row th {
+  background: var(--bg-mute);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.matrix tr.group-row .group-label { position: sticky; left: 0.55rem; }
 
 .compare-grid {
   display: grid;
@@ -404,6 +427,10 @@ footer.site {
   .grid-2, .compare-grid, .food-overview { grid-template-columns: 1fr 1fr; }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .compare-grid.n3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 880px) {
+  .radar-pair { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 980px) {

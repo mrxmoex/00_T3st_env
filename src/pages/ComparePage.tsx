@@ -1,18 +1,31 @@
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { AxisRadar } from "../components/AxisRadar";
 import { formatAmount } from "../components/format";
 import { HeatCell } from "../components/HeatCell";
 import { axisValue } from "../components/MatrixTable";
+import { NutrientRadar } from "../components/NutrientRadar";
 import { BIOACTIVE_COMPOUNDS, bioactiveMg, bioactiveValue, type BioactiveValue } from "../data/bioactives";
 import { FOODS, foodsByClass } from "../data/catalog";
 import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
 import { BIOACTIVE_LABELS, MICRO_LABELS, NOVA_LABELS } from "../i18n/labels";
-import { foodName } from "../i18n/locale";
+import { foodName, type LocalizedText } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
+import type { Messages } from "../i18n/messages";
+import { energyKj, generalNutrientGrams, generalNutrientScores, GENERAL_NUTRIENT_KEYS } from "../scoring/generalNutrients";
 import { upperLimitExceedances } from "../scoring/micros";
 import { scoreCatalog } from "../scoring/scoreFood";
-import { AXIS_KEYS, FOOD_CLASSES, MICRO_NUTRIENTS } from "../scoring/types";
+import { FOOD_CLASSES, MICRO_NUTRIENTS, type AxisKey, type FoodRecord, type ScoreCard } from "../scoring/types";
+import {
+  COMPARE_GROUP_ORDER,
+  DIGESTIBILITY_AXES,
+  IMPORTANCE_AXES,
+  KIND_AXES,
+  SOURCING_AXES,
+  type CompareGroup,
+} from "./compareAxisGroups";
+
+type ComparedFood = { food: FoodRecord; card: ScoreCard };
 
 const cards = scoreCatalog(FOODS);
 
@@ -28,6 +41,144 @@ function bioactiveCell(value: BioactiveValue, notDetected: string): string {
       return "—";
     default: {
       const _exhaustive: never = value;
+      return _exhaustive;
+    }
+  }
+}
+
+function GroupLabel({ label, span }: { label: string; span: number }) {
+  return (
+    <tr className="group-row">
+      <th scope="colgroup" colSpan={span}>
+        <span className="group-label">{label}</span>
+      </th>
+    </tr>
+  );
+}
+
+function scoreRows(axes: readonly AxisKey[], selected: readonly ComparedFood[], t: Messages): ReactNode[] {
+  return axes.map((axis) => (
+    <tr key={axis}>
+      <td className="sticky">{t.axes[axis]}</td>
+      {selected.map(({ food, card }, index) => (
+        <td key={`${index}-${food.id}`}>
+          <HeatCell score={axisValue(card, axis)} />
+        </td>
+      ))}
+    </tr>
+  ));
+}
+
+function axisGroup(
+  group: CompareGroup,
+  selected: readonly ComparedFood[],
+  t: Messages,
+  localize: (text: LocalizedText) => string,
+): ReactNode {
+  const span = selected.length + 1;
+  switch (group) {
+    case "kind":
+      return (
+        <>
+          <GroupLabel label={t.compare.axisGroups.kind} span={span} />
+          {scoreRows(KIND_AXES, selected, t)}
+        </>
+      );
+    case "general":
+      return (
+        <>
+          <GroupLabel label={t.compare.axisGroups.general} span={span} />
+          {GENERAL_NUTRIENT_KEYS.map((key) => (
+            <tr key={key}>
+              <td className="sticky">{t.compare.nutrientRows[key]}</td>
+              {selected.map(({ food }, index) => (
+                <td key={`${index}-${food.id}`}>
+                  <HeatCell
+                    score={generalNutrientScores(food)[key]}
+                    label={`${formatAmount(generalNutrientGrams(food)[key])} g`}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.kcal}</td>
+            {selected.map(({ food }, index) => (
+              <td key={`${index}-${food.id}`} className="mono">
+                {Math.round(food.kcalPer100g)}
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.kJ}</td>
+            {selected.map(({ food }, index) => (
+              <td key={`${index}-${food.id}`} className="mono">
+                {energyKj(food.kcalPer100g)}
+              </td>
+            ))}
+          </tr>
+        </>
+      );
+    case "importance":
+      return (
+        <>
+          <GroupLabel label={t.compare.axisGroups.importance} span={span} />
+          {scoreRows(IMPORTANCE_AXES, selected, t)}
+        </>
+      );
+    case "sourcing":
+      return (
+        <>
+          <GroupLabel label={t.compare.axisGroups.sourcing} span={span} />
+          {scoreRows(SOURCING_AXES, selected, t)}
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.nova}</td>
+            {selected.map(({ food }, index) => (
+              <td key={`${index}-${food.id}`}>
+                <span className={`nova-badge nova-${food.processing.nova}`}>
+                  {food.processing.nova} · {localize(NOVA_LABELS[food.processing.nova])}
+                </span>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.source}</td>
+            {selected.map(({ food }, index) => {
+              const primary = food.sourceEntries[0];
+              return (
+                <td key={`${index}-${food.id}`} className="mono">
+                  {primary ? `${primary.db} ${primary.code}` : "—"}
+                </td>
+              );
+            })}
+          </tr>
+        </>
+      );
+    case "digestibility":
+      return (
+        <>
+          <GroupLabel label={t.compare.axisGroups.digestibility} span={span} />
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.digestibility}</td>
+            {selected.map(({ food }, index) => (
+              <td key={`${index}-${food.id}`}>
+                <HeatCell score={food.ilealDigestibility * 100} label={formatAmount(food.ilealDigestibility)} />
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.diaas}</td>
+            {selected.map(({ food, card }, index) => (
+              <td key={`${index}-${food.id}`}>
+                <HeatCell score={Math.min(100, card.eaa.diaas * 100)} label={formatAmount(card.eaa.diaas)} />
+              </td>
+            ))}
+          </tr>
+          {scoreRows(DIGESTIBILITY_AXES, selected, t)}
+        </>
+      );
+    default: {
+      const _exhaustive: never = group;
       return _exhaustive;
     }
   }
@@ -113,40 +264,49 @@ export function ComparePage() {
         ))}
       </div>
       <section className="panel">
-        <h2>{t.compare.radarHeading}</h2>
-        <AxisRadar
-          title={t.compare.radarTitle}
-          entries={selected.map(({ food, card }, index) => ({
-            id: `${index}-${food.id}`,
-            label: foodName(food, locale),
-            card,
-          }))}
-        />
-      </section>
-      <div className="matrix-wrap" style={{ marginTop: "1rem" }}>
-        <table className="matrix">
-          <thead>
-            <tr>
-              <th className="sticky">{t.table.axis}</th>
-              {selected.map(({ food }, index) => (
-                <th key={`${index}-${food.id}`}>{foodName(food, locale)}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {AXIS_KEYS.map((axis) => (
-              <tr key={axis}>
-                <td className="sticky">{t.axes[axis]}</td>
-                {selected.map(({ food, card }, index) => (
-                  <td key={`${index}-${food.id}`}>
-                    <HeatCell score={axisValue(card, axis)} />
-                  </td>
+        <div className="radar-pair">
+          <div>
+            <h2>{t.compare.radarHeading}</h2>
+            <AxisRadar
+              title={t.compare.radarTitle}
+              entries={selected.map(({ food, card }, index) => ({
+                id: `${index}-${food.id}`,
+                label: foodName(food, locale),
+                card,
+              }))}
+            />
+          </div>
+          <div>
+            <h2>{t.compare.nutrientRadarHeading}</h2>
+            <NutrientRadar
+              title={t.compare.nutrientRadarTitle}
+              entries={selected.map(({ food }, index) => ({
+                id: `${index}-${food.id}`,
+                label: foodName(food, locale),
+                food,
+              }))}
+            />
+            <p className="muted">{t.compare.nutrientRadarHint}</p>
+          </div>
+        </div>
+        <div className="matrix-wrap" style={{ marginTop: "1rem" }}>
+          <table className="matrix compare-axes">
+            <thead>
+              <tr>
+                <th className="sticky">{t.table.axis}</th>
+                {selected.map(({ food }, index) => (
+                  <th key={`${index}-${food.id}`}>{foodName(food, locale)}</th>
                 ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {COMPARE_GROUP_ORDER.map((group) => (
+                <Fragment key={group}>{axisGroup(group, selected, t, localize)}</Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
       <section className="panel">
         <h2>{t.compare.microHeading}</h2>
         <p className="muted">{t.compare.microHint}</p>
