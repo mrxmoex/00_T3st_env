@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { foodsInGroup } from "../data/catalog";
 import { NUTRIENT_UNITS, type NutrientKey } from "../data/sources/snapshot";
-import { NUTRIENT_LABELS, PREPARATION_LABELS } from "../i18n/labels";
+import { NOVA_LABELS, NUTRIENT_LABELS, PREPARATION_LABELS } from "../i18n/labels";
 import { useLocale } from "../i18n/LocaleContext";
 import { perGramDryMatter } from "../scoring/retention";
 import type { FoodRecord, ScoreCard } from "../scoring/types";
 import { formatAmount, formatChange } from "./format";
+import { NovaMarker } from "./NovaMarker";
 
 /** Nutrients that cooking and processing change most visibly. */
 const ROWS: readonly NutrientKey[] = [
@@ -100,7 +101,10 @@ export function PreparationPanel({ food, cards }: { food: FoodRecord; cards: rea
               <td className="sticky">{t.food.preparationsProcessing}</td>
               {variants.map((variant) => (
                 <td key={variant.id} className={variant.id === food.id ? "current" : undefined}>
-                  <span className={`nova-badge nova-${variant.processing.nova}`}>NOVA {variant.processing.nova}</span>
+                  <NovaMarker
+                    group={variant.processing.nova}
+                    fullLabel={`NOVA ${variant.processing.nova} · ${localize(NOVA_LABELS[variant.processing.nova])}`}
+                  />
                 </td>
               ))}
             </tr>

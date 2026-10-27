@@ -353,9 +353,9 @@ export const de: Messages = {
     residueHeading: "6. Rückstands- / Kontaminationsrisiko",
     residueNote:
       "Höherer Wert = geringeres Risiko. Blattgemüse mit großer Oberfläche wird nicht wie eine Knolle bewertet. Metalle in Fisch/Algen und Tierarzneimittelrückstände sind vollwertige Faktoren, keine Fußnoten.",
-    degradationHeading: "7. Stabilität und Nährstoffverlust",
+    degradationHeading: "7. Nährstoff-Haltbarkeit",
     degradationNote:
-      "Boni: gegart +0.08, fermentiert +0.22, getrocknet +0.28. Frisches Blattgemüse bleibt labil. Ein industriell verarbeitetes Lebensmittel (NOVA 3–4) wird mit dem Anteil an Vitamin C, Thiamin, Folat und B6 je Gramm Trockenmasse skaliert, den es gegenüber der selbst zubereiteten Form desselben Lebensmittels behalten hat. Eine lange Haltbarkeit, erkauft mit zerstörten Vitaminen, zählt nicht als Stabilität.",
+      "Die Achse fragt, wie viel der labilen Nährstoffe Kochen, Lagerung und Verarbeitung übersteht — nicht jedes Vitamin verblasst gleich. Boni: gegart +0.08, fermentiert +0.22, getrocknet +0.28. Frisches Blattgemüse bleibt labil. Ein industriell verarbeitetes Lebensmittel (NOVA 3–4) wird mit dem Anteil an Vitamin C, Thiamin, Folat und B6 je Gramm Trockenmasse skaliert, den es gegenüber der selbst zubereiteten Form desselben Lebensmittels behalten hat. Eine lange Haltbarkeit, erkauft mit zerstörten Vitaminen, zählt nicht als Haltbarkeit.",
     compositeHeading: "8. Gesamtwert und Stufen",
     compositeNote:
       "Die Gewichte sind klassenspezifisch und summieren sich zu 1. Ballaststoffe werden bei tierischen Klassen geringer gewichtet, weil ihr Fehlen erwartet wird — die Ballaststoffachse selbst zeigt trotzdem 0.",

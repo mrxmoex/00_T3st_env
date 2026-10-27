@@ -7,6 +7,7 @@ import { foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { isAnimalClass, MICRO_NUTRIENTS, type FoodRecord, type ScoreCard } from "../scoring/types";
 import { formatAmount } from "./format";
+import { NovaMarker } from "./NovaMarker";
 
 /** %DV per 100 kcal from which a stored nutrient is named as supplied by the food. */
 const STORED_SUPPLY_PCT_DV = 10;
@@ -44,7 +45,7 @@ export function BurdenPanel({ food, card }: { food: FoodRecord; card: ScoreCard 
         <div>
           <h3>{b.processingHeading}</h3>
           <p>
-            <span className={`nova-badge nova-${nova}`}>NOVA {nova}</span> {localize(NOVA_LABELS[nova])}
+            <NovaMarker group={nova} fullLabel={`NOVA ${nova} · ${localize(NOVA_LABELS[nova])}`} />
           </p>
           <p className="muted">{b.novaMeaning[nova]}</p>
           {retention && reference ? (

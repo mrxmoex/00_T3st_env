@@ -26,7 +26,7 @@ import {
   SOURCING_AXES,
   type CompareGroup,
 } from "./compareAxisGroups";
-import { foodHonors } from "./foodHonors";
+import { FoodHonorsList } from "../components/FoodHonorsList";
 
 type ComparedFood = { food: FoodRecord; card: ScoreCard };
 
@@ -257,23 +257,7 @@ export function ComparePage() {
                 limiting: card.eaa.limitingAa.toUpperCase(),
               })}
             </p>
-            {(() => {
-              const honors = foodHonors(food, card, t, locale);
-              return honors.length > 0 ? (
-                <p className="honor-line">
-                  {honors.map((honor) => (
-                    <span key={honor.key} className="honor-chip">
-                      {honor.stamp === "fibre" ? (
-                        <span className="honor-stamp fibre-stamp" aria-hidden="true" />
-                      ) : null}
-                      {honor.text}
-                    </span>
-                  ))}
-                </p>
-              ) : (
-                <p className="muted honor-line">{t.compare.honorsEmpty}</p>
-              );
-            })()}
+            <FoodHonorsList food={food} card={card} />
           </article>
         ))}
       </div>
@@ -359,7 +343,6 @@ export function ComparePage() {
       </section>
       <section className="panel">
         <h2>{t.compare.bioactivesHeading}</h2>
-        <p className="muted">{t.compare.bioactivesHint}</p>
         <CompareBioactivesPanel foods={selected.map(({ food }) => food)} />
       </section>
     </main>

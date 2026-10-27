@@ -349,9 +349,9 @@ export const en: Messages = {
     residueHeading: "6. Residue / contaminant risk",
     residueNote:
       "Higher score = lower risk. Leafy high surface area is not scored like a tuber. Fish/algae metals and veterinary residues are first-class, not footnotes.",
-    degradationHeading: "7. Stability and nutrient loss",
+    degradationHeading: "7. Nutrient keeping power",
     degradationNote:
-      "Bonuses: cooked +0.08, fermented +0.22, dried +0.28. Fresh leafy stays labile. An industrially processed food (NOVA 3–4) is scaled by the share of vitamin C, thiamin, folate, and B6 per gram of dry matter it kept against the home-prepared form of the same food, so a long shelf life bought by destroying vitamins does not count as stability.",
+      "The axis asks how much of the food’s labile nutrients survive cooking, storage, and processing — not every vitamin fades equally. Bonuses: cooked +0.08, fermented +0.22, dried +0.28. Fresh leafy stays labile. An industrially processed food (NOVA 3–4) is scaled by the share of vitamin C, thiamin, folate, and B6 per gram of dry matter it kept against the home-prepared form of the same food, so a long shelf life bought by destroying vitamins does not count as keeping power.",
     compositeHeading: "8. Composite and tiers",
     compositeNote:
       "Weights are class-specific and sum to 1. Fibre is down-weighted for animal classes because absence is expected — the fibre axis itself still reads 0.",
