@@ -65,6 +65,7 @@ export function RadarChart({
   title,
   center,
   hideLegend = false,
+  hideTicks = false,
 }: {
   axes: readonly RadarAxis[];
   series: readonly RadarSeries[];
@@ -72,6 +73,8 @@ export function RadarChart({
   /** Energy or other absolute values drawn in the middle of the polygon. */
   center?: readonly RadarCenterLine[];
   hideLegend?: boolean;
+  /** Ring numbers are only meaningful when every spoke shares one 0–100 scale. */
+  hideTicks?: boolean;
 }) {
   const titleId = useId();
   const count = axes.length;
@@ -97,7 +100,7 @@ export function RadarChart({
             />
           );
         })}
-        {center === undefined
+        {center === undefined && !hideTicks
           ? RINGS.map((ring) => (
               <text key={ring} className="radar-tick" x={CX + 4} y={CY - (ring / MAX) * RADIUS - 2}>
                 {ring}

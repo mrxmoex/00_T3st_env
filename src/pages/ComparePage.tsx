@@ -10,11 +10,11 @@ import { axisValue } from "../components/MatrixTable";
 import { NutrientRadar } from "../components/NutrientRadar";
 import { FOODS, foodsByClass } from "../data/catalog";
 import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
-import { MICRO_LABELS, NOVA_LABELS } from "../i18n/labels";
+import { MICRO_LABELS, MICRO_ROW_HINTS, NOVA_LABELS } from "../i18n/labels";
 import { foodName, type LocalizedText } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import type { Messages } from "../i18n/messages";
-import { energyKj, generalNutrientGrams, generalNutrientScores, GENERAL_NUTRIENT_KEYS } from "../scoring/generalNutrients";
+import { energyKj, generalNutrientGrams, GENERAL_NUTRIENT_KEYS } from "../scoring/generalNutrients";
 import { upperLimitExceedances } from "../scoring/micros";
 import { scoreCatalog } from "../scoring/scoreFood";
 import {
@@ -69,11 +69,11 @@ function axisLabelCell(axis: AxisKey, t: Messages): ReactNode {
   return t.axes[axis];
 }
 
-function microLabelCell(nutrient: MicroNutrient, t: Messages, localize: (text: LocalizedText) => string): ReactNode {
+function microLabelCell(nutrient: MicroNutrient, localize: (text: LocalizedText) => string): ReactNode {
   return (
     <>
       {localize(MICRO_LABELS[nutrient])}
-      <span className="axis-row-sub">{localize(t.compare.microRowHints[nutrient])}</span>
+      <span className="axis-row-sub">{localize(MICRO_ROW_HINTS[nutrient])}</span>
     </>
   );
 }
@@ -141,11 +141,8 @@ function axisGroup(
             <tr key={key}>
               <td className="sticky">{t.compare.nutrientRows[key]}</td>
               {selected.map(({ food }, index) => (
-                <td key={`${index}-${food.id}`}>
-                  <HeatCell
-                    score={generalNutrientScores(food)[key]}
-                    label={`${formatAmount(generalNutrientGrams(food)[key])} g`}
-                  />
+                <td key={`${index}-${food.id}`} className="mono">
+                  {formatAmount(generalNutrientGrams(food)[key])} g
                 </td>
               ))}
             </tr>
@@ -325,7 +322,6 @@ export function ComparePage() {
           <div>
             <h2>{t.compare.nutrientRadarHeading}</h2>
             <NutrientRadar
-              title={t.compare.nutrientRadarTitle(t.compare.macroShareBasis.g)}
               entries={selected.map(({ food }, index) => ({
                 id: `${index}-${food.id}`,
                 label: foodName(food, locale),
@@ -369,7 +365,7 @@ export function ComparePage() {
             <tbody>
               {MICRO_NUTRIENTS.map((nutrient) => (
                 <tr key={nutrient}>
-                  <td className="sticky">{microLabelCell(nutrient, t, localize)}</td>
+                  <td className="sticky">{microLabelCell(nutrient, localize)}</td>
                   {selected.map(({ food, card, excess }, index) => {
                     const pct = card.micro.nutrients[nutrient].pctDvPer100kcal;
                     const pctLabel =

@@ -8,7 +8,7 @@ export const DIGESTIBILITY_AXES = ["degradation"] as const satisfies readonly Ax
 
 /**
  * Order of the compare-page axis table, including the gram rows that are not scores.
- * Sourcing and digestibility/stability rows share one group: necessity, exposure, and what the body keeps.
+ * Residue, processing, data source, digestibility, and stability rows share one group: what reaches the body.
  */
 export const COMPARE_GROUP_ORDER = ["kind", "general", "importance", "necessityImpact"] as const;
 export type CompareGroup = (typeof COMPARE_GROUP_ORDER)[number];

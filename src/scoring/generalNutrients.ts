@@ -4,14 +4,14 @@ import { clamp01 } from "./math";
 
 export type NutrientBasis = "per100g" | "per100kcal";
 
-/** Grams per 100 g at which a spoke is drawn full. Sugar is scaled tighter because whole foods carry less of it than protein or fat. */
+/** Grams at which a spoke is drawn full, on either basis. Sugar is scaled tighter because whole foods carry less of it than protein or fat. */
 export const GENERAL_NUTRIENT_FULL_G = {
   protein: 25,
   fat: 20,
   sugar: 10,
 } as const;
 
-/** EU food-labelling conversion. */
+/** Thermochemical calorie. EU labels use their own factors (17 / 37 / 17 kJ per g), so a database kJ value can differ by up to 2 %. */
 export const KJ_PER_KCAL = 4.184;
 
 export const GENERAL_NUTRIENT_KEYS = ["protein", "fat", "sugar"] as const;

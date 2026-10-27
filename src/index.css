@@ -547,6 +547,7 @@ details.panel > summary {
   background: hsl(128 50% 42%);
   box-shadow: 0 0 4px hsl(128 50% 42% / 0.5);
 }
+.honor-basis { align-self: center; font-size: 0.8rem; }
 
 .bioactives-profiles {
   display: grid;

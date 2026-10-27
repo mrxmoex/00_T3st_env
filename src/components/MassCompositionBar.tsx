@@ -1,4 +1,5 @@
 import { useLocale } from "../i18n/LocaleContext";
+import { activeCarbsG, passiveCarbsG } from "../scoring/carbs";
 import { massCompositionPercent } from "../scoring/generalNutrients";
 import type { FoodRecord } from "../scoring/types";
 import { formatAmount } from "./format";
@@ -19,7 +20,7 @@ export function MassCompositionBar({ food, label }: { food: FoodRecord; label: s
     water: formatAmount(food.composition.waterG),
     protein: formatAmount(food.proteinG),
     fat: formatAmount(food.fatG),
-    carbs: formatAmount(food.carbs.total),
+    carbs: formatAmount(activeCarbsG(food) + passiveCarbsG(food)),
   });
 
   return (

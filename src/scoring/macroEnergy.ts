@@ -9,30 +9,21 @@ export interface MacroEnergyShares {
   carb: number;
 }
 
-/** Share of metabolizable energy from protein, fat, and available carbohydrate. Display only. */
-export function macroEnergyShares(food: FoodRecord, basis: "per100g" | "per100kcal" = "per100g"): MacroEnergyShares {
-  const proteinKcal = food.proteinG * KCAL_PER_G.protein;
-  const fatKcal = food.fatG * KCAL_PER_G.fat;
-  const carbKcal = activeCarbsG(food) * KCAL_PER_G.carb;
-  let p = proteinKcal;
-  let f = fatKcal;
-  let c = carbKcal;
-
-  if (basis === "per100kcal") {
-    const kcal = Math.max(food.kcalPer100g, 1);
-    const scale = 100 / kcal;
-    p *= scale;
-    f *= scale;
-    c *= scale;
-  }
-
-  const total = p + f + c;
+/**
+ * Split of the energy from protein, fat, and available carbohydrate (4 / 9 / 4 kcal per g), relative to
+ * their sum; fibre energy is not counted. A share does not depend on the serving basis. Display only.
+ */
+export function macroEnergyShares(food: FoodRecord): MacroEnergyShares {
+  const protein = food.proteinG * KCAL_PER_G.protein;
+  const fat = food.fatG * KCAL_PER_G.fat;
+  const carb = activeCarbsG(food) * KCAL_PER_G.carb;
+  const total = protein + fat + carb;
   if (total <= 0) {
     return { protein: 0, fat: 0, carb: 0 };
   }
   return {
-    protein: (p / total) * 100,
-    fat: (f / total) * 100,
-    carb: (c / total) * 100,
+    protein: (protein / total) * 100,
+    fat: (fat / total) * 100,
+    carb: (carb / total) * 100,
   };
 }

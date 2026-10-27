@@ -117,10 +117,7 @@ export function FoodPage() {
             </div>
             <div>
               <h2 className="radar-block-heading">{t.compare.nutrientRadarHeading}</h2>
-              <NutrientRadar
-                title={t.compare.nutrientRadarTitle(t.compare.macroShareBasis.g)}
-                entries={[{ id: food.id, label: name, food }]}
-              />
+              <NutrientRadar entries={[{ id: food.id, label: name, food }]} />
             </div>
           </div>
         </div>

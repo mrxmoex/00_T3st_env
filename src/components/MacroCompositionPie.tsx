@@ -16,11 +16,11 @@ function polar(cx: number, cy: number, r: number, angle: number): [number, numbe
   return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
 }
 
-/** Small energy-share donut for legend rows (protein / fat / carb). */
-export function MacroCompositionPie({ food, basis = "per100g" }: { food: FoodRecord; basis?: "per100g" | "per100kcal" }) {
+/** Small energy-split donut for legend rows (protein / fat / available carbs). */
+export function MacroCompositionPie({ food }: { food: FoodRecord }) {
   const { t } = useLocale();
   const titleId = useId();
-  const shares = macroEnergyShares(food, basis);
+  const shares = macroEnergyShares(food);
   const cx = SIZE / 2;
   const cy = SIZE / 2;
   const r = SIZE / 2 - 1;
@@ -45,7 +45,6 @@ export function MacroCompositionPie({ food, basis = "per100g" }: { food: FoodRec
     protein: shares.protein.toFixed(0),
     fat: shares.fat.toFixed(0),
     carb: shares.carb.toFixed(0),
-    basis: basis === "per100kcal" ? t.compare.macroShareBasis.kcal : t.compare.macroShareBasis.g,
   });
 
   return (

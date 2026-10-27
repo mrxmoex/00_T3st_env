@@ -58,7 +58,7 @@ export const de: Messages = {
       "Stoffe, die die Nährstoffdatenbanken nicht angeben, nach Gehalt aus veröffentlichten Analysen erfasst. Gezeigt, nicht bewertet. „Keine Daten“ heißt, dass keine Analyse gefunden wurde, nicht null; „nicht nachgewiesen“ heißt, eine Analyse hat gesucht und nichts gefunden.",
     bioactiveColumns: { compound: "Stoff", content: "mg pro 100 g", measured: "Was gemessen wurde", source: "Quelle" },
     bioactiveStatus: { notDetected: "nicht nachgewiesen", notExpected: "nicht zu erwarten", noData: "keine Daten" },
-    bioactiveRawValue: "Wert aus rohem Gewebe; Garen verändert ihn",
+    bioactiveRawValue: "Wert aus rohem Gewebe; die Zubereitung verändert ihn",
     bioactiveDryWeight: "aus der Trockenmasse mit dem Wassergehalt dieses Lebensmittels umgerechnet",
     bioactiveRange: (min, max) => `Spanne ${min}–${max}`,
     burden: {
@@ -185,28 +185,29 @@ export const de: Messages = {
       "Lebensmittel vergleichen, ohne Klassen zu vermischen. Eine Linsenspalte bekommt keinen B12-Wert, nur weil die Oberfläche Ausgewogenheit möchte.",
     slot: (position) => `Lebensmittel ${position}`,
     classTier: (classLabel, tier) => `${classLabel} · Stufe ${tier}`,
-    eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
+    eaaLine: ({ aas, diaas, limiting }) =>
+      `AAS ${aas} · DIAAS ${diaas} · ${aas < 1 ? `limitierend ${limiting}` : "vollständig"}`,
     novaLine: (group, label) => `NOVA ${group} · ${label}`,
     honors: {
       creatine: (mg) => `Kreatin ${mg} mg`,
       fibre: (g) => `Ballaststoffe ${g} g`,
       b12: (ug) => `B12 ${ug} µg`,
       taurine: (mg) => `Taurin ${mg} mg`,
-      glucosinolates: (mg) => `Glucosinolates ${mg} mg`,
+      glucosinolates: (mg) => `Glucosinolate ${mg} mg`,
     },
-    honorsEmpty: "Keine auffälligen Bioaktive oder Ballaststoffe auf dieser Karte.",
+    honorsEmpty: "Keine herausragenden Ballaststoffe, kein B12 und keine Bioaktiven auf dieser Karte.",
     bioactivesHeading: "Bioaktive Stoffe",
     bioactivesSubtitle:
-      "Speicherung, täglicher Bedarf und Besonderheiten — nicht nur Milligramm pro 100 g. Mehrere davon bildet der Körper selbst; essenzielle Nährstoffe bestimmen weiterhin die Bewertung.",
+      "Was jeder Stoff tut — nicht nur Milligramm pro 100 g. Mehrere davon bildet der Körper selbst; essenzielle Nährstoffe bestimmen weiterhin die Bewertung.",
     bioactivesHint:
-      "Index aus veröffentlichten Analysen (mg pro 100 g, wenn ein Wert existiert). Nicht bewertet. Chip aufklappen für Rolle und Quelle. * Wert aus rohem Gewebe · n. n. untersucht, nicht nachgewiesen.",
+      "Index aus veröffentlichten Analysen (mg pro 100 g, wenn ein Wert existiert). Nicht bewertet. Chip aufklappen für Rolle und Quelle. * Wert aus rohem Gewebe für ein gegartes oder verarbeitetes Lebensmittel · n. n. untersucht, nicht nachgewiesen.",
     bioactivesProfileLede: "Was drinsteckt — nur Stoffe mit Wert oder nachgewiesener Abwesenheit.",
-    bioactivesProfileEmpty: "Im Bioaktiv-Index nichts Nennenswertes für dieses Lebensmittel.",
+    bioactivesProfileEmpty: "Keine Analyse im Index für dieses Lebensmittel.",
     notDetectedShort: "n. n.",
     radarHeading: "Achsenprofil",
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
     axisRadarHint:
-      "Protein ist aufgeteilt in Muster (gegen FAO 2013, gedeckelt bei 1,0), ileale Verdaulichkeit und Dichte (Protein g / 20 g). DIAAS = AAS × Verdaulichkeit und kann über 1 liegen — das ist verfügbare Qualität, nicht wie die Muster-Speiche gedeckelt.",
+      "Protein ist aufgeteilt in Muster (gegen FAO 2013, gedeckelt bei 1,0), ileale Verdaulichkeit und Dichte (Protein g / 20 g). DIAAS = AAS × Verdaulichkeit und kann über 1 liegen; die Muster-Speiche endet bei 1.",
     axisRadarMethodLink: "Methode: EAA-Achse",
     radarProteinShort: { pattern: "Muster", digest: "Verd.", density: "Dichte" },
     radarProteinLabels: {
@@ -221,27 +222,28 @@ export const de: Messages = {
       density: ({ food, proteinG }) => `${food}: ${proteinG} g Protein / 100 g (volle Speiche bei 20 g)`,
     },
     radarProteinLegendHeading: "Proteinqualität",
-    radarProteinLegendLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
+    radarProteinLegendLine: ({ aas, diaas, limiting }) =>
+      `AAS ${aas} · DIAAS ${diaas} · ${aas < 1 ? `limitierend ${limiting}` : "vollständig"}`,
     nutrientRadarHeading: "Grundnährstoffe & Dichte",
     nutrientRadarTitle: (basis) => `Protein, Fett und Zucker (${basis})`,
-    nutrientRadarHint: (basis) =>
-      `Speichen beziehen sich auf ${basis} (voll bei 25 g Protein, 20 g Fett, 10 g Zucker). Umschalten aktualisiert Radar und Energie-Donuts. Balken unten: essbare Masse — Wasser plus Makros ergänzen sich zu 100 g.`,
-    macroShareToggleLabel: "Energieanteil bezogen auf:",
+    nutrientRadarHint: ({ basis, protein, fat, sugar }) =>
+      `Speichen: Gramm ${basis}, voll bei ${protein} g Protein, ${fat} g Fett, ${sugar} g Zucker. Die Energieaufteilung hängt nicht von der Bezugsgröße ab; die Balken zeigen, woraus 100 g bestehen.`,
+    macroShareToggleLabel: "Mengen:",
     macroShareBasis: { g: "pro 100 g", kcal: "pro 100 kcal" },
-    macroShareCaption: ({ protein, fat, carb, basis }) =>
-      `${protein}% Protein · ${fat}% Fett · ${carb}% KH (${basis})`,
+    macroShareCaption: ({ protein, fat, carb }) =>
+      `Energieaufteilung: ${protein}% Protein · ${fat}% Fett · ${carb}% verfügbare KH`,
     macroLegendHeading: "Makro-Energieanteil je Lebensmittel",
     macroLegend: { protein: "Protein", fat: "Fett", carb: "Verfügbare KH" },
     macroLegendNote:
-      "Prozent = Anteil an verwertbarer Energie (Protein 4, Fett 9, verfügbare KH 4 kcal/g). Ballaststoffe und resistente Stärke sind nicht im KH-Anteil.",
+      "Prozent = Anteil an der Energie aus Protein, Fett und verfügbaren KH (4, 9, 4 kcal/g); Energie aus Ballaststoffen zählt nicht mit. Gramm folgen der Bezugsgröße oben.",
     massCompositionHeading: "Zusammensetzung der essbaren Masse (pro 100 g)",
     massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
-      `${food}: Wasser ${water} g, Protein ${protein} g, Fett ${fat} g, Kohlenhydrate gesamt ${carbs} g`,
+      `${food}: Wasser ${water} g, Protein ${protein} g, Fett ${fat} g, Kohlenhydrate inkl. Ballaststoffe ${carbs} g`,
     massCompositionLegend: {
       water: "Wasser",
       protein: "Protein",
       fat: "Fett",
-      carbs: "Kohlenhydrate",
+      carbs: "Kohlenhydrate inkl. Ballaststoffe",
       other: "Sonstiges / nicht zugeordnet",
     },
     carbRowLabel: "Kohlenhydrat-Zusammensetzung & Qualität",
@@ -249,19 +251,19 @@ export const de: Messages = {
       "Kreis = Anteil Zucker, verdauliche Stärke und passive KH (Ballaststoffe + RS). Farbe = Typ, kein 0–100-Rang.",
     carbLegendHeading: "Farben der Kohlenhydrat-Kreise",
     carbLegend: {
-      sugar: "Zucker (schnell)",
+      sugar: "Zucker",
       starch: "Verdauliche Stärke",
       passive: "Ballaststoffe + resistente Stärke",
       none: "Vernachlässigbare KH (× in Zellen)",
     },
     carbPie: {
-      quiet: "Vernachlässigbare Kohlenhydrate; metabolisch ruhig, kein Ballaststoffersatz.",
+      quiet: "Vernachlässigbare Kohlenhydrate (unter 0,5 g pro 100 g); keine Ballaststoffquelle.",
       noneSymbol: "×",
       title: ({ sugar, starch, passive }) =>
-        `KH-Zusammensetzung: Zucker ${sugar} g, Stärke ${starch} g, passiv (Ballaststoffe+RS) ${passive} g`,
+        `KH pro 100 g: Zucker ${sugar} g, Stärke ${starch} g, passiv (Ballaststoffe+RS) ${passive} g`,
     },
     necessityImpactGroupHint:
-      "Herkunft, Rückstände, Verarbeitung, Lagerstabilität und was der Darm tatsächlich liefert — ein Notwendigkeits-/Wirkungsvektor neben der Mikronährstoffdichte.",
+      "Rückstände, Verarbeitung, Nährstoff-Haltbarkeit und wie viel Protein bis zum Ende des Dünndarms aufgenommen wird (ileale Verdaulichkeit, DIAAS).",
     necessityImpactMethodLink: "Methode: Rückstände & Stabilität",
     degradationRowHint: "Garen, Lagerung, Verarbeitung vs. labile Vitamine — nicht jeder Nährstoff verblasst gleich.",
     nutrientShort: { protein: "Protein", fat: "Fett", sugar: "Zucker" },
@@ -270,7 +272,7 @@ export const de: Messages = {
       fat: "Fett (g / 100 g)",
       sugar: "Zucker (g / 100 g)",
       kcal: "Energie (kcal / 100 g)",
-      kJ: "Energie (kJ / 100 g)",
+      kJ: "Energie (kJ / 100 g, aus kcal)",
       digestibility: "Ileale Verdaulichkeit",
       diaas: "DIAAS",
       source: "Primärquelle",
@@ -280,48 +282,11 @@ export const de: Messages = {
       kind: "Art",
       general: "Grundnährstoffe",
       importance: "Wichtigkeit",
-      necessityImpact: "Notwendigkeit & Wirkung",
+      necessityImpact: "Was im Körper ankommt",
     },
     microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
     microHint:
-      "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen gespeicherten Nährstoff, dessen Menge in 100 kcal die Höchstmenge für Erwachsene überschreitet. Die Häufigkeit zählt; die Markierung senkt den Wert nicht.",
-    microRowHints: {
-      iron: {
-        en: "Absorbable iron vs DV; phytate and heme context in the score.",
-        de: "Aufnehmbares Eisen vs. DV; Phytat- und Häm-Kontext in der Bewertung.",
-      },
-      zinc: {
-        en: "Absorbable zinc; plant phytate lowers uptake.",
-        de: "Aufnehmbares Zink; pflanzliches Phytat senkt die Aufnahme.",
-      },
-      vitaminA: { en: "RAE from retinol and carotenoids.", de: "RAE aus Retinol und Carotinoiden." },
-      vitaminB12: {
-        en: "Effective B12; algae analogues discounted when flagged.",
-        de: "Wirksames B12; Algen-Analoga abgewertet, wenn markiert.",
-      },
-      folate: { en: "Food folate before fortification.", de: "Lebensmittelfolat vor Anreicherung." },
-      vitaminC: { en: "Labile; cooking and storage matter.", de: "Labil; Kochen und Lagerung zählen." },
-      vitaminD: { en: "Few foods are rich sources.", de: "Wenige Lebensmittel sind reiche Quellen." },
-      vitaminE: { en: "Tocopherols in the fat matrix.", de: "Tocopherole in der Fettmatrix." },
-      vitaminK: { en: "K1 from plants; K2 from fermentation/animal.", de: "K1 aus Pflanzen; K2 aus Fermentation/Tier." },
-      thiamin: { en: "Water-soluble; leaches with cooking water.", de: "Wasserlöslich; geht ins Kochwasser über." },
-      riboflavin: { en: "Light-sensitive.", de: "Lichtempfindlich." },
-      niacin: { en: "Includes tryptophan conversion where relevant.", de: "Inkl. Tryptophan-Umwandlung wo relevant." },
-      vitaminB6: { en: "Storage moderate.", de: "Speicherung moderat." },
-      choline: {
-        en: "Partly made by the body; eggs and liver stand out.",
-        de: "Teils körpereigen; Eier und Leber stechen heraus.",
-      },
-      calcium: { en: "Absorbable calcium vs oxalate/phytate.", de: "Aufnehmbares Calcium vs. Oxalat/Phytat." },
-      magnesium: { en: "Widespread; density per kcal matters.", de: "Verbreitet; Dichte pro kcal zählt." },
-      potassium: { en: "High in plants; leaches when boiled.", de: "Hoch in Pflanzen; geht beim Kochen verloren." },
-      copper: { en: "Trace; excess flagged on limits page.", de: "Spur; Überschuss auf der Grenzwert-Seite." },
-      selenium: { en: "Soil-dependent; fish and Brazil nuts vary.", de: "Bodenabhängig; Fisch und Paranüsse variieren." },
-      iodine: {
-        en: "Seafood and iodised salt; not in all catalog foods.",
-        de: "Meeresfrüchte und jodiertes Salz; nicht in allen Katalog-Lebensmitteln.",
-      },
-    },
+      "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen Nährstoff, dessen Menge in 100 kcal die Höchstmenge für Erwachsene für einen ganzen Tag (EFSA) überschreitet. Die Häufigkeit zählt; die Markierung senkt den Wert nicht.",
   },
   recommend: {
     title: "Empfehlungs-Engine",

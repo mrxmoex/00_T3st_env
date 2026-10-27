@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { useLocale } from "../i18n/LocaleContext";
 import { activeCarbsG } from "../scoring/carbs";
 import {
+  GENERAL_NUTRIENT_FULL_G,
   generalNutrientGramsForBasis,
   generalNutrientScoresForBasis,
   GENERAL_NUTRIENT_KEYS,
@@ -21,33 +22,34 @@ export interface NutrientRadarEntry {
   food: FoodRecord;
 }
 
-export function NutrientRadar({ entries, title }: { entries: readonly NutrientRadarEntry[]; title: string }) {
+export function NutrientRadar({ entries }: { entries: readonly NutrientRadarEntry[] }) {
   const { t } = useLocale();
   const [basis, setBasis] = useState<NutrientBasis>("per100g");
 
   const basisLabel = basis === "per100kcal" ? t.compare.macroShareBasis.kcal : t.compare.macroShareBasis.g;
   const radarTitle = t.compare.nutrientRadarTitle(basisLabel);
-  const hint = t.compare.nutrientRadarHint(basisLabel);
+  const hint = t.compare.nutrientRadarHint({ basis: basisLabel, ...GENERAL_NUTRIENT_FULL_G });
 
   const axes = useMemo(
     () =>
       GENERAL_NUTRIENT_KEYS.map((key) => ({
         short: t.compare.nutrientShort[key],
-        label: t.compare.nutrientRows[key],
+        label: `${t.compare.nutrientShort[key]} (g ${basisLabel})`,
       })),
-    [t],
+    [basisLabel, t],
   );
 
   const series = useMemo(
     () =>
       entries.map(({ id, label, food }) => {
         const grams = generalNutrientGramsForBasis(food, basis);
+        const spokes = generalNutrientScoresForBasis(food, basis);
         return {
           id,
           label,
-          values: GENERAL_NUTRIENT_KEYS.map((key) => generalNutrientScoresForBasis(food, basis)[key]),
+          values: GENERAL_NUTRIENT_KEYS.map((key) => spokes[key]),
           tips: GENERAL_NUTRIENT_KEYS.map(
-            (key) => `${label} · ${t.compare.nutrientRows[key]}: ${formatAmount(grams[key])} g (${basisLabel})`,
+            (key) => `${label} · ${t.compare.nutrientShort[key]}: ${formatAmount(grams[key])} g ${basisLabel}`,
           ),
         };
       }),
@@ -56,7 +58,7 @@ export function NutrientRadar({ entries, title }: { entries: readonly NutrientRa
 
   return (
     <div className="nutrient-radar-wrap">
-      <RadarChart hideLegend key={basis} title={title || radarTitle} axes={axes} series={series} />
+      <RadarChart hideLegend hideTicks key={basis} title={radarTitle} axes={axes} series={series} />
       <div className="nutrient-radar-controls">
         <span className="muted">{t.compare.macroShareToggleLabel}</span>
         <label>
@@ -83,7 +85,7 @@ export function NutrientRadar({ entries, title }: { entries: readonly NutrientRa
         <>
           <ul className="radar-legend nutrient-macro-legend" aria-label={t.compare.macroLegendHeading}>
             {entries.map(({ id, label, food }, seriesIndex) => {
-              const shares = macroEnergyShares(food, basis);
+              const shares = macroEnergyShares(food);
               const proteinG = scaleGramsForBasis(food.proteinG, food, basis);
               const fatG = scaleGramsForBasis(food.fatG, food, basis);
               const carbG = scaleGramsForBasis(activeCarbsG(food), food, basis);
@@ -93,7 +95,7 @@ export function NutrientRadar({ entries, title }: { entries: readonly NutrientRa
                   <div className="nutrient-macro-legend-body">
                     <div className="nutrient-macro-legend-title">
                       <strong>{label}</strong>
-                      <MacroCompositionPie food={food} basis={basis} />
+                      <MacroCompositionPie food={food} />
                     </div>
                     <ul className="macro-share-lines">
                       <li>

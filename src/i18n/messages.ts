@@ -6,11 +6,9 @@ import type {
   DietaryPattern,
   FoodClass,
   Kingdom,
-  MicroNutrient,
   NovaGroup,
   Tier,
 } from "../scoring/types";
-import type { LocalizedText } from "./locale";
 
 export interface Messages {
   nav: {
@@ -207,10 +205,10 @@ export interface Messages {
     radarProteinLegendLine: (info: { aas: number; diaas: number; limiting: string }) => string;
     nutrientRadarHeading: string;
     nutrientRadarTitle: (basis: string) => string;
-    nutrientRadarHint: (basis: string) => string;
+    nutrientRadarHint: (info: { basis: string; protein: number; fat: number; sugar: number }) => string;
     macroShareToggleLabel: string;
     macroShareBasis: { g: string; kcal: string };
-    macroShareCaption: (info: { protein: string; fat: string; carb: string; basis: string }) => string;
+    macroShareCaption: (info: { protein: string; fat: string; carb: string }) => string;
     macroLegendHeading: string;
     macroLegend: { protein: string; fat: string; carb: string };
     macroLegendNote: string;
@@ -234,7 +232,6 @@ export interface Messages {
     };
     necessityImpactGroupHint: string;
     necessityImpactMethodLink: string;
-    microRowHints: Readonly<Record<MicroNutrient, LocalizedText>>;
     degradationRowHint: string;
     nutrientShort: Record<"protein" | "fat" | "sugar", string>;
     nutrientRows: {

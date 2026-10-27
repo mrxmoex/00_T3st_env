@@ -13,11 +13,12 @@ export function FoodHonorsList({ food, card }: { food: FoodRecord; card: ScoreCa
   return (
     <p className="honor-line">
       {honors.map((honor) => (
-        <span key={honor.key} className="honor-chip">
+        <span key={honor.key} className="honor-chip" title={honor.note}>
           {honor.stamp === "fibre" ? <span className="honor-stamp fibre-stamp" aria-hidden="true" /> : null}
           {honor.text}
         </span>
       ))}
+      <span className="honor-basis muted">{t.compare.macroShareBasis.g}</span>
     </p>
   );
 }
