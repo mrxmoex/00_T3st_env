@@ -194,7 +194,10 @@ table.matrix {
   width: 100%;
   font-size: 0.86rem;
 }
-table.matrix.compare-axes { min-width: 40rem; }
+table.matrix.compare-axes { min-width: 0; }
+table.matrix.compare-axes th,
+table.matrix.compare-axes td,
+table.matrix.compare-axes .nova-badge { white-space: normal; }
 
 .matrix th, .matrix td {
   padding: 0.55rem 0.55rem;
