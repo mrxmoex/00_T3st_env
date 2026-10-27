@@ -39,7 +39,7 @@ Not audited; Phase 1 does that. Suspects to check first:
 ## Found, not fixed
 
 - Too much text on Compare (C1) → Phase 2.
-- `BioactivesTable` may be unused; the `compare.bioactivesHint` key is unused → Phase 7.
+- `BioactivesTable` may be unused → Phase 7. (`compare.bioactivesHint` is in use again since `50ca639`.)
 
 ## Seeds for the next phase
 

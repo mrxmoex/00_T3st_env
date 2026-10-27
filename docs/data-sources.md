@@ -51,7 +51,7 @@ Each value keeps the database's own category, mapped to one vocabulary: lab anal
 | Evenepoel et al. 1998, J Nutr 128:1716–1722 | Human ileal digestibility of raw vs cooked egg (51.3 % vs 90.9 %) | Raw egg digestibility |
 | IOM / EFSA vitamin A | Food RAE: β-carotene /12, other provitamin A carotenoids /24 | Micro axis, `raeUg` |
 | FDA Daily Values (21 CFR 101.9, 2016) | Reference amounts for the 20 scored micronutrients | Micro axis density |
-| EFSA tolerable upper intake levels | Retinol, iodine, selenium, copper, zinc, vitamin D, calcium, B6 | Micro axis cost when 100 kcal exceed a day's limit |
+| EFSA tolerable upper intake levels | Retinol, iodine, selenium, copper, zinc, vitamin D, calcium, B6 | Marked (⚠) when 100 kcal exceed a day's limit; not scored |
 | Iron/zinc bioavailability meta-analyses | Fractional absorption midpoints (heme vs non-heme, phytate) | `absorbableIronMg`, `absorbableZincMg` |
 | IOM 2001 (iron, zinc DRIs); Weaver et al. 1999 | Absorption the Daily Value assumes: iron 18 %, zinc 41 %, calcium as milk 32.1 % | `DV_REFERENCE_ABSORPTION`: absorbed amounts in DV units |
 | Weaver, Proulx & Heaney 1999, Am J Clin Nutr 70:543S (Table 2) | Human calcium absorption by food (spinach 5.1 %, kale 49.3 %, broccoli 61.3 %, beans 22–27 %, tofu 31 %, milk 32.1 %) | `absorbableCalciumMg` |

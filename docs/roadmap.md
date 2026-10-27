@@ -234,7 +234,7 @@ Work through the Phase 2 list in the Phase 1 handoff on /compare. Keep every cla
 
 ### Phase 7: Hygiene
 
-**Intent.** Remove what earlier phases left unused: `compare.bioactivesHint`, `BioactivesTable` if nothing imports it, stale CSS.
+**Intent.** Remove what earlier phases left unused: `BioactivesTable` if nothing imports it, display helpers no longer called (`generalNutrientScores`), keys that no longer match their content (`compare.necessityImpact*`), stale CSS.
 
 **Done when.** A search shows no remaining references; tests and build pass.
 
