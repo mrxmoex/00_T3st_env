@@ -343,6 +343,138 @@ details.panel > summary {
 .nova-3 { background: #8a7a3d; color: #fff8d9; }
 .nova-4 { background: #7a3a32; color: #ffe8e4; }
 
+.nova-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.nova-supernova {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e8fff6 0%, #3d9a72 45%, #1a4d3a 100%);
+  box-shadow: 0 0 6px rgba(90, 220, 160, 0.55);
+  flex-shrink: 0;
+}
+.nova-marker.nova-2 .nova-supernova {
+  background: radial-gradient(circle at 35% 35%, #f3ffef 0%, #6a9a5a 45%, #2d4d28 100%);
+}
+.nova-marker.nova-3 .nova-supernova {
+  background: radial-gradient(circle at 35% 35%, #fff8d9 0%, #c4a832 45%, #6a5520 100%);
+  box-shadow: 0 0 5px rgba(220, 190, 80, 0.45);
+}
+.nova-marker.nova-4 .nova-supernova {
+  background: radial-gradient(circle at 35% 35%, #ffe8e4 0%, #c45a48 45%, #5a2218 100%);
+  box-shadow: 0 0 5px rgba(220, 100, 80, 0.45);
+}
+.nova-marker-text { color: var(--ink); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.axis-row-sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.3;
+  max-width: 14rem;
+}
+
+.carb-pie { display: inline-flex; vertical-align: middle; }
+.carb-pie svg { display: block; }
+.carb-seg-sugar { fill: hsl(32 78% 52%); }
+.carb-seg-starch { fill: hsl(210 55% 48%); }
+.carb-seg-passive { fill: hsl(128 42% 42%); }
+.carb-seg-quiet { fill: var(--bg-mute); stroke: var(--line); stroke-width: 1; }
+.carb-pie-hole { fill: var(--bg); }
+
+.macro-comp-pie { display: inline-flex; flex-shrink: 0; }
+.macro-seg-protein { fill: var(--series-1); }
+.macro-seg-fat { fill: var(--series-2); }
+.macro-seg-carb { fill: var(--series-3); }
+.macro-pie-hole { fill: var(--bg); }
+.nutrient-macro-legend { margin-top: 0.5rem; }
+.nutrient-radar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+}
+.nutrient-radar-controls label { display: inline-flex; align-items: center; gap: 0.25rem; }
+
+.compare-radar-hint { font-size: 0.82rem; max-width: 36rem; }
+.compare-radar-protein-legend {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.compare-radar-protein-legend li { margin: 0.15rem 0; }
+.compare-radar-protein-legend strong { color: var(--ink); font-weight: 600; }
+
+.honor-line { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; font-size: 0.88rem; }
+.honor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  background: var(--bg-mute);
+}
+.honor-stamp.fibre-stamp {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: hsl(128 50% 42%);
+  box-shadow: 0 0 4px hsl(128 50% 42% / 0.5);
+}
+
+.bioactives-profiles {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 720px) {
+  .bioactives-profiles { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+}
+.bioactives-profile h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+.bioactive-chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.bioactive-chip summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.88rem;
+}
+.bioactive-chip-name { font-weight: 600; }
+.bioactive-chip-amount { color: var(--muted); }
+.bioactive-chip-role { margin: 0.35rem 0 0; font-size: 0.82rem; color: var(--muted); }
+
 .role, .cell-note { display: block; font-size: 0.78rem; color: var(--muted); }
 .person-bar { margin: 0.6rem var(--pad) 0; }
 .person-fields { display: flex; flex-wrap: wrap; gap: 0.6rem 0.8rem; align-items: end; }

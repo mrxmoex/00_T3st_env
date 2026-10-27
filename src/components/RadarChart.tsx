@@ -64,12 +64,14 @@ export function RadarChart({
   series,
   title,
   center,
+  hideLegend = false,
 }: {
   axes: readonly RadarAxis[];
   series: readonly RadarSeries[];
   title: string;
   /** Energy or other absolute values drawn in the middle of the polygon. */
   center?: readonly RadarCenterLine[];
+  hideLegend?: boolean;
 }) {
   const titleId = useId();
   const count = axes.length;
@@ -149,7 +151,7 @@ export function RadarChart({
           </g>
         ) : null}
       </svg>
-      {series.length > 1 ? (
+      {!hideLegend && series.length > 1 ? (
         <figcaption>
           <ul className="radar-legend">
             {series.map((item, seriesIndex) => (
