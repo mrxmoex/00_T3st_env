@@ -21,6 +21,9 @@ const RADIUS = 112;
 const LABEL_RADIUS = RADIUS + 16;
 const RINGS = [25, 50, 75, 100] as const;
 const MAX = 100;
+const CENTER_LINE = 16;
+const CENTER_WIDTH = 186;
+const CENTER_PAD_Y = 8;
 
 function angleAt(index: number, count: number): number {
   return -Math.PI / 2 + (index * 2 * Math.PI) / count;
@@ -125,10 +128,10 @@ export function RadarChart({
           <g className="radar-center">
             <rect
               className="radar-center-plate"
-              x={CX - 84}
-              y={CY - (center.length * 15) / 2 - 8}
-              width={168}
-              height={center.length * 15 + 16}
+              x={CX - CENTER_WIDTH / 2}
+              y={CY - (center.length * CENTER_LINE) / 2 - CENTER_PAD_Y}
+              width={CENTER_WIDTH}
+              height={center.length * CENTER_LINE + CENTER_PAD_Y * 2}
               rx={8}
             />
             {center.map((line, index) => (
@@ -136,7 +139,7 @@ export function RadarChart({
                 key={`${line.seriesClass ?? "center"}-${index}`}
                 className={line.seriesClass ? `radar-center-text ${line.seriesClass}` : "radar-center-text"}
                 x={CX}
-                y={CY - ((center.length - 1) * 15) / 2 + index * 15}
+                y={CY - ((center.length - 1) * CENTER_LINE) / 2 + index * CENTER_LINE}
                 textAnchor="middle"
                 dominantBaseline="middle"
               >
