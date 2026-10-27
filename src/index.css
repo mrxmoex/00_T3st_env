@@ -420,7 +420,96 @@ details.panel > summary {
 .macro-seg-fat { fill: var(--series-2); }
 .macro-seg-carb { fill: var(--series-3); }
 .macro-pie-hole { fill: var(--bg); }
-.nutrient-macro-legend { margin-top: 0.5rem; }
+.nutrient-macro-legend {
+  margin-top: 0.5rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+}
+.nutrient-macro-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  text-align: left;
+}
+.nutrient-macro-legend-body { flex: 1; min-width: 0; }
+.nutrient-macro-legend-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.macro-share-lines {
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.macro-share-lines li { display: flex; align-items: center; gap: 0.35rem; margin: 0.1rem 0; }
+.macro-key-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.macro-key-dot.macro-seg-protein { background: var(--series-1); }
+.macro-key-dot.macro-seg-fat { background: var(--series-2); }
+.macro-key-dot.macro-seg-carb { background: var(--series-3); }
+.macro-legend-note { font-size: 0.78rem; margin: 0.35rem 0 0; }
+.nutrient-radar-hint { margin: 0.35rem 0 0; font-size: 0.84rem; }
+.mass-composition-block { margin-top: 0.75rem; }
+.mass-composition-heading { font-size: 0.82rem; font-weight: 600; margin: 0 0 0.35rem; color: var(--muted); }
+.mass-composition { display: flex; align-items: center; gap: 0.5rem; margin: 0.2rem 0; font-size: 0.78rem; }
+.mass-composition-label { min-width: 5.5rem; flex-shrink: 0; color: var(--ink); font-weight: 500; }
+.mass-composition-track {
+  display: flex;
+  flex: 1;
+  height: 0.55rem;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-mute);
+  min-width: 0;
+}
+.mass-seg-water { background: hsl(200 45% 62%); }
+.mass-seg-protein { background: var(--series-1); }
+.mass-seg-fat { background: var(--series-2); }
+.mass-seg-carbs { background: var(--series-3); }
+.mass-seg-other { background: hsl(280 18% 55%); }
+.mass-composition-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.mass-composition-key li { display: inline-flex; align-items: center; gap: 0.25rem; }
+.mass-key-swatch { width: 0.65rem; height: 0.55rem; border-radius: 2px; }
+.carb-type-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.carb-type-key li { display: inline-flex; align-items: center; gap: 0.35rem; }
+.carb-key-swatch { width: 0.65rem; height: 0.65rem; border-radius: 2px; }
+.carb-pie-none { color: var(--muted); font-size: 1.1rem; line-height: 1; padding: 0 0.15rem; }
+.carb-pie-quiet { min-width: 1.4rem; justify-content: center; }
+.matrix tr.group-hint-row td.group-hint-cell {
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 0.35rem 0.55rem 0.5rem;
+  background: var(--bg-mute);
+  border-bottom: 1px solid var(--line);
+}
+.heat-percent { min-width: 3.4rem; font-variant-numeric: tabular-nums; }
 .nutrient-radar-controls {
   display: flex;
   flex-wrap: wrap;
@@ -511,6 +600,7 @@ details.panel > summary {
 .radar { margin: 0; }
 .radar svg { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; }
 .radar-grid { fill: none; stroke: var(--line); }
+.radar-spoke { stroke: var(--line); stroke-width: 1; shape-rendering: geometricPrecision; }
 .radar-tick { fill: var(--muted); font-family: var(--font-mono); font-size: 9px; }
 .radar-label { fill: var(--muted); font-size: 12px; }
 .series-1 { --series: var(--series-1); }

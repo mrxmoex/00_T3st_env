@@ -195,9 +195,11 @@ export const de: Messages = {
       glucosinolates: (mg) => `Glucosinolates ${mg} mg`,
     },
     honorsEmpty: "Keine auffälligen Bioaktive oder Ballaststoffe auf dieser Karte.",
-    bioactivesHeading: "Bioaktive Stoffe (mg pro 100 g)",
+    bioactivesHeading: "Bioaktive Stoffe",
+    bioactivesSubtitle:
+      "Speicherung, täglicher Bedarf und Besonderheiten — nicht nur Milligramm pro 100 g. Mehrere davon bildet der Körper selbst; essenzielle Nährstoffe bestimmen weiterhin die Bewertung.",
     bioactivesHint:
-      "Aus veröffentlichten Analysen; nicht bewertet. Chip aufklappen für die Rolle. * Wert aus rohem Gewebe · n. n. untersucht, nicht nachgewiesen.",
+      "Index aus veröffentlichten Analysen (mg pro 100 g, wenn ein Wert existiert). Nicht bewertet. Chip aufklappen für Rolle und Quelle. * Wert aus rohem Gewebe · n. n. untersucht, nicht nachgewiesen.",
     bioactivesProfileLede: "Was drinsteckt — nur Stoffe mit Wert oder nachgewiesener Abwesenheit.",
     bioactivesProfileEmpty: "Im Bioaktiv-Index nichts Nennenswertes für dieses Lebensmittel.",
     notDetectedShort: "n. n.",
@@ -220,19 +222,47 @@ export const de: Messages = {
     },
     radarProteinLegendHeading: "Proteinqualität",
     radarProteinLegendLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
-    nutrientRadarHeading: "Grundnährstoffe",
-    nutrientRadarTitle: "Protein, Fett und Zucker pro 100 g",
-    nutrientRadarHint:
-      "Speichen = Gramm pro 100 g (voll bei 25 g Protein, 20 g Fett, 10 g Zucker). Donuts in der Legende = Energieanteil aus Protein, Fett und verfügbaren Kohlenhydraten.",
+    nutrientRadarHeading: "Grundnährstoffe & Dichte",
+    nutrientRadarTitle: (basis) => `Protein, Fett und Zucker (${basis})`,
+    nutrientRadarHint: (basis) =>
+      `Speichen beziehen sich auf ${basis} (voll bei 25 g Protein, 20 g Fett, 10 g Zucker). Umschalten aktualisiert Radar und Energie-Donuts. Balken unten: essbare Masse — Wasser plus Makros ergänzen sich zu 100 g.`,
     macroShareToggleLabel: "Energieanteil bezogen auf:",
     macroShareBasis: { g: "pro 100 g", kcal: "pro 100 kcal" },
     macroShareCaption: ({ protein, fat, carb, basis }) =>
       `${protein}% Protein · ${fat}% Fett · ${carb}% KH (${basis})`,
+    macroLegendHeading: "Makro-Energieanteil je Lebensmittel",
+    macroLegend: { protein: "Protein", fat: "Fett", carb: "Verfügbare KH" },
+    macroLegendNote:
+      "Prozent = Anteil an verwertbarer Energie (Protein 4, Fett 9, verfügbare KH 4 kcal/g). Ballaststoffe und resistente Stärke sind nicht im KH-Anteil.",
+    massCompositionHeading: "Zusammensetzung der essbaren Masse (pro 100 g)",
+    massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
+      `${food}: Wasser ${water} g, Protein ${protein} g, Fett ${fat} g, Kohlenhydrate gesamt ${carbs} g`,
+    massCompositionLegend: {
+      water: "Wasser",
+      protein: "Protein",
+      fat: "Fett",
+      carbs: "Kohlenhydrate",
+      other: "Sonstiges / nicht zugeordnet",
+    },
+    carbRowLabel: "Kohlenhydrat-Zusammensetzung & Qualität",
+    carbRowHint:
+      "Kreis = Anteil Zucker, verdauliche Stärke und passive KH (Ballaststoffe + RS). Farbe = Typ, kein 0–100-Rang.",
+    carbLegendHeading: "Farben der Kohlenhydrat-Kreise",
+    carbLegend: {
+      sugar: "Zucker (schnell)",
+      starch: "Verdauliche Stärke",
+      passive: "Ballaststoffe + resistente Stärke",
+      none: "Vernachlässigbare KH (× in Zellen)",
+    },
     carbPie: {
       quiet: "Vernachlässigbare Kohlenhydrate; metabolisch ruhig, kein Ballaststoffersatz.",
+      noneSymbol: "×",
       title: ({ sugar, starch, passive }) =>
         `KH-Zusammensetzung: Zucker ${sugar} g, Stärke ${starch} g, passiv (Ballaststoffe+RS) ${passive} g`,
     },
+    necessityImpactGroupHint:
+      "Herkunft, Rückstände, Verarbeitung, Lagerstabilität und was der Darm tatsächlich liefert — ein Notwendigkeits-/Wirkungsvektor neben der Mikronährstoffdichte.",
+    necessityImpactMethodLink: "Methode: Rückstände & Stabilität",
     degradationRowHint: "Garen, Lagerung, Verarbeitung vs. labile Vitamine — nicht jeder Nährstoff verblasst gleich.",
     nutrientShort: { protein: "Protein", fat: "Fett", sugar: "Zucker" },
     nutrientRows: {
@@ -250,12 +280,48 @@ export const de: Messages = {
       kind: "Art",
       general: "Grundnährstoffe",
       importance: "Wichtigkeit",
-      sourcing: "Herkunft",
-      digestibility: "Verdaulichkeit",
+      necessityImpact: "Notwendigkeit & Wirkung",
     },
     microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
     microHint:
       "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen gespeicherten Nährstoff, dessen Menge in 100 kcal die Höchstmenge für Erwachsene überschreitet. Die Häufigkeit zählt; die Markierung senkt den Wert nicht.",
+    microRowHints: {
+      iron: {
+        en: "Absorbable iron vs DV; phytate and heme context in the score.",
+        de: "Aufnehmbares Eisen vs. DV; Phytat- und Häm-Kontext in der Bewertung.",
+      },
+      zinc: {
+        en: "Absorbable zinc; plant phytate lowers uptake.",
+        de: "Aufnehmbares Zink; pflanzliches Phytat senkt die Aufnahme.",
+      },
+      vitaminA: { en: "RAE from retinol and carotenoids.", de: "RAE aus Retinol und Carotinoiden." },
+      vitaminB12: {
+        en: "Effective B12; algae analogues discounted when flagged.",
+        de: "Wirksames B12; Algen-Analoga abgewertet, wenn markiert.",
+      },
+      folate: { en: "Food folate before fortification.", de: "Lebensmittelfolat vor Anreicherung." },
+      vitaminC: { en: "Labile; cooking and storage matter.", de: "Labil; Kochen und Lagerung zählen." },
+      vitaminD: { en: "Few foods are rich sources.", de: "Wenige Lebensmittel sind reiche Quellen." },
+      vitaminE: { en: "Tocopherols in the fat matrix.", de: "Tocopherole in der Fettmatrix." },
+      vitaminK: { en: "K1 from plants; K2 from fermentation/animal.", de: "K1 aus Pflanzen; K2 aus Fermentation/Tier." },
+      thiamin: { en: "Water-soluble; leaches with cooking water.", de: "Wasserlöslich; geht ins Kochwasser über." },
+      riboflavin: { en: "Light-sensitive.", de: "Lichtempfindlich." },
+      niacin: { en: "Includes tryptophan conversion where relevant.", de: "Inkl. Tryptophan-Umwandlung wo relevant." },
+      vitaminB6: { en: "Storage moderate.", de: "Speicherung moderat." },
+      choline: {
+        en: "Partly made by the body; eggs and liver stand out.",
+        de: "Teils körpereigen; Eier und Leber stechen heraus.",
+      },
+      calcium: { en: "Absorbable calcium vs oxalate/phytate.", de: "Aufnehmbares Calcium vs. Oxalat/Phytat." },
+      magnesium: { en: "Widespread; density per kcal matters.", de: "Verbreitet; Dichte pro kcal zählt." },
+      potassium: { en: "High in plants; leaches when boiled.", de: "Hoch in Pflanzen; geht beim Kochen verloren." },
+      copper: { en: "Trace; excess flagged on limits page.", de: "Spur; Überschuss auf der Grenzwert-Seite." },
+      selenium: { en: "Soil-dependent; fish and Brazil nuts vary.", de: "Bodenabhängig; Fisch und Paranüsse variieren." },
+      iodine: {
+        en: "Seafood and iodised salt; not in all catalog foods.",
+        de: "Meeresfrüchte und jodiertes Salz; nicht in allen Katalog-Lebensmitteln.",
+      },
+    },
   },
   recommend: {
     title: "Empfehlungs-Engine",

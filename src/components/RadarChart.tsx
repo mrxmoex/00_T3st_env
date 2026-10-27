@@ -85,7 +85,17 @@ export function RadarChart({
         ))}
         {axes.map((axis, index) => {
           const [x, y] = pointAt(index, count, MAX);
-          return <line key={axis.short} className="radar-grid" x1={CX} y1={CY} x2={x} y2={y} />;
+          return (
+            <line
+              key={axis.short}
+              className="radar-spoke"
+              x1={CX}
+              y1={CY}
+              x2={x}
+              y2={y}
+              vectorEffect="non-scaling-stroke"
+            />
+          );
         })}
         {center === undefined
           ? RINGS.map((ring) => (

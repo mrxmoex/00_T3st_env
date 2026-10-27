@@ -1,6 +1,16 @@
 import type { Gap } from "../recommend/engine";
 import type { Activity, SweatLevel } from "../person/context";
-import type { AxisKey, ClassWeights, DietaryPattern, FoodClass, Kingdom, NovaGroup, Tier } from "../scoring/types";
+import type {
+  AxisKey,
+  ClassWeights,
+  DietaryPattern,
+  FoodClass,
+  Kingdom,
+  MicroNutrient,
+  NovaGroup,
+  Tier,
+} from "../scoring/types";
+import type { LocalizedText } from "./locale";
 
 export interface Messages {
   nav: {
@@ -177,6 +187,7 @@ export interface Messages {
     };
     honorsEmpty: string;
     bioactivesHeading: string;
+    bioactivesSubtitle: string;
     bioactivesHint: string;
     bioactivesProfileLede: string;
     bioactivesProfileEmpty: string;
@@ -195,15 +206,35 @@ export interface Messages {
     radarProteinLegendHeading: string;
     radarProteinLegendLine: (info: { aas: number; diaas: number; limiting: string }) => string;
     nutrientRadarHeading: string;
-    nutrientRadarTitle: string;
-    nutrientRadarHint: string;
+    nutrientRadarTitle: (basis: string) => string;
+    nutrientRadarHint: (basis: string) => string;
     macroShareToggleLabel: string;
     macroShareBasis: { g: string; kcal: string };
     macroShareCaption: (info: { protein: string; fat: string; carb: string; basis: string }) => string;
+    macroLegendHeading: string;
+    macroLegend: { protein: string; fat: string; carb: string };
+    macroLegendNote: string;
+    massCompositionHeading: string;
+    massCompositionTitle: (info: {
+      food: string;
+      water: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+    }) => string;
+    massCompositionLegend: { water: string; protein: string; fat: string; carbs: string; other: string };
+    carbRowLabel: string;
+    carbRowHint: string;
+    carbLegendHeading: string;
+    carbLegend: { sugar: string; starch: string; passive: string; none: string };
     carbPie: {
       quiet: string;
+      noneSymbol: string;
       title: (info: { sugar: string; starch: string; passive: string }) => string;
     };
+    necessityImpactGroupHint: string;
+    necessityImpactMethodLink: string;
+    microRowHints: Readonly<Record<MicroNutrient, LocalizedText>>;
     degradationRowHint: string;
     nutrientShort: Record<"protein" | "fat" | "sugar", string>;
     nutrientRows: {
@@ -221,8 +252,7 @@ export interface Messages {
       kind: string;
       general: string;
       importance: string;
-      sourcing: string;
-      digestibility: string;
+      necessityImpact: string;
     };
     microHeading: string;
     microHint: string;

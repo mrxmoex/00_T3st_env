@@ -57,9 +57,9 @@ export function CarbTypePie({ food, carb }: { food: FoodRecord; carb: CarbBreakd
         <span id={titleId} className="sr-only">
           {title}
         </span>
-        <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true">
-          <circle className="carb-seg-quiet" cx={cx} cy={cy} r={r - 4} />
-        </svg>
+        <span className="carb-pie-none mono" aria-hidden="true">
+          {t.compare.carbPie.noneSymbol}
+        </span>
       </span>
     );
   }

@@ -72,9 +72,12 @@ function BioactiveChip({
 export function BioactivesProfile({
   foods,
   showSources = false,
+  showProfileLede = false,
 }: {
   foods: readonly FoodRecord[];
   showSources?: boolean;
+  /** When false, the lede lives in the page header (compare / food). */
+  showProfileLede?: boolean;
 }) {
   const { t, locale } = useLocale();
 
@@ -92,7 +95,7 @@ export function BioactivesProfile({
         return (
           <article key={food.id} className="bioactives-profile card">
             {foods.length > 1 ? <h3>{foodName(food, locale)}</h3> : null}
-            <p className="muted">{t.compare.bioactivesProfileLede}</p>
+            {showProfileLede ? <p className="muted">{t.compare.bioactivesProfileLede}</p> : null}
             {entries.length === 0 ? (
               <p className="muted">{t.compare.bioactivesProfileEmpty}</p>
             ) : (

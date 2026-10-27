@@ -117,8 +117,10 @@ export function FoodPage() {
             </div>
             <div>
               <h2 className="radar-block-heading">{t.compare.nutrientRadarHeading}</h2>
-              <NutrientRadar title={t.compare.nutrientRadarTitle} entries={[{ id: food.id, label: name, food }]} />
-              <p className="muted">{t.compare.nutrientRadarHint}</p>
+              <NutrientRadar
+                title={t.compare.nutrientRadarTitle(t.compare.macroShareBasis.g)}
+                entries={[{ id: food.id, label: name, food }]}
+              />
             </div>
           </div>
         </div>
@@ -162,6 +164,8 @@ export function FoodPage() {
       </section>
       <section className="panel">
         <h2>{t.food.bioactivesHeading}</h2>
+        <p className="muted">{t.food.bioactivesLede}</p>
+        <p className="muted">{t.compare.bioactivesProfileLede}</p>
         <BioactivesProfile foods={[food]} showSources />
       </section>
       <BurdenPanel food={food} card={card} />
