@@ -183,19 +183,54 @@ export const en: Messages = {
     slot: (position) => `Food ${position}`,
     classTier: (classLabel, tier) => `${classLabel} · tier ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limiting ${limiting}`,
-    compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Creatine ${creatineMg === null ? "—" : `${creatineMg} mg`} · fibre ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
     novaLine: (group, label) => `NOVA ${group} · ${label}`,
+    honors: {
+      creatine: (mg) => `Creatine ${mg} mg`,
+      fibre: (g) => `Fibre ${g} g`,
+      b12: (ug) => `B12 ${ug} µg`,
+      taurine: (mg) => `Taurine ${mg} mg`,
+      glucosinolates: (mg) => `Glucosinolates ${mg} mg`,
+    },
+    honorsEmpty: "No standout bioactives or fibre on this card.",
     bioactivesHeading: "Bioactive compounds (mg per 100 g)",
     bioactivesHint:
-      "From published analyses; not scored. * raw-tissue value for a cooked food · — no analysis found · n.d. analysed, not detected · ∅ not expected in this kind of food.",
+      "From published analyses; not scored. Expand a chip for what the compound does. * raw-tissue value for a cooked food · n.d. analysed, not detected.",
+    bioactivesProfileLede: "What's inside — only compounds with a value or a measured absence.",
+    bioactivesProfileEmpty: "Nothing notable in the published bioactive index for this food.",
     notDetectedShort: "n.d.",
     radarHeading: "Axis profile",
     radarTitle: "Axis profile of the selected foods",
+    axisRadarHint:
+      "Protein is split into pattern (vs FAO 2013, capped at 1.0), ileal digestibility, and density (protein g / 20 g). DIAAS = AAS × digestibility and can exceed 1 — that is “plain available” quality, not capped like the pattern spoke.",
+    axisRadarMethodLink: "Method: EAA axis",
+    radarProteinShort: { pattern: "Pat.", digest: "Dig.", density: "Dens." },
+    radarProteinLabels: {
+      pattern: "Protein pattern (AAS, capped)",
+      digest: "Ileal digestibility",
+      density: "Protein density",
+    },
+    radarProteinTips: {
+      pattern: ({ food, aas, diaas }) => `${food}: AAS ${aas} (min ratio vs FAO 2013); DIAAS ${diaas}`,
+      digest: ({ food, digestibility, diaas }) =>
+        `${food}: digestibility ${digestibility.toFixed(2)}; DIAAS ${diaas} = AAS × digestibility`,
+      density: ({ food, proteinG }) => `${food}: ${proteinG} g protein / 100 g (full spoke at 20 g)`,
+    },
+    radarProteinLegendHeading: "Protein quality readout",
+    radarProteinLegendLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limiting ${limiting}`,
     nutrientRadarHeading: "General nutrients",
     nutrientRadarTitle: "Protein, fat, and sugar per 100 g",
     nutrientRadarHint:
-      "Spokes are grams per 100 g. Full length is 25 g protein, 20 g fat, and 10 g sugar. The centre is energy per 100 g, in kcal and kJ. These lengths are not score axes.",
+      "Spokes are grams per 100 g (full at 25 g protein, 20 g fat, 10 g sugar). Donuts in the legend are % energy from protein, fat, and available carbs.",
+    macroShareToggleLabel: "Energy share basis:",
+    macroShareBasis: { g: "per 100 g", kcal: "per 100 kcal" },
+    macroShareCaption: ({ protein, fat, carb, basis }) =>
+      `${protein}% protein · ${fat}% fat · ${carb}% carbs (${basis})`,
+    carbPie: {
+      quiet: "Negligible carbohydrate; metabolically quiet, not a fibre source.",
+      title: ({ sugar, starch, passive }) =>
+        `Carb composition: sugars ${sugar} g, starch ${starch} g, passive (fibre+RS) ${passive} g`,
+    },
+    degradationRowHint: "Cooking, storage, and processing vs labile vitamins — not every nutrient fades equally.",
     nutrientShort: { protein: "Protein", fat: "Fat", sugar: "Sugar" },
     nutrientRows: {
       protein: "Protein (g / 100 g)",
@@ -428,7 +463,7 @@ export const en: Messages = {
     micro: "Micros + bioavailability",
     fibre: "Fibre / phytochemicals",
     residue: "Residue / contaminants",
-    degradation: "Stability / nutrient loss",
+    degradation: "Nutrient keeping power",
     composite: "Composite",
   },
   axesShort: {
@@ -438,7 +473,7 @@ export const en: Messages = {
     micro: "Micro",
     fibre: "Fibre",
     residue: "Residue",
-    degradation: "Stable",
+    degradation: "Keep",
     composite: "Σ",
   },
   patterns: {

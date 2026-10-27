@@ -167,16 +167,44 @@ export interface Messages {
     slot: (position: number) => string;
     classTier: (classLabel: string, tier: Tier) => string;
     eaaLine: (info: { aas: number; diaas: number; limiting: string }) => string;
-    compoundLine: (info: { creatineMg: number | null; fibreG: number; b12Ug: number | null }) => string;
     novaLine: (group: NovaGroup, label: string) => string;
+    honors: {
+      creatine: (mg: string) => string;
+      fibre: (g: string) => string;
+      b12: (ug: string) => string;
+      taurine: (mg: string) => string;
+      glucosinolates: (mg: string) => string;
+    };
+    honorsEmpty: string;
     bioactivesHeading: string;
     bioactivesHint: string;
+    bioactivesProfileLede: string;
+    bioactivesProfileEmpty: string;
     notDetectedShort: string;
     radarHeading: string;
     radarTitle: string;
+    axisRadarHint: string;
+    axisRadarMethodLink: string;
+    radarProteinShort: { pattern: string; digest: string; density: string };
+    radarProteinLabels: { pattern: string; digest: string; density: string };
+    radarProteinTips: {
+      pattern: (info: { food: string; aas: number; diaas: number }) => string;
+      digest: (info: { food: string; digestibility: number; diaas: number }) => string;
+      density: (info: { food: string; proteinG: number }) => string;
+    };
+    radarProteinLegendHeading: string;
+    radarProteinLegendLine: (info: { aas: number; diaas: number; limiting: string }) => string;
     nutrientRadarHeading: string;
     nutrientRadarTitle: string;
     nutrientRadarHint: string;
+    macroShareToggleLabel: string;
+    macroShareBasis: { g: string; kcal: string };
+    macroShareCaption: (info: { protein: string; fat: string; carb: string; basis: string }) => string;
+    carbPie: {
+      quiet: string;
+      title: (info: { sugar: string; starch: string; passive: string }) => string;
+    };
+    degradationRowHint: string;
     nutrientShort: Record<"protein" | "fat" | "sugar", string>;
     nutrientRows: {
       protein: string;

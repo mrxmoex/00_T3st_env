@@ -186,19 +186,54 @@ export const de: Messages = {
     slot: (position) => `Lebensmittel ${position}`,
     classTier: (classLabel, tier) => `${classLabel} · Stufe ${tier}`,
     eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
-    compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Kreatin ${creatineMg === null ? "—" : `${creatineMg} mg`} · Ballaststoffe ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
     novaLine: (group, label) => `NOVA ${group} · ${label}`,
+    honors: {
+      creatine: (mg) => `Kreatin ${mg} mg`,
+      fibre: (g) => `Ballaststoffe ${g} g`,
+      b12: (ug) => `B12 ${ug} µg`,
+      taurine: (mg) => `Taurin ${mg} mg`,
+      glucosinolates: (mg) => `Glucosinolates ${mg} mg`,
+    },
+    honorsEmpty: "Keine auffälligen Bioaktive oder Ballaststoffe auf dieser Karte.",
     bioactivesHeading: "Bioaktive Stoffe (mg pro 100 g)",
     bioactivesHint:
-      "Aus veröffentlichten Analysen; nicht bewertet. * Wert aus rohem Gewebe bei gegartem Lebensmittel · — keine Analyse gefunden · n. n. untersucht, nicht nachgewiesen · ∅ in dieser Art Lebensmittel nicht zu erwarten.",
+      "Aus veröffentlichten Analysen; nicht bewertet. Chip aufklappen für die Rolle. * Wert aus rohem Gewebe · n. n. untersucht, nicht nachgewiesen.",
+    bioactivesProfileLede: "Was drinsteckt — nur Stoffe mit Wert oder nachgewiesener Abwesenheit.",
+    bioactivesProfileEmpty: "Im Bioaktiv-Index nichts Nennenswertes für dieses Lebensmittel.",
     notDetectedShort: "n. n.",
     radarHeading: "Achsenprofil",
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
+    axisRadarHint:
+      "Protein ist aufgeteilt in Muster (gegen FAO 2013, gedeckelt bei 1,0), ileale Verdaulichkeit und Dichte (Protein g / 20 g). DIAAS = AAS × Verdaulichkeit und kann über 1 liegen — das ist verfügbare Qualität, nicht wie die Muster-Speiche gedeckelt.",
+    axisRadarMethodLink: "Methode: EAA-Achse",
+    radarProteinShort: { pattern: "Muster", digest: "Verd.", density: "Dichte" },
+    radarProteinLabels: {
+      pattern: "Proteinmuster (AAS, gedeckelt)",
+      digest: "Ileale Verdaulichkeit",
+      density: "Proteindichte",
+    },
+    radarProteinTips: {
+      pattern: ({ food, aas, diaas }) => `${food}: AAS ${aas} (Min.-Verhältnis FAO 2013); DIAAS ${diaas}`,
+      digest: ({ food, digestibility, diaas }) =>
+        `${food}: Verdaulichkeit ${digestibility.toFixed(2)}; DIAAS ${diaas} = AAS × Verdaulichkeit`,
+      density: ({ food, proteinG }) => `${food}: ${proteinG} g Protein / 100 g (volle Speiche bei 20 g)`,
+    },
+    radarProteinLegendHeading: "Proteinqualität",
+    radarProteinLegendLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limitierend ${limiting}`,
     nutrientRadarHeading: "Grundnährstoffe",
     nutrientRadarTitle: "Protein, Fett und Zucker pro 100 g",
     nutrientRadarHint:
-      "Die Speichen sind Gramm pro 100 g. Volle Länge ist 25 g Protein, 20 g Fett und 10 g Zucker. In der Mitte steht die Energie pro 100 g, in kcal und kJ. Diese Längen sind keine Bewertungsachsen.",
+      "Speichen = Gramm pro 100 g (voll bei 25 g Protein, 20 g Fett, 10 g Zucker). Donuts in der Legende = Energieanteil aus Protein, Fett und verfügbaren Kohlenhydraten.",
+    macroShareToggleLabel: "Energieanteil bezogen auf:",
+    macroShareBasis: { g: "pro 100 g", kcal: "pro 100 kcal" },
+    macroShareCaption: ({ protein, fat, carb, basis }) =>
+      `${protein}% Protein · ${fat}% Fett · ${carb}% KH (${basis})`,
+    carbPie: {
+      quiet: "Vernachlässigbare Kohlenhydrate; metabolisch ruhig, kein Ballaststoffersatz.",
+      title: ({ sugar, starch, passive }) =>
+        `KH-Zusammensetzung: Zucker ${sugar} g, Stärke ${starch} g, passiv (Ballaststoffe+RS) ${passive} g`,
+    },
+    degradationRowHint: "Garen, Lagerung, Verarbeitung vs. labile Vitamine — nicht jeder Nährstoff verblasst gleich.",
     nutrientShort: { protein: "Protein", fat: "Fett", sugar: "Zucker" },
     nutrientRows: {
       protein: "Protein (g / 100 g)",
@@ -432,7 +467,7 @@ export const de: Messages = {
     micro: "Mikros + Bioverfügbarkeit",
     fibre: "Ballaststoffe / Pflanzenstoffe",
     residue: "Rückstände / Kontaminanten",
-    degradation: "Stabilität / Nährstoffverlust",
+    degradation: "Nährstoff-Haltbarkeit",
     composite: "Gesamtwert",
   },
   axesShort: {
@@ -442,7 +477,7 @@ export const de: Messages = {
     micro: "Mikro",
     fibre: "Ballast",
     residue: "Rückst.",
-    degradation: "Stabil",
+    degradation: "Haltb.",
     composite: "Σ",
   },
   patterns: {

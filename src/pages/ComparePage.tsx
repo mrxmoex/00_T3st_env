@@ -1,14 +1,16 @@
 import { Fragment, useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { AxisRadar } from "../components/AxisRadar";
+import { CarbTypePie } from "../components/CarbTypePie";
+import { CompareAxisRadar } from "../components/CompareAxisRadar";
+import { CompareBioactivesPanel } from "../components/CompareBioactivesPanel";
+import { NovaMarker } from "../components/NovaMarker";
 import { formatAmount } from "../components/format";
 import { HeatCell } from "../components/HeatCell";
 import { axisValue } from "../components/MatrixTable";
 import { NutrientRadar } from "../components/NutrientRadar";
-import { BIOACTIVE_COMPOUNDS, bioactiveMg, bioactiveValue, type BioactiveValue } from "../data/bioactives";
 import { FOODS, foodsByClass } from "../data/catalog";
 import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
-import { BIOACTIVE_LABELS, MICRO_LABELS, NOVA_LABELS } from "../i18n/labels";
+import { MICRO_LABELS, NOVA_LABELS } from "../i18n/labels";
 import { foodName, type LocalizedText } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import type { Messages } from "../i18n/messages";
@@ -24,27 +26,11 @@ import {
   SOURCING_AXES,
   type CompareGroup,
 } from "./compareAxisGroups";
+import { foodHonors } from "./foodHonors";
 
 type ComparedFood = { food: FoodRecord; card: ScoreCard };
 
 const cards = scoreCatalog(FOODS);
-
-function bioactiveCell(value: BioactiveValue, notDetected: string): string {
-  switch (value.status) {
-    case "value":
-      return `${formatAmount(value.mgPer100g)}${value.rawValueForPreparedFood ? "*" : ""}`;
-    case "notDetected":
-      return notDetected;
-    case "notExpected":
-      return "∅";
-    case "noData":
-      return "—";
-    default: {
-      const _exhaustive: never = value;
-      return _exhaustive;
-    }
-  }
-}
 
 function GroupLabel({ label, span }: { label: string; span: number }) {
   return (
@@ -56,13 +42,29 @@ function GroupLabel({ label, span }: { label: string; span: number }) {
   );
 }
 
+function axisLabelCell(axis: AxisKey, t: Messages): ReactNode {
+  if (axis === "degradation") {
+    return (
+      <>
+        {t.axes.degradation}
+        <span className="axis-row-sub">{t.compare.degradationRowHint}</span>
+      </>
+    );
+  }
+  return t.axes[axis];
+}
+
 function scoreRows(axes: readonly AxisKey[], selected: readonly ComparedFood[], t: Messages): ReactNode[] {
   return axes.map((axis) => (
     <tr key={axis}>
-      <td className="sticky">{t.axes[axis]}</td>
+      <td className="sticky">{axisLabelCell(axis, t)}</td>
       {selected.map(({ food, card }, index) => (
         <td key={`${index}-${food.id}`}>
-          <HeatCell score={axisValue(card, axis)} />
+          {axis === "carb" ? (
+            <CarbTypePie food={food} carb={card.carb} />
+          ) : (
+            <HeatCell score={axisValue(card, axis)} />
+          )}
         </td>
       ))}
     </tr>
@@ -135,9 +137,10 @@ function axisGroup(
             <td className="sticky">{t.compare.nutrientRows.nova}</td>
             {selected.map(({ food }, index) => (
               <td key={`${index}-${food.id}`}>
-                <span className={`nova-badge nova-${food.processing.nova}`}>
-                  {food.processing.nova} · {localize(NOVA_LABELS[food.processing.nova])}
-                </span>
+                <NovaMarker
+                  group={food.processing.nova}
+                  fullLabel={t.compare.novaLine(food.processing.nova, localize(NOVA_LABELS[food.processing.nova]))}
+                />
               </td>
             ))}
           </tr>
@@ -242,9 +245,10 @@ export function ComparePage() {
             </h2>
             <p className="muted">{t.compare.classTier(t.classes[food.class], card.tier)}</p>
             <p>
-              <span className={`nova-badge nova-${food.processing.nova}`}>
-                {t.compare.novaLine(food.processing.nova, localize(NOVA_LABELS[food.processing.nova]))}
-              </span>
+              <NovaMarker
+                group={food.processing.nova}
+                fullLabel={t.compare.novaLine(food.processing.nova, localize(NOVA_LABELS[food.processing.nova]))}
+              />
             </p>
             <p>
               {t.compare.eaaLine({
@@ -253,13 +257,23 @@ export function ComparePage() {
                 limiting: card.eaa.limitingAa.toUpperCase(),
               })}
             </p>
-            <p>
-              {t.compare.compoundLine({
-                creatineMg: bioactiveMg(food, "creatine"),
-                fibreG: food.carbs.fibre,
-                b12Ug: card.micro.effectiveB12Ug,
-              })}
-            </p>
+            {(() => {
+              const honors = foodHonors(food, card, t, locale);
+              return honors.length > 0 ? (
+                <p className="honor-line">
+                  {honors.map((honor) => (
+                    <span key={honor.key} className="honor-chip">
+                      {honor.stamp === "fibre" ? (
+                        <span className="honor-stamp fibre-stamp" aria-hidden="true" />
+                      ) : null}
+                      {honor.text}
+                    </span>
+                  ))}
+                </p>
+              ) : (
+                <p className="muted honor-line">{t.compare.honorsEmpty}</p>
+              );
+            })()}
           </article>
         ))}
       </div>
@@ -267,11 +281,12 @@ export function ComparePage() {
         <div className="radar-pair">
           <div>
             <h2>{t.compare.radarHeading}</h2>
-            <AxisRadar
+            <CompareAxisRadar
               title={t.compare.radarTitle}
               entries={selected.map(({ food, card }, index) => ({
                 id: `${index}-${food.id}`,
                 label: foodName(food, locale),
+                food,
                 card,
               }))}
             />
@@ -345,30 +360,7 @@ export function ComparePage() {
       <section className="panel">
         <h2>{t.compare.bioactivesHeading}</h2>
         <p className="muted">{t.compare.bioactivesHint}</p>
-        <div className="matrix-wrap">
-          <table className="matrix">
-            <thead>
-              <tr>
-                <th className="sticky">{t.food.bioactiveColumns.compound}</th>
-                {selected.map(({ food }, index) => (
-                  <th key={`${index}-${food.id}`}>{foodName(food, locale)}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {BIOACTIVE_COMPOUNDS.map((compound) => (
-                <tr key={compound}>
-                  <td className="sticky">{localize(BIOACTIVE_LABELS[compound])}</td>
-                  {selected.map(({ food }, index) => (
-                    <td key={`${index}-${food.id}`} className="mono">
-                      {bioactiveCell(bioactiveValue(food, compound), t.compare.notDetectedShort)}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <CompareBioactivesPanel foods={selected.map(({ food }) => food)} />
       </section>
     </main>
   );
