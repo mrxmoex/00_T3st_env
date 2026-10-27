@@ -9,7 +9,7 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 | Branch | `cursor/compare-nutrient-groups-b80f` |
 | Pull request | [#15](https://github.com/mrxmoex/00_T3st_env/pull/15), open until Phase 8 |
 | Last confirmed phase | 0 (baseline) |
-| Active phase | 1, in progress |
+| Active phase | 1, awaiting review (`docs/handoffs/phase-1.md`) |
 
 At the end of a phase, set *Active phase* to "N, awaiting review". Only the user's go moves *Last confirmed phase*.
 
