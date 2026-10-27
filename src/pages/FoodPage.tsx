@@ -1,29 +1,48 @@
 import { Link, useParams } from "react-router-dom";
-import { AxisRadar } from "../components/AxisRadar";
-import { BioactivesTable } from "../components/BioactivesTable";
+import { BioactivesProfile } from "../components/BioactivesProfile";
 import { BurdenPanel } from "../components/BurdenPanel";
-import { axisValue } from "../components/MatrixTable";
-import { NutrientTable } from "../components/NutrientTable";
-import { PreparationPanel } from "../components/PreparationPanel";
+import { CarbTypePie } from "../components/CarbTypePie";
+import { CompareAxisRadar } from "../components/CompareAxisRadar";
 import { DigestionPanel } from "../components/DigestionPanel";
 import { ExposurePanel } from "../components/ExposurePanel";
+import { FoodHonorsList } from "../components/FoodHonorsList";
+import { NovaMarker } from "../components/NovaMarker";
+import { NutrientRadar } from "../components/NutrientRadar";
+import { NutrientTable } from "../components/NutrientTable";
+import { PreparationPanel } from "../components/PreparationPanel";
 import { ContextPanels } from "../components/SourcingPanel";
 import { SourcePanel } from "../components/SourcePanel";
+import { axisValue } from "../components/MatrixTable";
 import { FOODS, foodById } from "../data/catalog";
 import { CLASS_WEIGHTS } from "../data/classWeights";
 import { NOVA_LABELS, PREPARATION_LABELS } from "../i18n/labels";
 import { altFoodName, foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { scoreCatalog } from "../scoring/scoreFood";
-import { BENEFIT_AXES, BURDEN_AXES, kingdomOf, type AxisKey, type ScoreCard } from "../scoring/types";
+import { BENEFIT_AXES, BURDEN_AXES, kingdomOf, type AxisKey, type FoodRecord, type ScoreCard } from "../scoring/types";
 
 const cards = scoreCatalog(FOODS);
 
-function AxisBar({ label, card, axis, className }: { label: string; card: ScoreCard; axis: AxisKey; className?: string }) {
+function AxisBar({
+  label,
+  card,
+  axis,
+  food,
+  className,
+}: {
+  label: string;
+  card: ScoreCard;
+  axis: AxisKey;
+  food: FoodRecord;
+  className?: string;
+}) {
   const score = axisValue(card, axis);
   return (
     <div className={className ? `bar-row ${className}` : "bar-row"}>
-      <span>{label}</span>
+      <span className="bar-row-label">
+        {label}
+        {axis === "carb" ? <CarbTypePie food={food} carb={card.carb} /> : null}
+      </span>
       <div className="bar">
         <span style={{ width: `${score}%` }} />
       </div>
@@ -51,6 +70,7 @@ export function FoodPage() {
 
   const name = foodName(food, locale);
   const classLabel = t.classes[food.class];
+  const novaFull = t.compare.novaLine(food.processing.nova, localize(NOVA_LABELS[food.processing.nova]));
 
   return (
     <main>
@@ -69,23 +89,39 @@ export function FoodPage() {
           size: card.classSize,
         })}
       </p>
+      <p className="food-meta">
+        <NovaMarker group={food.processing.nova} fullLabel={novaFull} />
+        <span className="muted">{t.food.burden.novaMeaning[food.processing.nova]}</span>
+      </p>
+      <FoodHonorsList food={food} card={card} />
       <div className="food-overview">
         <div className="axis-bars">
           <p className="bars-heading">{t.food.benefitsHeading}</p>
           {BENEFIT_AXES.map((axis) => (
-            <AxisBar key={axis} label={t.axes[axis]} card={card} axis={axis} />
+            <AxisBar key={axis} label={t.axes[axis]} card={card} axis={axis} food={food} />
           ))}
           <p className="bars-heading">{t.food.burdensHeading}</p>
           {BURDEN_AXES.map((axis) => (
-            <AxisBar key={axis} label={t.axes[axis]} card={card} axis={axis} className="burden" />
+            <AxisBar key={axis} label={t.axes[axis]} card={card} axis={axis} food={food} className="burden" />
           ))}
-          <AxisBar label={t.axes.composite} card={card} axis="composite" className="composite" />
-          <p>
-            <span className={`nova-badge nova-${food.processing.nova}`}>NOVA {food.processing.nova}</span>{" "}
-            <span className="muted">{localize(NOVA_LABELS[food.processing.nova])}</span>
-          </p>
+          <AxisBar label={t.axes.composite} card={card} axis="composite" food={food} className="composite" />
         </div>
-        <AxisRadar title={t.food.radarTitle(name)} entries={[{ id: food.id, label: name, card }]} />
+        <div className="food-charts">
+          <div className="radar-pair food-radar-pair">
+            <div>
+              <h2 className="radar-block-heading">{t.compare.radarHeading}</h2>
+              <CompareAxisRadar
+                title={t.food.radarTitle(name)}
+                entries={[{ id: food.id, label: name, food, card }]}
+              />
+            </div>
+            <div>
+              <h2 className="radar-block-heading">{t.compare.nutrientRadarHeading}</h2>
+              <NutrientRadar title={t.compare.nutrientRadarTitle} entries={[{ id: food.id, label: name, food }]} />
+              <p className="muted">{t.compare.nutrientRadarHint}</p>
+            </div>
+          </div>
+        </div>
       </div>
       <PreparationPanel food={food} cards={cards} />
       <section className="grid-2">
@@ -124,7 +160,10 @@ export function FoodPage() {
           </p>
         </article>
       </section>
-      <BioactivesTable food={food} />
+      <section className="panel">
+        <h2>{t.food.bioactivesHeading}</h2>
+        <BioactivesProfile foods={[food]} showSources />
+      </section>
       <BurdenPanel food={food} card={card} />
       <ExposurePanel food={food} />
       <ContextPanels food={food} />
