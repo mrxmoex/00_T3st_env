@@ -67,9 +67,27 @@ Avoid until something computes or cites it: "necessity" or "need" (no Daily Valu
 - A compound value shows its source when its chip is expanded, on every page that shows it.
 - A hint that names a method links to `/method`.
 
+## 8. Hint hierarchy
+
+Each piece of explanation lives at the lowest level that still keeps the page true.
+
+| Level | Where | Holds | Limit |
+|---|---|---|---|
+| 0 Label | Headings, row and axis labels | Name, unit, basis | A few words |
+| 1 Hint | One line per block (panel, chart, table) | What a reader needs to read the block correctly: basis, scale, what is left out | Two short sentences |
+| 2 Key | Beside the marks it explains | Colours and marks (`*`, n.d., ×, ⚠) | Shown only while its mark is on screen |
+| 3 Detail | `title` tooltip, or an expandable chip or row | Constants, formulas, caveats, what was measured, the source | Never the only home of something needed to avoid a misreading; touch screens have no hover |
+| 4 Method | `/method` | Derivations | Linked from the block's hint or group header |
+
+- **One fact, one place per screen.** If a fact shows twice, keep the copy nearest to what it explains. On Compare the cards carry AAS and DIAAS, so the axis radar does not repeat them.
+- **A key sits next to its marks.** The carbohydrate key lives in the carbohydrate row.
+- **Explain a mark where and when it appears.** The ⚠ sentence shows only when a ⚠ cell does; the `*` and n.d. key only when a chip uses them.
+- **Moving text down a level keeps it true.** Record each move in the phase's truth ledger.
+
 ## Checklist for new copy
 
 1. Backing named (section 1) and added to the phase's truth ledger.
 2. Basis stated; numbers interpolated from constants.
 3. Colour and marks used as in section 3.
 4. EN and DE say the same thing.
+5. Placed at the lowest level of section 8 that keeps it true; no fact twice on one screen.
