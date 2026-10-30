@@ -29,6 +29,14 @@ python3 scripts/data/build_snapshot.py
 npm test
 ```
 
+Find codes for a new food in the cached archives (run the build once first):
+
+```bash
+cd scripts/data
+python3 find_food.py Apfel roh          # BLS: code, names, macros, whether all amino acids are reported
+python3 find_food.py --fdc apples raw   # USDA SR Legacy: FDC id and description
+```
+
 The archive hashes are pinned in the script. If an upstream archive changes, the script stops instead of silently importing different numbers.
 
 ## Merge and gap rules
@@ -38,6 +46,8 @@ The archive hashes are pinned in the script. If an upstream archive changes, the
 3. Missing stays missing. A value no database reports is `null`, shown as —, excluded from the score, and named in the food's flags.
 4. An essential amino acid of exactly 0 in a food with at least 0.5 g protein is a data defect (BLS pattern calculations for zucchini report all zeros) and is treated as missing.
 5. Amino acids still missing are filled from the pattern of a named similar food (`aaPattern`), scaled to this food's protein. This is the method BLS documents as *Musterberechnung*; the filled values carry the provenance `pattern`.
+6. Starch comes from the same entry as available carbohydrate. When that entry lists no starch, starch is available carbohydrate minus sugars. Another database's starch is derived from a different total and could push sugars plus starch past it (it did for dried shiitake: 61.7 g on top of 21.7 g).
+7. A value that cannot be true for the tissue is not used. Two foods take USDA as their primary entry and the manifest says why: pistachios (BLS: 5.6 mg potassium) and pumpkin seeds (BLS: folate exactly 0 by formula).
 
 ## Provenance categories
 

@@ -29043,6 +29043,12782 @@
      "BLS"
     ]
    }
+  },
+  "apple_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F110100",
+     "name": {
+      "de": "Apfel roh",
+      "en": "Apple raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "171688",
+     "name": {
+      "en": "Apples, raw, with skin (Includes foods for USDA's Food Distribution Program)"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     58.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     83.554,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     0.424,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     0.5,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     11.7,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.275,
+     "aggregation",
+     "BLS"
+    ],
+    "sugars": [
+     10.487,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.6,
+     "database",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.006,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.01,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.016,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.015,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.003,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.001,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.009,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.005,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.008,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.002,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.012,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.201,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.022,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.244,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.044,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.2005,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     23.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.172,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     5.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.011,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.1,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.05761,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     5.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     10.16,
+     "analysis",
+     "BLS"
+    ],
+    "choline": [
+     3.4,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     1.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     111.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     5.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     5.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     10.53,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.1,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.03,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.035,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     2.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "pear_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F130100",
+     "name": {
+      "de": "Birne roh",
+      "en": "Pear raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169118",
+     "name": {
+      "en": "Pears, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     58.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     83.608,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     0.3,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     0.29,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     13.16,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.8,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     10.08,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.006,
+     "pattern",
+     "BLS"
+    ],
+    "ile": [
+     0.007,
+     "pattern",
+     "BLS"
+    ],
+    "leu": [
+     0.016,
+     "pattern",
+     "BLS"
+    ],
+    "lys": [
+     0.014,
+     "pattern",
+     "BLS"
+    ],
+    "met": [
+     0.001,
+     "pattern",
+     "BLS"
+    ],
+    "cys": [
+     0.001,
+     "pattern",
+     "BLS"
+    ],
+    "phe": [
+     0.008,
+     "pattern",
+     "BLS"
+    ],
+    "tyr": [
+     0.001,
+     "pattern",
+     "BLS"
+    ],
+    "thr": [
+     0.007,
+     "pattern",
+     "BLS"
+    ],
+    "trp": [
+     0.001,
+     "pattern",
+     "BLS"
+    ],
+    "val": [
+     0.013,
+     "pattern",
+     "BLS"
+    ],
+    "sfa": [
+     0.0388,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0646,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.127,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0186,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.108,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     10.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.21,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     4.525,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.024,
+     "aggregation",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.2,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.03292,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     4.6,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     5.1,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.778,
+     "database",
+     "BLS"
+    ],
+    "potassium": [
+     124.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     8.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     6.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     11.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.1,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.11,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.079,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     1.0,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     0.1,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     4.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "banana_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F503100",
+     "name": {
+      "de": "Banane roh",
+      "en": "Banana raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "173944",
+     "name": {
+      "en": "Bananas, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     79.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     74.4,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     1.319,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     0.4,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     15.89,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.0,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     13.89,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     2.0,
+     "literature",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.077,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.038,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.085,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.057,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.009,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.002,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.034,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.021,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.038,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.018,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.057,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0729,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.023,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.0906,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.04921,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.00235,
+     "literature",
+     "BLS"
+    ],
+    "la": [
+     0.03833,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     32.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.665,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.3,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.134,
+     "aggregation",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.7,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.25513,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     14.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     11.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     9.8,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.52,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     334.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     6.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     28.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     22.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.4,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.18,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.104,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     3.0,
+     "literature",
+     "BLS"
+    ],
+    "selenium": [
+     1.0,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     32.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "orange_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F603100",
+     "name": {
+      "de": "Orange roh",
+      "en": "Orange raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169097",
+     "name": {
+      "en": "Oranges, raw, all commercial varieties"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     49.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     87.0,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     1.0,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.2,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     8.85,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.2,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     8.85,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.012,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.02,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.032,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.039,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.008,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.003,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.02,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.013,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.02,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.007,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.033,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0278,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0554,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.07575,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.025375,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.050375,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     29.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     8.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.725,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.1,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.22,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.03,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.5,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.04115,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     34.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     62.354,
+     "literature",
+     "BLS"
+    ],
+    "choline": [
+     8.4,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     2.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     156.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     39.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     11.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     20.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.181,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.08,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.046,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     1.0,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     0.5,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     134.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "kiwi_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F514100",
+     "name": {
+      "de": "Kiwi roh",
+      "en": "Kiwi fruit raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "168153",
+     "name": {
+      "en": "Kiwifruit, green, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     61.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     84.9,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     0.9,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.5,
+     "aggregation",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     10.1,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     3.9,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     10.1,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "literature",
+     "BLS"
+    ],
+    "his": [
+     0.008,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.021,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.051,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.047,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.024,
+     "analysis",
+     "FDC"
+    ],
+    "cys": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.026,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.026,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.039,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.015,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.044,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.3,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.1,
+     "pattern",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.2,
+     "pattern",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     38.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     3.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     1.74,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     33.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.0075,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "niacin": [
+     0.3,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.07,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     35.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     71.0,
+     "literature",
+     "BLS"
+    ],
+    "choline": [
+     7.8,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     3.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     280.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     26.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     14.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     33.0,
+     "literature",
+     "BLS"
+    ],
+    "iron": [
+     0.2,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.09,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.12,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     0.8,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     0.2,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "strawberries_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F301100",
+     "name": {
+      "de": "Erdbeere roh",
+      "en": "Strawberry raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "167762",
+     "name": {
+      "en": "Strawberries, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     38.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     90.1,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     0.82,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.4,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     5.917,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.0,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     5.857,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.016,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.044,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.034,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.001,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.007,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.025,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.029,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.026,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.015,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.025,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0313,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0628,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.238,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.1045,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.133,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     9.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.275,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     3.9,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.02,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.02,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.6,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.02469,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     68.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     56.864,
+     "aggregation",
+     "BLS"
+    ],
+    "choline": [
+     5.7,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     1.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     183.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     16.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     13.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     25.375,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.459,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.11,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.046,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     1.0,
+     "literature",
+     "BLS"
+    ],
+    "selenium": [
+     0.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     6.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "blueberries_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F304100",
+     "name": {
+      "de": "Heidelbeere roh",
+      "en": "Blueberry raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "171711",
+     "name": {
+      "en": "Blueberries, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     61.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     86.5,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     0.5,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.6,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     9.7,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     4.9,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     9.7,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.011,
+     "analysis",
+     "FDC"
+    ],
+    "ile": [
+     0.023,
+     "analysis",
+     "FDC"
+    ],
+    "leu": [
+     0.043,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.036,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.012,
+     "analysis",
+     "FDC"
+    ],
+    "cys": [
+     0.006,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.008,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.003,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.023,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.001,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.032,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0558,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.10038,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.401388,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.184194,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.217194,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     48.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     1.215,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     16.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.3,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.00677,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     12.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     22.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     6.0,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     2.0,
+     "literature",
+     "BLS"
+    ],
+    "potassium": [
+     84.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     11.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     6.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     13.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.708,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.14,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.073,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "literature",
+     "BLS"
+    ],
+    "selenium": [
+     0.1,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "raspberries_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F302100",
+     "name": {
+      "de": "Himbeere roh",
+      "en": "Raspberry raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "167755",
+     "name": {
+      "en": "Raspberries, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     43.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     86.1,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     1.0,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.3,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     5.2,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     4.7,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     5.2,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "borrowed",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "literature",
+     "BLS"
+    ],
+    "his": [
+     0.022,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.026,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.057,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.055,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.00121951,
+     "pattern",
+     "BLS"
+    ],
+    "cys": [
+     0.01,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.037,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.029,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.039,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.012,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.046,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0101,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.03,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.195,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.065,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.13,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     7.8,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.79,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     9.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.01,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.01,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.5,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.09,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     44.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     24.0,
+     "aggregation",
+     "BLS"
+    ],
+    "choline": [
+     12.3,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "potassium": [
+     172.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     13.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     18.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     28.0,
+     "literature",
+     "BLS"
+    ],
+    "iron": [
+     0.6,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.3,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.07,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     4.4,
+     "literature",
+     "BLS"
+    ],
+    "selenium": [
+     0.2,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     32.4,
+     "formula",
+     "BLS"
+    ]
+   },
+   "aminoAcidPattern": "strawberries_raw"
+  },
+  "blackcurrants_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F323100",
+     "name": {
+      "de": "Johannisbeere schwarz roh",
+      "en": "Black currant raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "173963",
+     "name": {
+      "en": "Currants, european black, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     57.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     82.2,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     1.375,
+     "literature",
+     "BLS"
+    ],
+    "fat": [
+     0.22,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     8.71,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     3.5,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     8.71,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "borrowed",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.025,
+     "pattern",
+     "BLS"
+    ],
+    "ile": [
+     0.015,
+     "pattern",
+     "BLS"
+    ],
+    "leu": [
+     0.059,
+     "pattern",
+     "BLS"
+    ],
+    "lys": [
+     0.051,
+     "pattern",
+     "BLS"
+    ],
+    "met": [
+     0.00167683,
+     "pattern",
+     "BLS"
+    ],
+    "cys": [
+     0.005,
+     "pattern",
+     "BLS"
+    ],
+    "phe": [
+     0.038,
+     "pattern",
+     "BLS"
+    ],
+    "tyr": [
+     0.03,
+     "pattern",
+     "BLS"
+    ],
+    "thr": [
+     0.04,
+     "pattern",
+     "BLS"
+    ],
+    "trp": [
+     0.001,
+     "pattern",
+     "BLS"
+    ],
+    "val": [
+     0.048,
+     "pattern",
+     "BLS"
+    ],
+    "sfa": [
+     0.026,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.025,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.11,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0405,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": null,
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.0695,
+     "database",
+     "BLS"
+    ],
+    "aa": null,
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     56.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     5.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     1.82,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     30.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.051,
+     "database",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.044,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     0.28,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.08,
+     "database",
+     "BLS"
+    ],
+    "folate": [
+     14.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     177.0,
+     "database",
+     "BLS"
+    ],
+    "choline": null,
+    "sodium": [
+     1.13,
+     "literature",
+     "BLS"
+    ],
+    "potassium": [
+     306.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     52.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     23.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     40.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     1.07,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.25,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.114,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     1.0,
+     "database",
+     "BLS"
+    ],
+    "selenium": null,
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     8.0,
+     "formula",
+     "BLS"
+    ]
+   },
+   "aminoAcidPattern": "strawberries_raw"
+  },
+  "grapes_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F310100",
+     "name": {
+      "de": "Weintraube roh",
+      "en": "Grape raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "174683",
+     "name": {
+      "en": "Grapes, red or green (European type, such as Thompson seedless), raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     61.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     83.1,
+     "literature",
+     "BLS"
+    ],
+    "protein": [
+     0.75,
+     "literature",
+     "BLS"
+    ],
+    "fat": [
+     0.28,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     12.18,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.6,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     12.08,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "borrowed",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.025,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.005,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.014,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.015,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.023,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.011,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.014,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.012,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.004,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0625,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.014,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.143,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.035,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.108308,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": [
+     0.0009,
+     "database",
+     "BLS"
+    ],
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     20.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.38,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     12.4,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.046,
+     "database",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.025,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     0.23,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.073,
+     "database",
+     "BLS"
+    ],
+    "folate": [
+     35.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     4.2,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     5.6,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     6.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     173.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     10.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     7.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     19.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.448,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.05,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.112,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "selenium": [
+     0.1,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     8.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "avocado_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F502100",
+     "name": {
+      "de": "Avocado roh",
+      "en": "Avocado raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "171705",
+     "name": {
+      "en": "Avocados, raw, all commercial varieties"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     132.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     77.2,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     1.37,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     12.5,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     1.37,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     4.1,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     1.37,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.049,
+     "borrowed",
+     "FDC"
+    ],
+    "ile": [
+     0.05,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     0.09,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.09,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.038,
+     "borrowed",
+     "FDC"
+    ],
+    "cys": [
+     0.027,
+     "borrowed",
+     "FDC"
+    ],
+    "phe": [
+     0.06,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.049,
+     "borrowed",
+     "FDC"
+    ],
+    "thr": [
+     0.06,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.025,
+     "borrowed",
+     "FDC"
+    ],
+    "val": [
+     0.08,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     2.589,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     7.58,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     1.523,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.104,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "la": [
+     1.413,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "c15": [
+     0.013,
+     "analysis",
+     "BLS"
+    ],
+    "c17": [
+     0.005,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.006,
+     "analysis",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     112.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     10.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     1.74,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     14.1,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.07,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.1,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     1.01,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.27,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     20.2,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     13.0,
+     "aggregation",
+     "BLS"
+    ],
+    "choline": [
+     14.2,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     5.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     550.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     14.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     24.6,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     48.8,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     0.44,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     0.644,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.39,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     3.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     0.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     16.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "apricot_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F201100",
+     "name": {
+      "de": "Aprikose roh",
+      "en": "Apricot raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "171697",
+     "name": {
+      "en": "Apricots, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     42.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     84.61,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     0.8,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.13,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     8.22,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.54,
+     "database",
+     "BLS"
+    ],
+    "sugars": [
+     7.42,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.027,
+     "database",
+     "FDC"
+    ],
+    "ile": [
+     0.041,
+     "database",
+     "FDC"
+    ],
+    "leu": [
+     0.024,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.023,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.006,
+     "database",
+     "FDC"
+    ],
+    "cys": [
+     0.006,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.052,
+     "database",
+     "FDC"
+    ],
+    "tyr": [
+     0.029,
+     "database",
+     "FDC"
+    ],
+    "thr": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.015,
+     "database",
+     "FDC"
+    ],
+    "val": [
+     0.018,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.0103,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.064,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.029,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.029,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     1562.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     141.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.5,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     3.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.107,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.053,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     0.77,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.07,
+     "database",
+     "BLS"
+    ],
+    "folate": [
+     10.8,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     9.4,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     2.8,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     2.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     362.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     21.9,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     20.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     21.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.612,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.21,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.082,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     0.5,
+     "database",
+     "BLS"
+    ],
+    "selenium": [
+     0.1,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     260.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "apricot_dried": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "F201400",
+     "name": {
+      "de": "Aprikose getrocknet",
+      "en": "Apricot dried"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "173941",
+     "name": {
+      "en": "Apricots, dried, sulfured, uncooked"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     216.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     32.5,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     2.66,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     0.23,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     44.0,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     6.04,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     38.46,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.62,
+     "analysis",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "literature",
+     "BLS"
+    ],
+    "his": [
+     0.029,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.044,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     0.085,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.061,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.016,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.018,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.054,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.036,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.051,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.014,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.057,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "la": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "c15": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     440.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     39.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     4.35,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     2.8,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.08,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     1.3,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.118,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     6.5,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     11.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     13.9,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     2.1,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     1136.2,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     63.4,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     34.4,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     66.6,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     1.19,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     0.55,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.385,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "selenium": [
+     2.2,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     56.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "almonds_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H210100",
+     "name": {
+      "de": "Mandel süß",
+      "en": "Sweet almond"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170567",
+     "name": {
+      "en": "Nuts, almonds"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     544.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     5.3,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     22.333,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     46.6,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     3.87,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     10.0,
+     "aggregation",
+     "BLS"
+    ],
+    "sugars": [
+     3.634,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.24,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.52,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.88,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     1.46,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.58,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.27,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.38,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     1.16,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.62,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.61,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.17,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     1.14,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     4.01,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     29.51,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     10.3,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     10.3,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.01,
+     "literature",
+     "BLS"
+    ],
+    "c17": [
+     0.03,
+     "literature",
+     "BLS"
+    ],
+    "cla": [
+     0.002,
+     "analysis",
+     "FDC"
+    ],
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     120.0,
+     "database",
+     "BLS"
+    ],
+    "vitaminARae": [
+     10.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     23.9,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.22,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     1.22,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     3.06,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.024,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     45.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     1.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     52.1,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     2.07,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     676.427,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     84.864,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     217.984,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     554.8,
+     "aggregation",
+     "BLS"
+    ],
+    "iron": [
+     3.11033,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     3.15574,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.901799,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     1.07549,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     4.1,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "borrowed",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "walnuts_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H120100",
+     "name": {
+      "de": "Walnuss",
+      "en": "Walnut"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170187",
+     "name": {
+      "en": "Nuts, walnuts, english"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     721.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     4.2,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     16.07,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     70.6,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     3.0,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     4.6,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     2.68,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.3,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.37,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.57,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.06,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.26,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.22,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.65,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.47,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.49,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.19,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.7,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     6.516,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     11.653,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     51.648,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     10.06,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "la": [
+     41.56,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "c15": [
+     0.007,
+     "analysis",
+     "BLS"
+    ],
+    "c17": [
+     0.028,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.007,
+     "analysis",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     23.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     1.09,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     2.63,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.34,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.13,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     1.21,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.6,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     72.8,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     39.2,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "potassium": [
+     444.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     87.3,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     140.0,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     320.0,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     2.78,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     2.64,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     1.34,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     3.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     4.9,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     2.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "hazelnuts_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H130100",
+     "name": {
+      "de": "Haselnuss",
+      "en": "Hazelnut"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170581",
+     "name": {
+      "en": "Nuts, hazelnuts or filberts"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     667.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     4.3,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     16.25,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     63.3,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     4.2,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     7.6,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     3.85,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.4,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.39,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.55,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.05,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.45,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.2,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.31,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.68,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.46,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.2,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.72,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     5.267,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     50.604,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     6.319,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.057,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "la": [
+     6.262,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "c15": [
+     0.006,
+     "analysis",
+     "BLS"
+    ],
+    "c17": [
+     0.025,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     22.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     22.2,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     11.1,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.46,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.15,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     1.42,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.66,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     89.6,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     45.6,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "potassium": [
+     745.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     149.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     163.0,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     288.0,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     3.43,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     2.08,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     1.6,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     1.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     2.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     4.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "cashews_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H170100",
+     "name": {
+      "de": "Cashewkern",
+      "en": "Cashew nut"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170162",
+     "name": {
+      "en": "Nuts, cashew nuts, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     618.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     4.08,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     21.01,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     47.1,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     26.0,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     3.0,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     6.15,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     19.8,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.48,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.81,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.5,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     1.0,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.36,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.97,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.67,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.73,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.31,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     1.11,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     9.262,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     28.809,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     8.628,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.08,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "la": [
+     8.548,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "c15": [
+     0.005,
+     "analysis",
+     "BLS"
+    ],
+    "c17": [
+     0.061,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.29,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     34.8,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.58,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.18,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     1.84,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.53,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     67.7,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": null,
+    "sodium": [
+     10.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     689.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     38.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     258.0,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     500.0,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     6.41,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     5.15,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     2.06,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     5.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     19.9,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "peanuts_roasted": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H110600",
+     "name": {
+      "de": "Erdnuss geröstet",
+      "en": "Peanut roasted"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "173806",
+     "name": {
+      "en": "Peanuts, all types, dry-roasted, without salt"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     620.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     1.07,
+     "literature",
+     "BLS"
+    ],
+    "protein": [
+     29.0,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     49.7,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     9.9,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     8.4,
+     "database",
+     "BLS"
+    ],
+    "sugars": [
+     4.9,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     5.04,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.71,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     1.23,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     2.03,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     1.1,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.31,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.43,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     1.54,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     1.19,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.85,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.32,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     1.45,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     7.7,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     26.1,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     9.74,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.025,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     9.69,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.016,
+     "database",
+     "BLS"
+    ],
+    "c15": [
+     0.004,
+     "database",
+     "BLS"
+    ],
+    "c17": [
+     0.041,
+     "database",
+     "BLS"
+    ],
+    "cla": [
+     0.009,
+     "database",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     11.0,
+     "database",
+     "BLS"
+    ],
+    "vitaminARae": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     8.0,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.39,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.255,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.14,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     14.3,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.4,
+     "database",
+     "BLS"
+    ],
+    "folate": [
+     77.5,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     64.6,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     3.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     687.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     59.2,
+     "literature",
+     "BLS"
+    ],
+    "magnesium": [
+     165.1,
+     "literature",
+     "BLS"
+    ],
+    "phosphorus": [
+     336.5,
+     "aggregation",
+     "BLS"
+    ],
+    "iron": [
+     1.528,
+     "literature",
+     "BLS"
+    ],
+    "zinc": [
+     3.4,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.728,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     0.0,
+     "database",
+     "BLS"
+    ],
+    "selenium": [
+     9.3,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "database",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     2.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "pistachios_raw": {
+   "sources": [
+    {
+     "db": "FDC",
+     "code": "170184",
+     "name": {
+      "en": "Nuts, pistachio nuts, raw"
+     }
+    }
+   ],
+   "values": {
+    "kcal": [
+     560.0,
+     "formula",
+     "FDC"
+    ],
+    "water": [
+     4.37,
+     "analysis",
+     "FDC"
+    ],
+    "protein": [
+     20.16,
+     "analysis",
+     "FDC"
+    ],
+    "fat": [
+     45.32,
+     "analysis",
+     "FDC"
+    ],
+    "carbsAvailable": [
+     16.57,
+     "formula",
+     "FDC"
+    ],
+    "fibre": [
+     10.6,
+     "analysis",
+     "FDC"
+    ],
+    "sugars": [
+     7.66,
+     "analysis",
+     "FDC"
+    ],
+    "starch": [
+     1.67,
+     "analysis",
+     "FDC"
+    ],
+    "lactose": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "his": [
+     0.512,
+     "analysis",
+     "FDC"
+    ],
+    "ile": [
+     0.917,
+     "analysis",
+     "FDC"
+    ],
+    "leu": [
+     1.604,
+     "analysis",
+     "FDC"
+    ],
+    "lys": [
+     1.138,
+     "analysis",
+     "FDC"
+    ],
+    "met": [
+     0.36,
+     "analysis",
+     "FDC"
+    ],
+    "cys": [
+     0.292,
+     "analysis",
+     "FDC"
+    ],
+    "phe": [
+     1.092,
+     "analysis",
+     "FDC"
+    ],
+    "tyr": [
+     0.509,
+     "analysis",
+     "FDC"
+    ],
+    "thr": [
+     0.684,
+     "analysis",
+     "FDC"
+    ],
+    "trp": [
+     0.251,
+     "analysis",
+     "FDC"
+    ],
+    "val": [
+     1.249,
+     "analysis",
+     "FDC"
+    ],
+    "sfa": [
+     5.907,
+     "formula",
+     "FDC"
+    ],
+    "mufa": [
+     23.257,
+     "formula",
+     "FDC"
+    ],
+    "pufa": [
+     14.38,
+     "formula",
+     "FDC"
+    ],
+    "ala": [
+     0.289,
+     "analysis",
+     "FDC"
+    ],
+    "epa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "la": [
+     14.091,
+     "analysis",
+     "FDC"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.009,
+     "analysis",
+     "FDC"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "betaCarotene": [
+     305.0,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminARae": [
+     26.0,
+     "database",
+     "FDC"
+    ],
+    "vitaminD": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "vitaminE": [
+     2.86,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminK": null,
+    "thiamin": [
+     0.87,
+     "analysis",
+     "FDC"
+    ],
+    "riboflavin": [
+     0.16,
+     "analysis",
+     "FDC"
+    ],
+    "niacin": [
+     1.3,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminB6": [
+     1.7,
+     "analysis",
+     "FDC"
+    ],
+    "folate": [
+     51.0,
+     "formula",
+     "FDC"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "vitaminC": [
+     5.6,
+     "analysis",
+     "FDC"
+    ],
+    "choline": null,
+    "sodium": [
+     1.0,
+     "analysis",
+     "FDC"
+    ],
+    "potassium": [
+     1025.0,
+     "analysis",
+     "FDC"
+    ],
+    "calcium": [
+     105.0,
+     "analysis",
+     "FDC"
+    ],
+    "magnesium": [
+     121.0,
+     "analysis",
+     "FDC"
+    ],
+    "phosphorus": [
+     490.0,
+     "analysis",
+     "FDC"
+    ],
+    "iron": [
+     3.92,
+     "analysis",
+     "FDC"
+    ],
+    "zinc": [
+     2.2,
+     "analysis",
+     "FDC"
+    ],
+    "copper": [
+     1.3,
+     "analysis",
+     "FDC"
+    ],
+    "iodine": null,
+    "selenium": [
+     7.0,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "provitaminAOther": [
+     10.0,
+     "analysis",
+     "FDC"
+    ]
+   }
+  },
+  "brazil_nuts_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H180100",
+     "name": {
+      "de": "Paranuss",
+      "en": "Brazil nut"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170569",
+     "name": {
+      "en": "Nuts, brazilnuts, dried, unblanched"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     704.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     2.24,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     16.96,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     68.1,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     2.8,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     5.8,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     2.39,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.4,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.53,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.24,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.53,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     1.11,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.71,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.42,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.46,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.19,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.83,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     16.67,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     21.709,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     28.745,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.061,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.014,
+     "analysis",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "la": [
+     28.67,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "c15": [
+     0.007,
+     "analysis",
+     "BLS"
+    ],
+    "c17": [
+     0.054,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     52.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     5.72,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     1.23,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.71,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.06,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.24,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     31.3,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     28.8,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     23.6,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     634.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     161.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     379.0,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     675.0,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     2.84,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     3.87,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     1.78,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     5.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     1917.0,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "sunflower_seeds": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H430100",
+     "name": {
+      "de": "Sonnenblumenkern",
+      "en": "Sunflower seed"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170562",
+     "name": {
+      "en": "Seeds, sunflower seed kernels, dried"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     564.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     3.77,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     26.11,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     47.6,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     4.8,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     5.8,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     3.45,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     1.4,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.67,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     1.1,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.65,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.96,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.55,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.45,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     1.25,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.68,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.93,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.36,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     1.29,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     4.75,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     13.44,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     26.7,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.055,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     26.64,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.01,
+     "literature",
+     "BLS"
+    ],
+    "c17": [
+     0.03,
+     "literature",
+     "BLS"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     15.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     37.2,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     2.6,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     1.9,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.26,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     5.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     1.27,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     121.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     55.1,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "potassium": [
+     784.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     85.7,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     336.0,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     688.0,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     5.72,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     5.76,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     1.89,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     4.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     53.0,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "pumpkin_seeds": {
+   "sources": [
+    {
+     "db": "FDC",
+     "code": "170556",
+     "name": {
+      "en": "Seeds, pumpkin and squash seed kernels, dried"
+     }
+    }
+   ],
+   "values": {
+    "kcal": [
+     559.0,
+     "formula",
+     "FDC"
+    ],
+    "water": [
+     5.23,
+     "analysis",
+     "FDC"
+    ],
+    "protein": [
+     30.23,
+     "analysis",
+     "FDC"
+    ],
+    "fat": [
+     49.05,
+     "analysis",
+     "FDC"
+    ],
+    "carbsAvailable": [
+     4.71,
+     "formula",
+     "FDC"
+    ],
+    "fibre": [
+     6.0,
+     "analysis",
+     "FDC"
+    ],
+    "sugars": [
+     1.4,
+     "analysis",
+     "FDC"
+    ],
+    "starch": [
+     1.47,
+     "analysis",
+     "FDC"
+    ],
+    "lactose": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "his": [
+     0.78,
+     "analysis",
+     "FDC"
+    ],
+    "ile": [
+     1.281,
+     "analysis",
+     "FDC"
+    ],
+    "leu": [
+     2.419,
+     "analysis",
+     "FDC"
+    ],
+    "lys": [
+     1.236,
+     "analysis",
+     "FDC"
+    ],
+    "met": [
+     0.603,
+     "analysis",
+     "FDC"
+    ],
+    "cys": [
+     0.332,
+     "analysis",
+     "FDC"
+    ],
+    "phe": [
+     1.733,
+     "analysis",
+     "FDC"
+    ],
+    "tyr": [
+     1.093,
+     "analysis",
+     "FDC"
+    ],
+    "thr": [
+     0.998,
+     "analysis",
+     "FDC"
+    ],
+    "trp": [
+     0.576,
+     "analysis",
+     "FDC"
+    ],
+    "val": [
+     1.579,
+     "analysis",
+     "FDC"
+    ],
+    "sfa": [
+     8.659,
+     "formula",
+     "FDC"
+    ],
+    "mufa": [
+     16.242,
+     "formula",
+     "FDC"
+    ],
+    "pufa": [
+     20.976,
+     "formula",
+     "FDC"
+    ],
+    "ala": [
+     0.12,
+     "analysis",
+     "FDC"
+    ],
+    "epa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "la": [
+     20.667,
+     "analysis",
+     "FDC"
+    ],
+    "aa": [
+     0.131,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.008,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.037,
+     "analysis",
+     "FDC"
+    ],
+    "cla": [
+     0.004,
+     "analysis",
+     "FDC"
+    ],
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "betaCarotene": [
+     9.0,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminARae": [
+     1.0,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminD": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "vitaminE": [
+     2.18,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminK": [
+     7.3,
+     "analysis",
+     "FDC"
+    ],
+    "thiamin": [
+     0.273,
+     "analysis",
+     "FDC"
+    ],
+    "riboflavin": [
+     0.153,
+     "analysis",
+     "FDC"
+    ],
+    "niacin": [
+     4.987,
+     "analysis",
+     "FDC"
+    ],
+    "vitaminB6": [
+     0.143,
+     "analysis",
+     "FDC"
+    ],
+    "folate": [
+     58.0,
+     "formula",
+     "FDC"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "vitaminC": [
+     1.9,
+     "database",
+     "FDC"
+    ],
+    "choline": [
+     63.0,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     7.0,
+     "analysis",
+     "FDC"
+    ],
+    "potassium": [
+     809.0,
+     "analysis",
+     "FDC"
+    ],
+    "calcium": [
+     46.0,
+     "analysis",
+     "FDC"
+    ],
+    "magnesium": [
+     592.0,
+     "analysis",
+     "FDC"
+    ],
+    "phosphorus": [
+     1233.0,
+     "analysis",
+     "FDC"
+    ],
+    "iron": [
+     8.82,
+     "analysis",
+     "FDC"
+    ],
+    "zinc": [
+     7.81,
+     "analysis",
+     "FDC"
+    ],
+    "copper": [
+     1.343,
+     "analysis",
+     "FDC"
+    ],
+    "iodine": null,
+    "selenium": [
+     9.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "provitaminAOther": [
+     2.0,
+     "analysis",
+     "FDC"
+    ]
+   }
+  },
+  "flaxseed": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H410100",
+     "name": {
+      "de": "Leinsamen",
+      "en": "Linseed/flax seed"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169414",
+     "name": {
+      "en": "Seeds, flaxseed"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     470.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     7.5,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     22.27,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     36.5,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     1.7,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     22.7,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     1.21,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.5,
+     "aggregation",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.5,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.92,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.31,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.88,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.43,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     1.07,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.57,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.84,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.38,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     1.11,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     3.597,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     7.141,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     25.367,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     19.97,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "la": [
+     5.39,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "c15": [
+     0.007,
+     "analysis",
+     "BLS"
+    ],
+    "c17": [
+     0.022,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     48.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminARae": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     3.55,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.46,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.15,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     2.56,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.43,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     73.3,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     78.7,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     56.8,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     731.0,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     206.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     323.0,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     533.0,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     6.75,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     4.17,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     1.2,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     25.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "chia_seeds": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H480100",
+     "name": {
+      "de": "Chia-Samen",
+      "en": "Chia seeds"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170554",
+     "name": {
+      "en": "Seeds, chia seeds, dried"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     479.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     7.9,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     22.11,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     32.79,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     3.66,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     40.23,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     0.4732,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     3.19,
+     "analysis",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.66,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.78,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     1.38,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     1.08,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.64,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.48,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     1.1,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.77,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.74,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.27,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.92,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     3.54,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     2.36,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     25.51,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     19.41,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": null,
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     6.012,
+     "analysis",
+     "BLS"
+    ],
+    "aa": null,
+    "c15": [
+     0.03,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.063,
+     "analysis",
+     "FDC"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     48.0,
+     "borrowed",
+     "BLS"
+    ],
+    "vitaminARae": [
+     4.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.29,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     1.694,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.97198,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.150339,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     6.37,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.43,
+     "borrowed",
+     "BLS"
+    ],
+    "folate": [
+     69.3,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": null,
+    "sodium": [
+     0.3,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     716.6,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     583.4,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     306.2,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     705.8,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     7.5825,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     5.718,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     1.6133,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "borrowed",
+     "BLS"
+    ],
+    "selenium": [
+     55.2,
+     "literature",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "sesame_seeds": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "H420100",
+     "name": {
+      "de": "Sesam",
+      "en": "Sesame seed"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170150",
+     "name": {
+      "en": "Seeds, sesame seeds, whole, dried"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     565.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     5.2,
+     "database",
+     "BLS"
+    ],
+    "protein": [
+     20.896,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     50.4,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     1.42,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     11.18,
+     "database",
+     "BLS"
+    ],
+    "sugars": [
+     1.2,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.22,
+     "database",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.49,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.93,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     1.54,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.64,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.64,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.26,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     1.25,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.72,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.91,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.29,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     1.11,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     7.55,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     19.9,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     19.37,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.67,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     18.7,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     5.0,
+     "borrowed",
+     "FDC"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.25,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     2.82,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.79,
+     "database",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.25,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     4.52,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.79,
+     "database",
+     "BLS"
+    ],
+    "folate": [
+     119.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "choline": [
+     25.6,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     45.0,
+     "database",
+     "BLS"
+    ],
+    "potassium": [
+     458.0,
+     "database",
+     "BLS"
+    ],
+    "calcium": [
+     783.0,
+     "database",
+     "BLS"
+    ],
+    "magnesium": [
+     347.0,
+     "database",
+     "BLS"
+    ],
+    "phosphorus": [
+     607.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     10.0,
+     "database",
+     "BLS"
+    ],
+    "zinc": [
+     5.95,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     1.656,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": null,
+    "selenium": [
+     34.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ]
+   }
+  },
+  "oat_flakes": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "C133000",
+     "name": {
+      "de": "Hafer Flocken",
+      "en": "Oat flakes"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "173904",
+     "name": {
+      "en": "Cereals, oats, regular and quick, not fortified, dry"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     348.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     10.07,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     13.22,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     6.65,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     53.3,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     10.983,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     0.74,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     52.6,
+     "borrowed",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.3,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.61,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     1.13,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.5,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.24,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.39,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.78,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.57,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.53,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.19,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.81,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     1.34,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     2.359,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     2.682,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.112,
+     "pattern",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     2.57,
+     "pattern",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.8,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     2.1,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.562,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.028,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     1.0,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.098,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     92.8,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     40.4,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     1.98,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     381.927,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     44.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     121.305,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     325.01,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     4.43663,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     3.64214,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.40961,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     0.790735,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     28.9,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "oat_porridge": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "C133032",
+     "name": {
+      "de": "Hafer Flocken, gekocht",
+      "en": "Oat flakes, boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "173905",
+     "name": {
+      "en": "Cereals, oats, regular and quick, unenriched, cooked with water (includes boiling and microwaving), without salt"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     66.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     79.9,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     2.499,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     1.257,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     10.0,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.076,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     0.14,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     9.9,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.057,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.115,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.214,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.095,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.045,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.074,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.147,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.108,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.036,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.153,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.253,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.446,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.507,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.021,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.486,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.001,
+     "analysis",
+     "FDC"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.151,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.4,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.085,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.005,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     0.17,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.017,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     12.3,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     7.4,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.37,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     68.588,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     8.0,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     22.931,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     58.37,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     0.79675,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     0.6885,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.07356,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": [
+     0.13453,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     5.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "rye_bread_wholemeal": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "B121000",
+     "name": {
+      "de": "Roggenvollkornbrot",
+      "en": "Wholemeal rye bread"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "172684",
+     "name": {
+      "en": "Bread, rye"
+     },
+     "match": "similar"
+    }
+   ],
+   "values": {
+    "kcal": [
+     193.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     46.4,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     6.04,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     1.81,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     32.49,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     9.62,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     4.58,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     27.9,
+     "analysis",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.12,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.18,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     0.32,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.17,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.08,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.12,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.25,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.11,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.18,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.0562,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.25,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     0.187,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.552,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.564,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.111,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ],
+    "dha": [
+     0.0012,
+     "analysis",
+     "BLS"
+    ],
+    "la": [
+     0.452,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "c15": null,
+    "c17": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "retinol": [
+     2.9,
+     "analysis",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminARae": [
+     2.9,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.635,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     4.159,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.267,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.082,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     2.175,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.102,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     16.7,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     14.6,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     440.5,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     255.5,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     25.5,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     55.7,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     257.5,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     1.61,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     1.35,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.175,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": null,
+    "selenium": [
+     30.9,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "wheat_bread_wholemeal": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "B111000",
+     "name": {
+      "de": "Weizenvollkornbrot",
+      "en": "Wholemeal wheat bread"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "172688",
+     "name": {
+      "en": "Bread, whole-wheat, commercially prepared"
+     },
+     "match": "similar"
+    }
+   ],
+   "values": {
+    "kcal": [
+     180.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     53.0,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     7.554,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.86,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     31.9,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     6.825,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     30.62,
+     "database",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.15,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.32,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.53,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.2,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.14,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.16,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.36,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.22,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.24,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.1,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.36,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.142,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.14,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.527,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0338,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.493,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "c15": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.6,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     3.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.25,
+     "database",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.15,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     3.3,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.079,
+     "database",
+     "BLS"
+    ],
+    "folate": [
+     26.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "choline": [
+     27.2,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     462.0,
+     "database",
+     "BLS"
+    ],
+    "potassium": [
+     210.0,
+     "database",
+     "BLS"
+    ],
+    "calcium": [
+     31.3,
+     "database",
+     "BLS"
+    ],
+    "magnesium": [
+     59.7,
+     "database",
+     "BLS"
+    ],
+    "phosphorus": [
+     204.25,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     1.978,
+     "database",
+     "BLS"
+    ],
+    "zinc": [
+     1.541,
+     "database",
+     "BLS"
+    ],
+    "copper": [
+     0.244,
+     "database",
+     "BLS"
+    ],
+    "iodine": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     25.7,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "wheat_bread_white": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "B311000",
+     "name": {
+      "de": "Weizenbrot/Weißbrot",
+      "en": "White bread/wheat bread"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "174924",
+     "name": {
+      "en": "Bread, white, commercially prepared (includes soft bread crumbs)"
+     },
+     "match": "similar"
+    }
+   ],
+   "values": {
+    "kcal": [
+     272.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     31.4,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     8.69,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     2.97,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     50.54,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     4.0,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     3.97,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     46.56,
+     "analysis",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.18,
+     "analysis",
+     "BLS"
+    ],
+    "ile": [
+     0.31,
+     "analysis",
+     "BLS"
+    ],
+    "leu": [
+     0.58,
+     "analysis",
+     "BLS"
+    ],
+    "lys": [
+     0.18,
+     "analysis",
+     "BLS"
+    ],
+    "met": [
+     0.12,
+     "analysis",
+     "BLS"
+    ],
+    "cys": [
+     0.18,
+     "analysis",
+     "BLS"
+    ],
+    "phe": [
+     0.51,
+     "analysis",
+     "BLS"
+    ],
+    "tyr": [
+     0.27,
+     "analysis",
+     "BLS"
+    ],
+    "thr": [
+     0.24,
+     "analysis",
+     "BLS"
+    ],
+    "trp": [
+     0.0907,
+     "analysis",
+     "BLS"
+    ],
+    "val": [
+     0.35,
+     "analysis",
+     "BLS"
+    ],
+    "sfa": [
+     0.685,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.837,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.468,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0585,
+     "analysis",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "la": [
+     0.41,
+     "analysis",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "c15": [
+     0.003,
+     "borrowed",
+     "FDC"
+    ],
+    "c17": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "analysis",
+     "BLS"
+    ],
+    "retinol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.585,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.628,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.171,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.059,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     0.96,
+     "analysis",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.092,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     19.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminC": [
+     1.052,
+     "analysis",
+     "BLS"
+    ],
+    "choline": [
+     14.6,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     568.2,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     139.5,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     24.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     21.8,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     88.9,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     0.865,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     0.67,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.11,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     5.8,
+     "database",
+     "BLS"
+    ],
+    "selenium": [
+     22.0,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "rice_brown_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "C351032",
+     "name": {
+      "de": "Reis unpoliert, gekocht",
+      "en": "Brown rice boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169704",
+     "name": {
+      "en": "Rice, brown, long-grain, cooked (Includes foods for USDA's Food Distribution Program)"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     128.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     70.8,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     3.006,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     0.917,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     26.32,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.4,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     0.26,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     26.062,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.068,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.122,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.247,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.108,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.061,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.036,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.151,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.115,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.118,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.032,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.179,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.1613,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.354,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.32,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.01438,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.306,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.002,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "cla": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.217,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.1,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.085,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.026,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     1.472,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.052,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     5.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     9.2,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     1.179,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     103.597,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     5.2,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     43.1,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     101.0,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     0.574,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     0.86,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": [
+     0.7,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     5.8,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "logicalZero",
+     "FDC"
+    ]
+   }
+  },
+  "rice_white_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "C352032",
+     "name": {
+      "de": "Reis poliert, gekocht",
+      "en": "White rice boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169757",
+     "name": {
+      "en": "Rice, white, long-grain, regular, unenriched, cooked without salt"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     117.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     67.52,
+     "analysis",
+     "BLS"
+    ],
+    "protein": [
+     3.3,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     0.35,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     24.8,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     0.61,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     0.1,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     24.7,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.055,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.109,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.213,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.093,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.055,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.035,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.126,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.084,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.09,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.029,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.158,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.04,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.069,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.071,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.004,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.067,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.018,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.029,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.001,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     0.32,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.012,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     21.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     2.1,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     9.77,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     31.63,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     24.0,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     13.66,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     40.25,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     0.14088,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     0.92028,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.09469,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     4.08,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     7.5,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ]
+   }
+  },
+  "pasta_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "E401032",
+     "name": {
+      "de": "Teigwaren eifrei, gekocht",
+      "en": "Pasta egg-free, boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "168928",
+     "name": {
+      "en": "Pasta, cooked, unenriched, without added salt"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     146.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     61.6,
+     "database",
+     "BLS"
+    ],
+    "protein": [
+     5.4,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     0.702,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     28.68,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.494,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     0.839,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     27.841,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.4,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.3,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.083,
+     "analysis",
+     "FDC"
+    ],
+    "val": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.101,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.131,
+     "formula",
+     "FDC"
+    ],
+    "pufa": [
+     0.271,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.017,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.254,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.001,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.6,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.033,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.013,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     1.303,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.04548,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     8.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     6.4,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     0.7,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     84.0,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     11.6,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     20.0,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     150.0,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     0.888,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     1.14,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": null,
+    "selenium": [
+     26.4,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "pasta_wholemeal_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "E500032",
+     "name": {
+      "de": "Vollkornteigwaren eifrei, gekocht",
+      "en": "Wholemeal pasta egg-free, boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "168910",
+     "name": {
+      "en": "Pasta, whole-wheat, cooked (Includes foods for USDA's Food Distribution Program)"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     130.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     67.6,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     5.4,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     1.11,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     22.6,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     3.9,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     1.0,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     21.6,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.4,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.3,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.073,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.2,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.165,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.101,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.43,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.03,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.4,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.002,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.001,
+     "recipe",
+     "BLS"
+    ],
+    "cla": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.17,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.5,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.04,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     1.7,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.1,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     13.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     6.5,
+     "analysis",
+     "FDC"
+    ],
+    "sodium": [
+     1.0,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     103.0,
+     "recipe",
+     "BLS"
+    ],
+    "calcium": [
+     13.0,
+     "recipe",
+     "BLS"
+    ],
+    "magnesium": [
+     37.0,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     130.0,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     1.0,
+     "recipe",
+     "BLS"
+    ],
+    "zinc": [
+     1.1,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.18,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": null,
+    "selenium": [
+     36.3,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "quinoa_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "C118032",
+     "name": {
+      "de": "Quinoa weiß, gekocht",
+      "en": "Quinoa white, boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "168917",
+     "name": {
+      "en": "Quinoa, cooked"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     104.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     74.1,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     3.491,
+     "analysis",
+     "BLS"
+    ],
+    "fat": [
+     1.8,
+     "analysis",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     16.92,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     3.08,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     0.49629,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     16.42,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.11,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.14,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.25,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.22,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.08,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.07,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.16,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.13,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.14,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.04,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.17,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.173,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.4,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.81,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.089,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.72,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.003,
+     "borrowed",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     3.0,
+     "borrowed",
+     "FDC"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.896,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.083,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.116,
+     "analysis",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.016,
+     "analysis",
+     "BLS"
+    ],
+    "niacin": [
+     0.24,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.04,
+     "analysis",
+     "BLS"
+    ],
+    "folate": [
+     29.4,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     23.0,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     2.28,
+     "analysis",
+     "BLS"
+    ],
+    "potassium": [
+     142.7,
+     "analysis",
+     "BLS"
+    ],
+    "calcium": [
+     19.78,
+     "analysis",
+     "BLS"
+    ],
+    "magnesium": [
+     58.2,
+     "analysis",
+     "BLS"
+    ],
+    "phosphorus": [
+     155.66,
+     "analysis",
+     "BLS"
+    ],
+    "iron": [
+     0.94125,
+     "analysis",
+     "BLS"
+    ],
+    "zinc": [
+     0.98109,
+     "analysis",
+     "BLS"
+    ],
+    "copper": [
+     0.13873,
+     "analysis",
+     "BLS"
+    ],
+    "iodine": [
+     4.9,
+     "analysis",
+     "BLS"
+    ],
+    "selenium": [
+     2.8,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "borrowed",
+     "FDC"
+    ]
+   }
+  },
+  "onion_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G480100",
+     "name": {
+      "de": "Speisezwiebel roh",
+      "en": "Onion raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170000",
+     "name": {
+      "en": "Onions, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     34.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     89.7,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     1.156,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     0.15,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     6.01,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.4,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     6.01,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.013,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.033,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.057,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.012,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.004,
+     "analysis",
+     "FDC"
+    ],
+    "phe": [
+     0.035,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.041,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.02,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.028,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.025,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0151,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.0519,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0027,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.0492,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.0008,
+     "literature",
+     "BLS"
+    ],
+    "c17": [
+     0.00037,
+     "literature",
+     "BLS"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     4.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.04,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.4,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.06,
+     "aggregation",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.02,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.3,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.0677,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     15.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     7.4,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     6.1,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     9.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     174.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     25.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     10.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     33.332,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.685,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.21,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.049,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     0.5,
+     "aggregation",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "garlic_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G490100",
+     "name": {
+      "de": "Knoblauch roh",
+      "en": "Garlic raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169230",
+     "name": {
+      "en": "Garlic, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     97.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     65.413,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     6.05,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.42,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     3.0,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     28.297,
+     "literature",
+     "BLS"
+    ],
+    "sugars": [
+     2.0,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     1.0,
+     "borrowed",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "his": [
+     0.106,
+     "pattern",
+     "BLS"
+    ],
+    "ile": [
+     0.255,
+     "pattern",
+     "BLS"
+    ],
+    "leu": [
+     0.361,
+     "pattern",
+     "BLS"
+    ],
+    "lys": [
+     0.301,
+     "pattern",
+     "BLS"
+    ],
+    "met": [
+     0.066,
+     "pattern",
+     "BLS"
+    ],
+    "cys": [
+     0.065,
+     "database",
+     "FDC"
+    ],
+    "phe": [
+     0.195,
+     "pattern",
+     "BLS"
+    ],
+    "tyr": [
+     0.175,
+     "pattern",
+     "BLS"
+    ],
+    "thr": [
+     0.238,
+     "pattern",
+     "BLS"
+    ],
+    "trp": [
+     0.066,
+     "pattern",
+     "BLS"
+    ],
+    "val": [
+     0.268,
+     "pattern",
+     "BLS"
+    ],
+    "sfa": [
+     0.063,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.012,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.171,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.013,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.158,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": [
+     0.0012,
+     "literature",
+     "BLS"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     534.0,
+     "borrowed",
+     "BLS"
+    ],
+    "vitaminARae": [
+     45.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.01,
+     "database",
+     "BLS"
+    ],
+    "vitaminK": [
+     0.076,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.2,
+     "database",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.08,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     0.6,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.14,
+     "borrowed",
+     "BLS"
+    ],
+    "folate": [
+     81.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     14.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     23.2,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     7.8678,
+     "literature",
+     "BLS"
+    ],
+    "potassium": [
+     384.71,
+     "literature",
+     "BLS"
+    ],
+    "calcium": [
+     14.42,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     16.382,
+     "literature",
+     "BLS"
+    ],
+    "phosphorus": [
+     134.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.6958,
+     "literature",
+     "BLS"
+    ],
+    "zinc": [
+     0.88,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.153,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     2.5,
+     "literature",
+     "BLS"
+    ],
+    "selenium": [
+     14.2,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     12.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "leek_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G470100",
+     "name": {
+      "de": "Porree/Lauch, roh",
+      "en": "Leek raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169246",
+     "name": {
+      "en": "Leeks, (bulb and lower leaf-portion), raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     36.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     90.4,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     2.14,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.25,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     5.0,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     2.2,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     3.8,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     1.0,
+     "literature",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "literature",
+     "BLS"
+    ],
+    "his": [
+     0.039,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.077,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.131,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.139,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.029,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.012,
+     "database",
+     "BLS"
+    ],
+    "phe": [
+     0.063,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.038,
+     "database",
+     "BLS"
+    ],
+    "thr": [
+     0.076,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.022,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.093,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.044,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.0098,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.104,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.013,
+     "literature",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.091,
+     "literature",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": [
+     0.0004,
+     "literature",
+     "BLS"
+    ],
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     534.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     45.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.35,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     54.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.05,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.03,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.3,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.14,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     64.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     24.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     9.5,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "potassium": [
+     275.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     42.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     7.0,
+     "literature",
+     "BLS"
+    ],
+    "phosphorus": [
+     23.0,
+     "literature",
+     "BLS"
+    ],
+    "iron": [
+     0.4,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.2,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.04,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     1.0,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     1.0,
+     "borrowed",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     12.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "cucumber_raw": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G520100",
+     "name": {
+      "de": "Gurke roh",
+      "en": "Cucumber raw"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "168409",
+     "name": {
+      "en": "Cucumber, with peel, raw"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     16.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     97.0,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     1.062,
+     "aggregation",
+     "BLS"
+    ],
+    "fat": [
+     0.2,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     1.97,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     0.9,
+     "analysis",
+     "BLS"
+    ],
+    "sugars": [
+     1.97,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.008,
+     "database",
+     "BLS"
+    ],
+    "ile": [
+     0.019,
+     "database",
+     "BLS"
+    ],
+    "leu": [
+     0.025,
+     "database",
+     "BLS"
+    ],
+    "lys": [
+     0.026,
+     "database",
+     "BLS"
+    ],
+    "met": [
+     0.006,
+     "database",
+     "BLS"
+    ],
+    "cys": [
+     0.004,
+     "database",
+     "FDC"
+    ],
+    "phe": [
+     0.014,
+     "database",
+     "BLS"
+    ],
+    "tyr": [
+     0.011,
+     "database",
+     "FDC"
+    ],
+    "thr": [
+     0.016,
+     "database",
+     "BLS"
+    ],
+    "trp": [
+     0.004,
+     "database",
+     "BLS"
+    ],
+    "val": [
+     0.021,
+     "database",
+     "BLS"
+    ],
+    "sfa": [
+     0.067,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.005,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.088,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.042,
+     "database",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "la": [
+     0.046,
+     "database",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c17": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "betaCarotene": [
+     127.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     12.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.03,
+     "literature",
+     "BLS"
+    ],
+    "vitaminK": [
+     32.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.04,
+     "aggregation",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.02,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.2,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.00823,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     13.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "vitaminC": [
+     8.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     6.0,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     3.0,
+     "aggregation",
+     "BLS"
+    ],
+    "potassium": [
+     181.0,
+     "aggregation",
+     "BLS"
+    ],
+    "calcium": [
+     19.0,
+     "aggregation",
+     "BLS"
+    ],
+    "magnesium": [
+     12.0,
+     "aggregation",
+     "BLS"
+    ],
+    "phosphorus": [
+     15.485,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.228,
+     "aggregation",
+     "BLS"
+    ],
+    "zinc": [
+     0.12,
+     "aggregation",
+     "BLS"
+    ],
+    "copper": [
+     0.031,
+     "aggregation",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "aggregation",
+     "BLS"
+    ],
+    "selenium": [
+     0.3,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "logicalZero",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     34.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "asparagus_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G450132",
+     "name": {
+      "de": "Spargel gekocht",
+      "en": "Asparagus boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "168390",
+     "name": {
+      "en": "Asparagus, cooked, boiled, drained"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     16.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     95.5,
+     "database",
+     "BLS"
+    ],
+    "protein": [
+     1.7,
+     "database",
+     "BLS"
+    ],
+    "fat": [
+     0.14,
+     "database",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     1.31,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     1.307,
+     "database",
+     "BLS"
+    ],
+    "sugars": [
+     1.13,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.087,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.03,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.066,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.079,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.085,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.026,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.034,
+     "analysis",
+     "FDC"
+    ],
+    "phe": [
+     0.057,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.057,
+     "analysis",
+     "FDC"
+    ],
+    "thr": [
+     0.055,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.022,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.087,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.0267,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.00556,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.0715,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.0248,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.0465,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "analysis",
+     "FDC"
+    ],
+    "c15": [
+     0.0003,
+     "recipe",
+     "BLS"
+    ],
+    "c17": [
+     0.00027,
+     "recipe",
+     "BLS"
+    ],
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     1.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     1.213,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     99.5,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.09,
+     "database",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.11,
+     "database",
+     "BLS"
+    ],
+    "niacin": [
+     0.93,
+     "database",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.037,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     56.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     16.0,
+     "database",
+     "BLS"
+    ],
+    "choline": [
+     26.1,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     2.0,
+     "database",
+     "BLS"
+    ],
+    "potassium": [
+     136.0,
+     "database",
+     "BLS"
+    ],
+    "calcium": [
+     20.0,
+     "database",
+     "BLS"
+    ],
+    "magnesium": [
+     6.966,
+     "recipe",
+     "BLS"
+    ],
+    "phosphorus": [
+     37.0,
+     "database",
+     "BLS"
+    ],
+    "iron": [
+     0.6,
+     "database",
+     "BLS"
+    ],
+    "zinc": [
+     0.33,
+     "recipe",
+     "BLS"
+    ],
+    "copper": [
+     0.109,
+     "literature",
+     "BLS"
+    ],
+    "iodine": [
+     6.0,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     6.1,
+     "analysis",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     0.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "green_beans_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G710132",
+     "name": {
+      "de": "Bohne grün, gekocht",
+      "en": "Bean green, boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "169141",
+     "name": {
+      "en": "Beans, snap, green, cooked, boiled, drained, without salt"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     34.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     90.284,
+     "aggregation",
+     "BLS"
+    ],
+    "protein": [
+     2.1,
+     "literature",
+     "BLS"
+    ],
+    "fat": [
+     0.3,
+     "literature",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     4.06,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     3.65,
+     "literature",
+     "BLS"
+    ],
+    "sugars": [
+     2.976,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     0.818,
+     "literature",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "his": [
+     0.047,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.106,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.135,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.135,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.033,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.023,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.071,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.048,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.09,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.026,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.126,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.068,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.007,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.111,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.06,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.051,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     276.0,
+     "aggregation",
+     "BLS"
+    ],
+    "vitaminARae": [
+     26.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.0,
+     "trace",
+     "BLS"
+    ],
+    "vitaminK": [
+     35.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.08,
+     "literature",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.08,
+     "literature",
+     "BLS"
+    ],
+    "niacin": [
+     0.7,
+     "literature",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.01355,
+     "literature",
+     "BLS"
+    ],
+    "folate": [
+     45.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     13.238,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     16.9,
+     "borrowed",
+     "FDC"
+    ],
+    "sodium": [
+     1.6,
+     "recipe",
+     "BLS"
+    ],
+    "potassium": [
+     304.0,
+     "literature",
+     "BLS"
+    ],
+    "calcium": [
+     61.0,
+     "literature",
+     "BLS"
+    ],
+    "magnesium": [
+     28.0,
+     "literature",
+     "BLS"
+    ],
+    "phosphorus": [
+     34.658,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     1.06,
+     "literature",
+     "BLS"
+    ],
+    "zinc": [
+     0.38,
+     "literature",
+     "BLS"
+    ],
+    "copper": [
+     0.069,
+     "recipe",
+     "BLS"
+    ],
+    "iodine": [
+     2.0,
+     "recipe",
+     "BLS"
+    ],
+    "selenium": [
+     0.2,
+     "database",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     72.0,
+     "formula",
+     "BLS"
+    ]
+   }
+  },
+  "green_peas_boiled": {
+   "sources": [
+    {
+     "db": "BLS",
+     "code": "G760232",
+     "name": {
+      "de": "Erbse grün, tiefgefroren, gekocht",
+      "en": "Pea green, deep-frozen, boiled"
+     }
+    },
+    {
+     "db": "FDC",
+     "code": "170017",
+     "name": {
+      "en": "Peas, green, frozen, cooked, boiled, drained, without salt"
+     },
+     "match": "same"
+    }
+   ],
+   "values": {
+    "kcal": [
+     76.0,
+     "formula",
+     "BLS"
+    ],
+    "water": [
+     78.4,
+     "recipe",
+     "BLS"
+    ],
+    "protein": [
+     4.8,
+     "recipe",
+     "BLS"
+    ],
+    "fat": [
+     0.692,
+     "recipe",
+     "BLS"
+    ],
+    "carbsAvailable": [
+     9.9,
+     "formula",
+     "BLS"
+    ],
+    "fibre": [
+     5.416,
+     "recipe",
+     "BLS"
+    ],
+    "sugars": [
+     5.3,
+     "formula",
+     "BLS"
+    ],
+    "starch": [
+     4.585,
+     "recipe",
+     "BLS"
+    ],
+    "lactose": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "his": [
+     0.107,
+     "recipe",
+     "BLS"
+    ],
+    "ile": [
+     0.215,
+     "recipe",
+     "BLS"
+    ],
+    "leu": [
+     0.38,
+     "recipe",
+     "BLS"
+    ],
+    "lys": [
+     0.376,
+     "recipe",
+     "BLS"
+    ],
+    "met": [
+     0.047,
+     "recipe",
+     "BLS"
+    ],
+    "cys": [
+     0.049,
+     "recipe",
+     "BLS"
+    ],
+    "phe": [
+     0.238,
+     "recipe",
+     "BLS"
+    ],
+    "tyr": [
+     0.148,
+     "recipe",
+     "BLS"
+    ],
+    "thr": [
+     0.232,
+     "recipe",
+     "BLS"
+    ],
+    "trp": [
+     0.047,
+     "recipe",
+     "BLS"
+    ],
+    "val": [
+     0.252,
+     "recipe",
+     "BLS"
+    ],
+    "sfa": [
+     0.144,
+     "formula",
+     "BLS"
+    ],
+    "mufa": [
+     0.053,
+     "formula",
+     "BLS"
+    ],
+    "pufa": [
+     0.428,
+     "formula",
+     "BLS"
+    ],
+    "ala": [
+     0.072,
+     "recipe",
+     "BLS"
+    ],
+    "epa": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "dpa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "dha": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "la": [
+     0.356,
+     "recipe",
+     "BLS"
+    ],
+    "aa": [
+     0.0,
+     "database",
+     "FDC"
+    ],
+    "c15": null,
+    "c17": null,
+    "cla": null,
+    "retinol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "betaCarotene": [
+     1072.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminARae": [
+     90.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminD": [
+     0.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminE": [
+     0.069,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminK": [
+     36.0,
+     "formula",
+     "BLS"
+    ],
+    "thiamin": [
+     0.429,
+     "recipe",
+     "BLS"
+    ],
+    "riboflavin": [
+     0.057,
+     "recipe",
+     "BLS"
+    ],
+    "niacin": [
+     1.643,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminB6": [
+     0.065,
+     "recipe",
+     "BLS"
+    ],
+    "folate": [
+     31.0,
+     "formula",
+     "BLS"
+    ],
+    "vitaminB12": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "vitaminC": [
+     17.857,
+     "recipe",
+     "BLS"
+    ],
+    "choline": [
+     27.5,
+     "database",
+     "FDC"
+    ],
+    "sodium": [
+     71.0,
+     "literature",
+     "BLS"
+    ],
+    "potassium": [
+     107.0,
+     "literature",
+     "BLS"
+    ],
+    "calcium": [
+     24.0,
+     "literature",
+     "BLS"
+    ],
+    "magnesium": [
+     21.0,
+     "literature",
+     "BLS"
+    ],
+    "phosphorus": [
+     117.0,
+     "recipe",
+     "BLS"
+    ],
+    "iron": [
+     1.49,
+     "literature",
+     "BLS"
+    ],
+    "zinc": [
+     0.65,
+     "literature",
+     "BLS"
+    ],
+    "copper": [
+     0.101,
+     "literature",
+     "BLS"
+    ],
+    "iodine": [
+     4.0,
+     "literature",
+     "BLS"
+    ],
+    "selenium": [
+     1.0,
+     "database",
+     "FDC"
+    ],
+    "cholesterol": [
+     0.0,
+     "recipe",
+     "BLS"
+    ],
+    "provitaminAOther": [
+     16.0,
+     "formula",
+     "BLS"
+    ]
+   }
   }
  }
 }

@@ -409,7 +409,10 @@ function defaultEntry(food: FoodRecord, compound: BioactiveCompound): BioactiveE
     case "anserine":
       return animal ? undefined : MUSCLE_COMPOUND;
     case "taurine":
-      return animal || food.class === "mushrooms" || food.class === "algae" ? undefined : TAURINE_PLANTS;
+      // Laidlaw et al. analysed vegetables, legumes, nuts, seeds, and fruit; no cereals.
+      return animal || food.class === "mushrooms" || food.class === "algae" || food.class === "grains"
+        ? undefined
+        : TAURINE_PLANTS;
     case "glucosinolates":
       return animal || !isBrassicales(food) ? GLUCOSINOLATE_FREE : undefined;
     case "coq10":

@@ -22,6 +22,12 @@ function classPhytoBaseline(foodClass: FoodClass): number {
       return 0.4;
     case "other_vegetables":
       return 0.5;
+    case "fruits":
+      return 0.75;
+    case "nuts_seeds":
+      return 0.65;
+    case "grains":
+      return 0.45;
     case "muscle_ruminant":
     case "muscle_monogastric":
     case "muscle_poultry":

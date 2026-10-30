@@ -22,7 +22,7 @@ const PREPARATION_WORDS: Partial<Record<Preparation, readonly string[]>> = {
   stewed: ["gedünstet", "stewed"],
   fried: ["gebraten", "fried"],
   roasted: ["Ofen", "geröstet", "roasted"],
-  baked: ["gebacken", "baked"],
+  baked: ["gebacken", "baked", "brot", "bread"],
   grilled: ["gegrillt", "grilled"],
   braised: ["geschmort", "braised"],
   poached: ["pochiert", "poached"],
@@ -88,13 +88,18 @@ describe("imported values", () => {
   });
 
   it("come from an entry whose name matches the food's preparation", () => {
+    const otherThanRaw = Object.entries(PREPARATION_WORDS)
+      .filter(([preparation]) => preparation !== "raw")
+      .flatMap(([, words]) => words);
     for (const food of FOODS) {
       const words = PREPARATION_WORDS[food.preparation];
       if (!words) continue;
       const [primary] = food.sourceEntries;
       const name = `${primary?.name.de ?? ""} ${primary?.name.en ?? ""}`;
+      // BLS names unroasted nuts and seeds bare ("Walnuss"): a raw entry may also name no preparation at all.
+      const bareRaw = food.preparation === "raw" && !otherThanRaw.some((word) => name.includes(word));
       expect(
-        words.some((word) => name.includes(word)),
+        bareRaw || words.some((word) => name.includes(word)),
         `${food.id} (${food.preparation}) vs "${name}"`,
       ).toBe(true);
     }

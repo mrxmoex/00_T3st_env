@@ -27,6 +27,12 @@ export function classExtraColumns(foodClass: FoodClass): string[] {
       return ["starchActivity", "carotenoidOnlyA", "resistantStarch"];
     case "other_vegetables":
       return ["vitaminCDensity", "waterWeight"];
+    case "fruits":
+      return ["vitaminCDensity", "fibreToSugar", "potassiumDensity"];
+    case "nuts_seeds":
+      return ["alaDensity", "vitaminEDensity", "magnesiumDensity", "lysineAdequacy"];
+    case "grains":
+      return ["lysineAdequacy", "thiaminDensity", "magnesiumDensity", "phytatePenalty"];
     case "muscle_ruminant":
       return ["eaaCompleteness", "oddChainCla", "creatine", "hemeIron"];
     case "muscle_monogastric":
@@ -131,6 +137,18 @@ function scoreExtraColumn(food: FoodRecord, column: string): number | null {
       return scaled(per100kcal(food.micros.vitaminCMg, kcal), 40);
     case "waterWeight":
       return 100 * clamp01(1 - food.kcalPer100g / 80);
+    case "fibreToSugar":
+      return 100 * clamp01(food.carbs.fibre / Math.max(food.carbs.sugars, 0.5) / 0.5);
+    case "potassiumDensity":
+      return scaled(per100kcal(food.micros.potassiumMg, kcal), 500);
+    case "alaDensity":
+      return scaled(per100kcal(food.fattyAcids.omega3Ala, kcal), 2);
+    case "vitaminEDensity":
+      return scaled(per100kcal(food.micros.vitaminEMg, kcal), 5);
+    case "magnesiumDensity":
+      return scaled(per100kcal(food.micros.magnesiumMg, kcal), 60);
+    case "thiaminDensity":
+      return scaled(per100kcal(food.micros.thiaminMg, kcal), 0.15);
     case "eaaCompleteness":
       return 100 * clamp01(Math.min(1, (food.aminoAcids.lys / 48 + (food.aminoAcids.met + food.aminoAcids.cys) / 23) / 2));
     case "oddChainCla": {
