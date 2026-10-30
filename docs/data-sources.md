@@ -49,6 +49,22 @@ The archive hashes are pinned in the script. If an upstream archive changes, the
 6. Starch comes from the same entry as available carbohydrate. When that entry lists no starch, starch is available carbohydrate minus sugars. Another database's starch is derived from a different total and could push sugars plus starch past it (it did for dried shiitake: 61.7 g on top of 21.7 g).
 7. A value that cannot be true for the tissue is not used. Two foods take USDA as their primary entry and the manifest says why: pistachios (BLS: 5.6 mg potassium) and pumpkin seeds (BLS: folate exactly 0 by formula).
 
+## Protein digestibility
+
+`ilealDigestibility` is the share of a food's protein absorbed by the end of the small intestine: true ileal digestibility of nitrogen, one value per food. Foods from D1 on cite theirs (`src/data/foods/proteinDigestibility.ts`, linked in the Food page source panel), and `proteinDigestibility.test.ts` checks each value against a percentage its source states. Measurements of the food as people eat it come first, in this order:
+
+1. Human, true ileal (15N-labelled food with a naso-ileal tube, or ileostomates).
+2. Growing pig, true ileal. Hodgkinson et al. 2025 measured 97 foods with one method in three laboratories; Hodgkinson et al. 2022 found pig and adult human values interchangeable (human = 1.00 × pig − 0.010).
+3. Rat, true ileal.
+4. Rat or human, true faecal, only when no ileal value exists: in rats, faecal values exceeded ileal ones for 11 of 14 foods, by 10 % on average (Rutherfurd et al. 2015).
+
+A food nobody has measured takes a **proxy**, named, when one measured food is clearly closer than its category (cooked oatmeal for uncooked oat flakes, whole wheat bread for wholemeal pasta); otherwise a **class value**, the median of its category in the pig study (Table 3: fruit 62 %, seeds 64 %, vegetables 86 %, nuts 90 %), which the authors call indicative only for plant categories. Raw grain measured as animal feed does not stand in for cooked food (Hodgkinson et al. 2022).
+
+Limits:
+- One value covers every amino acid. The limiting one can digest far worse: reactive lysine 17 % against 46 % of nitrogen in the pig study's rye bread.
+- Class values are medians of amino acid digestibility; measured values are nitrogen.
+- The pig study was funded by Project Proteos, a consortium of food sectors coordinated by the Global Dairy Platform, as the paper declares.
+
 ## Provenance categories
 
 Each value keeps the database's own category, mapped to one vocabulary: lab analysis, literature, aggregated literature, other database, recipe calculation, pattern of a similar food, taken from a similar food, rescaled, formula, logical zero, logical assumption, trace, label value. USDA derivation codes are mapped by their source code (analytical, calculated, assumed zero, …).
@@ -57,8 +73,10 @@ Each value keeps the database's own category, mapped to one vocabulary: lab anal
 
 | Source | What we take | Maps to |
 | --- | --- | --- |
-| FAO 2013 / WHO/FAO protein quality | Adult AA scoring pattern; DIAAS/PDCAAS convention | EAA axis, `ilealDigestibility` |
+| FAO 2013 / WHO/FAO protein quality | Adult AA scoring pattern; DIAAS/PDCAAS convention | EAA axis |
 | Evenepoel et al. 1998, J Nutr 128:1716–1722 | Human ileal digestibility of raw vs cooked egg (51.3 % vs 90.9 %) | Raw egg digestibility |
+| Hodgkinson et al. 2025, J Nutr, doi:10.1016/j.tjnut.2025.08.004 (Tables 2–3); Hodgkinson et al. 2022, J Nutr 152:1635 | Pig true ileal nitrogen digestibility of 97 foods; category medians; pig = human | `ilealDigestibility` of D1 foods |
+| Walther et al. 2019, Mol Nutr Food Res (Table 1); Rutherfurd et al. 2015, J Nutr 145:372 (Table 1); Bailey & Stein 2020, J Sci Food Agric (Table 4); Lackey & Fleming 2021, Front Nutr (Table 3); Freitas et al. 2012, Food Nutr Sci (Table 4) | Human, rat, and pig values for white bread, roasted peanuts, pistachios, walnuts, Brazil nuts | `ilealDigestibility` where the pig study has no match |
 | IOM / EFSA vitamin A | Food RAE: β-carotene /12, other provitamin A carotenoids /24 | Micro axis, `raeUg` |
 | FDA Daily Values (21 CFR 101.9, 2016) | Reference amounts for the 20 scored micronutrients | Micro axis density |
 | EFSA tolerable upper intake levels | Retinol, iodine, selenium, copper, zinc, vitamin D, calcium, B6 | Marked (⚠) when 100 kcal exceed a day's limit; not scored |

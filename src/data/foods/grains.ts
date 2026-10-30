@@ -1,7 +1,10 @@
 import type { LocalizedText } from "../../i18n/locale";
 import type { DegradationProfile, ResidueProfile } from "../../scoring/types";
 import { defineFood, plant, prepared } from "./helpers";
-import { FAO_WHO_UNU_1985, proxy, WALTHER_2019 } from "./proteinDigestibility";
+import { pigIleal, proxy, WALTHER_2019 } from "./proteinDigestibility";
+
+const OATMEAL = pigIleal("Oatmeal simmered in water for 15 min: 82.8 % of nitrogen.");
+const WHOLE_WHEAT_BREAD = pigIleal("Whole wheat bread from a US bakery: 70.7 % of nitrogen.");
 
 const FIELD_GRAIN: ResidueProfile = {
   surfaceAreaClass: "low", systemicPesticideLikelihood: 0.35,
@@ -29,7 +32,7 @@ const BREAD_NOVA: LocalizedText = {
 const oatFlakes = plant({
   id: "oat_flakes", name: "Oat flakes", nameDe: "Haferflocken",
   class: "grains", group: "oats", preparation: "raw",
-  ilealDigestibility: 0.86, zincBoundByPhytate: true, resistantStarchG: 0,
+  ilealDigestibility: 0.828, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: {
     waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.3,
@@ -37,7 +40,7 @@ const oatFlakes = plant({
     perishabilityDays: 180, processingStability: "dried",
   },
   phytochemicalIndex: 0.6,
-  sources: [FAO_WHO_UNU_1985],
+  sources: [OATMEAL, proxy("Measured on cooked oatmeal; no value for uncooked flakes was found.")],
   notes: [
     {
       en: "Rolled whole oats: about 11 g fibre and 13 g protein per 100 g as bought.",
@@ -50,11 +53,11 @@ const ryeBreadWholemeal = plant({
   id: "rye_bread_wholemeal", name: "Wholemeal rye bread", nameDe: "Roggenvollkornbrot",
   class: "grains", group: "rye_bread", preparation: "baked",
   processing: { nova: 3 },
-  ilealDigestibility: 0.86, zincBoundByPhytate: true, resistantStarchG: 0,
+  ilealDigestibility: 0.456, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: { ...BREAD, perishabilityDays: 7 },
   phytochemicalIndex: 0.6,
-  sources: [FAO_WHO_UNU_1985, proxy("No human value for rye; whole wheat (86 %) is used.")],
+  sources: [pigIleal("Friesian-style wholeseed rye bread: 45.6 % of nitrogen.")],
   notes: [
     {
       en: "About 10 g fibre per 100 g, with about 440 mg sodium from the salt in the dough.",
@@ -68,11 +71,11 @@ const wheatBreadWholemeal = plant({
   id: "wheat_bread_wholemeal", name: "Wholemeal wheat bread", nameDe: "Weizenvollkornbrot",
   class: "grains", group: "wheat_bread_wholemeal", preparation: "baked",
   processing: { nova: 3 },
-  ilealDigestibility: 0.86, zincBoundByPhytate: true, resistantStarchG: 0,
+  ilealDigestibility: 0.707, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: BREAD,
   phytochemicalIndex: 0.55,
-  sources: [FAO_WHO_UNU_1985],
+  sources: [WHOLE_WHEAT_BREAD],
   notes: [
     {
       en: "About 7 g fibre per 100 g against 4 g in white bread, and nearly three times its magnesium.",
@@ -86,7 +89,7 @@ const wheatBreadWhite = plant({
   id: "wheat_bread_white", name: "White wheat bread", nameDe: "Weizenbrot, Weißbrot",
   class: "grains", group: "wheat_bread_white", preparation: "baked",
   processing: { nova: 3 },
-  ilealDigestibility: 0.9, resistantStarchG: 0,
+  ilealDigestibility: 0.903, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: BREAD,
   phytochemicalIndex: 0.15,
@@ -103,11 +106,11 @@ const wheatBreadWhite = plant({
 const riceBrownBoiled = plant({
   id: "rice_brown_boiled", name: "Brown rice, boiled", nameDe: "Naturreis, gekocht",
   class: "grains", group: "rice_brown", preparation: "boiled",
-  ilealDigestibility: 0.85, zincBoundByPhytate: true, resistantStarchG: 0,
+  ilealDigestibility: 0.899, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: { ...FIELD_GRAIN, heavyMetalClass: "moderate" },
   degradation: BOILED_GRAIN,
   phytochemicalIndex: 0.4,
-  sources: [FAO_WHO_UNU_1985, proxy("No human value for brown rice; the whole-grain cereal value (85 %) is used.")],
+  sources: [pigIleal("Long-grain brown jasmine rice, cooked in a rice cooker: 89.9 % of nitrogen.")],
   notes: [
     {
       en: "The bran stays on: about three times the magnesium and twice the fibre of boiled white rice.",
@@ -119,11 +122,11 @@ const riceBrownBoiled = plant({
 const riceWhiteBoiled = plant({
   id: "rice_white_boiled", name: "White rice, boiled", nameDe: "Weißer Reis, gekocht",
   class: "grains", group: "rice_white", preparation: "boiled",
-  ilealDigestibility: 0.88, resistantStarchG: 0,
+  ilealDigestibility: 0.951, resistantStarchG: 0,
   residue: { ...FIELD_GRAIN, heavyMetalClass: "moderate" },
   degradation: BOILED_GRAIN,
   phytochemicalIndex: 0.1,
-  sources: [FAO_WHO_UNU_1985],
+  sources: [pigIleal("Thai Hom Mali white rice, cooked in a rice cooker: 95.1 % of nitrogen.")],
   notes: [
     {
       en: "Polished rice: bran and germ are removed, leaving mostly starch.",
@@ -135,11 +138,11 @@ const riceWhiteBoiled = plant({
 const pastaBoiled = plant({
   id: "pasta_boiled", name: "Pasta, egg-free, boiled", nameDe: "Teigwaren, eifrei, gekocht",
   class: "grains", group: "pasta", preparation: "boiled",
-  ilealDigestibility: 0.9, resistantStarchG: 0,
+  ilealDigestibility: 0.852, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: BOILED_GRAIN,
   phytochemicalIndex: 0.15,
-  sources: [WALTHER_2019, proxy("No human value for pasta; the wheat toast value (90.3 %) is used.")],
+  sources: [pigIleal("Dried durum wheat fettuccine, simmered: 85.2 % of nitrogen.")],
   notes: [
     {
       en: "Refined wheat pasta. Amino acids BLS does not report come from the USDA entry.",
@@ -151,11 +154,14 @@ const pastaBoiled = plant({
 const pastaWholemealBoiled = plant({
   id: "pasta_wholemeal_boiled", name: "Wholemeal pasta, egg-free, boiled", nameDe: "Vollkornteigwaren, eifrei, gekocht",
   class: "grains", group: "pasta_wholemeal", preparation: "boiled",
-  ilealDigestibility: 0.86, zincBoundByPhytate: true, resistantStarchG: 0,
+  ilealDigestibility: 0.707, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: BOILED_GRAIN,
   phytochemicalIndex: 0.45,
-  sources: [FAO_WHO_UNU_1985, proxy("No human value for wholemeal pasta; whole wheat (86 %) is used.")],
+  sources: [
+    WHOLE_WHEAT_BREAD,
+    proxy("No value for wholemeal pasta was found; the whole wheat bread value is used. Refined durum pasta measured 85.2 %."),
+  ],
   notes: [
     {
       en: "About 2.5 times the fibre of refined pasta per 100 g.",
@@ -167,11 +173,11 @@ const pastaWholemealBoiled = plant({
 const quinoaBoiled = plant({
   id: "quinoa_boiled", name: "Quinoa, boiled", nameDe: "Quinoa, gekocht",
   class: "grains", group: "quinoa", preparation: "boiled",
-  ilealDigestibility: 0.85, zincBoundByPhytate: true, resistantStarchG: 0,
+  ilealDigestibility: 0.854, zincBoundByPhytate: true, resistantStarchG: 0,
   residue: FIELD_GRAIN,
   degradation: BOILED_GRAIN,
   phytochemicalIndex: 0.55,
-  sources: [FAO_WHO_UNU_1985, proxy("No human value for quinoa; the whole-grain cereal value (85 %) is used.")],
+  sources: [pigIleal("White quinoa, soaked 10 min, cooked in a rice cooker: 85.4 % of nitrogen.")],
   notes: [
     {
       en: "A seed cooked like a grain (a pseudocereal). Unlike wheat and rice, its amino acid pattern is complete against FAO 2013.",
@@ -185,6 +191,7 @@ export const GRAIN_FOODS = [
   prepared(oatFlakes, {
     id: "oat_porridge", name: "Oat porridge, boiled in water", nameDe: "Haferbrei, in Wasser gekocht",
     preparation: "boiled",
+    sources: [OATMEAL],
     notes: [
       {
         en: "Oat flakes boiled in water: the same food, about five times more dilute per 100 g.",

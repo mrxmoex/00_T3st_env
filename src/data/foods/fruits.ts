@@ -1,12 +1,11 @@
-import type { DegradationProfile, ResidueProfile, SourceRef } from "../../scoring/types";
+import type { DegradationProfile, ResidueProfile } from "../../scoring/types";
 import { defineFood, plant, prepared } from "./helpers";
+import { classValue, pigIleal } from "./proteinDigestibility";
 
-/** No ileal digestibility study of fruit protein was found; fruit sits with the vegetable estimates (0.72–0.80). */
-const FRUIT_DIGESTIBILITY = 0.75;
-const FRUIT_PROTEIN: SourceRef = {
-  label: "Class estimate",
-  note: "No ileal digestibility study of fruit protein; set with the vegetable estimates. Fruit carries under 1.5 g protein per 100 g.",
-};
+const FRUIT_CLASS_DIGESTIBILITY = 0.62;
+const FRUIT_CLASS = classValue(
+  "No measurement of this fruit was found. Median amino acid digestibility of the six fruits measured in pigs: 62 %; the authors call fruit medians indicative only",
+);
 
 const BERRY: ResidueProfile = {
   surfaceAreaClass: "high", systemicPesticideLikelihood: 0.45,
@@ -41,7 +40,7 @@ const SOFT_BERRY: DegradationProfile = {
 const appleRaw = plant({
   id: "apple_raw", name: "Apple, raw, with skin", nameDe: "Apfel, roh, mit Schale",
   class: "fruits", group: "apple", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: 0.247, resistantStarchG: 0,
   residue: EDIBLE_SKIN,
   degradation: {
     waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.6,
@@ -49,7 +48,7 @@ const appleRaw = plant({
     perishabilityDays: 30, processingStability: "fresh",
   },
   phytochemicalIndex: 0.7,
-  sources: [FRUIT_PROTEIN],
+  sources: [pigIleal("Fresh apple, cored and grated: 24.7 % of nitrogen. Several amino acids were below the detection limit.")],
   notes: [
     {
       en: "Database entry with the skin. Per 100 g mostly water and about 10 g sugar, with modest fibre and vitamin C.",
@@ -61,11 +60,11 @@ const appleRaw = plant({
 const pearRaw = plant({
   id: "pear_raw", name: "Pear, raw", nameDe: "Birne, roh",
   class: "fruits", group: "pear", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: 0.266, resistantStarchG: 0,
   residue: EDIBLE_SKIN,
   degradation: { ...appleRaw.degradation, perishabilityDays: 10 },
   phytochemicalIndex: 0.5,
-  sources: [FRUIT_PROTEIN],
+  sources: [pigIleal("Fresh pear, cored and grated: 26.6 % of nitrogen. Several amino acids were below the detection limit.")],
   notes: [
     {
       en: "About as much sugar as apple, a little more fibre, and little vitamin C.",
@@ -77,7 +76,7 @@ const pearRaw = plant({
 const bananaRaw = plant({
   id: "banana_raw", name: "Banana, raw", nameDe: "Banane, roh",
   class: "fruits", group: "banana", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: 0.607, resistantStarchG: 0,
   residue: PEELED,
   degradation: {
     waterSolubleVitaminLoad: 0.4, cutSurfaceSensitivity: 0.7,
@@ -85,7 +84,7 @@ const bananaRaw = plant({
     perishabilityDays: 6, processingStability: "fresh",
   },
   phytochemicalIndex: 0.35,
-  sources: [FRUIT_PROTEIN],
+  sources: [pigIleal("Fresh banana, lightly mashed: 60.7 % of nitrogen.")],
   notes: [
     {
       en: "More sugar and some starch than most fruit here, and one of the higher potassium values among the fresh fruit.",
@@ -97,11 +96,11 @@ const bananaRaw = plant({
 const orangeRaw = plant({
   id: "orange_raw", name: "Orange, raw", nameDe: "Orange, roh",
   class: "fruits", group: "orange", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: PEELED,
   degradation: VITAMIN_C_FRUIT,
   phytochemicalIndex: 0.65,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "Vitamin C about 60 mg per 100 g of flesh. The peel is not part of the entry.",
@@ -113,11 +112,11 @@ const orangeRaw = plant({
 const kiwiRaw = plant({
   id: "kiwi_raw", name: "Kiwi, raw", nameDe: "Kiwi, roh",
   class: "fruits", group: "kiwi", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: PEELED,
   degradation: VITAMIN_C_FRUIT,
   phytochemicalIndex: 0.6,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "Vitamin C about 70 mg per 100 g, and more vitamin K than most fruit. Amino acids BLS does not report come from the USDA entry.",
@@ -129,11 +128,11 @@ const kiwiRaw = plant({
 const strawberriesRaw = plant({
   id: "strawberries_raw", name: "Strawberries, raw", nameDe: "Erdbeeren, roh",
   class: "fruits", group: "strawberry", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: BERRY,
   degradation: { ...SOFT_BERRY, waterSolubleVitaminLoad: 0.8, heatSensitivity: 0.75 },
   phytochemicalIndex: 0.8,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "Vitamin C near 57 mg per 100 g at under 40 kcal, and the most folate among the fruit here.",
@@ -145,11 +144,11 @@ const strawberriesRaw = plant({
 const blueberriesRaw = plant({
   id: "blueberries_raw", name: "Blueberries, raw", nameDe: "Heidelbeeren, roh",
   class: "fruits", group: "blueberry", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: BERRY,
   degradation: { ...SOFT_BERRY, waterSolubleVitaminLoad: 0.5, cutSurfaceSensitivity: 0.4, perishabilityDays: 10 },
   phytochemicalIndex: 0.9,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "About 5 g fibre with 10 g sugar per 100 g; vitamin C is modest. Amino acids BLS does not report come from the USDA entry.",
@@ -161,11 +160,11 @@ const blueberriesRaw = plant({
 const raspberriesRaw = plant({
   id: "raspberries_raw", name: "Raspberries, raw", nameDe: "Himbeeren, roh",
   class: "fruits", group: "raspberry", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: BERRY,
   degradation: { ...SOFT_BERRY, perishabilityDays: 3 },
   phytochemicalIndex: 0.85,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "Nearly as much fibre as sugar (4.7 g and 5.2 g per 100 g). Missing amino acids are filled from the strawberry pattern.",
@@ -177,11 +176,11 @@ const raspberriesRaw = plant({
 const blackcurrantsRaw = plant({
   id: "blackcurrants_raw", name: "Blackcurrants, raw", nameDe: "Schwarze Johannisbeeren, roh",
   class: "fruits", group: "blackcurrant", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: BERRY,
   degradation: { ...SOFT_BERRY, waterSolubleVitaminLoad: 0.85, cutSurfaceSensitivity: 0.5, heatSensitivity: 0.75, perishabilityDays: 5 },
   phytochemicalIndex: 0.9,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "The most vitamin C here, about 177 mg per 100 g. Amino acids are filled from the strawberry pattern.",
@@ -193,7 +192,7 @@ const blackcurrantsRaw = plant({
 const grapesRaw = plant({
   id: "grapes_raw", name: "Grapes, raw", nameDe: "Weintrauben, roh",
   class: "fruits", group: "grape", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: BERRY,
   degradation: {
     waterSolubleVitaminLoad: 0.3, cutSurfaceSensitivity: 0.4,
@@ -201,7 +200,7 @@ const grapesRaw = plant({
     perishabilityDays: 10, processingStability: "fresh",
   },
   phytochemicalIndex: 0.65,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "Mostly water and sugar, with little fibre or vitamin C per 100 g.",
@@ -213,7 +212,7 @@ const grapesRaw = plant({
 const avocadoRaw = plant({
   id: "avocado_raw", name: "Avocado, raw", nameDe: "Avocado, roh",
   class: "fruits", group: "avocado", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: 0.727, resistantStarchG: 0,
   residue: PEELED,
   degradation: {
     waterSolubleVitaminLoad: 0.35, cutSurfaceSensitivity: 0.8,
@@ -221,7 +220,7 @@ const avocadoRaw = plant({
     perishabilityDays: 5, processingStability: "fresh",
   },
   phytochemicalIndex: 0.5,
-  sources: [FRUIT_PROTEIN],
+  sources: [pigIleal("Fresh avocado, lightly mashed: 72.7 % of nitrogen.")],
   notes: [
     {
       en: "A fat fruit: 12.5 g fat per 100 g, mostly monounsaturated, little sugar, and the most potassium of the fresh fruit here.",
@@ -233,7 +232,7 @@ const avocadoRaw = plant({
 const apricotRaw = plant({
   id: "apricot_raw", name: "Apricot, raw", nameDe: "Aprikose, roh",
   class: "fruits", group: "apricot", preparation: "raw",
-  ilealDigestibility: FRUIT_DIGESTIBILITY, resistantStarchG: 0,
+  ilealDigestibility: FRUIT_CLASS_DIGESTIBILITY, resistantStarchG: 0,
   residue: EDIBLE_SKIN,
   degradation: {
     waterSolubleVitaminLoad: 0.45, cutSurfaceSensitivity: 0.6,
@@ -241,7 +240,7 @@ const apricotRaw = plant({
     perishabilityDays: 5, processingStability: "fresh",
   },
   phytochemicalIndex: 0.6,
-  sources: [FRUIT_PROTEIN],
+  sources: [FRUIT_CLASS],
   notes: [
     {
       en: "About 1.6 mg β-carotene per 100 g, counted as provitamin A (RAE), not as retinol.",

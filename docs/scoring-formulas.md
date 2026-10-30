@@ -24,6 +24,8 @@ EAA     = 100 × (0.55×min(1,AAS) + 0.30×digestibility + 0.15×density)
 
 Plant proteins stay incomplete when any ratio &lt; 1. Density stops low-protein leaves from ranking as protein foods.
 
+`ileal_digestibility` is true ileal digestibility of nitrogen, one value per food for every amino acid. Its sources and their order of preference: [`data-sources.md`](data-sources.md#protein-digestibility).
+
 ## EFA / glyceride profile
 
 ```
