@@ -2217,7 +2217,7 @@
     "starch": [
      0.0,
      "formula",
-     "FDC"
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -5470,7 +5470,7 @@
     "starch": [
      0.0,
      "formula",
-     "FDC"
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -5765,9 +5765,9 @@
      "BLS"
     ],
     "starch": [
-     0.01,
+     0.0,
      "formula",
-     "FDC"
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -9962,9 +9962,9 @@
      "BLS"
     ],
     "starch": [
-     0.0,
-     "analysis",
-     "FDC"
+     2.7,
+     "formula",
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -10546,9 +10546,9 @@
      "BLS"
     ],
     "starch": [
-     1.91,
+     0.0,
      "formula",
-     "FDC"
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -10814,9 +10814,9 @@
      "BLS"
     ],
     "starch": [
-     8.45,
-     "borrowed",
-     "FDC"
+     0.0,
+     "formula",
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -11118,9 +11118,9 @@
      "BLS"
     ],
     "starch": [
-     61.66,
+     0.0,
      "formula",
-     "FDC"
+     "BLS"
     ],
     "lactose": [
      0.0,
@@ -11726,9 +11726,9 @@
      "BLS"
     ],
     "starch": [
-     1.9,
+     0.39,
      "formula",
-     "FDC"
+     "BLS"
     ],
     "lactose": [
      0.0,

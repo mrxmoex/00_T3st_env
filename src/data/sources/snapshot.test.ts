@@ -71,6 +71,14 @@ describe("imported values", () => {
     }
   });
 
+  it("never split more sugar and starch than the available carbohydrate", () => {
+    for (const food of FOODS) {
+      const n = food.nutrients;
+      const split = (n.sugars ?? 0) + (n.starch ?? 0);
+      expect(split, food.id).toBeLessThanOrEqual((n.carbsAvailable ?? 0) + 0.5);
+    }
+  });
+
   it("roughly agree with the energy of their macronutrients", () => {
     for (const food of FOODS) {
       const n = food.nutrients;
