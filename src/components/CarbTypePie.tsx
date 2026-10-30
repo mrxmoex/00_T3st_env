@@ -6,6 +6,9 @@ import type { FoodRecord } from "../scoring/types";
 
 const SIZE = 44;
 
+/** Grams of carbohydrate (available plus fibre and resistant starch) per 100 g at which the pie fills its box. */
+export const CARB_PIE_FULL_G = 80;
+
 interface Segment {
   key: "sugar" | "starch" | "passive";
   grams: number;
@@ -32,7 +35,7 @@ function polar(cx: number, cy: number, r: number, angle: number): [number, numbe
   return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
 }
 
-/** Composition of carbohydrate type for one food; not a 0–100 rank. */
+/** Carbohydrate types as slices; the pie's area grows with grams per 100 g. Not a 0–100 rank. */
 export function CarbTypePie({ food, carb }: { food: FoodRecord; carb: CarbBreakdown }) {
   const { t } = useLocale();
   const titleId = useId();
@@ -40,7 +43,7 @@ export function CarbTypePie({ food, carb }: { food: FoodRecord; carb: CarbBreakd
   const total = segments.reduce((sum, seg) => sum + seg.grams, 0);
   const cx = SIZE / 2;
   const cy = SIZE / 2;
-  const r = SIZE / 2 - 2;
+  const r = (SIZE / 2 - 2) * Math.sqrt(Math.min(1, total / CARB_PIE_FULL_G));
 
   const title =
     total < 0.5

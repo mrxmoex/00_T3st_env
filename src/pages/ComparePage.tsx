@@ -1,6 +1,6 @@
 import { Fragment, useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { CarbTypePie } from "../components/CarbTypePie";
+import { CARB_PIE_FULL_G, CarbTypePie } from "../components/CarbTypePie";
 import { CompareAxisRadar } from "../components/CompareAxisRadar";
 import { CompareBioactivesPanel } from "../components/CompareBioactivesPanel";
 import { NovaMarker } from "../components/NovaMarker";
@@ -102,6 +102,7 @@ function CarbTypeKey({ t }: { t: Messages }) {
         </span>
         {t.compare.carbLegend.none}
       </li>
+      <li>{t.compare.carbLegend.size(CARB_PIE_FULL_G)}</li>
     </ul>
   );
 }
@@ -113,7 +114,13 @@ function scoreRows(axes: readonly AxisKey[], selected: readonly ComparedFood[], 
       {selected.map(({ food, card }, index) => (
         <td key={`${index}-${food.id}`}>
           {axis === "carb" ? (
-            <CarbTypePie food={food} carb={card.carb} />
+            <span className="carb-cell">
+              <CarbTypePie food={food} carb={card.carb} />
+              <HeatCell
+                score={axisValue(card, axis)}
+                title={card.carb.activeG + card.carb.passiveG < 0.5 ? t.compare.carbQuietScore : undefined}
+              />
+            </span>
           ) : (
             <HeatCell score={axisValue(card, axis)} />
           )}
@@ -152,6 +159,14 @@ function axisGroup(
               ))}
             </tr>
           ))}
+          <tr>
+            <td className="sticky">{t.compare.nutrientRows.sugar}</td>
+            {selected.map(({ food }, index) => (
+              <td key={`${index}-${food.id}`} className="mono">
+                {formatAmount(food.carbs.sugars)} g
+              </td>
+            ))}
+          </tr>
           <tr>
             <td className="sticky">{t.compare.nutrientRows.kcal}</td>
             {selected.map(({ food }, index) => (

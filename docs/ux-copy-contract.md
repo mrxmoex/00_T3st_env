@@ -27,7 +27,8 @@ No backing, no claim. Remove a claim rather than add a disclaimer.
 |---|---|---|
 | Heat colour (red → green) | Higher scores better on a scored axis: axis scores, ileal digestibility, DIAAS, %DV coverage | On raw amounts that are neither good nor bad (grams of protein, fat, sugar; kcal) |
 | Category colour (carb pie, macro donut, mass bar) | A type of component; each chart carries a key | A verdict such as good or bad |
-| Radar ring numbers | Shared 0–100 scale | On a radar whose spokes have different full scales |
+| Pie size (carbohydrate row) | Area proportional to grams of carbohydrate per 100 g, full at 80 g | A score; the score sits beside it in heat colour |
+| Radar ring numbers | A scale every spoke shares, with its unit (nutrient radar: 20–80 g per 100 g, or 25–100 kcal per 100 kcal) | On a radar whose spokes have different full scales |
 | ⚠ | 100 kcal exceed the adult whole-day EFSA upper limit (`upperLimitExceedances`) | Lowering a score; implying a single portion is harmful |
 | `*` on a compound amount | Raw-tissue value shown for a cooked or processed food, wherever the amount appears (profile chips, honours) | Leaving it off anywhere the amount is shown (non-claim 18) |
 | — | No database reports the value | Writing 0 for it (non-claim 14) |
@@ -40,6 +41,7 @@ No backing, no claim. Remove a claim rather than add a disclaimer.
 | EN | DE | Means | Use instead of |
 |---|---|---|---|
 | available carbs | verfügbare KH | sugars + digestible starch | "carbs" where fibre matters |
+| share of energy | Energieanteil | part of the food's database energy; protein, fat, available carbs, and fibre & other sum to 100 % | a split of the three macros alone |
 | passive carbs | passive KH | fibre + resistant starch | |
 | complete | vollständig | AAS ≥ 1, as the engine flags it | "limiting X" when AAS ≥ 1 |
 | limiting X | limitierend X | AAS < 1; X has the lowest ratio | |

@@ -19,7 +19,7 @@ const CX = WIDTH / 2;
 const CY = HEIGHT / 2;
 const RADIUS = 112;
 const LABEL_RADIUS = RADIUS + 16;
-const RINGS = [25, 50, 75, 100] as const;
+export const RINGS = [25, 50, 75, 100] as const;
 const MAX = 100;
 const CENTER_LINE = 16;
 const CENTER_WIDTH = 186;
@@ -65,7 +65,7 @@ export function RadarChart({
   title,
   center,
   hideLegend = false,
-  hideTicks = false,
+  tickLabel = (ring: number) => String(ring),
 }: {
   axes: readonly RadarAxis[];
   series: readonly RadarSeries[];
@@ -73,8 +73,8 @@ export function RadarChart({
   /** Energy or other absolute values drawn in the middle of the polygon. */
   center?: readonly RadarCenterLine[];
   hideLegend?: boolean;
-  /** Ring numbers are only meaningful when every spoke shares one 0–100 scale. */
-  hideTicks?: boolean;
+  /** Label for a ring at this percentage of the full spoke; only meaningful when every spoke shares one scale. */
+  tickLabel?: (ring: number) => string;
 }) {
   const titleId = useId();
   const count = axes.length;
@@ -100,10 +100,10 @@ export function RadarChart({
             />
           );
         })}
-        {center === undefined && !hideTicks
+        {center === undefined
           ? RINGS.map((ring) => (
               <text key={ring} className="radar-tick" x={CX + 4} y={CY - (ring / MAX) * RADIUS - 2}>
-                {ring}
+                {tickLabel(ring)}
               </text>
             ))
           : null}

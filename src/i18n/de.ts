@@ -227,15 +227,17 @@ export const de: Messages = {
     radarProteinLegendLine: ({ aas, diaas, limiting }) =>
       `AAS ${aas} · DIAAS ${diaas} · ${aas < 1 ? `limitierend ${limiting}` : "vollständig"}`,
     nutrientRadarHeading: "Grundnährstoffe & Dichte",
-    nutrientRadarTitle: (basis) => `Protein, Fett und Zucker (${basis})`,
-    nutrientRadarHint: ({ basis, protein, fat, sugar }) =>
-      `Speichen: Gramm ${basis}, voll bei ${protein} g Protein, ${fat} g Fett, ${sugar} g Zucker. Prozent: Energieanteil, auf beiden Bezugsgrößen gleich.`,
+    nutrientRadarTitle: (basis) => `Protein, Fett und verfügbare KH (${basis})`,
+    nutrientRadarHint: ({ basis, rings }) =>
+      basis === "per100g"
+        ? `Speichen: Gramm pro 100 g auf einer Skala, Ringe bei ${rings}. Prozent: Anteil an der Energie des Lebensmittels.`
+        : `Speichen: kcal aus jedem Nährstoff in 100 kcal, Ringe bei ${rings}. Prozent: Anteil an der Energie des Lebensmittels.`,
     macroShareToggleLabel: "Mengen:",
     macroShareBasis: { g: "pro 100 g", kcal: "pro 100 kcal" },
-    macroShareCaption: ({ protein, fat, carb }) =>
-      `Energieaufteilung: ${protein}% Protein · ${fat}% Fett · ${carb}% verfügbare KH (4 · 9 · 4 kcal/g; Energie aus Ballaststoffen nicht gezählt)`,
+    macroShareCaption: ({ protein, fat, carb, other }) =>
+      `Energie: ${protein}% Protein · ${fat}% Fett · ${carb}% verfügbare KH · ${other}% Ballaststoffe und Sonstiges (4 · 9 · 4 kcal/g)`,
     macroLegendHeading: "Makro-Energieanteil je Lebensmittel",
-    macroLegend: { protein: "Protein", fat: "Fett", carb: "Verfügbare KH" },
+    macroLegend: { protein: "Protein", fat: "Fett", carb: "Verfügbare KH", other: "Ballaststoffe & Sonstiges" },
     massCompositionHeading: "Zusammensetzung der essbaren Masse (pro 100 g)",
     massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
       `${food}: Wasser ${water} g, Protein ${protein} g, Fett ${fat} g, Kohlenhydrate inkl. Ballaststoffe ${carbs} g`,
@@ -253,7 +255,9 @@ export const de: Messages = {
       starch: "Verdauliche Stärke",
       passive: "Ballaststoffe + resistente Stärke",
       none: "vernachlässigbar (unter 0,5 g pro 100 g)",
+      size: (fullG) => `Kreisfläche: Gramm pro 100 g, voll bei ${fullG} g`,
     },
+    carbQuietScore: "Unter 0,5 g Kohlenhydrate gibt es feste 70: keine Zuckerlast, aber auch keine Ballaststoffe.",
     carbPie: {
       quiet: "Vernachlässigbare Kohlenhydrate (unter 0,5 g pro 100 g); keine Ballaststoffquelle.",
       noneSymbol: "×",
@@ -263,11 +267,12 @@ export const de: Messages = {
     necessityImpactMethodLink: "Methode: Rückstände & Stabilität",
     digestibilityDefinition: "Anteil des Proteins, der bis zum Ende des Dünndarms aufgenommen wird.",
     degradationRowHint: "Garen, Lagerung, Verarbeitung vs. labile Vitamine — nicht jeder Nährstoff verblasst gleich.",
-    nutrientShort: { protein: "Protein", fat: "Fett", sugar: "Zucker" },
+    nutrientShort: { protein: "Protein", fat: "Fett", carbs: "KH" },
     nutrientRows: {
       protein: "Protein (g / 100 g)",
       fat: "Fett (g / 100 g)",
-      sugar: "Zucker (g / 100 g)",
+      carbs: "Verfügbare KH (g / 100 g)",
+      sugar: "davon Zucker (g / 100 g)",
       kcal: "Energie (kcal / 100 g)",
       kJ: "Energie (kJ / 100 g, aus kcal)",
       digestibility: "Ileale Verdaulichkeit",

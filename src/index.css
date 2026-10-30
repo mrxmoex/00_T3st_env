@@ -201,6 +201,13 @@ table.matrix.compare-axes td,
 table.matrix.compare-micro th,
 table.matrix.compare-micro td,
 table.matrix.compare-axes .nova-badge { white-space: normal; }
+@media (max-width: 480px) {
+  table.matrix.compare-micro th,
+  table.matrix.compare-micro td { padding: 0.45rem 0.3rem; }
+  table.matrix.compare-micro td.sticky,
+  table.matrix.compare-micro th.sticky { min-width: 7.5rem; }
+  table.matrix.compare-micro .heat-percent { min-width: 2.9rem; padding-inline: 0.3rem; }
+}
 
 .matrix th, .matrix td {
   padding: 0.55rem 0.55rem;
@@ -423,6 +430,7 @@ details.panel > summary {
 .macro-seg-protein { fill: var(--series-1); }
 .macro-seg-fat { fill: var(--series-2); }
 .macro-seg-carb { fill: var(--series-3); }
+.macro-seg-other { fill: hsl(128 14% 58%); }
 .macro-pie-hole { fill: var(--bg); }
 .nutrient-macro-legend {
   margin-top: 0.5rem;
@@ -444,13 +452,16 @@ details.panel > summary {
   flex-wrap: wrap;
 }
 .macro-share-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.9rem;
   margin: 0.25rem 0 0;
   padding: 0;
   list-style: none;
   font-size: 0.78rem;
   color: var(--muted);
 }
-.macro-share-lines li { display: flex; align-items: center; gap: 0.35rem; margin: 0.1rem 0; }
+.macro-share-lines li { display: inline-flex; align-items: center; gap: 0.35rem; }
 .macro-key-dot {
   width: 0.55rem;
   height: 0.55rem;
@@ -460,6 +471,7 @@ details.panel > summary {
 .macro-key-dot.macro-seg-protein { background: var(--series-1); }
 .macro-key-dot.macro-seg-fat { background: var(--series-2); }
 .macro-key-dot.macro-seg-carb { background: var(--series-3); }
+.macro-key-dot.macro-seg-other { background: hsl(128 14% 58%); }
 .nutrient-radar-hint { margin: 0.35rem 0 0; font-size: 0.84rem; }
 .mass-composition-block { margin-top: 0.75rem; }
 .mass-composition-heading { font-size: 0.82rem; font-weight: 600; margin: 0 0 0.35rem; color: var(--muted); }
@@ -508,6 +520,7 @@ details.panel > summary {
 .carb-key-swatch { width: 0.6rem; height: 0.6rem; border-radius: 2px; }
 .carb-key-none { width: 0.6rem; text-align: center; line-height: 1; }
 .carb-pie-none { color: var(--muted); font-size: 1.1rem; line-height: 1; padding: 0 0.15rem; }
+.carb-cell { display: inline-flex; align-items: center; gap: 0.5rem; }
 .carb-pie-quiet { min-width: 1.4rem; justify-content: center; }
 .marker-key { margin: 0.6rem 0 0; font-size: 0.78rem; }
 .heat-percent { min-width: 3.4rem; font-variant-numeric: tabular-nums; }

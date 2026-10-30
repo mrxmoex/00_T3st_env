@@ -2,10 +2,11 @@ import { useMemo, useState } from "react";
 import { useLocale } from "../i18n/LocaleContext";
 import { activeCarbsG } from "../scoring/carbs";
 import {
-  GENERAL_NUTRIENT_FULL_G,
-  generalNutrientGramsForBasis,
-  generalNutrientScoresForBasis,
+  generalNutrientGrams,
   GENERAL_NUTRIENT_KEYS,
+  NUTRIENT_RADAR_FULL,
+  nutrientRadarAmounts,
+  nutrientRadarSpokes,
   scaleGramsForBasis,
   type NutrientBasis,
 } from "../scoring/generalNutrients";
@@ -14,7 +15,7 @@ import type { FoodRecord } from "../scoring/types";
 import { formatAmount } from "./format";
 import { MacroCompositionPie } from "./MacroCompositionPie";
 import { MassCompositionBar, MassCompositionKey } from "./MassCompositionBar";
-import { RadarChart } from "./RadarChart";
+import { RadarChart, RINGS } from "./RadarChart";
 
 export interface NutrientRadarEntry {
   id: string;
@@ -27,30 +28,36 @@ export function NutrientRadar({ entries }: { entries: readonly NutrientRadarEntr
   const [basis, setBasis] = useState<NutrientBasis>("per100g");
 
   const basisLabel = basis === "per100kcal" ? t.compare.macroShareBasis.kcal : t.compare.macroShareBasis.g;
+  const unit = basis === "per100kcal" ? "kcal" : "g";
+  const tickLabel = (ring: number) => `${formatAmount((ring / 100) * NUTRIENT_RADAR_FULL[basis])} ${unit}`;
   const radarTitle = t.compare.nutrientRadarTitle(basisLabel);
-  const hint = t.compare.nutrientRadarHint({ basis: basisLabel, ...GENERAL_NUTRIENT_FULL_G });
+  const hint = t.compare.nutrientRadarHint({ basis, rings: RINGS.map(tickLabel).join(", ") });
 
   const axes = useMemo(
     () =>
       GENERAL_NUTRIENT_KEYS.map((key) => ({
         short: t.compare.nutrientShort[key],
-        label: `${t.compare.nutrientShort[key]} (g ${basisLabel})`,
+        label: `${t.compare.nutrientShort[key]} (${unit} ${basisLabel})`,
       })),
-    [basisLabel, t],
+    [basisLabel, t, unit],
   );
 
   const series = useMemo(
     () =>
       entries.map(({ id, label, food }) => {
-        const grams = generalNutrientGramsForBasis(food, basis);
-        const spokes = generalNutrientScoresForBasis(food, basis);
+        const spokes = nutrientRadarSpokes(food, basis);
+        const amounts = nutrientRadarAmounts(food, basis);
+        const grams = generalNutrientGrams(food);
         return {
           id,
           label,
           values: GENERAL_NUTRIENT_KEYS.map((key) => spokes[key]),
-          tips: GENERAL_NUTRIENT_KEYS.map(
-            (key) => `${label} · ${t.compare.nutrientShort[key]}: ${formatAmount(grams[key])} g ${basisLabel}`,
-          ),
+          tips: GENERAL_NUTRIENT_KEYS.map((key) => {
+            const nutrient = t.compare.nutrientShort[key];
+            if (basis === "per100g") return `${label} · ${nutrient}: ${formatAmount(grams[key])} g ${basisLabel}`;
+            const gramsPerKcal = formatAmount(scaleGramsForBasis(grams[key], food, basis));
+            return `${label} · ${nutrient}: ${gramsPerKcal} g = ${Math.round(amounts[key])} kcal ${basisLabel}`;
+          }),
         };
       }),
     [basis, basisLabel, entries, t],
@@ -58,7 +65,7 @@ export function NutrientRadar({ entries }: { entries: readonly NutrientRadarEntr
 
   return (
     <div className="nutrient-radar-wrap">
-      <RadarChart hideLegend hideTicks key={basis} title={radarTitle} axes={axes} series={series} />
+      <RadarChart hideLegend key={basis} title={radarTitle} axes={axes} series={series} tickLabel={tickLabel} />
       <div className="nutrient-radar-controls">
         <span className="muted">{t.compare.macroShareToggleLabel}</span>
         <label>
@@ -109,6 +116,10 @@ export function NutrientRadar({ entries }: { entries: readonly NutrientRadarEntr
                       <li>
                         <span className="macro-key-dot macro-seg-carb" aria-hidden="true" />
                         {t.compare.macroLegend.carb}: {shares.carb.toFixed(0)}% · {formatAmount(carbG)} g
+                      </li>
+                      <li>
+                        <span className="macro-key-dot macro-seg-other" aria-hidden="true" />
+                        {t.compare.macroLegend.other}: {shares.other.toFixed(0)}%
                       </li>
                     </ul>
                   </div>

@@ -1,4 +1,5 @@
 import type { Gap } from "../recommend/engine";
+import type { NutrientBasis } from "../scoring/generalNutrients";
 import type { Activity, SweatLevel } from "../person/context";
 import type {
   AxisKey,
@@ -206,12 +207,12 @@ export interface Messages {
     radarProteinLegendLine: (info: { aas: number; diaas: number; limiting: string }) => string;
     nutrientRadarHeading: string;
     nutrientRadarTitle: (basis: string) => string;
-    nutrientRadarHint: (info: { basis: string; protein: number; fat: number; sugar: number }) => string;
+    nutrientRadarHint: (info: { basis: NutrientBasis; rings: string }) => string;
     macroShareToggleLabel: string;
     macroShareBasis: { g: string; kcal: string };
-    macroShareCaption: (info: { protein: string; fat: string; carb: string }) => string;
+    macroShareCaption: (info: { protein: string; fat: string; carb: string; other: string }) => string;
     macroLegendHeading: string;
-    macroLegend: { protein: string; fat: string; carb: string };
+    macroLegend: { protein: string; fat: string; carb: string; other: string };
     massCompositionHeading: string;
     massCompositionTitle: (info: {
       food: string;
@@ -223,7 +224,8 @@ export interface Messages {
     massCompositionLegend: { water: string; protein: string; fat: string; carbs: string; other: string };
     carbRowLabel: string;
     carbLegendHeading: string;
-    carbLegend: { sugar: string; starch: string; passive: string; none: string };
+    carbLegend: { sugar: string; starch: string; passive: string; none: string; size: (fullG: number) => string };
+    carbQuietScore: string;
     carbPie: {
       quiet: string;
       noneSymbol: string;
@@ -232,10 +234,11 @@ export interface Messages {
     necessityImpactMethodLink: string;
     digestibilityDefinition: string;
     degradationRowHint: string;
-    nutrientShort: Record<"protein" | "fat" | "sugar", string>;
+    nutrientShort: Record<"protein" | "fat" | "carbs", string>;
     nutrientRows: {
       protein: string;
       fat: string;
+      carbs: string;
       sugar: string;
       kcal: string;
       kJ: string;

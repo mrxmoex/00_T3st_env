@@ -16,7 +16,7 @@ function polar(cx: number, cy: number, r: number, angle: number): [number, numbe
   return [cx + r * Math.cos(angle), cy + r * Math.sin(angle)];
 }
 
-/** Small energy-split donut for legend rows (protein / fat / available carbs). */
+/** Small energy-split donut for legend rows (protein / fat / available carbs / fibre and other). */
 export function MacroCompositionPie({ food }: { food: FoodRecord }) {
   const { t } = useLocale();
   const titleId = useId();
@@ -25,10 +25,11 @@ export function MacroCompositionPie({ food }: { food: FoodRecord }) {
   const cy = SIZE / 2;
   const r = SIZE / 2 - 1;
 
-  const slices: { key: "protein" | "fat" | "carb"; pct: number; className: string }[] = [
+  const slices: { key: "protein" | "fat" | "carb" | "other"; pct: number; className: string }[] = [
     { key: "protein", pct: shares.protein, className: "macro-seg-protein" },
     { key: "fat", pct: shares.fat, className: "macro-seg-fat" },
     { key: "carb", pct: shares.carb, className: "macro-seg-carb" },
+    { key: "other", pct: shares.other, className: "macro-seg-other" },
   ];
 
   let angle = -Math.PI / 2;
@@ -45,6 +46,7 @@ export function MacroCompositionPie({ food }: { food: FoodRecord }) {
     protein: shares.protein.toFixed(0),
     fat: shares.fat.toFixed(0),
     carb: shares.carb.toFixed(0),
+    other: shares.other.toFixed(0),
   });
 
   return (

@@ -224,15 +224,17 @@ export const en: Messages = {
     radarProteinLegendLine: ({ aas, diaas, limiting }) =>
       `AAS ${aas} · DIAAS ${diaas} · ${aas < 1 ? `limiting ${limiting}` : "complete"}`,
     nutrientRadarHeading: "General nutrients & density",
-    nutrientRadarTitle: (basis) => `Protein, fat, and sugar (${basis})`,
-    nutrientRadarHint: ({ basis, protein, fat, sugar }) =>
-      `Spokes: grams ${basis}, full at ${protein} g protein, ${fat} g fat, ${sugar} g sugar. Percent: share of energy, the same on either basis.`,
+    nutrientRadarTitle: (basis) => `Protein, fat, and available carbs (${basis})`,
+    nutrientRadarHint: ({ basis, rings }) =>
+      basis === "per100g"
+        ? `Spokes: grams per 100 g on one scale, rings at ${rings}. Percent: share of the food's energy.`
+        : `Spokes: kcal from each nutrient in 100 kcal, rings at ${rings}. Percent: share of the food's energy.`,
     macroShareToggleLabel: "Amounts:",
     macroShareBasis: { g: "per 100 g", kcal: "per 100 kcal" },
-    macroShareCaption: ({ protein, fat, carb }) =>
-      `Energy split: ${protein}% protein · ${fat}% fat · ${carb}% available carbs (4 · 9 · 4 kcal/g; fibre energy not counted)`,
+    macroShareCaption: ({ protein, fat, carb, other }) =>
+      `Energy: ${protein}% protein · ${fat}% fat · ${carb}% available carbs · ${other}% fibre and other (4 · 9 · 4 kcal/g)`,
     macroLegendHeading: "Macro energy share by food",
-    macroLegend: { protein: "Protein", fat: "Fat", carb: "Available carbs" },
+    macroLegend: { protein: "Protein", fat: "Fat", carb: "Available carbs", other: "Fibre & other" },
     massCompositionHeading: "Edible mass composition (per 100 g)",
     massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
       `${food}: water ${water} g, protein ${protein} g, fat ${fat} g, carbohydrate incl. fibre ${carbs} g`,
@@ -250,7 +252,9 @@ export const en: Messages = {
       starch: "Digestible starch",
       passive: "Fibre + resistant starch",
       none: "negligible (under 0.5 g per 100 g)",
+      size: (fullG) => `Pie area: grams per 100 g, full at ${fullG} g`,
     },
+    carbQuietScore: "Under 0.5 g carbohydrate scores a fixed 70: no sugar load, and no fibre either.",
     carbPie: {
       quiet: "Negligible carbohydrate (under 0.5 g per 100 g); not a fibre source.",
       noneSymbol: "×",
@@ -260,11 +264,12 @@ export const en: Messages = {
     necessityImpactMethodLink: "Method: residues & stability",
     digestibilityDefinition: "Share of protein absorbed by the end of the small intestine.",
     degradationRowHint: "Cooking, storage, and processing vs labile vitamins — not every nutrient fades equally.",
-    nutrientShort: { protein: "Protein", fat: "Fat", sugar: "Sugar" },
+    nutrientShort: { protein: "Protein", fat: "Fat", carbs: "Carbs" },
     nutrientRows: {
       protein: "Protein (g / 100 g)",
       fat: "Fat (g / 100 g)",
-      sugar: "Sugar (g / 100 g)",
+      carbs: "Available carbs (g / 100 g)",
+      sugar: "of which sugars (g / 100 g)",
       kcal: "Energy (kcal / 100 g)",
       kJ: "Energy (kJ / 100 g, from kcal)",
       digestibility: "Ileal digestibility",
