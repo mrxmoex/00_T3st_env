@@ -57,6 +57,14 @@ export function SourcePanel({ food, card }: { food?: FoodRecord; card?: ScoreCar
                     <strong>{source.label}</strong>
                     {source.id ? ` · ${source.id}` : ""}
                     {source.note ? ` — ${source.note}` : ""}
+                    {source.url ? (
+                      <>
+                        {" "}
+                        <a href={source.url} target="_blank" rel="noreferrer">
+                          {t.source.link}
+                        </a>
+                      </>
+                    ) : null}
                   </li>
                 ))}
               </ul>
