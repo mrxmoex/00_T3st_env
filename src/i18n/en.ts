@@ -47,7 +47,7 @@ export const en: Messages = {
       `${altName}. Preparation: ${preparation}. Source: ${source}. ${kcal} kcal / 100 g. Tier ${tier} (#${rank} of ${size} in class).`,
     radarTitle: (name) => `${name}: axis profile`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
-      `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limiting amino acid: ${limiting}. Ileal digestibility ${digestibility}.`,
+      `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. ${aas < 1 ? `Limiting amino acid: ${limiting}.` : "Complete against the FAO 2013 pattern."} Ileal digestibility ${digestibility}.`,
     benefitsHeading: "Benefit",
     burdensHeading: "Burden (higher score = less burden)",
     fatsCarbsMicros: "Fats, carbs, micros",
@@ -470,7 +470,7 @@ export const en: Messages = {
     datasetsHeading: "Databases and licences",
     curatedHeading: "Curated literature",
     cardLine: ({ aas, diaas, pdcaas, limiting, rae, iron }) =>
-      `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · limiting ${limiting} · RAE ${rae} µg · absorbable Fe ${iron} mg`,
+      `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · ${aas < 1 ? `limiting ${limiting}` : "complete"} · RAE ${rae} µg · absorbable Fe ${iron} mg`,
   },
   classes: {
     leafy_salad: "Leafy / salad greens",

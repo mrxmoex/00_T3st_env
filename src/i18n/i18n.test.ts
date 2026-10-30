@@ -69,6 +69,12 @@ describe("UI messages", () => {
         expect(line({ aas: 0.878, diaas: 0.703, limiting: "SAA" })).toContain("SAA");
         expect(line({ aas: 1.252, diaas: 1.215, limiting: "LYS" })).not.toContain("LYS");
       }
+      const food = { diaas: 1, pdcaas: 1, digestibility: 0.9 };
+      expect(messages.food.eaaSummary({ ...food, aas: 0.8, limiting: "SAA" })).toContain("SAA");
+      expect(messages.food.eaaSummary({ ...food, aas: 1.2, limiting: "LYS" })).not.toContain("LYS");
+      const card = { diaas: 1, pdcaas: 1, rae: 0, iron: 0 };
+      expect(messages.source.cardLine({ ...card, aas: 0.8, limiting: "SAA" })).toContain("SAA");
+      expect(messages.source.cardLine({ ...card, aas: 1.2, limiting: "LYS" })).not.toContain("LYS");
     }
   });
 

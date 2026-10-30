@@ -47,7 +47,7 @@ export const de: Messages = {
       `${altName}. Zubereitung: ${preparation}. Quelle: ${source}. ${kcal} kcal / 100 g. Stufe ${tier} (Platz ${rank} von ${size} in der Klasse).`,
     radarTitle: (name) => `${name}: Achsenprofil`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
-      `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limitierende Aminosäure: ${limiting}. Ileale Verdaulichkeit ${digestibility}.`,
+      `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. ${aas < 1 ? `Limitierende Aminosäure: ${limiting}.` : "Vollständig gemessen am FAO-2013-Muster."} Ileale Verdaulichkeit ${digestibility}.`,
     benefitsHeading: "Nutzen",
     burdensHeading: "Last (höherer Wert = weniger Last)",
     fatsCarbsMicros: "Fette, Kohlenhydrate, Mikronährstoffe",
@@ -475,7 +475,7 @@ export const de: Messages = {
     datasetsHeading: "Datenbanken und Lizenzen",
     curatedHeading: "Kuratierte Literatur",
     cardLine: ({ aas, diaas, pdcaas, limiting, rae, iron }) =>
-      `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · limitierend ${limiting} · RAE ${rae} µg · resorbierbares Fe ${iron} mg`,
+      `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · ${aas < 1 ? `limitierend ${limiting}` : "vollständig"} · RAE ${rae} µg · resorbierbares Fe ${iron} mg`,
   },
   classes: {
     leafy_salad: "Blattgemüse / Salate",
