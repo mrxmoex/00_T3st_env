@@ -8,8 +8,8 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 |---|---|
 | Branch | `cursor/compare-nutrient-groups-b80f` |
 | Pull request | [#15](https://github.com/mrxmoex/00_T3st_env/pull/15), open until Phase 8 |
-| Last confirmed phase | 1 (truth audit and copy contract) |
-| Active phase | 2, awaiting review (`docs/handoffs/phase-2.md`) |
+| Last confirmed phase | 2 (Compare density and hierarchy) |
+| Active phase | 3 and data track D1, awaiting review (`docs/handoffs/phase-3.md`, `docs/handoffs/d1.md`) |
 
 At the end of a phase, set *Active phase* to "N, awaiting review". Only the user's go moves *Last confirmed phase*.
 
@@ -17,7 +17,7 @@ At the end of a phase, set *Active phase* to "N, awaiting review". Only the user
 
 1. **Truth before polish, polish before merge.** A sentence the code or a cited source cannot back is a bug, however well it reads.
 2. **Display is not scoring.** Charts, groups, and copy may change. Axis, composite, and tier formulas in `src/scoring/` change only when the user asks, with tests.
-3. **One worker per phase.** It owns the whole scope of its phase and nothing outside it. Problems found elsewhere go into the handoff under *Found, not fixed*, routed to a phase.
+3. **One worker per phase.** It owns the whole scope of its phase and nothing outside it. Problems found elsewhere go into the handoff under *Found, not fixed*, routed to a phase. Exception (E1): a small truth or layout bump met on the way, a few lines with a test or a check, may be fixed in place and listed under *Bumps eased*.
 4. **Every phase leaves ground for the next.** A handoff with seeds, shared components instead of page copies, and EN and DE keys that mean the same thing.
 
 ## How to run a phase
@@ -102,6 +102,14 @@ Status describes where each item stood after Phase 0.
 | C1 | Compare works but carries too much text; fine-tune later | Phase 2 |
 | C2 | Polish and truth first; this is only the beginning; phases must compound | Principles |
 | C3 | One strong worker per phase | How to run a phase |
+
+**Batch E: direction after Phase 2**
+
+| ID | Intent | Where it lands |
+|---|---|---|
+| E1 | Ease out bumps met on the way | Principle 3 exception, *Bumps eased* in handoffs |
+| E2 | Beautification still needed | Phase 3 |
+| E3 | Many more foods, produce and ingredients; expand important subject areas | Data track D1, D2 |
 
 ## Phases
 
@@ -241,3 +249,33 @@ Work through the Phase 2 list in the Phase 1 handoff on /compare. Keep every cla
 ### Phase 8: Merge gate
 
 Not a polish phase. PR #15 is ready to merge when the user signs off on the polish, the Phase 1 truth ledger re-checks clean on Compare, Food, and Matrix in EN and DE, and tests and build pass. The user merges.
+
+## Data track
+
+Data phases grow and correct the catalog. They follow the same phase contract and the rules in `docs/data-sources.md`: values imported by script, curated fields cited, missing stays missing.
+
+### D1: Fruit, nuts and seeds, grains (awaiting review)
+
+Three new plant classes and 42 foods, two new merge rules, and a code finder. See `docs/handoffs/d1.md`.
+
+### D2: Fats and oils, and the next produce
+
+**Intent.** Culinary fats and oils (olive, rapeseed, sunflower, linseed oil, butter), more produce and ingredients, and the subject data D1 left open.
+
+**Inputs.** E3.
+
+**Reads.** `docs/handoffs/d1.md`, `docs/data-sources.md` (§ Protein digestibility), `docs/research/d1-protein-and-residues.md`, the contract.
+
+**Prerequisite.** Protein-free foods need "not applicable" displays: an oil has no protein, so ileal digestibility and DIAAS must read —, not 0, and the EAA axis must not score digestibility of absent protein.
+
+**Decisions for the user, before code.** The amino acid score basis (per gram of protein as each database states it, or per gram of nitrogen; D1 handoff, *Found, not fixed*); whether and how EFSA residue rates calibrate the residue profiles; the resistant-starch double count.
+
+**In scope, in this order.**
+1. Older catalog digestibility: apply the D1 rule to the 96 foods before D1 from Hodgkinson et al. 2025 Table 2 and Walther et al. 2019 Table 1, extend `proteinDigestibility.test.ts` to them, and table every value and rank that moves.
+2. New foods that arrive with a measured digestibility (the D1 handoff's seeds), then the fats-and-oils class (weights, columns such as n-6 to n-3 balance and vitamin E density) once the prerequisite holds.
+3. Glycemic index for the D1 foods from the Atkinson et al. 2021 tables, in `src/data/glycemic.ts`.
+4. Measured bioactives for D1 foods (coenzyme Q10, L-carnitine) where a source has them; the exposure rules the D1 handoff lists.
+
+**Out of scope.** Formula changes without the user's sign-off.
+
+**Done when.** Every new food has a manifest entry, a spec with cited curated values, and passes the snapshot tests; the handoff lists every source and every value left at "no data".
