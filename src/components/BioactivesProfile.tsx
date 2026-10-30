@@ -1,5 +1,5 @@
 import { BIOACTIVE_COMPOUNDS, bioactiveValue, type BioactiveCompound, type BioactiveValue } from "../data/bioactives";
-import { BIOACTIVE_LABELS, BIOACTIVE_ROLES } from "../i18n/labels";
+import { BIOACTIVE_LABELS, BIOACTIVE_ROLES, MEASURED_STATE_LABELS } from "../i18n/labels";
 import { foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { BioactiveSourceLink } from "./BioactiveSourceLink";
@@ -22,14 +22,31 @@ function chipLabel(value: BioactiveValue, notDetected: string): string | null {
   }
 }
 
-function notable(value: BioactiveValue): boolean {
+function BioactiveProvenance({ value }: { value: BioactiveValue }) {
+  const { t, localize } = useLocale();
   switch (value.status) {
     case "value":
+      return (
+        <p className="bioactive-chip-source muted">
+          {t.food.bioactiveColumns.measured}: {localize(value.measured)}
+          {value.state === "unspecified" ? ` · ${localize(MEASURED_STATE_LABELS.unspecified)}` : null}
+          {value.range ? ` · ${t.food.bioactiveRange(formatAmount(value.range[0]), formatAmount(value.range[1]))}` : null}
+          {value.fromDryWeight ? ` · ${t.food.bioactiveDryWeight}` : null}
+          <br />
+          {t.food.bioactiveColumns.source}: <BioactiveSourceLink source={value.source} />
+        </p>
+      );
     case "notDetected":
-      return true;
+      return (
+        <p className="bioactive-chip-source muted">
+          {t.food.bioactiveColumns.measured}: {localize(value.measured)}
+          <br />
+          {t.food.bioactiveColumns.source}: <BioactiveSourceLink source={value.source} />
+        </p>
+      );
     case "notExpected":
     case "noData":
-      return false;
+      return null;
     default: {
       const _exhaustive: never = value;
       return _exhaustive;
@@ -58,13 +75,9 @@ function BioactiveChip({
       </summary>
       <p className="bioactive-chip-role">{localize(BIOACTIVE_ROLES[compound])}</p>
       {value.status === "value" && value.rawValueForPreparedFood ? (
-        <p className="muted">{t.food.bioactiveRawValue}</p>
+        <p className="bioactive-chip-source muted">{t.food.bioactiveRawValue}</p>
       ) : null}
-      {showSources && (value.status === "value" || value.status === "notDetected") ? (
-        <p className="bioactive-chip-source muted">
-          {t.food.bioactiveColumns.source}: <BioactiveSourceLink source={value.source} />
-        </p>
-      ) : null}
+      {showSources ? <BioactiveProvenance value={value} /> : null}
     </details>
   );
 }
@@ -73,26 +86,37 @@ export function BioactivesProfile({
   foods,
   showSources = false,
   showProfileLede = false,
+  markerKey = false,
 }: {
   foods: readonly FoodRecord[];
   showSources?: boolean;
   /** When false, the lede lives in the page header (compare / food). */
   showProfileLede?: boolean;
+  /** Explain `*` and n.d. under the cards, each only when it appears in them. */
+  markerKey?: boolean;
 }) {
   const { t, locale } = useLocale();
 
-  return (
-    <div className="bioactives-profiles">
-      {foods.map((food) => {
-        const entries = BIOACTIVE_COMPOUNDS.flatMap((compound) => {
-          const value = bioactiveValue(food, compound);
-          if (!notable(value)) return [];
-          const amount = chipLabel(value, t.compare.notDetectedShort);
-          if (amount === null) return [];
-          return [{ compound, value, amount }];
-        });
+  const profiles = foods.map((food) => ({
+    food,
+    entries: BIOACTIVE_COMPOUNDS.flatMap((compound) => {
+      const value = bioactiveValue(food, compound);
+      const amount = chipLabel(value, t.compare.notDetectedShort);
+      return amount === null ? [] : [{ compound, value, amount }];
+    }),
+  }));
+  const shown = profiles.flatMap((profile) => profile.entries);
+  const markers = [
+    shown.some(({ value }) => value.status === "value" && value.rawValueForPreparedFood)
+      ? t.compare.bioactiveMarkers.raw
+      : null,
+    shown.some(({ value }) => value.status === "notDetected") ? t.compare.bioactiveMarkers.notDetected : null,
+  ].filter((marker): marker is string => marker !== null);
 
-        return (
+  return (
+    <>
+      <div className="bioactives-profiles">
+        {profiles.map(({ food, entries }) => (
           <article key={food.id} className="bioactives-profile card">
             {foods.length > 1 ? <h3>{foodName(food, locale)}</h3> : null}
             {showProfileLede ? <p className="muted">{t.compare.bioactivesProfileLede}</p> : null}
@@ -108,8 +132,9 @@ export function BioactivesProfile({
               </ul>
             )}
           </article>
-        );
-      })}
-    </div>
+        ))}
+      </div>
+      {markerKey && markers.length > 0 ? <p className="marker-key muted">{markers.join(" · ")}</p> : null}
+    </>
   );
 }

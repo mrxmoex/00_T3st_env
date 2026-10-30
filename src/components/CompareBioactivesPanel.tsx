@@ -6,10 +6,8 @@ export function CompareBioactivesPanel({ foods }: { foods: readonly FoodRecord[]
   const { t } = useLocale();
   return (
     <>
-      <p className="muted">{t.compare.bioactivesSubtitle}</p>
       <p className="muted">{t.compare.bioactivesHint}</p>
-      <p className="muted">{t.compare.bioactivesProfileLede}</p>
-      <BioactivesProfile foods={foods} showSources />
+      <BioactivesProfile foods={foods} showSources markerKey />
     </>
   );
 }

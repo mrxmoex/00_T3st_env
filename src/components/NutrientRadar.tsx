@@ -116,7 +116,6 @@ export function NutrientRadar({ entries }: { entries: readonly NutrientRadarEntr
               );
             })}
           </ul>
-          <p className="muted macro-legend-note">{t.compare.macroLegendNote}</p>
           <div className="mass-composition-block">
             <p className="mass-composition-heading">{t.compare.massCompositionHeading}</p>
             {entries.map(({ id, label, food }) => (

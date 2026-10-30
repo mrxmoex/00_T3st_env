@@ -194,17 +194,19 @@ export const en: Messages = {
     },
     honorsEmpty: "No standout fibre, B12, or bioactives on this card.",
     bioactivesHeading: "Bioactive compounds",
-    bioactivesSubtitle:
-      "What each compound does, not only milligrams per 100 g. The body makes several of these; essential nutrients still drive the score.",
     bioactivesHint:
-      "Indexed from published analyses (mg per 100 g when a value exists). Not scored. Expand a chip for role and source. * raw-tissue value for a cooked or processed food · n.d. analysed, not detected.",
+      "Values from published analyses, mg per 100 g, not scored. Compounds without an analysis are left out; open a chip for its role, source, and what was measured.",
+    bioactiveMarkers: {
+      raw: "* raw-tissue value for a cooked or processed food",
+      notDetected: "n.d. analysed, not detected",
+    },
     bioactivesProfileLede: "What's inside — only compounds with a value or a measured absence.",
     bioactivesProfileEmpty: "No analysis in the index for this food.",
     notDetectedShort: "n.d.",
     radarHeading: "Axis profile",
     radarTitle: "Axis profile of the selected foods",
     axisRadarHint:
-      "Protein is split into pattern (vs FAO 2013, capped at 1.0), ileal digestibility, and density (protein g / 20 g). DIAAS = AAS × digestibility and can exceed 1; the pattern spoke stops at 1.",
+      "Protein splits into pattern (AAS vs FAO 2013, capped at 1), ileal digestibility, and density (full at 20 g per 100 g).",
     axisRadarMethodLink: "Method: EAA axis",
     radarProteinShort: { pattern: "Pat.", digest: "Dig.", density: "Dens." },
     radarProteinLabels: {
@@ -224,15 +226,13 @@ export const en: Messages = {
     nutrientRadarHeading: "General nutrients & density",
     nutrientRadarTitle: (basis) => `Protein, fat, and sugar (${basis})`,
     nutrientRadarHint: ({ basis, protein, fat, sugar }) =>
-      `Spokes: grams ${basis}, full at ${protein} g protein, ${fat} g fat, ${sugar} g sugar. The energy split does not change with the basis; the bars show what 100 g is made of.`,
+      `Spokes: grams ${basis}, full at ${protein} g protein, ${fat} g fat, ${sugar} g sugar. Percent: share of energy, the same on either basis.`,
     macroShareToggleLabel: "Amounts:",
     macroShareBasis: { g: "per 100 g", kcal: "per 100 kcal" },
     macroShareCaption: ({ protein, fat, carb }) =>
-      `Energy split: ${protein}% protein · ${fat}% fat · ${carb}% available carbs`,
+      `Energy split: ${protein}% protein · ${fat}% fat · ${carb}% available carbs (4 · 9 · 4 kcal/g; fibre energy not counted)`,
     macroLegendHeading: "Macro energy share by food",
     macroLegend: { protein: "Protein", fat: "Fat", carb: "Available carbs" },
-    macroLegendNote:
-      "Percent = share of the energy from protein, fat, and available carbs (4, 9, 4 kcal/g); fibre energy is not counted. Grams follow the basis above.",
     massCompositionHeading: "Edible mass composition (per 100 g)",
     massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
       `${food}: water ${water} g, protein ${protein} g, fat ${fat} g, carbohydrate incl. fibre ${carbs} g`,
@@ -244,13 +244,12 @@ export const en: Messages = {
       other: "Other / unaccounted",
     },
     carbRowLabel: "Carbohydrate composition & quality",
-    carbRowHint: "Pie = share of sugars, digestible starch, and passive carbs (fibre + RS). Colour = type, not a 0–100 rank.",
     carbLegendHeading: "Carbohydrate pie colours",
     carbLegend: {
       sugar: "Sugars",
       starch: "Digestible starch",
       passive: "Fibre + resistant starch",
-      none: "Negligible carbs (× in cells)",
+      none: "negligible (under 0.5 g per 100 g)",
     },
     carbPie: {
       quiet: "Negligible carbohydrate (under 0.5 g per 100 g); not a fibre source.",
@@ -258,9 +257,8 @@ export const en: Messages = {
       title: ({ sugar, starch, passive }) =>
         `Carbs per 100 g: sugars ${sugar} g, starch ${starch} g, passive (fibre+RS) ${passive} g`,
     },
-    necessityImpactGroupHint:
-      "Residues, processing, nutrient keeping power, and how much protein is absorbed by the end of the small intestine (ileal digestibility, DIAAS).",
     necessityImpactMethodLink: "Method: residues & stability",
+    digestibilityDefinition: "Share of protein absorbed by the end of the small intestine.",
     degradationRowHint: "Cooking, storage, and processing vs labile vitamins — not every nutrient fades equally.",
     nutrientShort: { protein: "Protein", fat: "Fat", sugar: "Sugar" },
     nutrientRows: {
@@ -281,8 +279,10 @@ export const en: Messages = {
       necessityImpact: "What reaches the body",
     },
     microHeading: "Micronutrient vector (%DV per 100 kcal)",
-    microHint:
-      "Colour saturates at 20 % DV per 100 kcal, the level scored as fully covered. ⚠ marks a nutrient whose amount in 100 kcal exceeds the adult upper limit for a whole day (EFSA). Frequency matters; the mark does not lower the score.",
+    microHint: "Full colour at 20 % DV per 100 kcal, the level the score counts as covered.",
+    microWarningKey: "⚠ 100 kcal pass the adult upper limit for a whole day (EFSA); the mark does not lower the score.",
+    microWarningTitle:
+      "Above the adult whole-day upper limit (EFSA) in 100 kcal. How often it is eaten matters; the score is not lowered.",
   },
   recommend: {
     title: "Best-practice engine",

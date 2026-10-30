@@ -194,9 +194,12 @@ table.matrix {
   width: 100%;
   font-size: 0.86rem;
 }
-table.matrix.compare-axes { min-width: 0; }
+table.matrix.compare-axes,
+table.matrix.compare-micro { min-width: 0; }
 table.matrix.compare-axes th,
 table.matrix.compare-axes td,
+table.matrix.compare-micro th,
+table.matrix.compare-micro td,
 table.matrix.compare-axes .nova-badge { white-space: normal; }
 
 .matrix th, .matrix td {
@@ -405,14 +408,15 @@ details.panel > summary {
   color: var(--muted);
   line-height: 1.3;
   max-width: 14rem;
+  white-space: normal;
 }
+.has-tip { text-decoration: underline dotted; text-underline-offset: 0.2em; cursor: help; }
 
 .carb-pie { display: inline-flex; vertical-align: middle; }
 .carb-pie svg { display: block; }
 .carb-seg-sugar { fill: hsl(32 78% 52%); }
 .carb-seg-starch { fill: hsl(210 55% 48%); }
 .carb-seg-passive { fill: hsl(128 42% 42%); }
-.carb-seg-quiet { fill: var(--bg-mute); stroke: var(--line); stroke-width: 1; }
 .carb-pie-hole { fill: var(--bg); }
 
 .macro-comp-pie { display: inline-flex; flex-shrink: 0; }
@@ -456,7 +460,6 @@ details.panel > summary {
 .macro-key-dot.macro-seg-protein { background: var(--series-1); }
 .macro-key-dot.macro-seg-fat { background: var(--series-2); }
 .macro-key-dot.macro-seg-carb { background: var(--series-3); }
-.macro-legend-note { font-size: 0.78rem; margin: 0.35rem 0 0; }
 .nutrient-radar-hint { margin: 0.35rem 0 0; font-size: 0.84rem; }
 .mass-composition-block { margin-top: 0.75rem; }
 .mass-composition-heading { font-size: 0.82rem; font-weight: 600; margin: 0 0 0.35rem; color: var(--muted); }
@@ -491,24 +494,22 @@ details.panel > summary {
 .carb-type-key {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 1rem;
-  margin: 0.75rem 0 0;
+  gap: 0.15rem 0.7rem;
+  max-width: 22rem;
+  margin: 0.25rem 0 0;
   padding: 0;
   list-style: none;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
+  font-weight: 400;
   color: var(--muted);
+  white-space: normal;
 }
-.carb-type-key li { display: inline-flex; align-items: center; gap: 0.35rem; }
-.carb-key-swatch { width: 0.65rem; height: 0.65rem; border-radius: 2px; }
+.carb-type-key li { display: inline-flex; align-items: center; gap: 0.3rem; }
+.carb-key-swatch { width: 0.6rem; height: 0.6rem; border-radius: 2px; }
+.carb-key-none { width: 0.6rem; text-align: center; line-height: 1; }
 .carb-pie-none { color: var(--muted); font-size: 1.1rem; line-height: 1; padding: 0 0.15rem; }
 .carb-pie-quiet { min-width: 1.4rem; justify-content: center; }
-.matrix tr.group-hint-row td.group-hint-cell {
-  font-size: 0.78rem;
-  color: var(--muted);
-  padding: 0.35rem 0.55rem 0.5rem;
-  background: var(--bg-mute);
-  border-bottom: 1px solid var(--line);
-}
+.marker-key { margin: 0.6rem 0 0; font-size: 0.78rem; }
 .heat-percent { min-width: 3.4rem; font-variant-numeric: tabular-nums; }
 .nutrient-radar-controls {
   display: flex;
@@ -649,6 +650,12 @@ details.panel > summary {
   text-transform: uppercase;
 }
 .matrix tr.group-row .group-label { position: sticky; left: 0.55rem; }
+.matrix tr.group-row .group-link {
+  margin-left: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
 
 .compare-grid {
   display: grid;

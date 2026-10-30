@@ -12,11 +12,13 @@ export function HeatCell({
   label,
   warning = false,
   className,
+  title,
 }: {
   score: number | null;
   label?: string;
   warning?: boolean;
   className?: string;
+  title?: string;
 }) {
   const extra = className ? ` ${className}` : "";
   if (score === null) {
@@ -24,10 +26,14 @@ export function HeatCell({
   }
   const text = label ?? score.toFixed(1);
   if (warning) {
-    return <span className={`heat heat-warning${extra}`}>⚠ {text}</span>;
+    return (
+      <span className={`heat heat-warning${extra}`} title={title}>
+        ⚠ {text}
+      </span>
+    );
   }
   return (
-    <span className={`heat${extra}`} style={{ background: heatColor(score) }}>
+    <span className={`heat${extra}`} style={{ background: heatColor(score) }} title={title}>
       {text}
     </span>
   );

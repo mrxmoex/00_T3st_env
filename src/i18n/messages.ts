@@ -185,8 +185,9 @@ export interface Messages {
     };
     honorsEmpty: string;
     bioactivesHeading: string;
-    bioactivesSubtitle: string;
     bioactivesHint: string;
+    /** Keys for the marks on compound amounts; each shows only when its mark is on screen. */
+    bioactiveMarkers: { raw: string; notDetected: string };
     bioactivesProfileLede: string;
     bioactivesProfileEmpty: string;
     notDetectedShort: string;
@@ -211,7 +212,6 @@ export interface Messages {
     macroShareCaption: (info: { protein: string; fat: string; carb: string }) => string;
     macroLegendHeading: string;
     macroLegend: { protein: string; fat: string; carb: string };
-    macroLegendNote: string;
     massCompositionHeading: string;
     massCompositionTitle: (info: {
       food: string;
@@ -222,7 +222,6 @@ export interface Messages {
     }) => string;
     massCompositionLegend: { water: string; protein: string; fat: string; carbs: string; other: string };
     carbRowLabel: string;
-    carbRowHint: string;
     carbLegendHeading: string;
     carbLegend: { sugar: string; starch: string; passive: string; none: string };
     carbPie: {
@@ -230,8 +229,8 @@ export interface Messages {
       noneSymbol: string;
       title: (info: { sugar: string; starch: string; passive: string }) => string;
     };
-    necessityImpactGroupHint: string;
     necessityImpactMethodLink: string;
+    digestibilityDefinition: string;
     degradationRowHint: string;
     nutrientShort: Record<"protein" | "fat" | "sugar", string>;
     nutrientRows: {
@@ -253,6 +252,9 @@ export interface Messages {
     };
     microHeading: string;
     microHint: string;
+    /** Shown only when a ⚠ cell is on screen. */
+    microWarningKey: string;
+    microWarningTitle: string;
   };
   recommend: {
     title: string;

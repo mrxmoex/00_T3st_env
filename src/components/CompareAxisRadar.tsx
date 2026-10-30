@@ -16,7 +16,16 @@ export interface CompareAxisRadarEntry {
   card: ScoreCard;
 }
 
-export function CompareAxisRadar({ entries, title }: { entries: readonly CompareAxisRadarEntry[]; title: string }) {
+export function CompareAxisRadar({
+  entries,
+  title,
+  showProteinReadout = true,
+}: {
+  entries: readonly CompareAxisRadarEntry[];
+  title: string;
+  /** Off where the page already prints AAS, DIAAS, and completeness per food. */
+  showProteinReadout?: boolean;
+}) {
   const { t } = useLocale();
   const labels = compareRadarLabels(t);
 
@@ -36,7 +45,7 @@ export function CompareAxisRadar({ entries, title }: { entries: readonly Compare
         {t.compare.axisRadarHint}{" "}
         <Link to="/method">{t.compare.axisRadarMethodLink}</Link>
       </p>
-      {entries.length > 0 ? (
+      {showProteinReadout && entries.length > 0 ? (
         <ul className="compare-radar-protein-legend" aria-label={t.compare.radarProteinLegendHeading}>
           {entries.map(({ id, label, card }, index) => (
             <li key={id} className={`series-${index + 1}`}>

@@ -39,11 +39,14 @@ type ComparedFood = { food: FoodRecord; card: ScoreCard };
 
 const cards = scoreCatalog(FOODS);
 
-function GroupLabel({ label, span }: { label: string; span: number }) {
+function GroupLabel({ label, span, link }: { label: string; span: number; link?: ReactNode }) {
   return (
     <tr className="group-row">
       <th scope="colgroup" colSpan={span}>
-        <span className="group-label">{label}</span>
+        <span className="group-label">
+          {label}
+          {link}
+        </span>
       </th>
     </tr>
   );
@@ -54,7 +57,7 @@ function axisLabelCell(axis: AxisKey, t: Messages): ReactNode {
     return (
       <>
         {t.compare.carbRowLabel}
-        <span className="axis-row-sub">{t.compare.carbRowHint}</span>
+        <CarbTypeKey t={t} />
       </>
     );
   }
@@ -78,7 +81,7 @@ function microLabelCell(nutrient: MicroNutrient, localize: (text: LocalizedText)
   );
 }
 
-function CarbTypeLegend({ t }: { t: Messages }) {
+function CarbTypeKey({ t }: { t: Messages }) {
   return (
     <ul className="carb-type-key" aria-label={t.compare.carbLegendHeading}>
       <li>
@@ -94,7 +97,9 @@ function CarbTypeLegend({ t }: { t: Messages }) {
         {t.compare.carbLegend.passive}
       </li>
       <li>
-        <span className="carb-key-swatch carb-seg-quiet" aria-hidden="true" />
+        <span className="carb-key-none mono" aria-hidden="true">
+          {t.compare.carbPie.noneSymbol}
+        </span>
         {t.compare.carbLegend.none}
       </li>
     </ul>
@@ -175,13 +180,15 @@ function axisGroup(
     case "necessityImpact":
       return (
         <>
-          <GroupLabel label={t.compare.axisGroups.necessityImpact} span={span} />
-          <tr className="group-hint-row">
-            <td colSpan={span} className="group-hint-cell">
-              {t.compare.necessityImpactGroupHint}{" "}
-              <Link to="/method">{t.compare.necessityImpactMethodLink}</Link>
-            </td>
-          </tr>
+          <GroupLabel
+            label={t.compare.axisGroups.necessityImpact}
+            span={span}
+            link={
+              <Link className="group-link" to="/method">
+                {t.compare.necessityImpactMethodLink}
+              </Link>
+            }
+          />
           {scoreRows(SOURCING_AXES, selected, t)}
           <tr>
             <td className="sticky">{t.compare.nutrientRows.nova}</td>
@@ -206,7 +213,11 @@ function axisGroup(
             })}
           </tr>
           <tr>
-            <td className="sticky">{t.compare.nutrientRows.digestibility}</td>
+            <td className="sticky">
+              <span className="has-tip" title={t.compare.digestibilityDefinition}>
+                {t.compare.nutrientRows.digestibility}
+              </span>
+            </td>
             {selected.map(({ food }, index) => (
               <td key={`${index}-${food.id}`}>
                 <HeatCell score={food.ilealDigestibility * 100} label={formatAmount(food.ilealDigestibility)} />
@@ -311,6 +322,7 @@ export function ComparePage() {
             <h2>{t.compare.radarHeading}</h2>
             <CompareAxisRadar
               title={t.compare.radarTitle}
+              showProteinReadout={false}
               entries={selected.map(({ food, card }, index) => ({
                 id: `${index}-${food.id}`,
                 label: foodName(food, locale),
@@ -330,7 +342,6 @@ export function ComparePage() {
             />
           </div>
         </div>
-        <CarbTypeLegend t={t} />
         <div className="matrix-wrap" style={{ marginTop: "1rem" }}>
           <table className="matrix compare-axes">
             <thead>
@@ -351,9 +362,12 @@ export function ComparePage() {
       </section>
       <section className="panel">
         <h2>{t.compare.microHeading}</h2>
-        <p className="muted">{t.compare.microHint}</p>
+        <p className="muted">
+          {t.compare.microHint}
+          {selected.some(({ excess }) => excess.length > 0) ? ` ${t.compare.microWarningKey}` : null}
+        </p>
         <div className="matrix-wrap">
-          <table className="matrix">
+          <table className="matrix compare-micro">
             <thead>
               <tr>
                 <th className="sticky">{t.food.columns.nutrient}</th>
@@ -378,6 +392,7 @@ export function ComparePage() {
                           score={pct === null ? null : Math.min(100, (pct / DENSITY_SATURATION_PCT_DV) * 100)}
                           label={pctLabel}
                           warning={excess.includes(nutrient)}
+                          title={excess.includes(nutrient) ? t.compare.microWarningTitle : undefined}
                           className="heat-percent"
                         />
                       </td>

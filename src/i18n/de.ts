@@ -197,17 +197,19 @@ export const de: Messages = {
     },
     honorsEmpty: "Keine herausragenden Ballaststoffe, kein B12 und keine Bioaktiven auf dieser Karte.",
     bioactivesHeading: "Bioaktive Stoffe",
-    bioactivesSubtitle:
-      "Was jeder Stoff tut — nicht nur Milligramm pro 100 g. Mehrere davon bildet der Körper selbst; essenzielle Nährstoffe bestimmen weiterhin die Bewertung.",
     bioactivesHint:
-      "Index aus veröffentlichten Analysen (mg pro 100 g, wenn ein Wert existiert). Nicht bewertet. Chip aufklappen für Rolle und Quelle. * Wert aus rohem Gewebe für ein gegartes oder verarbeitetes Lebensmittel · n. n. untersucht, nicht nachgewiesen.",
+      "Werte aus veröffentlichten Analysen, mg pro 100 g, nicht bewertet. Stoffe ohne Analyse werden weggelassen; Chip aufklappen für Rolle, Quelle und was gemessen wurde.",
+    bioactiveMarkers: {
+      raw: "* Wert aus rohem Gewebe für ein gegartes oder verarbeitetes Lebensmittel",
+      notDetected: "n. n. untersucht, nicht nachgewiesen",
+    },
     bioactivesProfileLede: "Was drinsteckt — nur Stoffe mit Wert oder nachgewiesener Abwesenheit.",
     bioactivesProfileEmpty: "Keine Analyse im Index für dieses Lebensmittel.",
     notDetectedShort: "n. n.",
     radarHeading: "Achsenprofil",
     radarTitle: "Achsenprofil der gewählten Lebensmittel",
     axisRadarHint:
-      "Protein ist aufgeteilt in Muster (gegen FAO 2013, gedeckelt bei 1,0), ileale Verdaulichkeit und Dichte (Protein g / 20 g). DIAAS = AAS × Verdaulichkeit und kann über 1 liegen; die Muster-Speiche endet bei 1.",
+      "Protein teilt sich in Muster (AAS gegen FAO 2013, gedeckelt bei 1), ileale Verdaulichkeit und Dichte (voll bei 20 g pro 100 g).",
     axisRadarMethodLink: "Methode: EAA-Achse",
     radarProteinShort: { pattern: "Muster", digest: "Verd.", density: "Dichte" },
     radarProteinLabels: {
@@ -227,15 +229,13 @@ export const de: Messages = {
     nutrientRadarHeading: "Grundnährstoffe & Dichte",
     nutrientRadarTitle: (basis) => `Protein, Fett und Zucker (${basis})`,
     nutrientRadarHint: ({ basis, protein, fat, sugar }) =>
-      `Speichen: Gramm ${basis}, voll bei ${protein} g Protein, ${fat} g Fett, ${sugar} g Zucker. Die Energieaufteilung hängt nicht von der Bezugsgröße ab; die Balken zeigen, woraus 100 g bestehen.`,
+      `Speichen: Gramm ${basis}, voll bei ${protein} g Protein, ${fat} g Fett, ${sugar} g Zucker. Prozent: Energieanteil, auf beiden Bezugsgrößen gleich.`,
     macroShareToggleLabel: "Mengen:",
     macroShareBasis: { g: "pro 100 g", kcal: "pro 100 kcal" },
     macroShareCaption: ({ protein, fat, carb }) =>
-      `Energieaufteilung: ${protein}% Protein · ${fat}% Fett · ${carb}% verfügbare KH`,
+      `Energieaufteilung: ${protein}% Protein · ${fat}% Fett · ${carb}% verfügbare KH (4 · 9 · 4 kcal/g; Energie aus Ballaststoffen nicht gezählt)`,
     macroLegendHeading: "Makro-Energieanteil je Lebensmittel",
     macroLegend: { protein: "Protein", fat: "Fett", carb: "Verfügbare KH" },
-    macroLegendNote:
-      "Prozent = Anteil an der Energie aus Protein, Fett und verfügbaren KH (4, 9, 4 kcal/g); Energie aus Ballaststoffen zählt nicht mit. Gramm folgen der Bezugsgröße oben.",
     massCompositionHeading: "Zusammensetzung der essbaren Masse (pro 100 g)",
     massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
       `${food}: Wasser ${water} g, Protein ${protein} g, Fett ${fat} g, Kohlenhydrate inkl. Ballaststoffe ${carbs} g`,
@@ -247,14 +247,12 @@ export const de: Messages = {
       other: "Sonstiges / nicht zugeordnet",
     },
     carbRowLabel: "Kohlenhydrat-Zusammensetzung & Qualität",
-    carbRowHint:
-      "Kreis = Anteil Zucker, verdauliche Stärke und passive KH (Ballaststoffe + RS). Farbe = Typ, kein 0–100-Rang.",
     carbLegendHeading: "Farben der Kohlenhydrat-Kreise",
     carbLegend: {
       sugar: "Zucker",
       starch: "Verdauliche Stärke",
       passive: "Ballaststoffe + resistente Stärke",
-      none: "Vernachlässigbare KH (× in Zellen)",
+      none: "vernachlässigbar (unter 0,5 g pro 100 g)",
     },
     carbPie: {
       quiet: "Vernachlässigbare Kohlenhydrate (unter 0,5 g pro 100 g); keine Ballaststoffquelle.",
@@ -262,9 +260,8 @@ export const de: Messages = {
       title: ({ sugar, starch, passive }) =>
         `KH pro 100 g: Zucker ${sugar} g, Stärke ${starch} g, passiv (Ballaststoffe+RS) ${passive} g`,
     },
-    necessityImpactGroupHint:
-      "Rückstände, Verarbeitung, Nährstoff-Haltbarkeit und wie viel Protein bis zum Ende des Dünndarms aufgenommen wird (ileale Verdaulichkeit, DIAAS).",
     necessityImpactMethodLink: "Methode: Rückstände & Stabilität",
+    digestibilityDefinition: "Anteil des Proteins, der bis zum Ende des Dünndarms aufgenommen wird.",
     degradationRowHint: "Garen, Lagerung, Verarbeitung vs. labile Vitamine — nicht jeder Nährstoff verblasst gleich.",
     nutrientShort: { protein: "Protein", fat: "Fett", sugar: "Zucker" },
     nutrientRows: {
@@ -285,8 +282,11 @@ export const de: Messages = {
       necessityImpact: "Was im Körper ankommt",
     },
     microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
-    microHint:
-      "Die Farbe sättigt bei 20 % DV pro 100 kcal, dem Niveau, das als voll gedeckt zählt. ⚠ markiert einen Nährstoff, dessen Menge in 100 kcal die Höchstmenge für Erwachsene für einen ganzen Tag (EFSA) überschreitet. Die Häufigkeit zählt; die Markierung senkt den Wert nicht.",
+    microHint: "Volle Farbe bei 20 % DV pro 100 kcal, dem Niveau, das die Bewertung als gedeckt zählt.",
+    microWarningKey:
+      "⚠ 100 kcal überschreiten die Tageshöchstmenge für Erwachsene (EFSA); die Markierung senkt den Wert nicht.",
+    microWarningTitle:
+      "Über der Tageshöchstmenge für Erwachsene (EFSA) in 100 kcal. Wie oft es gegessen wird, zählt; der Wert wird nicht gesenkt.",
   },
   recommend: {
     title: "Empfehlungs-Engine",
