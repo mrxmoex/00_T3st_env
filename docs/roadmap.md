@@ -8,8 +8,8 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 |---|---|
 | Branch | `cursor/compare-nutrient-groups-b80f` |
 | Pull request | [#15](https://github.com/mrxmoex/00_T3st_env/pull/15), open until Phase 8 |
-| Last confirmed phase | 0 (baseline) |
-| Active phase | 1, awaiting review (`docs/handoffs/phase-1.md`) |
+| Last confirmed phase | 1 (truth audit and copy contract) |
+| Active phase | 2, awaiting review (`docs/handoffs/phase-2.md`) |
 
 At the end of a phase, set *Active phase* to "N, awaiting review". Only the user's go moves *Last confirmed phase*.
 
@@ -186,7 +186,7 @@ Work through the Phase 2 list in the Phase 1 handoff on /compare. Keep every cla
 
 **Reads.** Handoffs 1 and 2, the contract.
 
-**In scope.** `RadarChart`, `NutrientRadar`, `MacroCompositionPie`, `MassCompositionBar`, `CarbTypePie`, their CSS.
+**In scope.** `RadarChart`, `NutrientRadar`, `MacroCompositionPie`, `MassCompositionBar`, `CarbTypePie`, their CSS, and the Compare tables at narrow widths. Start from the seeds in `docs/handoffs/phase-2.md`.
 
 **Out of scope.** Copy beyond chart labels, scoring, grouping.
 
