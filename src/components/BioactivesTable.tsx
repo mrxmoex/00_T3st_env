@@ -1,29 +1,9 @@
-import {
-  BIOACTIVE_COMPOUNDS,
-  BIOACTIVE_SOURCES,
-  bioactiveProfile,
-  shortCitation,
-  sourceLink,
-  type BioactiveSourceId,
-  type BioactiveValue,
-} from "../data/bioactives";
+import { BIOACTIVE_COMPOUNDS, bioactiveProfile, type BioactiveValue } from "../data/bioactives";
 import { BIOACTIVE_LABELS, BIOACTIVE_ROLES, MEASURED_STATE_LABELS } from "../i18n/labels";
 import { useLocale } from "../i18n/LocaleContext";
 import type { FoodRecord } from "../scoring/types";
+import { BioactiveSourceLink } from "./BioactiveSourceLink";
 import { formatAmount } from "./format";
-
-function SourceCell({ source }: { source: BioactiveSourceId }) {
-  const ref = BIOACTIVE_SOURCES[source];
-  const href = sourceLink(ref);
-  const label = shortCitation(ref);
-  return href ? (
-    <a href={href} target="_blank" rel="noreferrer" title={ref.citation}>
-      {label}
-    </a>
-  ) : (
-    <span title={ref.citation}>{label}</span>
-  );
-}
 
 export function BioactivesTable({ food }: { food: FoodRecord }) {
   const { t, localize } = useLocale();
@@ -105,7 +85,9 @@ export function BioactivesTable({ food }: { food: FoodRecord }) {
                   <td className="mono">{content(value)}</td>
                   <td>{measured(value)}</td>
                   <td className="muted">
-                    {value.status === "value" || value.status === "notDetected" ? <SourceCell source={value.source} /> : null}
+                    {value.status === "value" || value.status === "notDetected" ? (
+                      <BioactiveSourceLink source={value.source} />
+                    ) : null}
                   </td>
                 </tr>
               );

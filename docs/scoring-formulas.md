@@ -24,6 +24,8 @@ EAA     = 100 × (0.55×min(1,AAS) + 0.30×digestibility + 0.15×density)
 
 Plant proteins stay incomplete when any ratio &lt; 1. Density stops low-protein leaves from ranking as protein foods.
 
+`ileal_digestibility` is true ileal digestibility of nitrogen, one value per food for every amino acid. Its sources and their order of preference: [`data-sources.md`](data-sources.md#protein-digestibility).
+
 ## EFA / glyceride profile
 
 ```
@@ -119,7 +121,7 @@ phyto      = 0.65 × class_baseline + 0.35 × food_index
 Fibre      = 100 × (0.60×fibreScore + 0.40×phyto)
 ```
 
-Animal class baseline = 0.
+Animal class baseline = 0. Plant class baselines (`src/scoring/fibre.ts`): cruciferous 0.9, fermented cruciferous 0.88, leafy 0.85, sprouts 0.8, fruit 0.75, legumes 0.7, nuts and seeds 0.65, algae 0.6, mushrooms 0.55, other vegetables 0.5, grains 0.45, roots and tubers 0.4.
 
 ## Residue / contaminants (higher = safer)
 
@@ -168,7 +170,7 @@ Weights live in `src/data/classWeights.ts` and must sum to 1. Within-class rank 
 
 ## Class-specific columns
 
-Extra 0–100 columns (folate density, SAA adequacy, EPA+DHA, analogue B12, etc.) are defined in `src/scoring/extras.ts`. They do not replace the seven core axes. Creatine (full at 400 mg/100 g), glucosinolates (100 mg/100 g), and ergothioneine (10 mg/100 g) now read the sourced compound index; a food without an analysis shows —.
+Extra 0–100 columns (folate density, SAA adequacy, EPA+DHA, analogue B12, etc.) are defined in `src/scoring/extras.ts`. They do not replace the seven core axes. Fruit: vitamin C density, fibre per sugar (full when fibre is at least half the sugar), potassium density (full at 500 mg per 100 kcal). Nuts and seeds: ALA density (2 g per 100 kcal), vitamin E density (5 mg), magnesium density (60 mg), lysine adequacy. Grains: lysine adequacy, thiamin density (0.15 mg per 100 kcal), magnesium density, phytate. Creatine (full at 400 mg/100 g), glucosinolates (100 mg/100 g), and ergothioneine (10 mg/100 g) now read the sourced compound index; a food without an analysis shows —.
 
 ## Bioactive compounds (shown, not scored)
 

@@ -161,10 +161,14 @@ describe("upper limits", () => {
     expect(upperLimitExceedances(carrot)).not.toContain("vitaminA");
   });
 
-  it("only flags organs and algae in the current catalog", () => {
+  it("only flags organs, algae, and Brazil nut selenium in the current catalog", () => {
     const flagged = FOODS.filter((food) => upperLimitExceedances(food).length > 0);
     expect(flagged.length).toBeGreaterThan(0);
     for (const food of flagged) {
+      if (food.id === "brazil_nuts_raw") {
+        expect(upperLimitExceedances(food)).toEqual(["selenium"]);
+        continue;
+      }
       expect(["organs", "algae"]).toContain(food.class);
     }
   });

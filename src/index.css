@@ -194,6 +194,20 @@ table.matrix {
   width: 100%;
   font-size: 0.86rem;
 }
+table.matrix.compare-axes,
+table.matrix.compare-micro { min-width: 0; }
+table.matrix.compare-axes th,
+table.matrix.compare-axes td,
+table.matrix.compare-micro th,
+table.matrix.compare-micro td,
+table.matrix.compare-axes .nova-badge { white-space: normal; }
+@media (max-width: 480px) {
+  table.matrix.compare-micro th,
+  table.matrix.compare-micro td { padding: 0.45rem 0.3rem; }
+  table.matrix.compare-micro td.sticky,
+  table.matrix.compare-micro th.sticky { min-width: 7.5rem; }
+  table.matrix.compare-micro .heat-percent { min-width: 2.9rem; padding-inline: 0.3rem; }
+}
 
 .matrix th, .matrix td {
   padding: 0.55rem 0.55rem;
@@ -306,6 +320,18 @@ details.panel > summary {
 .axis-bars { display: grid; gap: 0.45rem; }
 
 .bar-row { display: grid; grid-template-columns: 9.5rem 1fr 2.4rem; gap: 0.45rem; align-items: center; }
+.bar-row-label { display: inline-flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; }
+.food-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem 0.65rem;
+  margin: 0.35rem 0 0.5rem;
+}
+.food-meta .honor-line { margin: 0; }
+.radar-block-heading { font-size: 1.1rem; margin: 0 0 0.5rem; }
+.food-charts { min-width: 0; }
+.food-radar-pair .compare-axis-radar { margin-bottom: 0; }
 .bar {
   height: 0.55rem;
   background: var(--bg-mute);
@@ -339,6 +365,233 @@ details.panel > summary {
 .nova-3 { background: #8a7a3d; color: #fff8d9; }
 .nova-4 { background: #7a3a32; color: #ffe8e4; }
 
+.nova-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.nova-supernova {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e8fff6 0%, #3d9a72 45%, #1a4d3a 100%);
+  box-shadow: 0 0 6px rgba(90, 220, 160, 0.55);
+  flex-shrink: 0;
+}
+.nova-marker.nova-2 .nova-supernova {
+  background: radial-gradient(circle at 35% 35%, #f3ffef 0%, #6a9a5a 45%, #2d4d28 100%);
+}
+.nova-marker.nova-3 .nova-supernova {
+  background: radial-gradient(circle at 35% 35%, #fff8d9 0%, #c4a832 45%, #6a5520 100%);
+  box-shadow: 0 0 5px rgba(220, 190, 80, 0.45);
+}
+.nova-marker.nova-4 .nova-supernova {
+  background: radial-gradient(circle at 35% 35%, #ffe8e4 0%, #c45a48 45%, #5a2218 100%);
+  box-shadow: 0 0 5px rgba(220, 100, 80, 0.45);
+}
+.nova-marker-text { color: var(--ink); }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.axis-row-sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.3;
+  max-width: 14rem;
+  white-space: normal;
+}
+.has-tip { text-decoration: underline dotted; text-underline-offset: 0.2em; cursor: help; }
+
+.carb-pie { display: inline-flex; vertical-align: middle; }
+.carb-pie svg { display: block; }
+.carb-seg-sugar { fill: hsl(32 78% 52%); background: hsl(32 78% 52%); }
+.carb-seg-starch { fill: hsl(210 55% 48%); background: hsl(210 55% 48%); }
+.carb-seg-passive { fill: hsl(128 42% 42%); background: hsl(128 42% 42%); }
+.carb-pie-hole { fill: var(--bg); }
+
+.macro-comp-pie { display: inline-flex; flex-shrink: 0; }
+.macro-seg-protein { fill: var(--series-1); }
+.macro-seg-fat { fill: var(--series-2); }
+.macro-seg-carb { fill: var(--series-3); }
+.macro-seg-other { fill: hsl(128 14% 58%); }
+.macro-pie-hole { fill: var(--bg); }
+.nutrient-macro-legend {
+  margin-top: 0.5rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+}
+.nutrient-macro-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  text-align: left;
+}
+.nutrient-macro-legend-body { flex: 1; min-width: 0; }
+.nutrient-macro-legend-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.macro-share-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.9rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.macro-share-lines li { display: inline-flex; align-items: center; gap: 0.35rem; }
+.macro-key-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.macro-key-dot.macro-seg-protein { background: var(--series-1); }
+.macro-key-dot.macro-seg-fat { background: var(--series-2); }
+.macro-key-dot.macro-seg-carb { background: var(--series-3); }
+.macro-key-dot.macro-seg-other { background: hsl(128 14% 58%); }
+.nutrient-radar-hint { margin: 0.35rem 0 0; font-size: 0.84rem; }
+.mass-composition-block { margin-top: 0.75rem; }
+.mass-composition-heading { font-size: 0.82rem; font-weight: 600; margin: 0 0 0.35rem; color: var(--muted); }
+.mass-composition { display: flex; align-items: center; gap: 0.5rem; margin: 0.2rem 0; font-size: 0.78rem; }
+.mass-composition-label { min-width: 5.5rem; flex-shrink: 0; color: var(--ink); font-weight: 500; }
+.mass-composition-track {
+  display: flex;
+  flex: 1;
+  height: 0.55rem;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-mute);
+  min-width: 0;
+}
+.mass-seg-water { background: hsl(200 45% 62%); }
+.mass-seg-protein { background: var(--series-1); }
+.mass-seg-fat { background: var(--series-2); }
+.mass-seg-carbs { background: var(--series-3); }
+.mass-seg-other { background: hsl(280 18% 55%); }
+.mass-composition-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.mass-composition-key li { display: inline-flex; align-items: center; gap: 0.25rem; }
+.mass-key-swatch { width: 0.65rem; height: 0.55rem; border-radius: 2px; }
+.carb-type-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.7rem;
+  max-width: 22rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--muted);
+  white-space: normal;
+}
+.carb-type-key li { display: inline-flex; align-items: center; gap: 0.3rem; }
+.carb-key-swatch { width: 0.6rem; height: 0.6rem; border-radius: 2px; }
+.carb-key-none { width: 0.6rem; text-align: center; line-height: 1; }
+.carb-pie-none { color: var(--muted); font-size: 1.1rem; line-height: 1; padding: 0 0.15rem; }
+.carb-cell { display: inline-flex; align-items: center; gap: 0.5rem; }
+.carb-pie-quiet { min-width: 1.4rem; justify-content: center; }
+.marker-key { margin: 0.6rem 0 0; font-size: 0.78rem; }
+.heat-percent { min-width: 3.4rem; font-variant-numeric: tabular-nums; }
+.nutrient-radar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+}
+.nutrient-radar-controls label { display: inline-flex; align-items: center; gap: 0.25rem; }
+
+.compare-radar-hint { font-size: 0.82rem; max-width: 36rem; }
+.compare-radar-protein-legend {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.compare-radar-protein-legend li { margin: 0.15rem 0; }
+.compare-radar-protein-legend strong { color: var(--ink); font-weight: 600; }
+
+.honor-line { display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; font-size: 0.88rem; }
+.honor-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 6px;
+  background: var(--bg-mute);
+}
+.honor-stamp.fibre-stamp {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: hsl(128 50% 42%);
+  box-shadow: 0 0 4px hsl(128 50% 42% / 0.5);
+}
+.honor-basis { align-self: center; font-size: 0.8rem; }
+
+.bioactives-profiles {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 720px) {
+  .bioactives-profiles { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+}
+.bioactives-profile h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+.bioactive-chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.bioactive-chip summary {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.88rem;
+}
+.bioactive-chip-name { font-weight: 600; }
+.bioactive-chip-amount { color: var(--muted); }
+.bioactive-chip-role { margin: 0.35rem 0 0; font-size: 0.82rem; color: var(--muted); }
+.bioactive-chip-source { margin: 0.35rem 0 0; font-size: 0.78rem; }
+
 .role, .cell-note { display: block; font-size: 0.78rem; color: var(--muted); }
 .person-bar { margin: 0.6rem var(--pad) 0; }
 .person-fields { display: flex; flex-wrap: wrap; gap: 0.6rem 0.8rem; align-items: end; }
@@ -362,6 +615,7 @@ details.panel > summary {
 .radar { margin: 0; }
 .radar svg { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; }
 .radar-grid { fill: none; stroke: var(--line); }
+.radar-spoke { stroke: var(--line); stroke-width: 1; shape-rendering: geometricPrecision; }
 .radar-tick { fill: var(--muted); font-family: var(--font-mono); font-size: 9px; }
 .radar-label { fill: var(--muted); font-size: 12px; }
 .series-1 { --series: var(--series-1); }
@@ -387,6 +641,34 @@ details.panel > summary {
 }
 .radar-legend li { display: inline-flex; align-items: center; gap: 0.4rem; }
 .radar-swatch { width: 0.8rem; height: 0.8rem; border-radius: 3px; background: var(--series); }
+.radar-center-plate { fill: var(--bg-elev); stroke: var(--line); pointer-events: none; }
+.radar-center-text {
+  fill: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  pointer-events: none;
+}
+.radar-center-text.series-1,
+.radar-center-text.series-2,
+.radar-center-text.series-3 { fill: var(--series); }
+.radar-pair { display: grid; gap: 1.2rem; align-items: start; }
+.radar-pair .muted { margin: 0.35rem 0 0; font-size: 0.84rem; }
+.matrix tr.group-row th {
+  background: var(--bg-mute);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.matrix tr.group-row .group-label { position: sticky; left: 0.55rem; }
+.matrix tr.group-row .group-link {
+  margin-left: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
 
 .compare-grid {
   display: grid;
@@ -404,6 +686,10 @@ footer.site {
   .grid-2, .compare-grid, .food-overview { grid-template-columns: 1fr 1fr; }
   .cards { grid-template-columns: repeat(2, 1fr); }
   .compare-grid.n3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 880px) {
+  .radar-pair { grid-template-columns: 1fr 1fr; }
 }
 
 @media (min-width: 980px) {

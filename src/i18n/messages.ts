@@ -1,6 +1,15 @@
 import type { Gap } from "../recommend/engine";
+import type { NutrientBasis } from "../scoring/generalNutrients";
 import type { Activity, SweatLevel } from "../person/context";
-import type { AxisKey, ClassWeights, DietaryPattern, FoodClass, Kingdom, NovaGroup, Tier } from "../scoring/types";
+import type {
+  AxisKey,
+  ClassWeights,
+  DietaryPattern,
+  FoodClass,
+  Kingdom,
+  NovaGroup,
+  Tier,
+} from "../scoring/types";
 
 export interface Messages {
   nav: {
@@ -167,15 +176,88 @@ export interface Messages {
     slot: (position: number) => string;
     classTier: (classLabel: string, tier: Tier) => string;
     eaaLine: (info: { aas: number; diaas: number; limiting: string }) => string;
-    compoundLine: (info: { creatineMg: number | null; fibreG: number; b12Ug: number | null }) => string;
     novaLine: (group: NovaGroup, label: string) => string;
+    honors: {
+      creatine: (mg: string) => string;
+      fibre: (g: string) => string;
+      b12: (ug: string) => string;
+      taurine: (mg: string) => string;
+      glucosinolates: (mg: string) => string;
+    };
+    honorsEmpty: string;
     bioactivesHeading: string;
     bioactivesHint: string;
+    /** Keys for the marks on compound amounts; each shows only when its mark is on screen. */
+    bioactiveMarkers: { raw: string; notDetected: string };
+    bioactivesProfileLede: string;
+    bioactivesProfileEmpty: string;
     notDetectedShort: string;
     radarHeading: string;
     radarTitle: string;
+    axisRadarHint: string;
+    axisRadarMethodLink: string;
+    radarProteinShort: { pattern: string; digest: string; density: string };
+    radarProteinLabels: { pattern: string; digest: string; density: string };
+    radarProteinTips: {
+      pattern: (info: { food: string; aas: number; diaas: number }) => string;
+      digest: (info: { food: string; digestibility: number; diaas: number }) => string;
+      density: (info: { food: string; proteinG: number }) => string;
+    };
+    radarProteinLegendHeading: string;
+    radarProteinLegendLine: (info: { aas: number; diaas: number; limiting: string }) => string;
+    nutrientRadarHeading: string;
+    nutrientRadarTitle: (basis: string) => string;
+    nutrientRadarHint: (info: { basis: NutrientBasis; rings: string }) => string;
+    macroShareToggleLabel: string;
+    macroShareBasis: { g: string; kcal: string };
+    macroShareCaption: (info: { protein: string; fat: string; carb: string; other: string }) => string;
+    macroLegendHeading: string;
+    macroLegend: { protein: string; fat: string; carb: string; other: string };
+    massCompositionHeading: string;
+    massCompositionTitle: (info: {
+      food: string;
+      water: string;
+      protein: string;
+      fat: string;
+      carbs: string;
+    }) => string;
+    massCompositionLegend: { water: string; protein: string; fat: string; carbs: string; other: string };
+    carbRowLabel: string;
+    carbLegendHeading: string;
+    carbLegend: { sugar: string; starch: string; passive: string; none: string; size: (fullG: number) => string };
+    carbQuietScore: string;
+    carbPie: {
+      quiet: string;
+      noneSymbol: string;
+      title: (info: { sugar: string; starch: string; passive: string }) => string;
+    };
+    necessityImpactMethodLink: string;
+    digestibilityDefinition: string;
+    degradationRowHint: string;
+    nutrientShort: Record<"protein" | "fat" | "carbs", string>;
+    nutrientRows: {
+      protein: string;
+      fat: string;
+      carbs: string;
+      sugar: string;
+      kcal: string;
+      kJ: string;
+      digestibility: string;
+      diaas: string;
+      source: string;
+      nova: string;
+    };
+    axisGroups: {
+      kind: string;
+      general: string;
+      importance: string;
+      necessityImpact: string;
+    };
     microHeading: string;
     microHint: string;
+    /** Shown only when a ⚠ cell is on screen. */
+    microWarningKey: string;
+    microWarningTitle: string;
   };
   recommend: {
     title: string;

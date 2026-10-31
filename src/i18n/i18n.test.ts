@@ -14,6 +14,7 @@ import {
   BIOACTIVE_ROLES,
   BODY_STORE_LABELS,
   MICRO_LABELS,
+  MICRO_ROW_HINTS,
   NOVA_LABELS,
   NUTRIENT_LABELS,
   PREPARATION_LABELS,
@@ -62,6 +63,21 @@ describe("UI messages", () => {
     }
   });
 
+  it("calls a protein limiting only when the engine does (AAS below 1)", () => {
+    for (const messages of [en, de]) {
+      for (const line of [messages.compare.eaaLine, messages.compare.radarProteinLegendLine]) {
+        expect(line({ aas: 0.878, diaas: 0.703, limiting: "SAA" })).toContain("SAA");
+        expect(line({ aas: 1.252, diaas: 1.215, limiting: "LYS" })).not.toContain("LYS");
+      }
+      const food = { diaas: 1, pdcaas: 1, digestibility: 0.9 };
+      expect(messages.food.eaaSummary({ ...food, aas: 0.8, limiting: "SAA" })).toContain("SAA");
+      expect(messages.food.eaaSummary({ ...food, aas: 1.2, limiting: "LYS" })).not.toContain("LYS");
+      const card = { diaas: 1, pdcaas: 1, rae: 0, iron: 0 };
+      expect(messages.source.cardLine({ ...card, aas: 0.8, limiting: "SAA" })).toContain("SAA");
+      expect(messages.source.cardLine({ ...card, aas: 1.2, limiting: "LYS" })).not.toContain("LYS");
+    }
+  });
+
   it("translates list content item by item", () => {
     expect(de.limits.nonClaims).toHaveLength(en.limits.nonClaims.length);
     expect(de.limits.willDo).toHaveLength(en.limits.willDo.length);
@@ -70,7 +86,7 @@ describe("UI messages", () => {
   });
 
   it("labels compounds, NOVA groups, body stores, and additives in both languages", () => {
-    const tables = { BIOACTIVE_LABELS, BIOACTIVE_ROLES, NOVA_LABELS, BODY_STORE_LABELS, ADDITIVE_LABELS };
+    const tables = { BIOACTIVE_LABELS, BIOACTIVE_ROLES, MICRO_ROW_HINTS, NOVA_LABELS, BODY_STORE_LABELS, ADDITIVE_LABELS };
     for (const [table, labels] of Object.entries(tables)) {
       for (const [key, label] of Object.entries(labels)) {
         expectTranslated(label, `${table}.${key}`);

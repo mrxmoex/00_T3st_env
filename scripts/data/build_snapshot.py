@@ -363,9 +363,11 @@ def build(manifest: dict, bls: dict[str, dict], fdc: dict[str, dict]) -> dict:
         for required in ("kcal", "protein", "fat", "carbsAvailable", "fibre"):
             if values[required] is None:
                 raise SystemExit(f"{item['id']}: required nutrient {required} missing in every source")
-        if values["starch"] is None and values["sugars"] is not None:
-            starch = max(0.0, values["carbsAvailable"][0] - values["sugars"][0])
-            values["starch"] = [compact(starch), "formula", values["carbsAvailable"][2]]
+        carbs, sugars, starch = values["carbsAvailable"], values["sugars"], values["starch"]
+        # Starch must come from the entry that gave available carbohydrate; another database's starch
+        # is derived from a different total and can push sugars + starch past it.
+        if sugars is not None and sugars[2] == carbs[2] and (starch is None or starch[2] != carbs[2]):
+            values["starch"] = [compact(max(0.0, carbs[0] - sugars[0])), "formula", carbs[2]]
         sources = [
             {"db": db, "code": code, "name": name, **({"match": match} if match else {})}
             for db, code, _canonical, name, match in entries

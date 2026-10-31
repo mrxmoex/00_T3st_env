@@ -1,5 +1,9 @@
 import { ANIMAL_FOODS } from "./foods/animal";
+import { FRUIT_FOODS } from "./foods/fruits";
+import { GRAIN_FOODS } from "./foods/grains";
+import { NUT_SEED_FOODS } from "./foods/nutsSeeds";
 import { PLANT_FOODS } from "./foods/plant";
+import { VEGETABLE_FOODS } from "./foods/vegetables";
 import { DATASET_VERSION, LAST_VERIFIED } from "./coefficients";
 import { labileRetention, perGramDryMatter } from "../scoring/retention";
 import { PREPARATIONS, type FoodClass, type FoodRecord } from "../scoring/types";
@@ -23,7 +27,14 @@ function withProcessingRetention(foods: readonly FoodRecord[]): FoodRecord[] {
   });
 }
 
-export const FOODS: FoodRecord[] = withProcessingRetention([...PLANT_FOODS, ...ANIMAL_FOODS]);
+export const FOODS: FoodRecord[] = withProcessingRetention([
+  ...PLANT_FOODS,
+  ...VEGETABLE_FOODS,
+  ...FRUIT_FOODS,
+  ...NUT_SEED_FOODS,
+  ...GRAIN_FOODS,
+  ...ANIMAL_FOODS,
+]);
 
 export const DATA_META = {
   version: DATASET_VERSION,

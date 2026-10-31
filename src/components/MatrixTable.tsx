@@ -4,6 +4,7 @@ import { useLocale } from "../i18n/LocaleContext";
 import { classExtraColumns } from "../scoring/extras";
 import type { AxisKey, FoodClass, FoodRecord, ScoreCard } from "../scoring/types";
 import { AXIS_KEYS } from "../scoring/types";
+import { CarbTypePie } from "./CarbTypePie";
 import { HeatCell } from "./HeatCell";
 
 export function axisValue(card: ScoreCard, axis: AxisKey): number {
@@ -57,6 +58,7 @@ export function MatrixTable({
               <th
                 key={axis}
                 className="sortable"
+                title={axis === "degradation" ? t.axes.degradation : undefined}
                 onClick={() => onSort(axis)}
                 aria-sort={sortAxis === axis ? "descending" : "none"}
               >
@@ -84,11 +86,22 @@ export function MatrixTable({
                   {card.tier}
                 </span>
               </td>
-              {AXIS_KEYS.map((axis) => (
-                <td key={axis}>
-                  <HeatCell score={axisValue(card, axis)} />
-                </td>
-              ))}
+              {AXIS_KEYS.map((axis) => {
+                const score = axisValue(card, axis);
+                if (axis === "carb") {
+                  const label = `${t.axes.carb}: ${score.toFixed(1)}`;
+                  return (
+                    <td key={axis} title={label} aria-label={label}>
+                      <CarbTypePie food={food} carb={card.carb} />
+                    </td>
+                  );
+                }
+                return (
+                  <td key={axis}>
+                    <HeatCell score={score} />
+                  </td>
+                );
+              })}
               {extras.map((column) => (
                 <td key={column}>
                   <HeatCell score={card.extras[column] ?? null} />

@@ -47,6 +47,9 @@ export function preparationIdeas(food: FoodRecord): LocalizedText[] {
     case "mushrooms":
     case "algae":
     case "other_vegetables":
+    case "fruits":
+    case "nuts_seeds":
+    case "grains":
     case "muscle_ruminant":
     case "muscle_monogastric":
     case "muscle_poultry":

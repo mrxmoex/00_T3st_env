@@ -16,6 +16,9 @@ export const PLANT_CLASSES = [
   "algae",
   "roots_tubers",
   "other_vegetables",
+  "fruits",
+  "nuts_seeds",
+  "grains",
 ] as const;
 
 export const ANIMAL_CLASSES = [
@@ -385,6 +388,9 @@ export function kingdomOf(foodClass: FoodClass): Kingdom {
     case "algae":
     case "roots_tubers":
     case "other_vegetables":
+    case "fruits":
+    case "nuts_seeds":
+    case "grains":
       return "plant";
     case "muscle_ruminant":
     case "muscle_monogastric":

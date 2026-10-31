@@ -45,8 +45,8 @@ export const BIOACTIVE_ROLES: Readonly<Record<BioactiveCompound, LocalizedText>>
     de: "Antioxidans mit eigenem Transporter (OCTN1). Der Mensch kann es nicht bilden; Pilze sind die reichste Quelle.",
   },
   glucosinolates: {
-    en: "Precursors of isothiocyanates such as sulforaphane. Conversion needs the plant enzyme myrosinase, which cooking destroys.",
-    de: "Vorstufen von Isothiocyanaten wie Sulforaphan. Die Umwandlung braucht das Pflanzenenzym Myrosinase, das beim Kochen zerstört wird.",
+    en: "Precursors of isothiocyanates such as sulforaphane. The plant enzyme myrosinase converts them; cooking destroys it, and gut bacteria then convert a smaller share.",
+    de: "Vorstufen von Isothiocyanaten wie Sulforaphan. Das Pflanzenenzym Myrosinase wandelt sie um; Kochen zerstört es, dann setzen Darmbakterien einen kleineren Teil um.",
   },
 };
 
@@ -107,6 +107,60 @@ export const MICRO_LABELS: Readonly<Record<MicroNutrient, LocalizedText>> = {
   copper: { en: "Copper", de: "Kupfer" },
   selenium: { en: "Selenium", de: "Selen" },
   iodine: { en: "Iodine", de: "Jod" },
+};
+
+/** One line under each micronutrient row. Each claim needs a backing named in docs/ux-copy-contract.md. */
+export const MICRO_ROW_HINTS: Readonly<Record<MicroNutrient, LocalizedText>> = {
+  iron: {
+    en: "Absorbable iron vs DV; phytate and heme context in the score.",
+    de: "Aufnehmbares Eisen vs. DV; Phytat- und Häm-Kontext in der Bewertung.",
+  },
+  zinc: {
+    en: "Absorbable zinc; plant phytate lowers uptake.",
+    de: "Aufnehmbares Zink; pflanzliches Phytat senkt die Aufnahme.",
+  },
+  vitaminA: { en: "RAE from retinol and carotenoids.", de: "RAE aus Retinol und Carotinoiden." },
+  vitaminB12: {
+    en: "Effective B12: algal analogues count as 0.",
+    de: "Wirksames B12: Algen-Analoga zählen als 0.",
+  },
+  folate: { en: "Food folate; sensitive to heat and water.", de: "Lebensmittelfolat; hitze- und wasserempfindlich." },
+  vitaminC: { en: "Labile; cooking and storage matter.", de: "Labil; Kochen und Lagerung zählen." },
+  vitaminD: { en: "Few foods are rich sources.", de: "Wenige Lebensmittel sind reiche Quellen." },
+  vitaminE: { en: "Tocopherols in the fat matrix.", de: "Tocopherole in der Fettmatrix." },
+  vitaminK: {
+    en: "K1 in leafy greens; K2 is often not reported.",
+    de: "K1 in Blattgemüse; K2 wird oft nicht erfasst.",
+  },
+  thiamin: { en: "Water-soluble; leaches with cooking water.", de: "Wasserlöslich; geht ins Kochwasser über." },
+  riboflavin: { en: "Light-sensitive.", de: "Lichtempfindlich." },
+  niacin: {
+    en: "Preformed niacin; conversion from tryptophan not counted.",
+    de: "Vorgeformtes Niacin; Umwandlung aus Tryptophan nicht eingerechnet.",
+  },
+  vitaminB6: { en: "Muscle holds a store for weeks.", de: "Der Muskel hält einen Vorrat für Wochen." },
+  choline: {
+    en: "Partly made by the body; eggs and liver stand out.",
+    de: "Teils körpereigen; Eier und Leber stechen heraus.",
+  },
+  calcium: {
+    en: "Absorption from human studies where they exist; otherwise counted like milk.",
+    de: "Aufnahme aus Humanstudien, wo vorhanden; sonst wie Milch gerechnet.",
+  },
+  magnesium: { en: "Widespread; density per kcal matters.", de: "Verbreitet; Dichte pro kcal zählt." },
+  potassium: {
+    en: "Leaches into cooking water; no body store.",
+    de: "Geht ins Kochwasser über; kein Körperspeicher.",
+  },
+  copper: {
+    en: "Trace element; the liver stores it for months.",
+    de: "Spurenelement; die Leber speichert es für Monate.",
+  },
+  selenium: { en: "Varies with soil; values from USDA.", de: "Schwankt mit dem Boden; Werte aus USDA." },
+  iodine: {
+    en: "Mostly from seafood, seaweed, dairy, and iodised salt.",
+    de: "Vor allem aus Fisch, Meeresfrüchten, Algen, Milchprodukten und jodiertem Salz.",
+  },
 };
 
 export const NUTRIENT_LABELS: Readonly<Record<NutrientKey, LocalizedText>> = {

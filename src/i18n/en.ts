@@ -47,7 +47,7 @@ export const en: Messages = {
       `${altName}. Preparation: ${preparation}. Source: ${source}. ${kcal} kcal / 100 g. Tier ${tier} (#${rank} of ${size} in class).`,
     radarTitle: (name) => `${name}: axis profile`,
     eaaSummary: ({ aas, diaas, pdcaas, limiting, digestibility }) =>
-      `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. Limiting amino acid: ${limiting}. Ileal digestibility ${digestibility}.`,
+      `AAS ${aas}, DIAAS ${diaas}, PDCAAS ${pdcaas}. ${aas < 1 ? `Limiting amino acid: ${limiting}.` : "Complete against the FAO 2013 pattern."} Ileal digestibility ${digestibility}.`,
     benefitsHeading: "Benefit",
     burdensHeading: "Burden (higher score = less burden)",
     fatsCarbsMicros: "Fats, carbs, micros",
@@ -58,7 +58,7 @@ export const en: Messages = {
       "Compounds the nutrient databases do not report, indexed by content from published analyses. Shown, not scored. “No data” means no analysis was found, not zero; “not detected” means an analysis looked and found none.",
     bioactiveColumns: { compound: "Compound", content: "mg per 100 g", measured: "What was measured", source: "Source" },
     bioactiveStatus: { notDetected: "not detected", notExpected: "not expected", noData: "no data" },
-    bioactiveRawValue: "raw tissue value; cooking changes it",
+    bioactiveRawValue: "raw tissue value; preparation changes it",
     bioactiveDryWeight: "scaled from dry weight with this food's water content",
     bioactiveRange: (min, max) => `range ${min}–${max}`,
     burden: {
@@ -182,19 +182,112 @@ export const en: Messages = {
       "Compare foods without collapsing classes. A lentil column will not grow a B12 value because the UI wants balance.",
     slot: (position) => `Food ${position}`,
     classTier: (classLabel, tier) => `${classLabel} · tier ${tier}`,
-    eaaLine: ({ aas, diaas, limiting }) => `AAS ${aas} · DIAAS ${diaas} · limiting ${limiting}`,
-    compoundLine: ({ creatineMg, fibreG, b12Ug }) =>
-      `Creatine ${creatineMg === null ? "—" : `${creatineMg} mg`} · fibre ${fibreG} g · B12 ${b12Ug ?? "—"} µg`,
+    eaaLine: ({ aas, diaas, limiting }) =>
+      `AAS ${aas} · DIAAS ${diaas} · ${aas < 1 ? `limiting ${limiting}` : "complete"}`,
     novaLine: (group, label) => `NOVA ${group} · ${label}`,
-    bioactivesHeading: "Bioactive compounds (mg per 100 g)",
+    honors: {
+      creatine: (mg) => `Creatine ${mg} mg`,
+      fibre: (g) => `Fibre ${g} g`,
+      b12: (ug) => `B12 ${ug} µg`,
+      taurine: (mg) => `Taurine ${mg} mg`,
+      glucosinolates: (mg) => `Glucosinolates ${mg} mg`,
+    },
+    honorsEmpty: "No standout fibre, B12, or bioactives on this card.",
+    bioactivesHeading: "Bioactive compounds",
     bioactivesHint:
-      "From published analyses; not scored. * raw-tissue value for a cooked food · — no analysis found · n.d. analysed, not detected · ∅ not expected in this kind of food.",
+      "Values from published analyses, mg per 100 g, not scored. Compounds without an analysis are left out; open a chip for its role, source, and what was measured.",
+    bioactiveMarkers: {
+      raw: "* raw-tissue value for a cooked or processed food",
+      notDetected: "n.d. analysed, not detected",
+    },
+    bioactivesProfileLede: "What's inside — only compounds with a value or a measured absence.",
+    bioactivesProfileEmpty: "No analysis in the index for this food.",
     notDetectedShort: "n.d.",
     radarHeading: "Axis profile",
     radarTitle: "Axis profile of the selected foods",
+    axisRadarHint:
+      "Protein splits into pattern (AAS vs FAO 2013, capped at 1), ileal digestibility, and density (full at 20 g per 100 g).",
+    axisRadarMethodLink: "Method: EAA axis",
+    radarProteinShort: { pattern: "Pat.", digest: "Dig.", density: "Dens." },
+    radarProteinLabels: {
+      pattern: "Protein pattern (AAS, capped)",
+      digest: "Ileal digestibility",
+      density: "Protein density",
+    },
+    radarProteinTips: {
+      pattern: ({ food, aas, diaas }) => `${food}: AAS ${aas} (min ratio vs FAO 2013); DIAAS ${diaas}`,
+      digest: ({ food, digestibility, diaas }) =>
+        `${food}: digestibility ${digestibility.toFixed(2)}; DIAAS ${diaas} = AAS × digestibility`,
+      density: ({ food, proteinG }) => `${food}: ${proteinG} g protein / 100 g (full spoke at 20 g)`,
+    },
+    radarProteinLegendHeading: "Protein quality readout",
+    radarProteinLegendLine: ({ aas, diaas, limiting }) =>
+      `AAS ${aas} · DIAAS ${diaas} · ${aas < 1 ? `limiting ${limiting}` : "complete"}`,
+    nutrientRadarHeading: "General nutrients & density",
+    nutrientRadarTitle: (basis) => `Protein, fat, and available carbs (${basis})`,
+    nutrientRadarHint: ({ basis, rings }) =>
+      basis === "per100g"
+        ? `Spokes: grams per 100 g on one scale, rings at ${rings}. Percent: share of the food's energy.`
+        : `Spokes: kcal from each nutrient in 100 kcal, rings at ${rings}. Percent: share of the food's energy.`,
+    macroShareToggleLabel: "Amounts:",
+    macroShareBasis: { g: "per 100 g", kcal: "per 100 kcal" },
+    macroShareCaption: ({ protein, fat, carb, other }) =>
+      `Energy: ${protein}% protein · ${fat}% fat · ${carb}% available carbs · ${other}% fibre and other (4 · 9 · 4 kcal/g)`,
+    macroLegendHeading: "Macro energy share by food",
+    macroLegend: { protein: "Protein", fat: "Fat", carb: "Available carbs", other: "Fibre & other" },
+    massCompositionHeading: "Edible mass composition (per 100 g)",
+    massCompositionTitle: ({ food, water, protein, fat, carbs }) =>
+      `${food}: water ${water} g, protein ${protein} g, fat ${fat} g, carbohydrate incl. fibre ${carbs} g`,
+    massCompositionLegend: {
+      water: "Water",
+      protein: "Protein",
+      fat: "Fat",
+      carbs: "Carbohydrate incl. fibre",
+      other: "Other / unaccounted",
+    },
+    carbRowLabel: "Carbohydrate composition & quality",
+    carbLegendHeading: "Carbohydrate pie colours",
+    carbLegend: {
+      sugar: "Sugars",
+      starch: "Digestible starch",
+      passive: "Fibre + resistant starch",
+      none: "negligible (under 0.5 g per 100 g)",
+      size: (fullG) => `Pie area: grams per 100 g, full at ${fullG} g`,
+    },
+    carbQuietScore: "Under 0.5 g carbohydrate scores a fixed 70: no sugar load, and no fibre either.",
+    carbPie: {
+      quiet: "Negligible carbohydrate (under 0.5 g per 100 g); not a fibre source.",
+      noneSymbol: "×",
+      title: ({ sugar, starch, passive }) =>
+        `Carbs per 100 g: sugars ${sugar} g, starch ${starch} g, passive (fibre+RS) ${passive} g`,
+    },
+    necessityImpactMethodLink: "Method: residues & stability",
+    digestibilityDefinition: "Share of protein absorbed by the end of the small intestine.",
+    degradationRowHint: "Cooking, storage, and processing vs labile vitamins — not every nutrient fades equally.",
+    nutrientShort: { protein: "Protein", fat: "Fat", carbs: "Carbs" },
+    nutrientRows: {
+      protein: "Protein (g / 100 g)",
+      fat: "Fat (g / 100 g)",
+      carbs: "Available carbs (g / 100 g)",
+      sugar: "of which sugars (g / 100 g)",
+      kcal: "Energy (kcal / 100 g)",
+      kJ: "Energy (kJ / 100 g, from kcal)",
+      digestibility: "Ileal digestibility",
+      diaas: "DIAAS",
+      source: "Primary source",
+      nova: "NOVA group",
+    },
+    axisGroups: {
+      kind: "Kind",
+      general: "General nutrients",
+      importance: "Importance",
+      necessityImpact: "What reaches the body",
+    },
     microHeading: "Micronutrient vector (%DV per 100 kcal)",
-    microHint:
-      "Colour saturates at 20 % DV per 100 kcal, the level scored as fully covered. ⚠ marks a stored nutrient whose amount in 100 kcal exceeds the adult upper limit. Frequency matters; the mark does not lower the score.",
+    microHint: "Full colour at 20 % DV per 100 kcal, the level the score counts as covered.",
+    microWarningKey: "⚠ 100 kcal pass the adult upper limit for a whole day (EFSA); the mark does not lower the score.",
+    microWarningTitle:
+      "Above the adult whole-day upper limit (EFSA) in 100 kcal. How often it is eaten matters; the score is not lowered.",
   },
   recommend: {
     title: "Best-practice engine",
@@ -291,9 +384,9 @@ export const en: Messages = {
     residueHeading: "6. Residue / contaminant risk",
     residueNote:
       "Higher score = lower risk. Leafy high surface area is not scored like a tuber. Fish/algae metals and veterinary residues are first-class, not footnotes.",
-    degradationHeading: "7. Stability and nutrient loss",
+    degradationHeading: "7. Nutrient keeping power",
     degradationNote:
-      "Bonuses: cooked +0.08, fermented +0.22, dried +0.28. Fresh leafy stays labile. An industrially processed food (NOVA 3–4) is scaled by the share of vitamin C, thiamin, folate, and B6 per gram of dry matter it kept against the home-prepared form of the same food, so a long shelf life bought by destroying vitamins does not count as stability.",
+      "The axis asks how much of the food’s labile nutrients survive cooking, storage, and processing — not every vitamin fades equally. Bonuses: cooked +0.08, fermented +0.22, dried +0.28. Fresh leafy stays labile. An industrially processed food (NOVA 3–4) is scaled by the share of vitamin C, thiamin, folate, and B6 per gram of dry matter it kept against the home-prepared form of the same food, so a long shelf life bought by destroying vitamins does not count as keeping power.",
     compositeHeading: "8. Composite and tiers",
     compositeNote:
       "Weights are class-specific and sum to 1. Fibre is down-weighted for animal classes because absence is expected — the fibre axis itself still reads 0.",
@@ -323,7 +416,7 @@ export const en: Messages = {
       "It will not claim that algal B12 analogues are vitamin B12.",
       "It will not claim that a plant-only diet is complete without fortification or supplementation.",
       "It will not claim that fibre absence makes meat “unhealthy,” or that fibre presence makes a plant complete.",
-      "It will not treat leafy salads, legumes, sprouts, kraut, mushrooms, and algae as one class.",
+      "It will not treat leafy salads, legumes, sprouts, kraut, mushrooms, algae, fruit, nuts and seeds, and grains as one class.",
       "It will not treat muscle, organs, eggs, dairy, and fermented animal foods as one class.",
       "It will not issue medical diagnoses, personalised prescriptions, or bloodwork interpretations (the data model allows future overlays; they are not present).",
       "It will not treat residue scores as laboratory certificates for a named farm or lot.",
@@ -377,7 +470,7 @@ export const en: Messages = {
     datasetsHeading: "Databases and licences",
     curatedHeading: "Curated literature",
     cardLine: ({ aas, diaas, pdcaas, limiting, rae, iron }) =>
-      `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · limiting ${limiting} · RAE ${rae} µg · absorbable Fe ${iron} mg`,
+      `AAS ${aas} · DIAAS ${diaas} · PDCAAS ${pdcaas} · ${aas < 1 ? `limiting ${limiting}` : "complete"} · RAE ${rae} µg · absorbable Fe ${iron} mg`,
   },
   classes: {
     leafy_salad: "Leafy / salad greens",
@@ -394,6 +487,9 @@ export const en: Messages = {
     muscle_poultry: "Muscle — poultry",
     muscle_fish: "Muscle — fish",
     organs: "Organs",
+    fruits: "Fruit",
+    nuts_seeds: "Nuts & seeds",
+    grains: "Grains & pseudocereals",
     eggs: "Eggs",
     dairy: "Dairy",
     fermented_animal: "Fermented animal",
@@ -405,7 +501,7 @@ export const en: Messages = {
     micro: "Micros + bioavailability",
     fibre: "Fibre / phytochemicals",
     residue: "Residue / contaminants",
-    degradation: "Stability / nutrient loss",
+    degradation: "Nutrient keeping power",
     composite: "Composite",
   },
   axesShort: {
@@ -415,7 +511,7 @@ export const en: Messages = {
     micro: "Micro",
     fibre: "Fibre",
     residue: "Residue",
-    degradation: "Stable",
+    degradation: "Keep",
     composite: "Σ",
   },
   patterns: {
@@ -463,6 +559,12 @@ export const en: Messages = {
     creatine: "Creatine",
     hemeIron: "Heme iron",
     n6Load: "n-6 quietness",
+    fibreToSugar: "Fibre per sugar",
+    potassiumDensity: "Potassium density",
+    alaDensity: "ALA density",
+    vitaminEDensity: "Vitamin E density",
+    magnesiumDensity: "Magnesium density",
+    thiaminDensity: "Thiamin density",
     leanness: "Leanness",
     epaDha: "EPA+DHA",
     iodineSelenium: "Iodine + selenium",

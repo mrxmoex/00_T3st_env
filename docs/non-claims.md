@@ -10,7 +10,7 @@ The system will **not**:
 4. Count algal B12 analogues as vitamin B12.
 5. Call a plant-only diet complete without fortification or supplementation.
 6. Moralise fibre absence in animal foods or fibre presence in plants as overall superiority.
-7. Collapse leafy salads, legumes, sprouts, kraut, mushrooms, and algae.
+7. Collapse leafy salads, legumes, sprouts, kraut, mushrooms, algae, fruit, nuts and seeds, and grains.
 8. Collapse muscle, organs, eggs, dairy, and fermented animal foods.
 9. Diagnose, prescribe, or interpret personal bloodwork (future overlay only).
 10. Present residue scores as farm-level lab certificates.

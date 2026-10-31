@@ -9,6 +9,8 @@ export interface RadarSeries {
   id: string;
   label: string;
   values: readonly number[];
+  /** Hover text per spoke. Falls back to the 0–100 length. */
+  tips?: readonly string[];
 }
 
 const WIDTH = 420;
@@ -17,8 +19,11 @@ const CX = WIDTH / 2;
 const CY = HEIGHT / 2;
 const RADIUS = 112;
 const LABEL_RADIUS = RADIUS + 16;
-const RINGS = [25, 50, 75, 100] as const;
+export const RINGS = [25, 50, 75, 100] as const;
 const MAX = 100;
+const CENTER_LINE = 16;
+const CENTER_WIDTH = 186;
+const CENTER_PAD_Y = 8;
 
 function angleAt(index: number, count: number): number {
   return -Math.PI / 2 + (index * 2 * Math.PI) / count;
@@ -49,14 +54,27 @@ function labelBaseline(angle: number): "auto" | "middle" | "hanging" {
   return "middle";
 }
 
+export interface RadarCenterLine {
+  text: string;
+  seriesClass?: string;
+}
+
 export function RadarChart({
   axes,
   series,
   title,
+  center,
+  hideLegend = false,
+  tickLabel = (ring: number) => String(ring),
 }: {
   axes: readonly RadarAxis[];
   series: readonly RadarSeries[];
   title: string;
+  /** Energy or other absolute values drawn in the middle of the polygon. */
+  center?: readonly RadarCenterLine[];
+  hideLegend?: boolean;
+  /** Label for a ring at this percentage of the full spoke; only meaningful when every spoke shares one scale. */
+  tickLabel?: (ring: number) => string;
 }) {
   const titleId = useId();
   const count = axes.length;
@@ -70,13 +88,25 @@ export function RadarChart({
         ))}
         {axes.map((axis, index) => {
           const [x, y] = pointAt(index, count, MAX);
-          return <line key={axis.short} className="radar-grid" x1={CX} y1={CY} x2={x} y2={y} />;
+          return (
+            <line
+              key={axis.short}
+              className="radar-spoke"
+              x1={CX}
+              y1={CY}
+              x2={x}
+              y2={y}
+              vectorEffect="non-scaling-stroke"
+            />
+          );
         })}
-        {RINGS.map((ring) => (
-          <text key={ring} className="radar-tick" x={CX + 4} y={CY - (ring / MAX) * RADIUS - 2}>
-            {ring}
-          </text>
-        ))}
+        {center === undefined
+          ? RINGS.map((ring) => (
+              <text key={ring} className="radar-tick" x={CX + 4} y={CY - (ring / MAX) * RADIUS - 2}>
+                {tickLabel(ring)}
+              </text>
+            ))
+          : null}
         {axes.map((axis, index) => {
           const angle = angleAt(index, count);
           const [x, y] = pointAt(index, count, MAX, LABEL_RADIUS);
@@ -100,16 +130,41 @@ export function RadarChart({
             {item.values.map((value, index) => {
               const [x, y] = pointAt(index, count, value);
               const axis = axes[index];
+              const tip = item.tips?.[index] ?? `${item.label} · ${axis?.label ?? ""}: ${value.toFixed(1)}`;
               return (
                 <circle key={axis?.short ?? index} className="radar-dot" cx={x} cy={y} r={3.2}>
-                  <title>{`${item.label} · ${axis?.label ?? ""}: ${value.toFixed(1)}`}</title>
+                  <title>{tip}</title>
                 </circle>
               );
             })}
           </g>
         ))}
+        {center && center.length > 0 ? (
+          <g className="radar-center">
+            <rect
+              className="radar-center-plate"
+              x={CX - CENTER_WIDTH / 2}
+              y={CY - (center.length * CENTER_LINE) / 2 - CENTER_PAD_Y}
+              width={CENTER_WIDTH}
+              height={center.length * CENTER_LINE + CENTER_PAD_Y * 2}
+              rx={8}
+            />
+            {center.map((line, index) => (
+              <text
+                key={`${line.seriesClass ?? "center"}-${index}`}
+                className={line.seriesClass ? `radar-center-text ${line.seriesClass}` : "radar-center-text"}
+                x={CX}
+                y={CY - ((center.length - 1) * CENTER_LINE) / 2 + index * CENTER_LINE}
+                textAnchor="middle"
+                dominantBaseline="middle"
+              >
+                {line.text}
+              </text>
+            ))}
+          </g>
+        ) : null}
       </svg>
-      {series.length > 1 ? (
+      {!hideLegend && series.length > 1 ? (
         <figcaption>
           <ul className="radar-legend">
             {series.map((item, seriesIndex) => (
