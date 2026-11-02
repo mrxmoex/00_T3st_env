@@ -6,8 +6,8 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 
 | | |
 |---|---|
-| Branch | `cursor/compare-nutrient-groups-b80f` |
-| Pull request | [#15](https://github.com/mrxmoex/00_T3st_env/pull/15), open until Phase 8 |
+| Branch | `cursor/need-and-impact-647c` |
+| Pull request | [#16](https://github.com/mrxmoex/00_T3st_env/pull/16). #15 is merged. |
 | Last confirmed phase | 3 (Compare visual calibration); data track D1 confirmed |
 | Active phase | 4, awaiting review (`docs/handoffs/phase-4.md`) |
 
@@ -248,7 +248,7 @@ Work through the Phase 2 list in the Phase 1 handoff on /compare. Keep every cla
 
 ### Phase 8: Merge gate
 
-Not a polish phase. PR #15 is ready to merge when the user signs off on the polish, the Phase 1 truth ledger re-checks clean on Compare, Food, and Matrix in EN and DE, and tests and build pass. The user merges.
+Not a polish phase. The open polish pull request is ready to merge when the user signs off on the polish, the Phase 1 truth ledger re-checks clean on Compare, Food, and Matrix in EN and DE, and tests and build pass. The user merges.
 
 ## Data track
 
