@@ -8,8 +8,8 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 |---|---|
 | Branch | `cursor/compare-nutrient-groups-b80f` |
 | Pull request | [#15](https://github.com/mrxmoex/00_T3st_env/pull/15), open until Phase 8 |
-| Last confirmed phase | 2 (Compare density and hierarchy) |
-| Active phase | 3 and data track D1, awaiting review (`docs/handoffs/phase-3.md`, `docs/handoffs/d1.md`) |
+| Last confirmed phase | 3 (Compare visual calibration); data track D1 confirmed |
+| Active phase | 4, awaiting review (`docs/handoffs/phase-4.md`) |
 
 At the end of a phase, set *Active phase* to "N, awaiting review". Only the user's go moves *Last confirmed phase*.
 
@@ -254,7 +254,7 @@ Not a polish phase. PR #15 is ready to merge when the user signs off on the poli
 
 Data phases grow and correct the catalog. They follow the same phase contract and the rules in `docs/data-sources.md`: values imported by script, curated fields cited, missing stays missing.
 
-### D1: Fruit, nuts and seeds, grains (awaiting review)
+### D1: Fruit, nuts and seeds, grains (confirmed)
 
 Three new plant classes and 42 foods, two new merge rules, and a code finder. See `docs/handoffs/d1.md`.
 
