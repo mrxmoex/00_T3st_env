@@ -60,7 +60,7 @@ export function ExposureCatalog() {
   return (
     <>
       {Object.values(EXPOSURE_CARDS).map((card) => (
-        <article key={card.id} className="panel">
+        <article key={card.id} id={card.id} className="panel">
           <h2>{localize(card.title)}</h2>
           <p>{localize(card.body)}</p>
           <p className="muted">{localize(card.where)}</p>

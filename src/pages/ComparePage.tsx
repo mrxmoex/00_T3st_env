@@ -8,9 +8,11 @@ import { formatAmount } from "../components/format";
 import { HeatCell } from "../components/HeatCell";
 import { axisValue } from "../components/MatrixTable";
 import { NutrientRadar } from "../components/NutrientRadar";
+import { BODY_STORAGE } from "../data/absorption";
 import { FOODS, foodsByClass } from "../data/catalog";
-import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
-import { MICRO_LABELS, MICRO_ROW_HINTS, NOVA_LABELS } from "../i18n/labels";
+import { DENSITY_SATURATION_PCT_DV, HEME_SHARE_OF_MIXED_IRON } from "../data/coefficients";
+import { EXPOSURE_CARDS } from "../data/exposure";
+import { BODY_STORE_LABELS, IRON_FORM_LABELS, MICRO_LABELS, MICRO_ROW_HINTS, NOVA_LABELS } from "../i18n/labels";
 import { foodName, type LocalizedText } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import type { Messages } from "../i18n/messages";
@@ -22,17 +24,19 @@ import {
   MICRO_NUTRIENTS,
   type AxisKey,
   type FoodRecord,
+  type IronForm,
   type MicroNutrient,
   type ScoreCard,
 } from "../scoring/types";
 import {
+  AXIS_METHOD_ANCHOR,
   COMPARE_GROUP_ORDER,
   DIGESTIBILITY_AXES,
   IMPORTANCE_AXES,
   KIND_AXES,
-  SOURCING_AXES,
   type CompareGroup,
 } from "./compareAxisGroups";
+import { needFacts } from "./compareNecessity";
 import { FoodHonorsList } from "../components/FoodHonorsList";
 
 type ComparedFood = { food: FoodRecord; card: ScoreCard };
@@ -52,11 +56,34 @@ function GroupLabel({ label, span, link }: { label: string; span: number; link?:
   );
 }
 
+function ironTitle(form: IronForm, t: Messages): string | undefined {
+  switch (form) {
+    case "mixed":
+      return t.compare.ironMixedTitle(Math.round(HEME_SHARE_OF_MIXED_IRON * 100));
+    case "heme":
+    case "nonheme":
+      return undefined;
+    default: {
+      const _exhaustive: never = form;
+      return _exhaustive;
+    }
+  }
+}
+
+function RowLink({ to, children }: { to: string; children: ReactNode }) {
+  return (
+    <Link className="row-link" to={to}>
+      {children}
+    </Link>
+  );
+}
+
 function axisLabelCell(axis: AxisKey, t: Messages): ReactNode {
+  const link = <RowLink to={AXIS_METHOD_ANCHOR[axis]}>{axis === "carb" ? t.compare.carbRowLabel : t.axes[axis]}</RowLink>;
   if (axis === "carb") {
     return (
       <>
-        {t.compare.carbRowLabel}
+        {link}
         <CarbTypeKey t={t} />
       </>
     );
@@ -64,12 +91,12 @@ function axisLabelCell(axis: AxisKey, t: Messages): ReactNode {
   if (axis === "degradation") {
     return (
       <>
-        {t.axes.degradation}
+        {link}
         <span className="axis-row-sub">{t.compare.degradationRowHint}</span>
       </>
     );
   }
-  return t.axes[axis];
+  return link;
 }
 
 function microLabelCell(nutrient: MicroNutrient, localize: (text: LocalizedText) => string): ReactNode {
@@ -195,18 +222,128 @@ function axisGroup(
     case "necessityImpact":
       return (
         <>
-          <GroupLabel
-            label={t.compare.axisGroups.necessityImpact}
-            span={span}
-            link={
-              <Link className="group-link" to="/method">
-                {t.compare.necessityImpactMethodLink}
-              </Link>
-            }
-          />
-          {scoreRows(SOURCING_AXES, selected, t)}
+          <GroupLabel label={t.compare.axisGroups.necessityImpact} span={span} />
           <tr>
-            <td className="sticky">{t.compare.nutrientRows.nova}</td>
+            <td className="sticky">
+              <RowLink to="/method#micros">{t.compare.dvCoverageLabel}</RowLink>
+              <span className="axis-row-sub">{t.compare.dvCoverageHint(DENSITY_SATURATION_PCT_DV)}</span>
+            </td>
+            {selected.map(({ food, card }, index) => {
+              const facts = needFacts(food, card);
+              const names = facts.covered.map((nutrient) => localize(MICRO_LABELS[nutrient])).join(", ");
+              return (
+                <td key={`${index}-${food.id}`}>
+                  <HeatCell
+                    score={facts.reported === 0 ? null : (facts.covered.length / facts.reported) * 100}
+                    label={facts.reported === 0 ? undefined : `${facts.covered.length}/${facts.reported}`}
+                    title={names || undefined}
+                  />
+                </td>
+              );
+            })}
+          </tr>
+          <tr>
+            <td className="sticky">
+              <RowLink to="/method#storage">{t.compare.storeLabel}</RowLink>
+              <span className="axis-row-sub">{t.compare.storeHint}</span>
+            </td>
+            {selected.map(({ food, card }, index) => {
+              const stored = needFacts(food, card).stored;
+              const title = stored
+                .map((nutrient) => `${localize(MICRO_LABELS[nutrient])}: ${localize(BODY_STORAGE[nutrient].site)}`)
+                .join("; ");
+              return (
+                <td key={`${index}-${food.id}`}>
+                  {stored.length === 0 ? (
+                    <span className="heat heat-missing">—</span>
+                  ) : (
+                    <span className="compare-note" title={title}>
+                      {stored.map((nutrient) => (
+                        <span key={nutrient}>
+                          {localize(MICRO_LABELS[nutrient])} · {localize(BODY_STORE_LABELS[BODY_STORAGE[nutrient].store])}
+                        </span>
+                      ))}
+                    </span>
+                  )}
+                </td>
+              );
+            })}
+          </tr>
+          <tr>
+            <td className="sticky">
+              <RowLink to="/method#micros">{t.compare.ironLabel}</RowLink>
+            </td>
+            {selected.map(({ food }, index) => {
+              const form = food.micros.ironForm;
+              const title = ironTitle(form, t);
+              return (
+                <td key={`${index}-${food.id}`} title={title}>
+                  {localize(IRON_FORM_LABELS[form])}
+                </td>
+              );
+            })}
+          </tr>
+          <tr>
+            <td className="sticky">
+              <RowLink to="/method#micros">{t.compare.upperLimitLabel}</RowLink>
+              <span className="axis-row-sub">{t.compare.upperLimitHint}</span>
+            </td>
+            {selected.map(({ food, card }, index) => {
+              const limits = needFacts(food, card).upperLimits;
+              return (
+                <td key={`${index}-${food.id}`}>
+                  {limits.length === 0 ? (
+                    <span className="heat heat-missing">—</span>
+                  ) : (
+                    <span className="heat heat-warning" title={t.compare.microWarningTitle}>
+                      ⚠ {limits.map((nutrient) => localize(MICRO_LABELS[nutrient])).join(", ")}
+                    </span>
+                  )}
+                </td>
+              );
+            })}
+          </tr>
+          <tr>
+            <td className="sticky">
+              <RowLink to={AXIS_METHOD_ANCHOR.residue}>{t.axes.residue}</RowLink>
+              <span className="axis-row-sub">
+                <RowLink to="/limits#non-claims">{t.compare.residueCertificateLink}</RowLink>
+              </span>
+            </td>
+            {selected.map(({ food, card }, index) => (
+              <td key={`${index}-${food.id}`}>
+                <HeatCell score={axisValue(card, "residue")} />
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td className="sticky">
+              <RowLink to="/exposure">{t.compare.exposureLabel}</RowLink>
+              <span className="axis-row-sub">{t.compare.exposureHint}</span>
+            </td>
+            {selected.map(({ food, card }, index) => {
+              const notes = needFacts(food, card).exposure;
+              return (
+                <td key={`${index}-${food.id}`}>
+                  {notes.length === 0 ? (
+                    <span className="heat heat-missing">—</span>
+                  ) : (
+                    <span className="compare-note">
+                      {notes.map((id) => (
+                        <RowLink key={id} to={`/exposure#${id}`}>
+                          {localize(EXPOSURE_CARDS[id].title)}
+                        </RowLink>
+                      ))}
+                    </span>
+                  )}
+                </td>
+              );
+            })}
+          </tr>
+          <tr>
+            <td className="sticky">
+              <RowLink to="/method#processing">{t.compare.nutrientRows.nova}</RowLink>
+            </td>
             {selected.map(({ food }, index) => (
               <td key={`${index}-${food.id}`}>
                 <NovaMarker
@@ -217,7 +354,9 @@ function axisGroup(
             ))}
           </tr>
           <tr>
-            <td className="sticky">{t.compare.nutrientRows.source}</td>
+            <td className="sticky">
+              <RowLink to="/method#data">{t.compare.nutrientRows.source}</RowLink>
+            </td>
             {selected.map(({ food }, index) => {
               const primary = food.sourceEntries[0];
               return (
@@ -230,7 +369,7 @@ function axisGroup(
           <tr>
             <td className="sticky">
               <span className="has-tip" title={t.compare.digestibilityDefinition}>
-                {t.compare.nutrientRows.digestibility}
+                <RowLink to="/method#eaa">{t.compare.nutrientRows.digestibility}</RowLink>
               </span>
             </td>
             {selected.map(({ food }, index) => (
@@ -240,7 +379,9 @@ function axisGroup(
             ))}
           </tr>
           <tr>
-            <td className="sticky">{t.compare.nutrientRows.diaas}</td>
+            <td className="sticky">
+              <RowLink to="/method#eaa">{t.compare.nutrientRows.diaas}</RowLink>
+            </td>
             {selected.map(({ food, card }, index) => (
               <td key={`${index}-${food.id}`}>
                 <HeatCell score={Math.min(100, card.eaa.diaas * 100)} label={formatAmount(card.eaa.diaas)} />

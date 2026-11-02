@@ -7,7 +7,7 @@ export function LimitsPage() {
     <main>
       <h1>{t.limits.title}</h1>
       <p className="lede">{t.limits.lede}</p>
-      <section className="panel">
+      <section className="panel" id="non-claims">
         <h2>{t.limits.nonClaimsHeading}</h2>
         <ul>
           {t.limits.nonClaims.map((claim) => (
