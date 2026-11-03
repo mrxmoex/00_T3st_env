@@ -47,6 +47,35 @@ function labelAnchor(angle: number): "start" | "middle" | "end" {
   return cos > 0 ? "start" : "end";
 }
 
+/** Crop the square canvas to the spokes and their labels, so a triangle does not sit in an empty box. */
+export function radarViewBox(count: number): string {
+  const textPad = 68;
+  let minX = CX;
+  let maxX = CX;
+  let minY = CY;
+  let maxY = CY;
+  for (let index = 0; index < count; index += 1) {
+    const angle = angleAt(index, count);
+    const [x, y] = pointAt(index, count, MAX, LABEL_RADIUS);
+    const anchor = labelAnchor(angle);
+    const left = anchor === "end" ? x - textPad : anchor === "middle" ? x - textPad / 2 : x;
+    const right = anchor === "start" ? x + textPad : anchor === "middle" ? x + textPad / 2 : x;
+    const baseline = labelBaseline(angle);
+    const top = baseline === "hanging" ? y : y - 16;
+    const bottom = baseline === "auto" ? y + 4 : y + 18;
+    minX = Math.min(minX, left);
+    maxX = Math.max(maxX, right);
+    minY = Math.min(minY, top);
+    maxY = Math.max(maxY, bottom);
+  }
+  const margin = 10;
+  const x = Math.floor(minX - margin);
+  const y = Math.floor(minY - margin);
+  const width = Math.ceil(maxX + margin - x);
+  const height = Math.ceil(maxY + margin - y);
+  return `${x} ${y} ${width} ${height}`;
+}
+
 function labelBaseline(angle: number): "auto" | "middle" | "hanging" {
   const sin = Math.sin(angle);
   if (sin < -0.5) return "auto";
@@ -81,7 +110,7 @@ export function RadarChart({
 
   return (
     <figure className="radar">
-      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-labelledby={titleId}>
+      <svg viewBox={radarViewBox(count)} role="img" aria-labelledby={titleId}>
         <title id={titleId}>{title}</title>
         {RINGS.map((ring) => (
           <polygon key={ring} className="radar-grid" points={polygonPoints(axes.map(() => ring))} />

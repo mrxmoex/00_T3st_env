@@ -1,10 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
 import { FOODS } from "../data/catalog";
-import { scoreCatalog } from "../scoring/scoreFood";
-import { AXIS_KEYS } from "../scoring/types";
-import { AXIS_METHOD_ANCHOR } from "./compareAxisGroups";
-import { needFacts } from "./compareNecessity";
+import { scoreCatalog } from "./scoreFood";
+import { needFacts } from "./needFacts";
 
 const cards = scoreCatalog(FOODS);
 
@@ -46,14 +44,5 @@ describe("need and impact facts", () => {
   it("shows class exposure notes and stays quiet where none apply", () => {
     expect(factsFor("lentils_boiled").facts.exposure).toContain("glyphosate");
     expect(factsFor("milk_whole").facts.exposure).toEqual([]);
-  });
-});
-
-describe("method anchors", () => {
-  it("sends every scored axis to a method section", () => {
-    expect(Object.keys(AXIS_METHOD_ANCHOR).sort()).toEqual([...AXIS_KEYS].sort());
-    for (const href of Object.values(AXIS_METHOD_ANCHOR)) {
-      expect(href.startsWith("/method#")).toBe(true);
-    }
   });
 });

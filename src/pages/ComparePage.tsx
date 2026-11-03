@@ -1,9 +1,10 @@
 import { Fragment, useMemo, useState, type ReactNode } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { CARB_PIE_FULL_G, CarbTypePie } from "../components/CarbTypePie";
+import { CARB_PIE_FULL_G, CarbScoreCell } from "../components/CarbTypePie";
 import { CompareAxisRadar } from "../components/CompareAxisRadar";
 import { CompareBioactivesPanel } from "../components/CompareBioactivesPanel";
 import { NovaMarker } from "../components/NovaMarker";
+import { FoodHonorsList } from "../components/FoodHonorsList";
 import { formatAmount } from "../components/format";
 import { HeatCell } from "../components/HeatCell";
 import { axisValue } from "../components/MatrixTable";
@@ -18,6 +19,7 @@ import { useLocale } from "../i18n/LocaleContext";
 import type { Messages } from "../i18n/messages";
 import { energyKj, generalNutrientGrams, GENERAL_NUTRIENT_KEYS } from "../scoring/generalNutrients";
 import { upperLimitExceedances } from "../scoring/micros";
+import { needFacts } from "../scoring/needFacts";
 import { scoreCatalog } from "../scoring/scoreFood";
 import {
   FOOD_CLASSES,
@@ -36,8 +38,6 @@ import {
   KIND_AXES,
   type CompareGroup,
 } from "./compareAxisGroups";
-import { needFacts } from "./compareNecessity";
-import { FoodHonorsList } from "../components/FoodHonorsList";
 
 type ComparedFood = { food: FoodRecord; card: ScoreCard };
 
@@ -141,13 +141,7 @@ function scoreRows(axes: readonly AxisKey[], selected: readonly ComparedFood[], 
       {selected.map(({ food, card }, index) => (
         <td key={`${index}-${food.id}`}>
           {axis === "carb" ? (
-            <span className="carb-cell">
-              <CarbTypePie food={food} carb={card.carb} />
-              <HeatCell
-                score={axisValue(card, axis)}
-                title={card.carb.activeG + card.carb.passiveG < 0.5 ? t.compare.carbQuietScore : undefined}
-              />
-            </span>
+            <CarbScoreCell food={food} card={card} />
           ) : (
             <HeatCell score={axisValue(card, axis)} />
           )}

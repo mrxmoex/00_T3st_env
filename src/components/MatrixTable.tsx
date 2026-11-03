@@ -4,7 +4,7 @@ import { useLocale } from "../i18n/LocaleContext";
 import { classExtraColumns } from "../scoring/extras";
 import type { AxisKey, FoodClass, FoodRecord, ScoreCard } from "../scoring/types";
 import { AXIS_KEYS } from "../scoring/types";
-import { CarbTypePie } from "./CarbTypePie";
+import { CarbScoreCell } from "./CarbTypePie";
 import { HeatCell } from "./HeatCell";
 
 export function axisValue(card: ScoreCard, axis: AxisKey): number {
@@ -91,8 +91,8 @@ export function MatrixTable({
                 if (axis === "carb") {
                   const label = `${t.axes.carb}: ${score.toFixed(1)}`;
                   return (
-                    <td key={axis} title={label} aria-label={label}>
-                      <CarbTypePie food={food} carb={card.carb} />
+                    <td key={axis} aria-label={label}>
+                      <CarbScoreCell food={food} card={card} />
                     </td>
                   );
                 }

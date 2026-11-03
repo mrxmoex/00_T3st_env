@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import { NeedFactsList } from "../components/NeedFactsList";
 import { BioactivesProfile } from "../components/BioactivesProfile";
 import { BurdenPanel } from "../components/BurdenPanel";
 import { CarbTypePie } from "../components/CarbTypePie";
@@ -19,6 +20,7 @@ import { NOVA_LABELS, PREPARATION_LABELS } from "../i18n/labels";
 import { altFoodName, foodName } from "../i18n/locale";
 import { useLocale } from "../i18n/LocaleContext";
 import { scoreCatalog } from "../scoring/scoreFood";
+import { AXIS_METHOD_ANCHOR } from "./compareAxisGroups";
 import { BENEFIT_AXES, BURDEN_AXES, kingdomOf, type AxisKey, type FoodRecord, type ScoreCard } from "../scoring/types";
 
 const cards = scoreCatalog(FOODS);
@@ -40,7 +42,9 @@ function AxisBar({
   return (
     <div className={className ? `bar-row ${className}` : "bar-row"}>
       <span className="bar-row-label">
-        {label}
+        <Link className="row-link" to={AXIS_METHOD_ANCHOR[axis]}>
+          {label}
+        </Link>
         {axis === "carb" ? <CarbTypePie food={food} carb={card.carb} /> : null}
       </span>
       <div className="bar">
@@ -122,6 +126,7 @@ export function FoodPage() {
           </div>
         </div>
       </div>
+      <NeedFactsList food={food} card={card} />
       <PreparationPanel food={food} cards={cards} />
       <section className="grid-2">
         <article className="panel">
