@@ -1,8 +1,8 @@
 import { BODY_STORAGE, type BodyStore } from "../data/absorption";
 import { DENSITY_SATURATION_PCT_DV } from "../data/coefficients";
 import { exposureForFood, type ExposureId } from "../data/exposure";
-import { upperLimitExceedances } from "../scoring/micros";
-import { MICRO_NUTRIENTS, type FoodRecord, type MicroNutrient, type ScoreCard } from "../scoring/types";
+import { MICRO_NUTRIENTS, type FoodRecord, type MicroNutrient, type ScoreCard } from "./types";
+import { upperLimitExceedances } from "./micros";
 
 /** A nutrient counts as covered at the same bar the micronutrient score uses. */
 export function isCovered(card: ScoreCard, nutrient: MicroNutrient): boolean {

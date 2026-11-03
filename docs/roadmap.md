@@ -6,10 +6,10 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 
 | | |
 |---|---|
-| Branch | `cursor/need-and-impact-647c` |
-| Pull request | [#16](https://github.com/mrxmoex/00_T3st_env/pull/16). #15 is merged. |
-| Last confirmed phase | 3 (Compare visual calibration); data track D1 confirmed |
-| Active phase | 4, awaiting review (`docs/handoffs/phase-4.md`) |
+| Branch | `cursor/food-matrix-sync-647c` |
+| Pull request | [#17](https://github.com/mrxmoex/00_T3st_env/pull/17). #15 and #16 are merged. |
+| Last confirmed phase | 4 (Necessity and impact); data track D1 confirmed |
+| Active phase | 5, awaiting review (`docs/handoffs/phase-5.md`) |
 
 At the end of a phase, set *Active phase* to "N, awaiting review". Only the user's go moves *Last confirmed phase*.
 

@@ -1,8 +1,8 @@
 import { useId } from "react";
 import { useLocale } from "../i18n/LocaleContext";
+import type { CarbBreakdown, FoodRecord, ScoreCard } from "../scoring/types";
 import { formatAmount } from "./format";
-import type { CarbBreakdown } from "../scoring/types";
-import type { FoodRecord } from "../scoring/types";
+import { HeatCell } from "./HeatCell";
 
 const SIZE = 44;
 
@@ -88,6 +88,18 @@ export function CarbTypePie({ food, carb }: { food: FoodRecord; carb: CarbBreakd
         ))}
         <circle className="carb-pie-hole" cx={cx} cy={cy} r={r * 0.38} />
       </svg>
+    </span>
+  );
+}
+
+/** The composition pie beside the carbohydrate axis score. Same pair on Compare and the matrix. */
+export function CarbScoreCell({ food, card }: { food: FoodRecord; card: ScoreCard }) {
+  const { t } = useLocale();
+  const quiet = card.carb.activeG + card.carb.passiveG < 0.5;
+  return (
+    <span className="carb-cell">
+      <CarbTypePie food={food} carb={card.carb} />
+      <HeatCell score={card.carb.score} title={quiet ? t.compare.carbQuietScore : undefined} />
     </span>
   );
 }

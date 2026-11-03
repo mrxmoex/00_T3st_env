@@ -610,7 +610,11 @@ details.panel > summary {
 .wrap-table td:first-child { min-width: 11rem; max-width: 22rem; }
 .callout-warning { border-left: 4px solid var(--danger); padding-left: 0.6rem; }
 
-.food-overview { display: grid; gap: 1rem; align-items: center; }
+.food-overview { display: grid; gap: 1rem; align-items: start; }
+.need-facts { display: grid; gap: 0.85rem; margin: 0.6rem 0 0; }
+.need-facts > div { display: grid; gap: 0.2rem; }
+.need-facts dt { font-weight: 600; }
+.need-facts dd { margin: 0; display: grid; gap: 0.25rem; justify-items: start; }
 
 .radar { margin: 0; }
 .radar svg { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; }
@@ -669,7 +673,7 @@ details.panel > summary {
   letter-spacing: 0;
   text-transform: none;
 }
-.compare-axes a.row-link { color: inherit; text-underline-offset: 0.15em; }
+a.row-link { color: inherit; text-underline-offset: 0.15em; }
 .compare-note { display: flex; flex-wrap: wrap; gap: 0.15rem 0.5rem; }
 .panel[id], article.panel[id] { scroll-margin-top: 4.5rem; }
 
@@ -693,6 +697,7 @@ footer.site {
 
 @media (min-width: 880px) {
   .radar-pair { grid-template-columns: 1fr 1fr; }
+  .food-overview { grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr); }
 }
 
 @media (min-width: 980px) {

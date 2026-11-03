@@ -119,7 +119,7 @@ export function NutrientRadar({ entries }: { entries: readonly NutrientRadarEntr
                       </li>
                       <li>
                         <span className="macro-key-dot macro-seg-other" aria-hidden="true" />
-                        {t.compare.macroLegend.other}: {shares.other.toFixed(0)}%
+                        {t.compare.macroLegend.other}: {Math.max(0, Math.round(shares.other))}%
                       </li>
                     </ul>
                   </div>
