@@ -90,6 +90,9 @@ Each value keeps the database's own category, mapped to one vocabulary: lab anal
 | Watanabe et al., reviews of algal corrinoids | Inactive B12 analogues in seaweeds and spirulina | `b12IsAnalogue` → effective B12 = 0 |
 | EU/US MRL monitoring (classed, not lot-level) | Surface-area and systemic vs contact residue logic | Residue axis |
 | Published analyses (see `docs/scoring-formulas.md`) | Creatine, taurine, carnosine, anserine, CoQ10, L-carnitine, ergothioneine, glucosinolates (in neither database) | Bioactive compound table, creatine / glucosinolate / ergothioneine columns |
+| Atkinson et al. 2021, Am J Clin Nutr 114:1625, Supplemental Table 1 | ISO glycemic index means, and a single ISO test when the tables list the food once | `src/data/glycemic.ts` |
+| Pravst et al. 2010, Crit Rev Food Sci Nutr 50:269, Table 1 | Coenzyme Q10, mg/kg divided by 10 | coenzyme Q10 chips |
+| EFSA CONTAM 2009, arsenic (1351), aflatoxins (1168), cadmium (980); EFSA CONTAM 2015, acrylamide (4104) | Class notes, not a concentration in the food | Exposure panel |
 
 ## Versioning
 

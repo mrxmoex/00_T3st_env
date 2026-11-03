@@ -50,6 +50,14 @@ export const EXPOSURE_SOURCES = {
     citation: "EFSA CONTAM Panel (2010). Scientific Opinion on lead in food. EFSA Journal 8(4):1570. No threshold was identified for the neurodevelopmental effect.",
     url: "https://doi.org/10.2903/j.efsa.2010.1570",
   },
+  efsaArsenic: {
+    citation: "EFSA CONTAM Panel (2009). Scientific Opinion on arsenic in food. EFSA Journal 7(10):1351. Inorganic arsenic exposure of average consumers: 0.13–0.56 µg/kg body weight per day. BMDL01 for lung, skin and bladder cancers and skin lesions: 0.3–8 µg/kg body weight per day.",
+    url: "https://doi.org/10.2903/j.efsa.2009.1351",
+  },
+  efsaAflatoxin: {
+    citation: "EFSA CONTAM Panel (2009). Statement on raising the maximum level for total aflatoxins from 4 µg/kg to 10 µg/kg for tree nuts other than almonds, hazelnuts and pistachios. EFSA Journal 7(6):1168. Aflatoxins are genotoxic and carcinogenic; exposure from all sources should stay as low as reasonably achievable.",
+    url: "https://doi.org/10.2903/j.efsa.2009.1168",
+  },
   euTiO2: {
     citation: "Commission Regulation (EU) 2022/63. Bans titanium dioxide (E171) as a food additive because a genotoxic concern could not be excluded.",
     url: "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32022R0063",
@@ -87,6 +95,8 @@ export const EXPOSURE_IDS = [
   "methylmercury",
   "cadmium",
   "lead",
+  "inorganicArsenic",
+  "aflatoxin",
 ] as const;
 export type ExposureId = (typeof EXPOSURE_IDS)[number];
 
@@ -182,8 +192,8 @@ export const EXPOSURE_CARDS: Readonly<Record<ExposureId, ExposureCard>> = {
     id: "cadmium",
     title: { en: "Cadmium", de: "Cadmium" },
     where: {
-      en: "Offal, some seaweeds, and some leafy crops and cereals. Not a measurement of this sample.",
-      de: "Innereien, manche Algen und manche Blattgemüse und Getreide. Keine Messung dieser Probe.",
+      en: "Offal, some seaweeds, leafy crops, cereals, and nuts and oilseeds. Not a measurement of this sample.",
+      de: "Innereien, manche Algen, Blattgemüse, Getreide sowie Nüsse und Ölsaaten. Keine Messung dieser Probe.",
     },
     body: {
       en: "Cadmium accumulates in the kidney. The biological half-life is 10–30 years. It is a metal store, not a fat store.",
@@ -204,6 +214,32 @@ export const EXPOSURE_CARDS: Readonly<Record<ExposureId, ExposureCard>> = {
     },
     sources: ["efsaLead"],
   },
+  inorganicArsenic: {
+    id: "inorganicArsenic",
+    title: { en: "Inorganic arsenic", de: "Anorganisches Arsen" },
+    where: {
+      en: "Rice grains and rice products are a cereal source. Not a measurement of this rice.",
+      de: "Reiskörner und Reisprodukte sind eine Getreidequelle. Keine Messung dieses Reises.",
+    },
+    body: {
+      en: "EFSA estimated inorganic arsenic intake of average European consumers at 0.13–0.56 µg per kg body weight per day. The lower confidence limit of the benchmark dose for lung, skin and bladder cancers and for skin lesions was 0.3–8 µg per kg per day, so the margin can be small. Most arsenic in fish is the less toxic organic form; rice is not fish.",
+      de: "Die EFSA schätzte die Aufnahme von anorganischem Arsen bei durchschnittlichen Verbrauchern in Europa auf 0,13–0,56 µg pro kg Körpergewicht und Tag. Die untere Vertrauensgrenze der Benchmark-Dosis für Lungen-, Haut- und Blasenkrebs und für Hautveränderungen lag bei 0,3–8 µg pro kg und Tag, der Abstand kann also klein sein. Das meiste Arsen in Fisch ist die weniger giftige organische Form; Reis ist kein Fisch.",
+    },
+    sources: ["efsaArsenic"],
+  },
+  aflatoxin: {
+    id: "aflatoxin",
+    title: { en: "Aflatoxins", de: "Aflatoxine" },
+    where: {
+      en: "Peanuts and tree nuts, also maize and dried fruit. Not a measurement of this nut.",
+      de: "Erdnüsse und Baumnüsse, auch Mais und Trockenobst. Keine Messung dieser Nuss.",
+    },
+    body: {
+      en: "Aflatoxins are genotoxic and carcinogenic. The EU maximum level cited for total aflatoxins in almonds, hazelnuts and pistachios is 4 µg/kg. EFSA judged that raising it to 10 µg/kg would change average exposure only a little, and still said exposure from every source should stay as low as reasonably achievable.",
+      de: "Aflatoxine sind genotoxisch und krebserregend. Der genannte EU-Höchstgehalt für Aflatoxine insgesamt in Mandeln, Haselnüssen und Pistazien liegt bei 4 µg/kg. Die EFSA urteilte, dass eine Anhebung auf 10 µg/kg die durchschnittliche Aufnahme nur wenig ändert, und sagte weiter, die Aufnahme aus jeder Quelle solle so niedrig wie vernünftigerweise erreichbar bleiben.",
+    },
+    sources: ["efsaAflatoxin"],
+  },
 };
 
 const HOT_DRY: ReadonlySet<Preparation> = new Set(["fried", "baked", "roasted", "grilled"]);
@@ -215,8 +251,13 @@ export function exposureForFood(food: FoodRecord): ExposureId[] {
   if (food.class === "muscle_fish" || food.class === "eggs") ids.push("pfas");
   if (food.processing.nova >= 3) ids.push("pfas");
   if (food.class === "muscle_fish" || food.processing.nova >= 3) ids.push("microplastics");
-  if ((food.class === "roots_tubers" || food.group === "potato_mash") && HOT_DRY.has(food.preparation)) ids.push("acrylamide");
+  if ((food.class === "roots_tubers" || food.group === "potato_mash" || food.class === "grains") && HOT_DRY.has(food.preparation)) ids.push("acrylamide");
   if (food.preparation === "instant") ids.push("acrylamide");
+  if (food.group === "rice_brown" || food.group === "rice_white") ids.push("inorganicArsenic");
+  if (food.class === "nuts_seeds") {
+    ids.push("aflatoxin");
+    ids.push("cadmium");
+  }
   if (food.class === "muscle_fish") ids.push("methylmercury");
   if (food.class === "organs" || food.class === "leafy_salad" || food.class === "algae") ids.push("cadmium");
   if (food.class === "organs") ids.push("lead");
