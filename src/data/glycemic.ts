@@ -1,7 +1,7 @@
 /**
  * Glycemic index on the glucose scale (ISO 26642), from the international tables.
- * A value is stored only when those tables give a mean for that food and preparation.
- * Low carbohydrate foods are usually not tested. Missing stays missing.
+ * A value is a mean the tables print, or the one ISO test they list for that food.
+ * Several rows are not averaged here. Low carbohydrate foods are usually not tested. Missing stays missing.
  *
  * Glycemic load per 100 g = GI × available carbohydrate (g) / 100.
  */
@@ -100,6 +100,61 @@ const BY_FOOD: Readonly<Record<string, GlycemicEntry>> = {
     gi: 33,
     tested: { en: "all yoghurts, mean of 72 studies", de: "alle Joghurts, Mittel aus 72 Studien" },
     carriedOver: false,
+  },
+  apple_raw: {
+    gi: 44,
+    tested: { en: "apples, raw, one ISO test (44 ± 5); the tables print no mean", de: "Äpfel, roh, ein ISO-Test (44 ± 5); die Tabellen nennen keinen Mittelwert" },
+    carriedOver: false,
+  },
+  strawberries_raw: {
+    gi: 40,
+    tested: { en: "strawberries, fresh, raw, one ISO test (40 ± 7)", de: "Erdbeeren, frisch, roh, ein ISO-Test (40 ± 7)" },
+    carriedOver: false,
+  },
+  oat_porridge: {
+    gi: 58,
+    tested: { en: "porridge from rolled oats, mean of eight foods", de: "Brei aus Haferflocken, Mittel aus acht Lebensmitteln" },
+    carriedOver: false,
+  },
+  oat_flakes: {
+    gi: 58,
+    tested: { en: "porridge from rolled oats, mean of eight foods; dry flakes were not tested", de: "Brei aus Haferflocken, Mittel aus acht Lebensmitteln; trockene Flocken wurden nicht gemessen" },
+    carriedOver: true,
+  },
+  wheat_bread_white: {
+    gi: 73,
+    tested: { en: "white wheat-flour bread, mean of 35 foods", de: "Weißbrot aus Weizenmehl, Mittel aus 35 Lebensmitteln" },
+    carriedOver: false,
+  },
+  wheat_bread_wholemeal: {
+    gi: 75,
+    tested: { en: "wholemeal wheat-flour bread, mean of eight foods", de: "Vollkornbrot aus Weizenmehl, Mittel aus acht Lebensmitteln" },
+    carriedOver: false,
+  },
+  rye_bread_wholemeal: {
+    gi: 60,
+    tested: { en: "rye breads, mean of 13 foods; the wholeseed loaf was not listed apart", de: "Roggenbrote, Mittel aus 13 Lebensmitteln; das Vollkornbrot mit ganzen Körnern steht nicht extra" },
+    carriedOver: true,
+  },
+  pasta_boiled: {
+    gi: 47,
+    tested: { en: "white spaghetti, boiled, mean of 11 foods", de: "weiße Spaghetti, gekocht, Mittel aus 11 Lebensmitteln" },
+    carriedOver: false,
+  },
+  pasta_wholemeal_boiled: {
+    gi: 50,
+    tested: { en: "wholemeal spaghetti, boiled, mean of five foods", de: "Vollkornspaghetti, gekocht, Mittel aus fünf Lebensmitteln" },
+    carriedOver: false,
+  },
+  quinoa_boiled: {
+    gi: 53,
+    tested: { en: "quinoa, mean of four foods", de: "Quinoa, Mittel aus vier Lebensmitteln" },
+    carriedOver: false,
+  },
+  green_peas_boiled: {
+    gi: 36,
+    tested: { en: "frozen peas, mean of two studies; boiled peas were not listed apart", de: "tiefgekühlte Erbsen, Mittel aus zwei Studien; gekochte stehen nicht extra" },
+    carriedOver: true,
   },
 };
 

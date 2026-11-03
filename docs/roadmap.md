@@ -6,10 +6,10 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 
 | | |
 |---|---|
-| Branch | `cursor/food-matrix-sync-647c` |
-| Pull request | [#17](https://github.com/mrxmoex/00_T3st_env/pull/17). #15 and #16 are merged. |
-| Last confirmed phase | 4 (Necessity and impact); data track D1 confirmed |
-| Active phase | 5, awaiting review (`docs/handoffs/phase-5.md`) |
+| Branch | `cursor/science-headstart-647c` |
+| Pull request | [#18](https://github.com/mrxmoex/00_T3st_env/pull/18). #15, #16 and #17 are merged. |
+| Last confirmed phase | 5 (Food and Matrix); data track D1 confirmed |
+| Active phase | data head start, awaiting review (`docs/research/d2-headstart.md`) |
 
 At the end of a phase, set *Active phase* to "N, awaiting review". Only the user's go moves *Last confirmed phase*.
 
@@ -264,7 +264,9 @@ Three new plant classes and 42 foods, two new merge rules, and a code finder. Se
 
 **Inputs.** E3.
 
-**Reads.** `docs/handoffs/d1.md`, `docs/data-sources.md` (§ Protein digestibility), `docs/research/d1-protein-and-residues.md`, the contract.
+**Reads.** `docs/handoffs/d1.md`, `docs/data-sources.md` (§ Protein digestibility), `docs/research/d1-protein-and-residues.md`, `docs/research/d2-headstart.md`, the contract.
+
+**Already entered** (see the head start): glycemic means and the two single ISO tests; coenzyme Q10 from Pravst 2010 Table 1 where the table gives one figure; inorganic arsenic on rice, aflatoxins on nuts and seeds, acrylamide on baked bread, cadmium on nuts and seeds. Residue scores are unchanged.
 
 **Prerequisite.** Protein-free foods need "not applicable" displays: an oil has no protein, so ileal digestibility and DIAAS must read —, not 0, and the EAA axis must not score digestibility of absent protein.
 

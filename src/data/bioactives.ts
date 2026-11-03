@@ -373,6 +373,42 @@ const BY_GROUP: EntryTable = {
   chanterelle: {
     ergothioneine: dryWeight(0.2, "kalaras2017", { en: "chanterelle, dried sample, 0.20 mg/g dry weight", de: "Pfifferling, getrocknete Probe, 0,20 mg/g Trockenmasse" }),
   },
+  peanut: {
+    coq10: measured(2.67, "pravst2010", { en: "peanuts, roasted, 26.7 mg/kg", de: "Erdnüsse, geröstet, 26,7 mg/kg" }, "cooked"),
+  },
+  pistachio: {
+    coq10: measured(2.01, "pravst2010", { en: "pistachio nuts, roasted, 20.1 mg/kg", de: "Pistazien, geröstet, 20,1 mg/kg" }, "cooked"),
+  },
+  walnut: {
+    coq10: measured(1.9, "pravst2010", { en: "walnuts, raw, 19.0 mg/kg", de: "Walnüsse, roh, 19,0 mg/kg" }, "raw"),
+  },
+  hazelnut: {
+    coq10: measured(1.67, "pravst2010", { en: "hazelnuts, roasted, 16.7 mg/kg", de: "Haselnüsse, geröstet, 16,7 mg/kg" }, "cooked"),
+  },
+  avocado: {
+    coq10: measured(0.95, "pravst2010", { en: "avocado, 9.5 mg/kg", de: "Avocado, 9,5 mg/kg" }, "unspecified"),
+  },
+  blackcurrant: {
+    coq10: measured(0.34, "pravst2010", { en: "blackcurrant, 3.4 mg/kg", de: "Schwarze Johannisbeere, 3,4 mg/kg" }, "unspecified"),
+  },
+  apple: {
+    coq10: measured(0.12, "pravst2010", { en: "apple, 1.2 mg/kg (reported range 1.1–1.3)", de: "Apfel, 1,2 mg/kg (genannter Bereich 1,1–1,3)" }, "unspecified", [0.11, 0.13]),
+  },
+  banana: {
+    coq10: measured(0.08, "pravst2010", { en: "banana, 0.8 mg/kg", de: "Banane, 0,8 mg/kg" }, "unspecified"),
+  },
+  kiwi: {
+    coq10: measured(0.05, "pravst2010", { en: "kiwi, 0.5 mg/kg", de: "Kiwi, 0,5 mg/kg" }, "unspecified"),
+  },
+  asparagus: {
+    coq10: measured(0.22, "pravst2010", { en: "asparagus, 2.2 mg/kg", de: "Spargel, 2,2 mg/kg" }, "unspecified"),
+  },
+  oats: {
+    coq10: notDetected("pravst2010", { en: "whole-grain oats, below the detection limit", de: "ganzer Hafer, unter der Nachweisgrenze" }),
+  },
+  rice_brown: {
+    coq10: notDetected("pravst2010", { en: "whole rice, below the detection limit", de: "Vollreis, unter der Nachweisgrenze" }),
+  },
 };
 
 /** Cooked-food measurements that replace the group's raw value for one preparation. */

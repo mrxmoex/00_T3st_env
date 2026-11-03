@@ -53,6 +53,11 @@ describe("bioactive compound index", () => {
   });
 
   it("reports taurine as not detected in analysed plant groups, but has no data for fungi and algae", () => {
+    const walnutCoq = bioactiveValue(requireFood("walnuts_raw"), "coq10");
+    expect(walnutCoq.status).toBe("value");
+    if (walnutCoq.status === "value") expect(walnutCoq.mgPer100g).toBe(1.9);
+    expect(bioactiveValue(requireFood("oat_flakes"), "coq10").status).toBe("notDetected");
+    expect(bioactiveValue(requireFood("rice_white_boiled"), "coq10").status).toBe("noData");
     expect(bioactiveValue(requireFood("lentils_boiled"), "taurine").status).toBe("notDetected");
     expect(bioactiveValue(requireFood("spinach_raw"), "taurine").status).toBe("notDetected");
     expect(bioactiveValue(requireFood("shiitake_raw"), "taurine").status).toBe("noData");
@@ -266,6 +271,16 @@ describe("processing burden", () => {
     expect(steamed.status === "value" && steamed.carriedOver).toBe(true);
     expect(beef.status).toBe("tooLittleCarbohydrate");
     expect(glycemicAssessment(requireFood("potato_baked")).status).toBe("noData");
+    const quinoa = glycemicAssessment(requireFood("quinoa_boiled"));
+    const apple = glycemicAssessment(requireFood("apple_raw"));
+    const porridge = glycemicAssessment(requireFood("oat_porridge"));
+    const flakes = glycemicAssessment(requireFood("oat_flakes"));
+    expect(quinoa.status === "value" && quinoa.gi).toBe(53);
+    expect(apple.status === "value" && apple.gi).toBe(44);
+    expect(porridge.status === "value" && porridge.gi).toBe(58);
+    expect(flakes.status === "value" && flakes.carriedOver).toBe(true);
+    expect(glycemicAssessment(requireFood("banana_raw")).status).toBe("noData");
+    expect(glycemicAssessment(requireFood("rice_white_boiled")).status).toBe("noData");
   });
 
   it("keeps fermentable lactose measured and does not invent a gram value for legumes", () => {
@@ -286,6 +301,11 @@ describe("processing burden", () => {
     expect(exposureForFood(requireFood("potato_mash_instant"))).toContain("acrylamide");
     expect(exposureForFood(requireFood("beef_mince_raw"))).not.toContain("glyphosate");
     expect(exposureForFood(requireFood("beef_mince_raw"))).not.toContain("fluoride");
+    expect(exposureForFood(requireFood("wheat_bread_white"))).toEqual(expect.arrayContaining(["glyphosate", "acrylamide"]));
+    expect(exposureForFood(requireFood("oat_porridge"))).not.toContain("acrylamide");
+    expect(exposureForFood(requireFood("rice_brown_boiled"))).toContain("inorganicArsenic");
+    expect(exposureForFood(requireFood("almonds_raw"))).toEqual(expect.arrayContaining(["aflatoxin", "cadmium"]));
+    expect(exposureForFood(requireFood("egg_boiled"))).not.toContain("aflatoxin");
     const salmon = exposureForFood(requireFood("salmon_raw"));
     expect(salmon).toEqual(expect.arrayContaining(["pfas", "methylmercury", "microplastics"]));
     expect(EXPOSURE_CARDS.pfas.body.en.toLowerCase()).toContain("albumin");
