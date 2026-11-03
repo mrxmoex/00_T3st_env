@@ -47,7 +47,7 @@ export function MethodPage() {
         <RichText text={m.lede(DATASET_VERSION, LAST_VERIFIED)} />
       </p>
 
-      <section className="panel">
+      <section className="panel" id="data">
         <h2>{m.dataHeading}</h2>
         <p>{m.dataPrimary}</p>
         <p>
@@ -71,7 +71,7 @@ export function MethodPage() {
         <p>{m.frameComposite}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="eaa">
         <h2>{m.eaaHeading}</h2>
         <p>
           {m.eaaPattern} His {FAO_2013_ADULT_MG_PER_G.his}, Ile {FAO_2013_ADULT_MG_PER_G.ile}, Leu{" "}
@@ -85,7 +85,7 @@ export function MethodPage() {
         <p>{m.eaaNote}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="efa">
         <h2>{m.efaHeading}</h2>
         <p className="mono">
           {m.efaConversion(coefficient(ALA_TO_DHA_EFFICIENCY), coefficient(ALA_TO_EPA_EFFICIENCY))}
@@ -94,7 +94,7 @@ export function MethodPage() {
         <p>{m.efaFatFree}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="carb">
         <h2>{m.carbHeading}</h2>
         <p className="mono">{m.carbSplit}</p>
         <p className="mono">
@@ -104,7 +104,7 @@ export function MethodPage() {
         <p>{m.carbCombined}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="micros">
         <h2>{m.microHeading}</h2>
         <p>
           {m.microAbsorption({
@@ -194,7 +194,7 @@ export function MethodPage() {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="fibre">
         <h2>{m.fibreHeading}</h2>
         <p className="mono">
           fibreScore = clamp((fibre_g / kcal) × 100 / 4); phyto = 0.65 × class_baseline + 0.35 ×
@@ -203,7 +203,7 @@ export function MethodPage() {
         <p>{m.fibreNote}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="residue">
         <h2>{m.residueHeading}</h2>
         <p className="mono">
           risk = 0.28×surface + 0.18×systemic + 0.14×contact + 0.14×MRL_proximity + 0.16×metals +
@@ -213,7 +213,7 @@ export function MethodPage() {
         <p>{m.hormonesNote}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="degradation">
         <h2>{m.degradationHeading}</h2>
         <p className="mono">
           sensitivity = 0.28×water_soluble_load + 0.18×cut + 0.18×heat + 0.18×O₂/light + 0.18×perish;
@@ -223,7 +223,7 @@ export function MethodPage() {
         <p>{m.degradationNote}</p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="composite">
         <h2>{m.compositeHeading}</h2>
         <p className="mono">
           composite = Σ (w_class,axis × axis_score); tier S≥80, A≥65, B≥50, C≥35, else D; NOVA 4 → min(composite,{" "}
@@ -265,7 +265,7 @@ export function MethodPage() {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="processing">
         <h2>{m.processingHeading}</h2>
         <p>{m.processingGroups}</p>
         <p>{m.processingCap(String(ULTRA_PROCESSED_CEILING))}</p>
@@ -278,7 +278,7 @@ export function MethodPage() {
         </p>
       </section>
 
-      <section className="panel">
+      <section className="panel" id="storage">
         <h2>{m.storageHeading}</h2>
         <p>{m.storageNutrients}</p>
         <div className="matrix-wrap">

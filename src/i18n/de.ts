@@ -264,8 +264,19 @@ export const de: Messages = {
       title: ({ sugar, starch, passive }) =>
         `KH pro 100 g: Zucker ${sugar} g, Stärke ${starch} g, passiv (Ballaststoffe+RS) ${passive} g`,
     },
-    necessityImpactMethodLink: "Methode: Rückstände & Stabilität",
     digestibilityDefinition: "Anteil des Proteins, der bis zum Ende des Dünndarms aufgenommen wird.",
+    dvCoverageLabel: "Gedeckte Tageswerte",
+    dvCoverageHint: (barPct) =>
+      `Ab ${barPct} % DV pro 100 kcal, unter den Nährstoffen, die eine Quelle nennt.`,
+    storeLabel: "Monate oder Jahre gespeichert",
+    storeHint: "Von den gedeckten Nährstoffen diejenigen, die der Körper Monate oder Jahre hält.",
+    upperLimitLabel: "Höchstmenge für Erwachsene",
+    upperLimitHint: "100 kcal über der Tageshöchstmenge für Erwachsene (EFSA).",
+    exposureLabel: "Belastungshinweise",
+    exposureHint: "Hinweise zur Klasse, keine gemessene Menge in diesem Lebensmittel.",
+    residueCertificateLink: "Kein Zertifikat für einen Hof oder eine Charge.",
+    ironLabel: "Eisenform",
+    ironMixedTitle: (hemeSharePct) => `Etwa ${hemeSharePct} % des Eisens werden als Häm gerechnet.`,
     degradationRowHint: "Garen, Lagerung, Verarbeitung vs. labile Vitamine — nicht jeder Nährstoff verblasst gleich.",
     nutrientShort: { protein: "Protein", fat: "Fett", carbs: "KH" },
     nutrientRows: {
@@ -283,8 +294,8 @@ export const de: Messages = {
     axisGroups: {
       kind: "Art",
       general: "Grundnährstoffe",
-      importance: "Wichtigkeit",
-      necessityImpact: "Was im Körper ankommt",
+      importance: "Gesamt",
+      necessityImpact: "Bedarf und was im Körper ankommt",
     },
     microHeading: "Mikronährstoff-Vektor (%DV pro 100 kcal)",
     microHint: "Volle Farbe bei 20 % DV pro 100 kcal, dem Niveau, das die Bewertung als gedeckt zählt.",

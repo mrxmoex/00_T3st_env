@@ -669,6 +669,9 @@ details.panel > summary {
   letter-spacing: 0;
   text-transform: none;
 }
+.compare-axes a.row-link { color: inherit; text-underline-offset: 0.15em; }
+.compare-note { display: flex; flex-wrap: wrap; gap: 0.15rem 0.5rem; }
+.panel[id], article.panel[id] { scroll-margin-top: 4.5rem; }
 
 .compare-grid {
   display: grid;

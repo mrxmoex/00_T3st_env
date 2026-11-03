@@ -261,8 +261,19 @@ export const en: Messages = {
       title: ({ sugar, starch, passive }) =>
         `Carbs per 100 g: sugars ${sugar} g, starch ${starch} g, passive (fibre+RS) ${passive} g`,
     },
-    necessityImpactMethodLink: "Method: residues & stability",
     digestibilityDefinition: "Share of protein absorbed by the end of the small intestine.",
+    dvCoverageLabel: "Daily Values covered",
+    dvCoverageHint: (barPct) =>
+      `At or above ${barPct} % DV per 100 kcal, among the nutrients a source reports.`,
+    storeLabel: "Held for months or years",
+    storeHint: "Of the covered nutrients, those the body holds for months or years.",
+    upperLimitLabel: "Adult upper limit",
+    upperLimitHint: "100 kcal above the adult whole-day limit (EFSA).",
+    exposureLabel: "Exposure notes",
+    exposureHint: "Class notes, not a measured amount in this food.",
+    residueCertificateLink: "Not a certificate for a farm or lot.",
+    ironLabel: "Iron form",
+    ironMixedTitle: (hemeSharePct) => `About ${hemeSharePct} % of the iron is treated as heme.`,
     degradationRowHint: "Cooking, storage, and processing vs labile vitamins — not every nutrient fades equally.",
     nutrientShort: { protein: "Protein", fat: "Fat", carbs: "Carbs" },
     nutrientRows: {
@@ -280,8 +291,8 @@ export const en: Messages = {
     axisGroups: {
       kind: "Kind",
       general: "General nutrients",
-      importance: "Importance",
-      necessityImpact: "What reaches the body",
+      importance: "Overall",
+      necessityImpact: "Need and what reaches the body",
     },
     microHeading: "Micronutrient vector (%DV per 100 kcal)",
     microHint: "Full colour at 20 % DV per 100 kcal, the level the score counts as covered.",

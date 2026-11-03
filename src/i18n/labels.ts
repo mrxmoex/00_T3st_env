@@ -1,7 +1,7 @@
 import type { BodyStore } from "../data/absorption";
 import type { BioactiveCompound, MeasuredState } from "../data/bioactives";
 import type { NutrientKey, ProvenanceCategory } from "../data/sources/snapshot";
-import type { MicroNutrient, NovaGroup, Preparation } from "../scoring/types";
+import type { IronForm, MicroNutrient, NovaGroup, Preparation } from "../scoring/types";
 import type { LocalizedText } from "./locale";
 
 export const BIOACTIVE_LABELS: Readonly<Record<BioactiveCompound, LocalizedText>> = {
@@ -68,6 +68,12 @@ export const BODY_STORE_LABELS: Readonly<Record<BodyStore, LocalizedText>> = {
   months: { en: "months", de: "Monate" },
   weeks: { en: "weeks", de: "Wochen" },
   none: { en: "none", de: "keiner" },
+};
+
+export const IRON_FORM_LABELS: Readonly<Record<IronForm, LocalizedText>> = {
+  heme: { en: "Heme", de: "Häm" },
+  mixed: { en: "Mixed", de: "Gemischt" },
+  nonheme: { en: "Non-heme", de: "Nicht-Häm" },
 };
 
 /** Additives found in the processing evidence; other codes are shown as the bare E number. */

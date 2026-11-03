@@ -50,7 +50,7 @@ No backing, no claim. Remove a claim rather than add a disclaimer.
 | shown, not scored | gezeigt, nicht bewertet | enters no axis, composite, or tier | |
 | not detected / not expected / no data | nicht nachgewiesen / nicht zu erwarten / keine Daten | as defined in `src/data/bioactives.ts` | "nothing notable" |
 
-Avoid until something computes or cites it: "necessity" or "need" (no Daily Value shown), "storage" (no `BODY_STORAGE` shown), "essential" for compounds without a dietary reference, "metabolically quiet", "fast" sugars, "plain available".
+"Need" / "Bedarf" is allowed where the Daily Value row is on the same screen. "Storage" only names `BODY_STORAGE`. Avoid until something computes or cites it: "necessity", "essential" for compounds without a dietary reference, "metabolically quiet", "fast" sugars, "plain available".
 
 ## 5. Need, storage, essentiality
 
@@ -68,6 +68,7 @@ Avoid until something computes or cites it: "necessity" or "need" (no Daily Valu
 
 - A compound value shows its source when its chip is expanded, on every page that shows it.
 - A hint that names a method links to `/method`.
+- A Compare row that states a scored axis, a Daily Value, a body store, an upper limit, or an exposure note links to the Method, Exposure, or Limits section that backs it.
 
 ## 8. Hint hierarchy
 

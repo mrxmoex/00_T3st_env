@@ -231,8 +231,18 @@ export interface Messages {
       noneSymbol: string;
       title: (info: { sugar: string; starch: string; passive: string }) => string;
     };
-    necessityImpactMethodLink: string;
     digestibilityDefinition: string;
+    dvCoverageLabel: string;
+    dvCoverageHint: (barPct: number) => string;
+    storeLabel: string;
+    storeHint: string;
+    upperLimitLabel: string;
+    upperLimitHint: string;
+    exposureLabel: string;
+    exposureHint: string;
+    residueCertificateLink: string;
+    ironLabel: string;
+    ironMixedTitle: (hemeSharePct: number) => string;
     degradationRowHint: string;
     nutrientShort: Record<"protein" | "fat" | "carbs", string>;
     nutrientRows: {

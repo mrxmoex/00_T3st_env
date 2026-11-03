@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { DATA_META } from "../data/catalog";
 import { useLocale } from "../i18n/LocaleContext";
 import { LanguageToggle } from "./LanguageToggle";
@@ -14,11 +15,26 @@ const LINKS = [
   { to: "/limits", key: "limits" },
 ] as const;
 
+/** Client-side route changes do not scroll to a hash on their own. */
+function HashScroll() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) return;
+    const id = decodeURIComponent(hash.slice(1));
+    const scroll = () => document.getElementById(id)?.scrollIntoView();
+    scroll();
+    const frame = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(frame);
+  }, [pathname, hash]);
+  return null;
+}
+
 export function Layout() {
   const { t } = useLocale();
 
   return (
     <div className="app-shell">
+      <HashScroll />
       <header className="topbar">
         <NavLink to="/" className="brand">
           <strong>Du bist was du isst</strong>

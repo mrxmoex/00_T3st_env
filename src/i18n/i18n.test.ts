@@ -13,6 +13,7 @@ import {
   BIOACTIVE_LABELS,
   BIOACTIVE_ROLES,
   BODY_STORE_LABELS,
+  IRON_FORM_LABELS,
   MICRO_LABELS,
   MICRO_ROW_HINTS,
   NOVA_LABELS,
@@ -86,7 +87,7 @@ describe("UI messages", () => {
   });
 
   it("labels compounds, NOVA groups, body stores, and additives in both languages", () => {
-    const tables = { BIOACTIVE_LABELS, BIOACTIVE_ROLES, MICRO_ROW_HINTS, NOVA_LABELS, BODY_STORE_LABELS, ADDITIVE_LABELS };
+    const tables = { BIOACTIVE_LABELS, BIOACTIVE_ROLES, MICRO_ROW_HINTS, NOVA_LABELS, BODY_STORE_LABELS, IRON_FORM_LABELS, ADDITIVE_LABELS };
     for (const [table, labels] of Object.entries(tables)) {
       for (const [key, label] of Object.entries(labels)) {
         expectTranslated(label, `${table}.${key}`);
