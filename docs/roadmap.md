@@ -7,7 +7,7 @@ This file holds the phased UX work. It lives in git so every agent, fork, and VM
 | | |
 |---|---|
 | Branch | `cursor/science-headstart-647c` |
-| Pull request | Data head start, on top of [#17](https://github.com/mrxmoex/00_T3st_env/pull/17). #15 and #16 are merged. |
+| Pull request | [#18](https://github.com/mrxmoex/00_T3st_env/pull/18). #15, #16 and #17 are merged. |
 | Last confirmed phase | 5 (Food and Matrix); data track D1 confirmed |
 | Active phase | data head start, awaiting review (`docs/research/d2-headstart.md`) |
 
